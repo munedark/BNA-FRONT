@@ -1,0 +1,42 @@
+<div class="wrapper">
+    <aside id="sidebar" class="js-sidebar" [ngClass]="{ 'collapsed': isSidebarCollapsed }">
+        <!-- Sidebar content here -->
+        <button (click)="toggleSidebar()">Toggle Sidebar</button>
+        <ul class="sidebar-nav">
+            <!-- Sidebar elements with sub-elements -->
+            <li>
+                <p class="sidebar-link" (click)="toggleSubMenu(0)">Parent Element 1</p>
+                <ul class="sub-menu" *ngIf="isSubMenuVisible(0)">
+                    <li><a href="#">Sub-Element 1</a></li>
+                    <li><a href="#">Sub-Element 2</a></li>
+                    <!-- Add more sub-elements as needed -->
+                </ul>
+            </li>
+            <li>
+                <p class="sidebar-link" (click)="toggleSubMenu(1)">Parent Element 2</p>
+                <ul class="sub-menu" *ngIf="isSubMenuVisible(1)">
+                    <li><a href="#">Sub-Element 1</a></li>
+                    <li><a href="#">Sub-Element 2</a></li>
+                    <!-- Add more sub-elements as needed -->
+                </ul>
+            </li>
+            <!-- Add more parent elements with sub-elements as needed -->
+        </ul>
+    </aside>
+
+    <div class="main">
+        <!-- Navbar content here -->
+        <nav class="navbar navbar-expand px-3 border-bottom">
+            <!-- Navbar toggle button -->
+            <button class="btn" id="sidebar-toggle" type="button" (click)="toggleSidebar()">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Logout button -->
+            <button class="btn" (click)="logout()">Logout</button>
+        </nav>
+
+        <!-- Main content here -->
+        <!-- Include your main content components or HTML structure here -->
+    </div>
+</div>
