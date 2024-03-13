@@ -1,46 +1,45 @@
 import { Component } from '@angular/core';
-
-
+import { LogoutService } from '../services/logout.service';
+import { AuthService } from '../services/auth.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-gestionnaire',
   templateUrl: './gestionnaire.component.html',
   styleUrls: ['./gestionnaire.component.scss']
 })
 export class GestionnaireComponent {
-username:string="iheb";
-matricule:number=56165;
+  isSidebarCollapsed = false;
+  visibleSubMenus: boolean[] = [];
+ 
+  constructor(private logoutService: LogoutService,private authService:AuthService,private router:Router) { }
 
-
-
-title = 'MyApp';
-  isMobile = false;
-  isCollapsed = true;
-  activeModule: string | null = null;
-
-  constructor() {
-    // Check if the screen width is smaller than 600px to determine if it's mobile
-    if (window.innerWidth <= 600) {
-      this.isMobile = true;
-    }
+  ngOnInit(): void {
+    this.toggleSidebar();
+    const token = localStorage.getItem('token');
   }
 
-  toggleMenu() {
-    if (this.isMobile) {
-      
-      this.isCollapsed = false;
-    } else {
-      this.isCollapsed = !this.isCollapsed;
+  isSubMenuVisible(index: number): boolean {
+    // If the sub-menu visibility for the specified index is not defined, initialize it as false
+    if (this.visibleSubMenus[index] === undefined) {
+      this.visibleSubMenus[index] = false;
     }
+    return this.visibleSubMenus[index];
   }
 
-  toggleModule(module: string) {
-    if (this.activeModule === module) {
-      this.activeModule = null;
-    } else {
-      this.activeModule = module;
-    }
+  toggleSubMenu(index: number): void {
+    // Toggle the visibility of the sub-menu for the specified index
+    this.visibleSubMenus[index] = !this.visibleSubMenus[index];
   }
 
+  toggleSidebar(): void {
+    this.isSidebarCollapsed = !this.isSidebarCollapsed;
+  }
+  
+  
+  
 
+  logout(): void {
+    this.logoutService.logout();
+  }
   }
 

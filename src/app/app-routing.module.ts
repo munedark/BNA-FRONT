@@ -6,14 +6,14 @@ import { GestionnaireComponent } from './gestionnaire/gestionnaire.component';
 import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [
-  {path:"administrateur",
+  {path:"ADMINISTRATEUR",
   component:AdministrateurComponent},
   {
-    path:"validateur",
+    path:"VALIDATEUR",
     component:ValidateurComponent
   },
   {
-    path:"gestionnaire",
+    path:"GESTIONNAIRE",
     component:GestionnaireComponent
   },
   {

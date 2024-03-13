@@ -1,6 +1,8 @@
 // administrateur.component.ts
 import { Component, OnInit } from '@angular/core';
 import { LogoutService } from '../services/logout.service';
+import { jwtDecode } from 'jwt-decode';
+
 
 @Component({
   selector: 'app-administrateur',
@@ -10,10 +12,13 @@ import { LogoutService } from '../services/logout.service';
 export class AdministrateurComponent implements OnInit {
   isSidebarCollapsed = false;
   visibleSubMenus: boolean[] = [];
+ 
   constructor(private logoutService: LogoutService) { }
 
   ngOnInit(): void {
     this.toggleSidebar();
+    const token = localStorage.getItem('token');
+
   }
 
   isSubMenuVisible(index: number): boolean {

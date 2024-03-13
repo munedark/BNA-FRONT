@@ -26,6 +26,7 @@ h4 {
     background: var(--bs-dark);
     transition: margin-left 0.35s ease-in-out; /* Change transition to margin-left */
     overflow-y: auto; /* Enable vertical scrolling if content overflows */
+    
 }
 
 .main {
@@ -33,16 +34,18 @@ h4 {
     overflow: auto; /* Enable vertical scrolling if content overflows */
     transition: margin-left 0.35s ease-in-out; /* Change transition to margin-left */
     background: var(--bs-dark-bg-subtle);
+
 }
 
 /* Sidebar Toggle */
 #sidebar.collapsed {
     margin-left: -264px; /* Adjust margin to hide the sidebar */
+    width: 0;
 }
 
 /* Sidebar Elements Style */
 .sidebar-nav {
-    padding-left: 0;
+    padding-left: 10px;
 }
 
 .sidebar-header {
@@ -108,9 +111,14 @@ h4 {
     .navbar {
         width: 100vw;
         display: flex;
-        
+        flex-direction: row;
+        justify-content: space-between;
     }
 }
 li{
     color: #e9ecef;
+}
+
+.logout{
+    padding-right: 15px;
 }

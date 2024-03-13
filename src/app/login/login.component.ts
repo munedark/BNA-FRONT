@@ -1,28 +1,42 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 import { jwtDecode } from "jwt-decode";
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit{
   invalidLogin:boolean=false;
   loginSuccess:boolean=false;
   errorMessage:String='wrong password or username';
   successMessage:String='Valid';
   username:string="";
   password:string="";
-
+  
   constructor(private authService: AuthService , private router:Router) { }
+
+  ngOnInit(): void {
+      if(this.authService.isLoggedIn()){
+        const token:any = localStorage.getItem('token');
+        const decodedToken: any = jwtDecode(token);
+        const role = decodedToken.role.substring(5);
+        this.router.navigate([`/${role}`]);
+      }
+  }
+
   login() {
     this.authService.login(this.username, this.password).subscribe({
       next: () => {
         this.loginSuccess=true;
-        this.router.navigate(['/administrateur']); 
-        const token = localStorage.getItem('token');
-        console.log(token);
+
+        const token:any = localStorage.getItem('token');
+        const decodedToken: any = jwtDecode(token);
+        const role = decodedToken.role.substring(5);
+        this.router.navigate([`/${role}`]);
+
       },
       error: (error) => {
         

@@ -1,0 +1,124 @@
+a {
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+  }
+  
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  h4 {
+    font-size: 1.275rem;
+    color: var(--bs-emphasis-color);
+  }
+  
+  /* Layout for admin dashboard skeleton */
+  .wrapper {
+    display: flex;
+    height: 100vh; /* Make the wrapper take up the full viewport height */
+  }
+  
+  #sidebar {
+    flex: 0 0 264px; /* Sidebar width */
+    background: var(--bs-dark);
+    transition: margin-left 0.35s ease-in-out; /* Change transition to margin-left */
+    overflow-y: auto; /* Enable vertical scrolling if content overflows */
+    
+  }
+  
+  .main {
+    flex: 1;
+    overflow: auto; /* Enable vertical scrolling if content overflows */
+    transition: margin-left 0.35s ease-in-out; /* Change transition to margin-left */
+    background: var(--bs-dark-bg-subtle);
+  
+  }
+  
+  /* Sidebar Toggle */
+  #sidebar.collapsed {
+    margin-left: -264px; /* Adjust margin to hide the sidebar */
+    width: 0;
+  }
+  
+  /* Sidebar Elements Style */
+  .sidebar-nav {
+    padding-left: 10px;
+  }
+  
+  .sidebar-header {
+    color: #e9ecef;
+    font-size: 0.75rem;
+    padding: 1.5rem;
+  }
+  
+  .sidebar-link {
+    padding: 0.625rem 1.625rem;
+    color: #e9ecef;
+    position: relative;
+    display: block;
+    font-size: 0.875rem;
+  }
+  
+  .sidebar-link::after {
+    content: '\25BE';
+    position: absolute;
+    right: 1.5rem;
+    transition: transform 0.2s ease-out;
+  }
+  
+  .sidebar-link.collapsed::after {
+    transform: rotate(90deg);
+  }
+  
+  /* Theme Toggler */
+  .theme-toggle {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    text-align: center;
+    z-index: 10;
+    right: 0;
+    border: none;
+    background-color: var(--bs-body-color);
+  }
+  
+  .theme-toggle .fa-sun,
+  .theme-toggle .fa-moon {
+    cursor: pointer;
+    padding: 10px;
+    display: block;
+    font-size: 1.25rem;
+    color: #FFF;
+  }
+  
+  .theme-toggle .fa-moon {
+    display: none;
+  }
+  
+  /* Responsive Styles */
+  @media (max-width: 767.98px) {
+    .js-sidebar {
+        margin-left: -264px;
+    }
+  
+    #sidebar.collapsed {
+        margin-left: 0;
+    }
+  
+    .navbar {
+        width: 100vw;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+  }
+  li{
+    color: #e9ecef;
+  }
+  
+  .logout{
+    padding-right: 15px;
+  }

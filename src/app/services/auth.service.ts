@@ -12,20 +12,24 @@ export class AuthService {
 
   constructor(private http: HttpClient) { }
 
-  login(username: string, password: string): Observable<any> {
-    const authRequest = { "username": username, "password": password };
 
-    return this.http.post<any>(this.apiUrl, authRequest).pipe(
-      map((response) => {
+
+  login(username: string, password: string): Observable<any> 
+  { 
+    const authRequest = { "username": username, "password": password };
+    return this.http.post<any>(this.apiUrl, authRequest).pipe(map((response) => 
+    {
         // Authentication successful
         localStorage.setItem('token', response.jwt);
         return response;
-      }),
+    }
+      ),
       catchError((error) => {
         // Authentication failed
         return throwError(error);
       })
     );
+  
   }
 
   logout() {
