@@ -1,14 +1,20 @@
+<div class="background">
 <div *ngIf="!loginSuccess" class="wrapper fadeInDown">
   <div id="formContent">
-    <div class="alert alert-warning" *ngIf="invalidLogin" [@fadeOut]="invalidLogin ? 'visible' : 'hidden'">{{ errorMessage }}</div>
-    <div class="alert alert-success" *ngIf='loginSuccess'>{{ successMessage }}</div>
+    <div class="alert alert-danger" *ngIf="invalidLogin" [@fadeOut]="invalidLogin ? 'visible' : 'hidden'">{{ errorMessage }}</div>
     <!-- Tabs Titles -->
     <h3>Login</h3>
     <!-- Login Form -->
-    <form>
-      <input type="text" id="username" class="fadeIn second" [(ngModel)]="username" name="username" placeholder="username">
-      <input type="password" id="password" class="fadeIn third" [(ngModel)]="password" name="password" placeholder="password">
-      <input type="submit" (click)="login()" class="fadeIn fourth" value="Log In">
+    <form #loginForm="ngForm" (ngSubmit)="login()">
+      <input type="text" id="username" class="fadeIn second" [(ngModel)]="username" name="username" placeholder="Username" required>
+      <div *ngIf="loginForm.controls['username'].hasError('required') && loginForm.submitted" class="error-message">Username is required.</div>
+      
+      <input type="password" id="password" class="fadeIn third" [(ngModel)]="password" name="password" placeholder="Password" required>
+      <div *ngIf="loginForm.controls['password'].hasError('required') && loginForm.submitted" class="error-message">Password is required.</div>
+      
+      <input type="submit" class="fadeIn fourth submit" value="Log In" [disabled]="!loginForm.valid">
     </form>
+    
   </div>
+</div>
 </div>

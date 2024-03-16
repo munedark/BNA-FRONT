@@ -4,6 +4,7 @@ import { AdministrateurComponent } from './administrateur/administrateur.compone
 import { ValidateurComponent } from './validateur/validateur.component';
 import { GestionnaireComponent } from './gestionnaire/gestionnaire.component';
 import { LoginComponent } from './login/login.component';
+import { FeesComponent } from './fees/fees.component';
 
 const routes: Routes = [
   {path:"ADMINISTRATEUR",
@@ -19,7 +20,12 @@ const routes: Routes = [
   {
     path:"login",
     component:LoginComponent
-  }
+  },
+  {
+    path:"addfees",
+    component:FeesComponent
+  },
+  { path: '', redirectTo: '/login', pathMatch: 'full' }
 ];
 
 @NgModule({

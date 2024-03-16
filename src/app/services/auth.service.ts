@@ -1,7 +1,7 @@
 // auth.service.ts
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
+import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 
 @Injectable({
@@ -12,7 +12,13 @@ export class AuthService {
 
   constructor(private http: HttpClient) { }
 
+  private token = new BehaviorSubject<string | null>(null);
+  usertoken$ = this.token.asObservable();
 
+
+  updateUsertoken(token: any) {
+    this.token.next(token);
+  }
 
   login(username: string, password: string): Observable<any> 
   { 

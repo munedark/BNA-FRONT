@@ -12,7 +12,6 @@ export class LoginComponent implements OnInit{
   invalidLogin:boolean=false;
   loginSuccess:boolean=false;
   errorMessage:String='wrong password or username';
-  successMessage:String='Valid';
   username:string="";
   password:string="";
   
@@ -35,7 +34,9 @@ export class LoginComponent implements OnInit{
         const token:any = localStorage.getItem('token');
         const decodedToken: any = jwtDecode(token);
         const role = decodedToken.role.substring(5);
-        this.router.navigate([`/${role}`]);
+        this.authService.updateUsertoken(decodedToken)
+
+     this.router.navigate([`/${role}`]);
 
       },
       error: (error) => {

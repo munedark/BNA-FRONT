@@ -11,6 +11,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AdministrateurComponent } from './administrateur/administrateur.component';
 import { ValidateurComponent } from './validateur/validateur.component';
 import { GestionnaireComponent } from './gestionnaire/gestionnaire.component';
+import { NavbarComponent } from './navbar/navbar.component';
+import { SidebarComponent } from './sidebar/sidebar.component';
+import { FeesComponent } from './fees/fees.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +21,10 @@ import { GestionnaireComponent } from './gestionnaire/gestionnaire.component';
     LoginComponent,
     AdministrateurComponent,
     ValidateurComponent,
-    GestionnaireComponent
+    GestionnaireComponent,
+    NavbarComponent,
+    SidebarComponent,
+    FeesComponent
   ],
   imports: [
     BrowserModule,
