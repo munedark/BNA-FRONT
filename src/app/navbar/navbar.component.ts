@@ -9,7 +9,7 @@ import { DropService } from '../services/drop.service';
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss']
 })
-export class NavbarComponent implements OnInit  {
+export class NavbarComponent implements OnInit , OnDestroy {
   isSidebarOpen = false;
   private subscription: Subscription;
 
@@ -26,6 +26,11 @@ export class NavbarComponent implements OnInit  {
   ngOnInit(): void {
     
   }
+  ngOnDestroy(): void {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
+  }
 
   toggleSidebar(): void {
     this.sidebarToggleService.toggleSidebar();
@@ -34,4 +39,5 @@ export class NavbarComponent implements OnInit  {
   toggleUser(): void {
     this.dropService.toggleIcon();
   }
+  
 }

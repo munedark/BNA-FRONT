@@ -18,7 +18,6 @@ export class ValidateurComponent {
   }
 
   isSubMenuVisible(index: number): boolean {
-    // If the sub-menu visibility for the specified index is not defined, initialize it as false
     if (this.visibleSubMenus[index] === undefined) {
       this.visibleSubMenus[index] = false;
     }

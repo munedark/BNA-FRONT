@@ -41,7 +41,7 @@ export class LoginComponent implements OnInit {
       error: (error) => {
         this.invalidLogin = true;
         setTimeout(() => {
-          this.invalidLogin = false; // Reset invalidLogin after 3 seconds
+          this.invalidLogin = false; 
         }, 3000);
         console.error('Login error:', error);
       }

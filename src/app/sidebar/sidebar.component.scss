@@ -100,32 +100,12 @@ li > ul > li{
   display: none;
 }
 
-/* Responsive Styles */
-@media (max-width: 767.98px) {
-  .js-sidebar {
-      margin-left: -264px;
-  }
 
-  #sidebar.collapsed {
-      margin-left: 0;
-  }
-}
-  a {
-      cursor: pointer;
-      text-decoration: none;
-      color: inherit;
-    }
-    
-    ul {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-    }
-    
+
     /* Layout for admin dashboard skeleton */
     .wrapper {
       display: flex;
-      height: 100vh; /* Make the wrapper take up the full viewport height */
+      height: 92vh; /* Make the wrapper take up the full viewport height */
     }
     
     

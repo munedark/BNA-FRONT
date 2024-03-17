@@ -1,0 +1,40 @@
+.container {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 10px;
+    width: 1000px;
+}
+
+.profile-heading {
+    font-size: 16px;
+    color: #17a191;
+}
+
+.form-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.form-container > div {
+    margin-right: 20px; /* Add some space between the two sections */
+}
+
+.btnRegister {
+    border: none;
+    border-radius: 1.5rem;
+    padding: 8px 20px;
+    background: #17a191;
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+    float: right;
+}
+
+.form-group{
+    margin: 10px;
+}
+
+.second{
+    margin-top: 10% ;
+}
