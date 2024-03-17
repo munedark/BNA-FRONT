@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { DropService } from './services/drop.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -8,8 +10,15 @@ import { Router } from '@angular/router';
 })
 export class AppComponent {
   title = 'contentieux';
-  constructor(private router: Router) { }
-
+  isUserOpen:boolean=false;
+  subscription:Subscription|undefined
+  
+  
+  constructor(private router: Router , private dropService:DropService) {
+    this.subscription = this.dropService.isUserOpen$.subscribe(isOpen => {
+      this.isUserOpen = isOpen;
+   });
+  }
   isLoginPage(): boolean {
     return this.router.url === '/login';
 }

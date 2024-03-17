@@ -1,93 +1,44 @@
 <div class="wrapper">
     <aside id="sidebar" class="js-sidebar" [ngClass]="{ 'collapsed': isSidebarOpen }">
-        <ul class="sidebar-nav" *ngIf="role=='ROLE_ADMINISTRATEUR'">
-            <li>
-                <p class="sidebar-link" (click)="toggleSubMenu(0)">Gestion des agents</p>
-                
-                <ul class="sub-menu" *ngIf="isSubMenuVisible(0)">
-                    <li><a href="#">Supprimer agent</a></li>
-                    <li><a href="#">Modifier agent</a></li>
-                    <li><a href="#">Rechercher agent</a></li>
-            
-                </ul>
-            
-            </li>
-            
-            <li>
-                <p class="sidebar-link" (click)="toggleSubMenu(1)">Parent Element 2</p>
-             
-                <ul class="sub-menu" *ngIf="isSubMenuVisible(1)">
-             
-                    <li><a href="#">Sub-Element 1</a></li>
-                    <li><a href="#">Sub-Element 2</a></li>
-                    
-                </ul>
-        
-            </li>
-        
-        </ul>
+        <ng-container *ngIf="role === 'ROLE_ADMINISTRATEUR'">
+            <ul class="sidebar-nav">
+                <li>
+                    <p class="sidebar-link" (click)="toggleSubMenu(0)">Gestion des agents</p>
+                    <ul class="sub-menu" *ngIf="isSubMenuVisible(0)">
+                        <li><a href="#">Supprimer agent</a></li>
+                        <li><a href="#">Modifier agent</a></li>
+                        <li><a href="#">Rechercher agent</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <p class="sidebar-link" (click)="toggleSubMenu(1)">Parent Element 2</p>
+                    <ul class="sub-menu" *ngIf="isSubMenuVisible(1)">
+                        <li><a href="#">Sub-Element 1</a></li>
+                        <li><a href="#">Sub-Element 2</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </ng-container>
 
-
-
-        <ul class="sidebar-nav" *ngIf="role=='ROLE_VALIDATEUR'">
-            <li>
-                <p class="sidebar-link" (click)="toggleSubMenu(0)">Gestion des agents</p>
-                
-                <ul class="sub-menu" *ngIf="isSubMenuVisible(0)">
-            
-                    <li><a routerLink="/addfees">Ajouter frait</a></li>
-                    <li><a href="#">Supprimer agent</a></li>
-                    <li><a href="#">Modifier agent</a></li>
-                    <li><a href="#">Rechercher agent</a></li>
-            
-                </ul>
-            
-            </li>
-            
-            <li>
-                <p class="sidebar-link" (click)="toggleSubMenu(1)">Parent Element 2</p>
-             
-                <ul class="sub-menu" *ngIf="isSubMenuVisible(1)">
-             
-                    <li><a href="#">Sub-Element 1</a></li>
-                    <li><a href="#">Sub-Element 2</a></li>
-                    
-                </ul>
-        
-            </li>
-        
-        </ul>
-
-
-
-        <ul class="sidebar-nav" *ngIf="role=='ROLE_GESTIONNAIRE'">
-            <li>
-                <p class="sidebar-link" (click)="toggleSubMenu(0)">Gestion des agents</p>
-                
-                <ul class="sub-menu" *ngIf="isSubMenuVisible(0)">
-            
-                    <li><a routerLink="/addfees">Ajouter frait</a></li>
-                    <li><a href="#">Supprimer agent</a></li>
-                    <li><a href="#">Modifier agent</a></li>
-                    <li><a href="#">Rechercher agent</a></li>
-            
-                </ul>
-            
-            </li>
-            
-            <li>
-                <p class="sidebar-link" (click)="toggleSubMenu(1)">Parent Element 2</p>
-             
-                <ul class="sub-menu" *ngIf="isSubMenuVisible(1)">
-             
-                    <li><a href="#">Sub-Element 1</a></li>
-                    <li><a href="#">Sub-Element 2</a></li>
-                    
-                </ul>
-        
-            </li>
-        
-        </ul>
+        <ng-container *ngIf="role === 'ROLE_VALIDATEUR' || role === 'ROLE_GESTIONNAIRE'">
+            <ul class="sidebar-nav">
+                <li>
+                    <p class="sidebar-link" (click)="toggleSubMenu(0)">Gestion des agents</p>
+                    <ul class="sub-menu" *ngIf="isSubMenuVisible(0)">
+                        <li><a routerLink="/addfees">Ajouter frais</a></li>
+                        <li><a href="#">Supprimer agent</a></li>
+                        <li><a href="#">Modifier agent</a></li>
+                        <li><a href="#">Rechercher agent</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <p class="sidebar-link" (click)="toggleSubMenu(1)">Parent Element 2</p>
+                    <ul class="sub-menu" *ngIf="isSubMenuVisible(1)">
+                        <li><a href="#">Sub-Element 1</a></li>
+                        <li><a href="#">Sub-Element 2</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </ng-container>
     </aside>
 </div>
-

@@ -1,4 +1,5 @@
 <div *ngIf="!isLoginPage()">
 <app-navbar></app-navbar>
 </div>
+<app-drop-down *ngIf="!isLoginPage()&& isUserOpen"></app-drop-down>
 <router-outlet></router-outlet>

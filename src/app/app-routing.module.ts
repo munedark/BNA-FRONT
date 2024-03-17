@@ -5,6 +5,7 @@ import { ValidateurComponent } from './validateur/validateur.component';
 import { GestionnaireComponent } from './gestionnaire/gestionnaire.component';
 import { LoginComponent } from './login/login.component';
 import { FeesComponent } from './fees/fees.component';
+import { DropDownComponent } from './drop-down/drop-down.component';
 
 const routes: Routes = [
   {path:"ADMINISTRATEUR",
@@ -20,6 +21,10 @@ const routes: Routes = [
   {
     path:"login",
     component:LoginComponent
+  },
+  {
+    path:"drop",
+    component:DropDownComponent
   },
   {
     path:"addfees",

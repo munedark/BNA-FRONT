@@ -1,38 +1,22 @@
 
-<div class="main">
-    <nav class="navbar navbar-expand px-3 border-bottom " style="display: flex;justify-content: space-between;">
-  
-        <div style="display: flex;flex-direction: row;">   
-            <!-- sidebar button -->
-             <button class="btn" id="sidebar-toggle" type="button" (click)="toggleSidebar()">
+    <nav class="navbar navbar-expand px-3 border-bottom" style="display: flex; justify-content: space-between;">
+
+        <div style="display: flex; flex-direction: row;">
+            <!-- Sidebar button -->
+            <button class="btn" id="sidebar-toggle" type="button" (click)="toggleSidebar()">
                 <span *ngIf="isSidebarOpen" class="navbar-toggler-icon"></span>
-                <svg *ngIf="!isSidebarOpen" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-unindent" viewBox="0 0 16 16">
+                <svg *ngIf="!isSidebarOpen" xmlns="http://www.w3.org/2000/svg" width="24" height="16" fill="currentColor" class="bi bi-unindent" viewBox="0 0 16 16">
                     <path fill-rule="evenodd" d="M13 8a.5.5 0 0 0-.5-.5H5.707l2.147-2.146a.5.5 0 1 0-.708-.708l-3 3a.5.5 0 0 0 0 .708l3 3a.5.5 0 0 0 .708-.708L5.707 8.5H12.5A.5.5 0 0 0 13 8"/>
                     <path fill-rule="evenodd" d="M3.5 4a.5.5 0 0 0-.5.5v7a.5.5 0 0 0 1 0v-7a.5.5 0 0 0-.5-.5"/>
                 </svg>
             </button>
-            
-            <span>
-                {{role}}
-                    <br>
-                {{matricule}}
-            </span>
         </div>
 
-            <!-- logout button -->
-            <div class="ml-auto" >
-                <button class="btn logout" (click)="logout()" title="logout">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-in-left" viewBox="0 0 16 16">
-                        <path fill-rule="evenodd" d="M10 3.5a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-2a.5.5 0 0 1 1 0v2A1.5 1.5 0 0 1 9.5 14h-8A1.5 1.5 0 0 1 0 12.5v-9A1.5 1.5 0 0 1 1.5 2h8A1.5 1.5 0 0 1 11 3.5v2a.5.5 0 0 1-1 0z"/>
-                        <path fill-rule="evenodd" d="M4.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H14.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708z"/>
-                    </svg>
-                </button>
-            </div>
+        <div>
+            <img src="./assets/logo_bna.png" alt="BNA Logo">
+        </div>
+
+        <div (click)="toggleUser()">
+            <img src="./assets/user.png" class="userlogo" alt="Compte" title="Compte">
+        </div>
     </nav>
-</div>
-
-
-
-
-
-

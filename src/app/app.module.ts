@@ -14,6 +14,7 @@ import { GestionnaireComponent } from './gestionnaire/gestionnaire.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { FeesComponent } from './fees/fees.component';
+import { DropDownComponent } from './drop-down/drop-down.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { FeesComponent } from './fees/fees.component';
     GestionnaireComponent,
     NavbarComponent,
     SidebarComponent,
-    FeesComponent
+    FeesComponent,
+    DropDownComponent
   ],
   imports: [
     BrowserModule,
