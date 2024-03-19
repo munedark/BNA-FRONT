@@ -17,6 +17,7 @@ nav{
   background-color: #ffffff;
   color: #21242a;
   border-radius: 10px 10px 0 0 ;
+  
 }
 
 .userlogo{
@@ -24,6 +25,12 @@ nav{
   width: auto;
   cursor: pointer;
 }
-
+.btn:hover{
+  border-radius: 100px;
+  background-color: #00a98784;
+}
+.bi{
+  padding-bottom: 2px;
+}
 
 

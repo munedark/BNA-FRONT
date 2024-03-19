@@ -1,9 +1,9 @@
 .container{
     display: flex; 
     align-items: center ;
-    width: 100%;/* Use flexbox layout */
+    width: 100%;
     margin: 0;
     padding: 0;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
   
 }

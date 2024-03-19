@@ -14,6 +14,7 @@
     display: flex;
     flex-direction: row;
     justify-content: space-around;
+    flex-wrap: wrap;
 }
 
 .form-container > div {
@@ -29,6 +30,12 @@
     font-weight: 600;
     cursor: pointer;
     float: right;
+    margin-top: 20px;
+    text-align: center;
+    
+}
+.btnRegister:hover{
+    background-color: #89E7D9;
 }
 
 .form-group{
@@ -38,3 +45,16 @@
 .second{
     margin-top: 10% ;
 }
+input.ng-invalid.ng-touched {
+    border-color: red;
+    
+}
+select.ng-invalid.ng-touched {
+    border-color: red;
+    
+}
+input.ng-invalid.ng-touched::placeholder {
+    color: rgb(255, 0, 0);
+}
+
+    

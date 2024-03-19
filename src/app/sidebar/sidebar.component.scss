@@ -1,116 +1,85 @@
+.wrapper {
+  display: flex;
+  height: 92vh; /* Make the wrapper take up the full viewport height */
+  width: 300px;
+}
+
+#sidebar {
+  flex: 0 0 264px; 
+  background: var(--bs-dark);
+  transition: margin-left 0.35s ease-in-out; 
+  overflow-y: auto; 
+  padding: 40px 0 0 0;
+  border-radius: 10px;
+  
+  
+} 
+
+#sidebar.collapsed {
+  margin-left: -264px; 
+  width: 0;
+}  
+
+.sidebar-link {
+  padding: 0.625rem 1.625rem;
+  position: relative;
+  display: block;
+  font-size: 0.875rem;
+  border-radius: 10px;
+  font-weight: bold;
+  width: 90%;
+}  
+
 a {
   cursor: pointer;
   text-decoration: none;
   color: inherit;
-}
+}  
 
 ul {
   list-style: none;
   margin: 0;
   padding: 0;
-}
+}  
 
-.wrapper {
-  display: inline-flex;
-  width: 300px; 
- 
-}
 .sidebar-link:hover{
-  color: aqua;
-}
-li:hover{
-  color: rgb(120, 224, 120);
-}
-li > ul > li{
+  color: #00A987;
   cursor: pointer;
-  margin: 10px 0 0 50px;
-  
-}
-#sidebar {
-  flex: 0 0 264px; /* Sidebar width */
-  background: var(--bs-dark);
-  transition: margin-left 0.35s ease-in-out; /* Change transition to margin-left */
-  overflow-y: auto; /* Enable vertical scrolling if content overflows */
-  
-}
+}  
 
-/* Sidebar Toggle */
-#sidebar.collapsed {
-  margin-left: -264px; /* Adjust margin to hide the sidebar */
-  width: 0;
+li{
+  color: #fff;
+  }
+li:hover{
+  color: #00A987;
 }
+      
+.sub-menu > li:hover{
+  color: #89E7D9;
+  cursor: pointer;
+}  
 
-/* Sidebar Elements Style */
+
+
+
+
 .sidebar-nav {
   padding-left: 10px;
   
-}
-#sidebar{
-  padding: 10px;
-  border-radius: 10px;
-}
+}  
 
-.sidebar-header {
-  color: #e9ecef;
-  font-size: 0.75rem;
-  padding: 1.5rem;
-}
-
-.sidebar-link {
-  padding: 0.625rem 1.625rem;
-  color: #e9ecef;
-  position: relative;
-  display: block;
-  font-size: 0.875rem;
-}
 
 .sidebar-link::after {
   content: '\25BE';
   position: absolute;
   right: 1.5rem;
   transition: transform 0.2s ease-out;
+}  
+
+.sub-menu{
+  margin-left: 50px;
 }
-
-.sidebar-link.collapsed::after {
-  transform: rotate(90deg);
+.sub-menu > li{
+    margin-bottom: 10px;
 }
-
-/* Theme Toggler */
-.theme-toggle {
-  position: fixed;
-  top: 50%;
-  transform: translateY(-50%);
-  text-align: center;
-  z-index: 10;
-  right: 0;
-  border: none;
-  background-color: var(--bs-body-color);
-}
-
-.theme-toggle .fa-sun,
-.theme-toggle .fa-moon {
-  cursor: pointer;
-  padding: 10px;
-  display: block;
-  font-size: 1.25rem;
-  color: #FFF;
-}
-
-.theme-toggle .fa-moon {
-  display: none;
-}
-
-
-
-    /* Layout for admin dashboard skeleton */
-    .wrapper {
-      display: flex;
-      height: 92vh; /* Make the wrapper take up the full viewport height */
-    }
-    
-    
-      li{
-        color: #e9ecef;
-      }
-      
  

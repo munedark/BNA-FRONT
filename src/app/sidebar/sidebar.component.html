@@ -5,6 +5,7 @@
                 <li>
                     <p class="sidebar-link" (click)="toggleSubMenu(0)">Gestion des agents</p>
                     <ul class="sub-menu" *ngIf="isSubMenuVisible(0)">
+                        <li><a href="#">Ajouter agent</a></li>
                         <li><a href="#">Supprimer agent</a></li>
                         <li><a href="#">Modifier agent</a></li>
                         <li><a href="#">Rechercher agent</a></li>
@@ -20,22 +21,43 @@
             </ul>
         </ng-container>
 
-        <ng-container *ngIf="role === 'ROLE_VALIDATEUR' || role === 'ROLE_GESTIONNAIRE'">
+        <ng-container *ngIf="role === 'ROLE_VALIDATEUR'">
             <ul class="sidebar-nav">
                 <li>
-                    <p class="sidebar-link" (click)="toggleSubMenu(0)">Gestion des agents</p>
+                    <p class="sidebar-link" (click)="toggleSubMenu(0)">Frais</p>
                     <ul class="sub-menu" *ngIf="isSubMenuVisible(0)">
                         <li><a routerLink="/addfees">Ajouter frais</a></li>
-                        <li><a href="#">Supprimer agent</a></li>
-                        <li><a href="#">Modifier agent</a></li>
-                        <li><a href="#">Rechercher agent</a></li>
+                        <li><a href="#">frais 1</a></li>
+                        <li><a href="#">frais 2</a></li>
+                        <li><a href="#">frais 3</a></li>
                     </ul>
                 </li>
                 <li>
-                    <p class="sidebar-link" (click)="toggleSubMenu(1)">Parent Element 2</p>
+                    <p class="sidebar-link" (click)="toggleSubMenu(1)">Remboursement</p>
                     <ul class="sub-menu" *ngIf="isSubMenuVisible(1)">
-                        <li><a href="#">Sub-Element 1</a></li>
-                        <li><a href="#">Sub-Element 2</a></li>
+                        <li><a href="#">remboursement 1</a></li>
+                        <li><a href="#">remboursement 2</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </ng-container>
+
+        <ng-container *ngIf="role === 'ROLE_GESTIONNAIRE'">
+            <ul class="sidebar-nav">
+                <li>
+                    <p class="sidebar-link" (click)="toggleSubMenu(0)"><img src="./assets/frais.png" style="width: 20px;height: auto;border-radius: 2px;margin-right: 5px;">   Frais</p>
+                    <ul class="sub-menu" *ngIf="isSubMenuVisible(0)">
+                        <li><a routerLink="/addfees">Ajouter frais</a></li>
+                        <li><a href="#">frais 1</a></li>
+                        <li><a href="#">frais 2</a></li>
+                        <li><a href="#">frais 3</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <p class="sidebar-link" (click)="toggleSubMenu(1)"> <img src="./assets/remboursement.png" style="width: 20px;height: auto;border-radius: 2px;margin-right: 5px;">Remboursement</p>
+                    <ul class="sub-menu" *ngIf="isSubMenuVisible(1)">
+                        <li><a href="#">remboursement 1</a></li>
+                        <li><a href="#">remboursement 2</a></li>
                     </ul>
                 </li>
             </ul>
