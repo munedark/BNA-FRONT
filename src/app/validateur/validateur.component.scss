@@ -1,26 +1,8 @@
-app-sidebar {
-  display: inline-block; /* Display as an inline block */
-  width: auto; /* Set width to auto to take only the needed space */
-  vertical-align: top; /* Align to the top */
-}
-.container {
-  display: flex; 
-  align-items: first baseline;
-  width: 100%;/* Use flexbox layout */
-  margin: 0;
-  padding: 0;
-  flex-wrap: wrap;
-
-
-}
-
 table {
-  flex-grow: 1; /* Allow the table to grow and take remaining space */
-  margin-left: 20px; /* Add margin for spacing */
-  align-self: center;
-  width: 100px;
  
-}
+  align-self: center;
+  width: 100%;
+ }
 .button{
   background-color: #17a191;
   border-radius: 10px;
@@ -28,4 +10,21 @@ table {
 }
 .button:hover{
   background-color: #89E7D9;
+}
+
+.container{
+  display: flex; 
+  flex-direction: row;
+  justify-content: space-between;
+  
+  width: 100vw;
+  margin: 0;
+  padding: 0;
+  flex-wrap: nowrap;
+
+}
+.content {
+  margin-left: 20px;
+  flex: 1; 
+  padding: 20px;
 }

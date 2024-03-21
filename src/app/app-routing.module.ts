@@ -6,6 +6,8 @@ import { GestionnaireComponent } from './gestionnaire/gestionnaire.component';
 import { LoginComponent } from './login/login.component';
 import { FeesComponent } from './fees/fees.component';
 import { DropDownComponent } from './drop-down/drop-down.component';
+import { UserFormComponent } from './user-form/user-form.component';
+import { RechercheComponent } from './recherche/recherche.component';
 
 const routes: Routes = [
   {path:"ADMINISTRATEUR",
@@ -23,8 +25,8 @@ const routes: Routes = [
     component:LoginComponent
   },
   {
-    path:"drop",
-    component:DropDownComponent
+    path:"recherche",
+    component:RechercheComponent
   },
   {
     path:"addfees",

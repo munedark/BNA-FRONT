@@ -1,9 +1,10 @@
 <div class="wrapper">
-    <aside id="sidebar" class="js-sidebar" [ngClass]="{ 'collapsed': isSidebarOpen }">
+    <aside id="sidebar"  [ngClass]="{ 'collapsed': isSidebarOpen }">
+        <p class="module">Modules:</p>
         <ng-container *ngIf="role === 'ROLE_ADMINISTRATEUR'">
             <ul class="sidebar-nav">
                 <li>
-                    <p class="sidebar-link" (click)="toggleSubMenu(0)">Gestion des agents</p>
+                    <p [ngClass]="{'sidebar-link':!visibleSubMenus[0],'sidebar-link-clicked':visibleSubMenus[0]}" (click)="toggleSubMenu(0)">Gestion des agents</p>
                     <ul class="sub-menu" *ngIf="isSubMenuVisible(0)">
                         <li><a href="#">Ajouter agent</a></li>
                         <li><a href="#">Supprimer agent</a></li>
@@ -12,7 +13,7 @@
                     </ul>
                 </li>
                 <li>
-                    <p class="sidebar-link" (click)="toggleSubMenu(1)">Parent Element 2</p>
+                    <p [ngClass]="{'sidebar-link':!visibleSubMenus[1],'sidebar-link-clicked':visibleSubMenus[1]}" (click)="toggleSubMenu(1)">Parent Element 2</p>
                     <ul class="sub-menu" *ngIf="isSubMenuVisible(1)">
                         <li><a href="#">Sub-Element 1</a></li>
                         <li><a href="#">Sub-Element 2</a></li>
@@ -24,7 +25,7 @@
         <ng-container *ngIf="role === 'ROLE_VALIDATEUR'">
             <ul class="sidebar-nav">
                 <li>
-                    <p class="sidebar-link" (click)="toggleSubMenu(0)">Frais</p>
+                    <p [ngClass]="{'sidebar-link':!visibleSubMenus[0],'sidebar-link-clicked':visibleSubMenus[0]}" (click)="toggleSubMenu(0)"><img src="./assets/frais.png" style="width: 20px;height: auto;border-radius: 2px;margin-right: 5px;">    Frais</p>
                     <ul class="sub-menu" *ngIf="isSubMenuVisible(0)">
                         <li><a routerLink="/addfees">Ajouter frais</a></li>
                         <li><a href="#">frais 1</a></li>
@@ -33,7 +34,7 @@
                     </ul>
                 </li>
                 <li>
-                    <p class="sidebar-link" (click)="toggleSubMenu(1)">Remboursement</p>
+                    <p [ngClass]="{'sidebar-link':!visibleSubMenus[1],'sidebar-link-clicked':visibleSubMenus[1]}" (click)="toggleSubMenu(1)"><img src="./assets/remboursement.png" style="width: 20px;height: auto;border-radius: 2px;margin-right: 5px;">    Remboursement</p>
                     <ul class="sub-menu" *ngIf="isSubMenuVisible(1)">
                         <li><a href="#">remboursement 1</a></li>
                         <li><a href="#">remboursement 2</a></li>
@@ -45,7 +46,7 @@
         <ng-container *ngIf="role === 'ROLE_GESTIONNAIRE'">
             <ul class="sidebar-nav">
                 <li>
-                    <p class="sidebar-link" (click)="toggleSubMenu(0)"><img src="./assets/frais.png" style="width: 20px;height: auto;border-radius: 2px;margin-right: 5px;">   Frais</p>
+                    <p [ngClass]="{'sidebar-link':!visibleSubMenus[0],'sidebar-link-clicked':visibleSubMenus[0]}" (click)="toggleSubMenu(0)"><img src="./assets/frais.png" style="width: 20px;height: auto;border-radius: 2px;margin-right: 5px;">    Frais</p>
                     <ul class="sub-menu" *ngIf="isSubMenuVisible(0)">
                         <li><a routerLink="/addfees">Ajouter frais</a></li>
                         <li><a href="#">frais 1</a></li>
@@ -54,7 +55,7 @@
                     </ul>
                 </li>
                 <li>
-                    <p class="sidebar-link" (click)="toggleSubMenu(1)"> <img src="./assets/remboursement.png" style="width: 20px;height: auto;border-radius: 2px;margin-right: 5px;">Remboursement</p>
+                    <p [ngClass]="{'sidebar-link':!visibleSubMenus[1],'sidebar-link-clicked':visibleSubMenus[1]}" (click)="toggleSubMenu(1)"> <img src="./assets/remboursement.png" style="width: 20px;height: auto;border-radius: 2px;margin-right: 5px;">    Remboursement</p>
                     <ul class="sub-menu" *ngIf="isSubMenuVisible(1)">
                         <li><a href="#">remboursement 1</a></li>
                         <li><a href="#">remboursement 2</a></li>

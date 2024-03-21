@@ -4,19 +4,12 @@ a {
   color: inherit;
 }
 
-.main {
-  flex: 1;
-  overflow: auto; /* Enable vertical scrolling if content overflows */
-  transition: margin-left 0.35s ease-in-out; /* Change transition to margin-left */
-  background: var(--bs-dark-bg-subtle);
-  
 
-
-}
 nav{
   background-color: #ffffff;
   color: #21242a;
   border-radius: 10px 10px 0 0 ;
+  width: 100%;
   
 }
 

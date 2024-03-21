@@ -2,14 +2,16 @@
     background-color: rgb(255, 255, 255);
     color: #21242a;
     width: 260px;
-    border-radius: 10px;
+    border-radius: 0px 0 10px 10px;
     padding: 15px 0 20px 10px ;
     position: absolute;
-    top: 50px; /* Adjust as needed */
-    right: 10px; /* Adjust as needed */
+    top: 57px; /* Adjust as needed */
+    right: 0px; /* Adjust as needed */
     z-index: 1000;   
     float: inline-end; 
     border: 3px solid #00a9872b;
+
+
 
 }
 

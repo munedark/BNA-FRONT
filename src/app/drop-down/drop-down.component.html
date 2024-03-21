@@ -1,8 +1,16 @@
 <div class="wrapper">    
     <div class="first">
-        <div class="icon">
-            <img src="./assets/user.png" alt="user-logo" title="user-logo" class="logo">
-        </div>
+       
+            <div class="icon" *ngIf="role == 'ROLE_ADMINISTRATEUR'">
+                <img  src="./assets/admin.png" alt="user-logo" title="user-logo" class="logo">
+            </div>
+            <div class="icon" *ngIf="role == 'ROLE_VALIDATEUR'">
+                <img  src="./assets/validateur.png" alt="user-logo" title="user-logo" class="logo">
+            </div>
+            <div class="icon" *ngIf="role == 'ROLE_GESTIONNAIRE'">
+                <img  src="./assets/gestionnaire.png" alt="user-logo" title="user-logo" class="logo">
+            </div>
+   
         <div class="text">
             <p style="font-weight: bold;">{{matricule}}</p>
             <p style="font-size: small; color: #17a191;">{{role}}</p>

@@ -1,25 +1,29 @@
 .container {
     background: #f8f9fa;
     padding: 20px;
-    border-radius: 10px;
-    width: 1000px;
+    border-radius: 0 0 10px 10px;
+    width: 90%;
+    border-top:2px solid #17a191 ;
+    margin-bottom: 20px ;
 }
-
 .profile-heading {
-    font-size: 16px;
+    font-size: 18px;
     color: #17a191;
 }
 
 .form-container {
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-between;
     flex-wrap: wrap;
+    margin: 0 100px 0 60px;
+
 }
 
 .form-container > div {
     margin-right: 20px; /* Add some space between the two sections */
 }
+
 
 .btnRegister {
     border: none;
@@ -30,8 +34,10 @@
     font-weight: 600;
     cursor: pointer;
     float: right;
+    
     margin-top: 20px;
     text-align: center;
+   
     
 }
 .btnRegister:hover{
@@ -42,9 +48,7 @@
     margin: 10px;
 }
 
-.second{
-    margin-top: 10% ;
-}
+
 input.ng-invalid.ng-touched {
     border-color: red;
     
@@ -57,4 +61,8 @@ input.ng-invalid.ng-touched::placeholder {
     color: rgb(255, 0, 0);
 }
 
-    
+.register-heading{
+    color: #17a191;
+    margin-bottom: 20px;
+}
+

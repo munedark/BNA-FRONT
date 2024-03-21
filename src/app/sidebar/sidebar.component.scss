@@ -1,6 +1,6 @@
 .wrapper {
   display: flex;
-  height: 92vh; /* Make the wrapper take up the full viewport height */
+  height: calc(100vh - 58px); /* Make the wrapper take up the full viewport height */
   width: 300px;
 }
 
@@ -9,8 +9,8 @@
   background: var(--bs-dark);
   transition: margin-left 0.35s ease-in-out; 
   overflow-y: auto; 
-  padding: 40px 0 0 0;
-  border-radius: 10px;
+  padding: 20px 0 0 0;
+  border-radius: 0 10px 10px 0;
   
   
 } 
@@ -42,25 +42,18 @@ ul {
   padding: 0;
 }  
 
-.sidebar-link:hover{
-  color: #00A987;
-  cursor: pointer;
-}  
 
 li{
   color: #fff;
-  }
-li:hover{
-  color: #00A987;
 }
-      
+li:hover{
+  color: #17a191;
+}
+
 .sub-menu > li:hover{
   color: #89E7D9;
   cursor: pointer;
 }  
-
-
-
 
 
 .sidebar-nav {
@@ -69,17 +62,53 @@ li:hover{
 }  
 
 
+.sidebar-link {
+  position: relative; /* Ensure the ::after pseudo-element is positioned relative to the .sidebar-link */
+}
+
 .sidebar-link::after {
-  content: '\25BE';
+  content: '\25B6';
   position: absolute;
   right: 1.5rem;
-  transition: transform 0.2s ease-out;
-}  
+  font-size: 9px;
+  padding-top: 5px;
 
+}
+
+.sidebar-link-clicked::after {
+  content: '\25BE';
+  color: #17a191;
+  position: absolute;
+  right: 1.2rem;
+  font-size: 20px;
+}
+.sidebar-link-clicked{
+  padding: 0.625rem 1.625rem;
+  color: #17a191;
+  position: relative;
+  display: block;
+  font-size: 0.875rem;
+  border-radius: 10px;
+  font-weight: bold;
+  width: 90%;
+}
+.sidebar-link:hover{
+  cursor: pointer;
+}
+.sidebar-link-clicked:hover{
+  cursor: pointer;
+}
 .sub-menu{
   margin-left: 50px;
 }
 .sub-menu > li{
     margin-bottom: 10px;
 }
- 
+
+.module{
+  margin: 10px 0 20px 15px;
+  color: #6F7780;
+  font-weight: bold;
+  font-size: medium;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}

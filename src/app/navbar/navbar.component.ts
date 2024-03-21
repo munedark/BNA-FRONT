@@ -30,7 +30,7 @@ export class NavbarComponent implements OnInit , OnDestroy {
     if (this.subscription) {
       this.subscription.unsubscribe();
     }
-    this.dropService.toggleIcon();
+  
   }
 
   toggleSidebar(): void {

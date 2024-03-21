@@ -16,6 +16,8 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { FeesComponent } from './fees/fees.component';
 import { DropDownComponent } from './drop-down/drop-down.component';
 import { UserFormComponent } from './user-form/user-form.component';
+import { RechercheComponent } from './recherche/recherche.component';
+import { RisquesComponent } from './risques/risques.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,9 @@ import { UserFormComponent } from './user-form/user-form.component';
     SidebarComponent,
     FeesComponent,
     DropDownComponent,
-    UserFormComponent
+    UserFormComponent,
+    RechercheComponent,
+    RisquesComponent
   ],
   imports: [
     BrowserModule,
