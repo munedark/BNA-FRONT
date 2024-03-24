@@ -1,0 +1,13 @@
+.container {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 0 0 10px 10px;
+    width: 90%;
+    border-top:2px solid #17a191 ;
+    margin-bottom: 20px ;
+}
+::ng-deep .mat-form-field.mat-form-field-appearance-fill.mat-focused .mat-form-field-underline {
+    background-color: #17a191; /* Change to the color you desire */
+  }
+    
+  

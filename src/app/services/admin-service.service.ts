@@ -14,6 +14,13 @@ export class AdminServiceService {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
     console.log(headers);
     
-    return this.http.get<any>('http://localhost:8080/admin/showAllAgents',  { headers });
+    return this.http.post<any>('http://localhost:8080/admin/addAgent',agentData  ,{headers});
+  }
+  ajouterClient(agentData: any) {
+    const token = this.auth.getToken();
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    console.log(headers);
+    
+    return this.http.post<any>('http://localhost:8080/admin/addClient',agentData  ,{headers});
   }
 }

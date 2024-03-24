@@ -24,7 +24,6 @@ export class SidebarComponent implements OnInit, OnDestroy {
   }
   
   ngOnInit(): void {
-    // Fetch token from local storage
     const token = this.auth.getToken();
     if (token) {
       const decodedToken: any = jwtDecode(token);

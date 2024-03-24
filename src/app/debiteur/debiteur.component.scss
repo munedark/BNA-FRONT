@@ -26,22 +26,3 @@
     border-radius: 5px 0 0 5px;
     padding-left: 10px ;
 }
-input.text:focus{
-    border:2px solid #89E7D9 ;
-    border-right: none;
-    outline: none;
-}
-form{
-    display: flex;
-    flex-wrap: wrap;
-    
-}
-.titre{
-    margin-right:10px ;
-    padding-top: 5px;
-}
-.searchBar{
-    display: flex;
-    flex-wrap: nowrap;
-}
-

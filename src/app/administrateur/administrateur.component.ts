@@ -2,6 +2,8 @@
 import { Component, OnInit } from '@angular/core';
 import { LogoutService } from '../services/logout.service';
 import { jwtDecode } from 'jwt-decode';
+import { MatTableDataSource } from '@angular/material/table';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -12,11 +14,31 @@ import { jwtDecode } from 'jwt-decode';
 export class AdministrateurComponent implements OnInit {
   isSidebarCollapsed = false;
   visibleSubMenus: boolean[] = [];
+  title:string="liste des risques";
+
+  dataSource: MatTableDataSource<any>;
+  displayedColumns: string[] = ['font', 'produit', 'montant']; // Define column names
+
+
  
-  constructor(private logoutService: LogoutService) { }
+  constructor(private logoutService: LogoutService) {
+
+
+    
+    this.dataSource = new MatTableDataSource<any>([{ font: 'value1', produit: 'value2', montant: 'value3' },
+    { font: 'value4', produit: 'value5', montant: 'value6' },
+    { font: 'value4', produit: 'value5', montant: 'value6' },
+    { font: 'value4', produit: 'value5', montant: 'value6' },
+    { font: 'value4', produit: 'value5', montant: 'value6' },
+    { font: 'value4', produit: 'value5', montant: 'value6' },
+    { font: 'value4', produit: 'value5', montant: 'value6' },
+    { font: 'value4', produit: 'value5', montant: 'value6' },
+    { font: 'value4', produit: 'value5', montant: 'value6' },
+    { font: 'value4', produit: 'value5', montant: 'value6' } ]);
+   }
 
   ngOnInit(): void {
-    this.toggleSidebar();
+    
     const token = localStorage.getItem('token');
 
   }
@@ -34,9 +56,6 @@ export class AdministrateurComponent implements OnInit {
     this.visibleSubMenus[index] = !this.visibleSubMenus[index];
   }
 
-  toggleSidebar(): void {
-    this.isSidebarCollapsed = !this.isSidebarCollapsed;
-  }
   
   
 

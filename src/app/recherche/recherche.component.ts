@@ -6,4 +6,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./recherche.component.scss']
 })
 export class RechercheComponent {
+
+  search(){}
 }

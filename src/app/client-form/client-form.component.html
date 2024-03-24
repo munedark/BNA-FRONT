@@ -1,0 +1,43 @@
+<div class="container">
+    <h3 class="register-heading">Ajouter un client</h3>
+    <hr style="color: #17a191 ;">
+    <form #ajout="ngForm" (ngSubmit)="ajouter()">
+        <div class="form-container">
+            <div>
+                <div class="form-group">
+                    <label for="nom">Nom *</label>
+                    <input type="text" id="nomClient" class="form-control" placeholder="Nom" name="nom" #nom="ngModel" [(ngModel)]="client.nom" required/>
+                </div>
+                <div class="form-group">
+                    <label for="prenom">Prénom *</label>
+                    <input type="text" id="prenomClient" class="form-control" placeholder="Prénom" name="prenom" #prenom="ngModel" [(ngModel)]="client.prenom" required/>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email *</label>
+                    <input type="email" id="emailClient" class="form-control" placeholder="Email" name="email" #email="ngModel" [(ngModel)]="client.email" required/>
+                </div>
+                <div class="form-group">
+                    <label for="numtele">Numéro de téléphone *</label>
+                    <input type="text" id="numteleClient" class="form-control" placeholder="Numéro de téléphone" name="numtele" #numtele="ngModel" [(ngModel)]="client.numtele" required/>
+                </div>
+
+            </div>
+        
+            <div class="second">
+                <h5 class="profile-heading">Information Du Compte:</h5>
+                <div class="form-group">
+                    <label for="username">Username *</label>
+                    <input type="text" id="usernameClient" class="form-control" placeholder="Username" name="username" #username="ngModel" [(ngModel)]="profile.username" required/>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password *</label>
+                    <input type="password" id="passwordClient" class="form-control" placeholder="Password" name="password" #password="ngModel" [(ngModel)]="profile.password" required/>
+                </div>
+                
+                <div class="form-group">
+                    <button type="submit" class="btn btnRegister" >ajouter</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

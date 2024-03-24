@@ -4,9 +4,12 @@
     </div>
     <hr style="color: green;">
     <div >
-        <form>
-            <input type="text" class="text" placeholder="Rechercher">
-            <button type="submit" class="button">search</button>
+        <form (ngSubmit)="search()">
+            <p class="titre">numero du dossier contentieux: </p>
+            <div class="searchBar">
+                <input type="text" class="text" placeholder="Rechercher" required>
+                <button type="submit" class="button">search</button>
+            </div>
         </form>
     </div>
 </div>
