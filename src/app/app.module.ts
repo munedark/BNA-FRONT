@@ -19,7 +19,6 @@ import { UserFormComponent } from './user-form/user-form.component';
 import { RechercheComponent } from './recherche/recherche.component';
 import { RisquesComponent } from './risques/risques.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { TableComponent } from './table/table.component';
 import { MatInputModule } from '@angular/material/input';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
@@ -27,6 +26,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { SharedTableComponent } from './shared-table/shared-table.component';
 import { DebiteurComponent } from './debiteur/debiteur.component';
 import { ClientFormComponent } from './client-form/client-form.component';
+import { ShowUsersComponent } from './show-users/show-users.component';
 
 
 
@@ -44,10 +44,10 @@ import { ClientFormComponent } from './client-form/client-form.component';
     UserFormComponent,
     RechercheComponent,
     RisquesComponent,
-    TableComponent,
     SharedTableComponent,
     DebiteurComponent,
-    ClientFormComponent
+    ClientFormComponent,
+    ShowUsersComponent
   ],
   imports: [
     BrowserModule,

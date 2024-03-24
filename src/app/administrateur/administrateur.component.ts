@@ -15,27 +15,8 @@ export class AdministrateurComponent implements OnInit {
   isSidebarCollapsed = false;
   visibleSubMenus: boolean[] = [];
   title:string="liste des risques";
-
-  dataSource: MatTableDataSource<any>;
-  displayedColumns: string[] = ['font', 'produit', 'montant']; // Define column names
-
-
  
-  constructor(private logoutService: LogoutService) {
-
-
-    
-    this.dataSource = new MatTableDataSource<any>([{ font: 'value1', produit: 'value2', montant: 'value3' },
-    { font: 'value4', produit: 'value5', montant: 'value6' },
-    { font: 'value4', produit: 'value5', montant: 'value6' },
-    { font: 'value4', produit: 'value5', montant: 'value6' },
-    { font: 'value4', produit: 'value5', montant: 'value6' },
-    { font: 'value4', produit: 'value5', montant: 'value6' },
-    { font: 'value4', produit: 'value5', montant: 'value6' },
-    { font: 'value4', produit: 'value5', montant: 'value6' },
-    { font: 'value4', produit: 'value5', montant: 'value6' },
-    { font: 'value4', produit: 'value5', montant: 'value6' } ]);
-   }
+  constructor(private logoutService: LogoutService) { }
 
   ngOnInit(): void {
     
@@ -44,7 +25,6 @@ export class AdministrateurComponent implements OnInit {
   }
 
   isSubMenuVisible(index: number): boolean {
-    // If the sub-menu visibility for the specified index is not defined, initialize it as false
     if (this.visibleSubMenus[index] === undefined) {
       this.visibleSubMenus[index] = false;
     }

@@ -8,7 +8,7 @@ import { FeesComponent } from './fees/fees.component';
 import { DropDownComponent } from './drop-down/drop-down.component';
 import { UserFormComponent } from './user-form/user-form.component';
 import { RechercheComponent } from './recherche/recherche.component';
-import { TableComponent } from './table/table.component';
+
 
 const routes: Routes = [
   {path:"ADMINISTRATEUR",
@@ -29,10 +29,7 @@ const routes: Routes = [
     path:"recherche",
     component:RechercheComponent
   },
-  {
-    path:"table",
-    component:TableComponent
-  },
+  
   {
     path:"addfees",
     component:FeesComponent
