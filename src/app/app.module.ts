@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { AuthService } from './services/auth.service';
 import { FormsModule } from '@angular/forms';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AdministrateurComponent } from './administrateur/administrateur.component';
 import { ValidateurComponent } from './validateur/validateur.component';
@@ -24,9 +24,12 @@ import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { SharedTableComponent } from './shared-table/shared-table.component';
-import { DebiteurComponent } from './debiteur/debiteur.component';
 import { ClientFormComponent } from './client-form/client-form.component';
 import { ShowUsersComponent } from './show-users/show-users.component';
+import { AffichageDebiteurComponent } from './affichage-debiteur/affichage-debiteur.component';
+import { JwtInterceptor } from './jwt.interceptor';
+import { AuthInterceptor } from './auth-interceptor.service';
+import { DebiteurComponent } from './debiteur/debiteur.component';
 
 
 
@@ -45,9 +48,10 @@ import { ShowUsersComponent } from './show-users/show-users.component';
     RechercheComponent,
     RisquesComponent,
     SharedTableComponent,
-    DebiteurComponent,
     ClientFormComponent,
-    ShowUsersComponent
+    ShowUsersComponent,
+    AffichageDebiteurComponent,
+    DebiteurComponent
   ],
   imports: [
     BrowserModule,
@@ -61,7 +65,8 @@ import { ShowUsersComponent } from './show-users/show-users.component';
     MatPaginatorModule,
     MatSortModule
   ],
-  providers: [AuthService],
+  providers: [ { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -10,7 +10,7 @@ import { MatTableDataSource } from '@angular/material/table';
 export class ShowUsersComponent {
   agents: any[] = [];
   title = 'Liste des agents';
-  dataSource!: MatTableDataSource<any>; 
+  dataSource = new MatTableDataSource<any>();
 
   displayedColumns: string[] = ['id', 'nom', 'prenom', 'email', 'numtele'];
 
@@ -24,7 +24,7 @@ export class ShowUsersComponent {
     this.adminService.showAgents().subscribe(
       (data: any[]) => {
         this.agents = data;
-        this.dataSource = new MatTableDataSource<any>(this.agents); // Use MatTableDataSource constructor
+        this.dataSource.data = data; 
       },
       error => {
         console.error('Error fetching agents:', error);

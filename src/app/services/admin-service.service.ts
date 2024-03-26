@@ -1,27 +1,26 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { AuthService } from './auth.service';
-
 @Injectable({
   providedIn: 'root'
 })
 export class AdminServiceService {
 
-  constructor(private http: HttpClient, private auth: AuthService) { }
+  constructor(private http: HttpClient) { }
 
   ajouterAgent(agentData: any) {
-    const token = this.auth.getToken();
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-    return this.http.post<any>('http://localhost:8080/admin/addAgent',agentData  ,{headers});
+    return this.http.post<any>('http://localhost:8080/admin/addAgent',agentData  );
   }
   ajouterClient(agentData: any) {
-    const token = this.auth.getToken();
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-    return this.http.post<any>('http://localhost:8080/admin/addClient',agentData  ,{headers});
+
+    return this.http.post<any>('http://localhost:8080/admin/addClient',agentData  );
   }
   showAgents() {
-    const token = this.auth.getToken();
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-    return this.http.get<any>('http://localhost:8080/admin/showAllAgents',{headers});
+
+    return this.http.get<any>('http://localhost:8080/admin/showAllAgents');
   }
+  showClients() {
+
+    return this.http.get<any>('http://localhost:8080/admin/showAllClients');
+  }
+
 }

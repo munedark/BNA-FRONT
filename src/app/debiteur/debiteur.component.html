@@ -1,8 +1,2 @@
-
-<div class="container">
-    <div class="search-text">
-        <p>Signaletique du debiteur N :</p>
-    </div>
-    <hr style="color: green;">
- 
-</div>
+<app-recherche (debiteurDataChange)="onDebiteurDataReceived($event)"></app-recherche>
+<app-affichage-debiteur [debiteurData]="debiteurData" *ngIf="debiteurData"></app-affichage-debiteur>

@@ -1,0 +1,20 @@
+<div class="container">
+    <p class="title">Signaletique du débiteur N: {{debiteurData?.numCtx}}</p>
+    <hr style="color: #17a191;">
+    <div class="donnees">
+        <div class="first">
+            <ul>
+                <li>Nom: <p class="reponse" style="text-decoration: underline;">{{debiteurData?.nom}} {{debiteurData?.prenom}}</p></li>
+                <li>Date de Transfert: <p class="reponse">{{debiteurData?.dateTransfert}}</p></li>
+            </ul>
+        </div>
+
+        <div class="second">
+            <ul>
+                <li>Solde en instance de recouvrement:<p class="reponse"> {{debiteurData?.soldeRecouvrement}} TND</p></li>
+                <li>Etat de Dossier: <p class="reponse">{{etatCTX}}</p></li>
+            </ul>
+        </div>
+        
+    </div>
+</div>

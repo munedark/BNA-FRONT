@@ -1,25 +1,33 @@
 import { Component } from '@angular/core';
-import { LogoutService } from '../services/logout.service';
-import { AuthService } from '../services/auth.service';
+
 import { Router } from '@angular/router';
+import { SharedServicesService } from '../services/shared-services.service';
 @Component({
   selector: 'app-gestionnaire',
   templateUrl: './gestionnaire.component.html',
   styleUrls: ['./gestionnaire.component.scss']
 })
 export class GestionnaireComponent {
-  role:any
-  constructor(private logoutService: LogoutService,private authService:AuthService,private router:Router) { }
+
+  constructor(private sharedService:SharedServicesService,private router:Router) { }
 
   ngOnInit(): void {
-    this.authService.usertoken$.subscribe((data:any)=>{
-      this.role= data.role
-    })
+   
+
+  }
+  click(){ 
+    this.sharedService.recherche(3221).subscribe(
+      (response) => {
+        console.log(response);
+      },
+      (error) => {
+        // Handle any errors here
+      }
+    );
   }
 
 
-  logout(): void {
-    this.logoutService.logout();
-  }
+
+
   }
 
