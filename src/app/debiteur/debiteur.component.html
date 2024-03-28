@@ -1,2 +1,9 @@
-<app-recherche (debiteurDataChange)="onDebiteurDataReceived($event)"></app-recherche>
+<app-recherche 
+  (debiteurDataChange)="onDebiteurDataReceived($event)"
+  (risques)="onRisquesReceived($event)">
+</app-recherche>
+
 <app-affichage-debiteur [debiteurData]="debiteurData" *ngIf="debiteurData"></app-affichage-debiteur>
+
+<!-- Display risks only when data is available -->
+<app-affichage-risque [risquesData]="risquesData" *ngIf="risquesData"></app-affichage-risque>

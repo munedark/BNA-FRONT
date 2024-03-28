@@ -30,7 +30,8 @@ import { AffichageDebiteurComponent } from './affichage-debiteur/affichage-debit
 import { JwtInterceptor } from './jwt.interceptor';
 import { AuthInterceptor } from './auth-interceptor.service';
 import { DebiteurComponent } from './debiteur/debiteur.component';
-
+import {MAT_FORM_FIELD_DEFAULT_OPTIONS, MatFormFieldModule} from '@angular/material/form-field';
+import { AffichageRisqueComponent } from './affichage-risque/affichage-risque.component';
 
 
 @NgModule({
@@ -51,7 +52,8 @@ import { DebiteurComponent } from './debiteur/debiteur.component';
     ClientFormComponent,
     ShowUsersComponent,
     AffichageDebiteurComponent,
-    DebiteurComponent
+    DebiteurComponent,
+    AffichageRisqueComponent
   ],
   imports: [
     BrowserModule,
@@ -63,10 +65,12 @@ import { DebiteurComponent } from './debiteur/debiteur.component';
     MatInputModule,
     MatTableModule,
     MatPaginatorModule,
-    MatSortModule
+    MatSortModule,
+    MatFormFieldModule
   ],
   providers: [ { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'outline'}}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,0 +1,8 @@
+<div class="container">
+    <p class="title">Liste des risques:</p>
+    <hr style="color: #17a191;">
+    <div class="donnees">
+        <app-shared-table *ngIf="risquesData" [dataSource]="dataSource" [displayedColumns]="['id', 'mntFrais', 'soldeRisque', 'mntEntreePrincipale']" title="Risques"></app-shared-table>
+
+    </div>
+</div>
