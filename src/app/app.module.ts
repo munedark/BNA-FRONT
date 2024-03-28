@@ -34,6 +34,7 @@ import {MAT_FORM_FIELD_DEFAULT_OPTIONS, MatFormFieldModule} from '@angular/mater
 import { AffichageRisqueComponent } from './affichage-risque/affichage-risque.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
+import { FraisEnregistrementComponent } from './frais-enregistrement/frais-enregistrement.component';
 
 @NgModule({
   declarations: [
@@ -55,6 +56,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     AffichageDebiteurComponent,
     DebiteurComponent,
     AffichageRisqueComponent,
+    FraisEnregistrementComponent,
     
   ],
   imports: [

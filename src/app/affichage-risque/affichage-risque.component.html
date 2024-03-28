@@ -1,8 +1,3 @@
-<div class="container">
-    <p class="title">Liste des risques:</p>
-    <hr style="color: #17a191;">
-    <div class="donnees">
-        <app-shared-table (rowClicked)="handleRowClick($event)" *ngIf="risquesData" [dataSource]="dataSource" [displayedColumns]="displayedColumns" title="Risques"></app-shared-table>
 
-    </div>
-</div>
+        <app-shared-table (rowClicked)="handleRowClick($event)" *ngIf="risquesData" [dataSource]="dataSource" [displayedColumns]="displayedColumns" title="Liste des risques:"></app-shared-table>
+

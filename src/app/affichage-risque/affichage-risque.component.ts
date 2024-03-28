@@ -3,7 +3,9 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Risque } from '../Models/Risque';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
-import { UserFormComponent } from '../user-form/user-form.component';
+
+import { FraisEnregistrementComponent } from '../frais-enregistrement/frais-enregistrement.component';
+
 
 @Component({
   selector: 'app-affichage-risque',
@@ -24,13 +26,13 @@ export class AffichageRisqueComponent implements OnInit {
   }
 
   openFormDialog(risque: Risque) {
-    this.dialog.open(UserFormComponent, {
-      data: { id: risque.id }
+    this.dialog.open(FraisEnregistrementComponent, {
+      data: { risque } // Pass the selected risque object to the dialog
     });
   }
   handleRowClick(row: Risque) {
     console.log('Row clicked in parent component:', row.id);
-    
+    this.openFormDialog(row);
   }
   
 }
