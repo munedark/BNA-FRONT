@@ -32,7 +32,8 @@ import { AuthInterceptor } from './auth-interceptor.service';
 import { DebiteurComponent } from './debiteur/debiteur.component';
 import {MAT_FORM_FIELD_DEFAULT_OPTIONS, MatFormFieldModule} from '@angular/material/form-field';
 import { AffichageRisqueComponent } from './affichage-risque/affichage-risque.component';
-
+import { MatIconModule } from '@angular/material/icon';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { AffichageRisqueComponent } from './affichage-risque/affichage-risque.co
     ShowUsersComponent,
     AffichageDebiteurComponent,
     DebiteurComponent,
-    AffichageRisqueComponent
+    AffichageRisqueComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -66,7 +68,9 @@ import { AffichageRisqueComponent } from './affichage-risque/affichage-risque.co
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatIconModule,
+    MatDialogModule
   ],
   providers: [ { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

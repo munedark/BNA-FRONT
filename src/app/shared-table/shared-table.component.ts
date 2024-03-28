@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Input, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -14,6 +14,8 @@ export class SharedTableComponent implements OnInit {
   @Input() title:string=""
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
+  @Output() rowClicked = new EventEmitter<any>();
+
 
   constructor(private cdr: ChangeDetectorRef) { }
 
@@ -32,4 +34,12 @@ export class SharedTableComponent implements OnInit {
       this.dataSource.paginator.firstPage();
     }
   }
+
+
+  onRowClick(element: any) {
+    this.rowClicked.emit(element); // Emit the clicked element data
+    // You can optionally log or perform other actions here
+  }
+  
+  
 }
