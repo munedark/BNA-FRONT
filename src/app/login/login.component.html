@@ -4,7 +4,7 @@
             <div class="alert alert-danger" *ngIf="invalidLogin" [@fadeOut]="invalidLogin ? 'visible' : 'hidden'">{{ errorMessage }}</div>
             <!-- Tabs Titles -->
             <img src="../assets/bna.png" class="logo-icon">
-            <h3>Se Connecte</h3>
+            <h3>Se Connecter</h3>
             <!-- Login Form -->
             <form #loginForm="ngForm" (ngSubmit)="login()">
                 <input type="text" id="username" class="fadeIn second" [(ngModel)]="username" name="username" placeholder="matricule" required>

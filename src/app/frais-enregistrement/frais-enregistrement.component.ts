@@ -1,6 +1,6 @@
-import { Component, Inject } from '@angular/core';
-import { Risque } from '../Models/Risque';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Component } from '@angular/core';
+import { SharedServicesService } from '../services/shared-services.service';
+import { FraisEnregistrement } from '../Models/FraisEnregistrement';
 
 @Component({
   selector: 'app-frais-enregistrement',
@@ -8,12 +8,27 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
   styleUrls: ['./frais-enregistrement.component.scss']
 })
 export class FraisEnregistrementComponent {
-  risque: Risque;
+  fraisEnregistrement: FraisEnregistrement = {
+    montantFrais: '',
+    numeroRouge: '',
+    numeroAffaire: '',
+    dateDemandeJugement: '',
+    recetteFinance: ''
+  };
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any) {
-    this.risque = data.risque; // Retrieve the risque object passed from the parent component
-  }
+  constructor(private sharedService: SharedServicesService) {}
 
-  ngOnInit(): void {
+  submitForm() {
+    this.sharedService.submitForm(this.fraisEnregistrement).subscribe(
+      (response) => {
+        console.log('Frais ajouté avec succès:', response);
+        // Optionally, reset the form or perform other actions after successful submission
+        // this.fraisEnregistrement = { montantFrais: '', numeroRouge: '', numeroAffaire: '', dateDemandeJugement: '', recetteFinance: '' };
+      },
+      (error) => {
+        console.error('Erreur lors de l\'ajout des frais:', error);
+        // Optionally, display an error message to the user
+      }
+    );
   }
 }

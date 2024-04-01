@@ -1,11 +1,7 @@
-// Inside affichage-risque.component.ts
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild, TemplateRef } from '@angular/core';
 import { Risque } from '../Models/Risque';
 import { MatTableDataSource } from '@angular/material/table';
-import { MatDialog } from '@angular/material/dialog';
-
-import { FraisEnregistrementComponent } from '../frais-enregistrement/frais-enregistrement.component';
-
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-affichage-risque',
@@ -16,8 +12,12 @@ export class AffichageRisqueComponent implements OnInit {
   dataSource: MatTableDataSource<Risque> = new MatTableDataSource<Risque>();
   @Input() risquesData: Risque[] | null = null;
   displayedColumns: string[] = ['id', 'mntFrais', 'soldeRisque', 'mntEntreePrincipale'];
+  @Input() debiteurData: any
+  @ViewChild('modal') modalContent!: TemplateRef<any>; // ViewChild to get a reference to the modal content
 
-  constructor(private dialog: MatDialog) {}
+  risque: Risque | null = null; // Property to hold the selected risque data
+
+  constructor(private modalService: NgbModal ) {}
 
   ngOnInit() {
     if (this.risquesData) {
@@ -25,14 +25,15 @@ export class AffichageRisqueComponent implements OnInit {
     }
   }
 
-  openFormDialog(risque: Risque) {
-    this.dialog.open(FraisEnregistrementComponent, {
-      data: { risque } // Pass the selected risque object to the dialog
-    });
+  openModal(risque: Risque) {
+    this.risque = risque; 
+   
   }
+
   handleRowClick(row: Risque) {
-    console.log('Row clicked in parent component:', row.id);
-    this.openFormDialog(row);
+    this.openModal(row);
   }
-  
+
+
+
 }

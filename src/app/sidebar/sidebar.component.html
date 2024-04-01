@@ -49,7 +49,7 @@
                     <p [ngClass]="{'sidebar-link':!visibleSubMenus[0],'sidebar-link-clicked':visibleSubMenus[0]}" (click)="toggleSubMenu(0)"><img src="./assets/frais.png" style="width: 20px;height: auto;border-radius: 2px;margin-right: 5px;">    Frais</p>
                     <ul class="sub-menu" *ngIf="isSubMenuVisible(0)">
                         <li><a routerLink="/addfees">Ajouter frais</a></li>
-                        <li><a href="#">frais 1</a></li>
+                        <li><a routerLink="/GESTIONNAIRE/frais/debiteur">Pec des frais generaux</a></li>
                         <li><a href="#">frais 2</a></li>
                         <li><a href="#">frais 3</a></li>
                     </ul>

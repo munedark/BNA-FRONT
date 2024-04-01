@@ -8,6 +8,7 @@ import { FeesComponent } from './fees/fees.component';
 import { DropDownComponent } from './drop-down/drop-down.component';
 import { UserFormComponent } from './user-form/user-form.component';
 import { RechercheComponent } from './recherche/recherche.component';
+import { DebiteurComponent } from './debiteur/debiteur.component';
 
 
 const routes: Routes = [
@@ -19,8 +20,46 @@ const routes: Routes = [
   },
   {
     path:"GESTIONNAIRE",
-    component:GestionnaireComponent
+    component:GestionnaireComponent,
+    children: [
+        {
+          path: 'frais', 
+          children: [
+      {
+        path: '', 
+        redirectTo: 'debiteur', 
+        pathMatch: 'full'
+      },
+      {
+        path: 'debiteur', 
+        component: DebiteurComponent
+      },
+      {
+        path: 'addUser', 
+        component: UserFormComponent
+      }
+    ]
   },
+  {
+    path: 'recouvrement', 
+    children: [
+      {
+        path: '', 
+        redirectTo: 'anotherComponent', 
+        pathMatch: 'full'
+      },
+      {
+        path: 'anotherComponent', 
+        component: AdministrateurComponent
+      },
+      {
+        path: 'yetAnotherComponent', 
+        component: AdministrateurComponent
+      }
+    ]
+  }
+]
+},
   {
     path:"login",
     component:LoginComponent
@@ -35,6 +74,7 @@ const routes: Routes = [
     component:FeesComponent
   },
   { path: '', redirectTo: '/login', pathMatch: 'full' }
+  
 ];
 
 @NgModule({

@@ -5,7 +5,9 @@
         <div class="first">
             <ul>
                 <li>Nom: <p class="reponse" style="text-decoration: underline;">{{debiteurData?.nom}} {{debiteurData?.prenom}}</p></li>
-                <li>Date de Transfert: <p class="reponse">{{debiteurData?.dateTransfert}}</p></li>
+                <ng-container *ngIf="!isModalOpen">
+                    <li>Date de Transfert: <p class="reponse">{{debiteurData?.dateTransfert}}</p></li>
+                </ng-container>
             </ul>
         </div>
 

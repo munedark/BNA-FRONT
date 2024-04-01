@@ -8,6 +8,7 @@
   flex-wrap: nowrap;
 }
 
+  
 .content {
   flex: 1; 
   padding: 20px;
@@ -15,6 +16,7 @@
   flex-direction: column;
   justify-content: space-between;
   overflow-y: scroll; 
+  justify-content: flex-start;
 
 
   height: calc(100vh - 58px);
@@ -27,7 +29,6 @@
   padding-top:50px;
 }
 .content::-webkit-scrollbar-thumb{
-  // background: linear-gradient(#00A987,#89E7D9,#00A987);
   background: #119c79;
   border-radius: 10px;
 

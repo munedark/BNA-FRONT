@@ -6,4 +6,4 @@
 <app-affichage-debiteur [debiteurData]="debiteurData" *ngIf="debiteurData"></app-affichage-debiteur>
 
 <!-- Display risks only when data is available -->
-<app-affichage-risque [risquesData]="risquesData" *ngIf="risquesData"></app-affichage-risque>
+<app-affichage-risque [risquesData]="risquesData" [debiteurData]="debiteurData" *ngIf="risquesData"></app-affichage-risque>

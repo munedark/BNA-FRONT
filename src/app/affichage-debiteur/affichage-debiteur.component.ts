@@ -8,8 +8,9 @@ import { DebiteurInfo } from '../Models/DebiteurInfo';
 })
 export class AffichageDebiteurComponent {
   @Input() debiteurData: DebiteurInfo | null = null;
+  @Input() isModalOpen: boolean =false;
   etatCTX: string = '';
-
+  
   constructor() {
     this.updateEtatCTX();
   }
