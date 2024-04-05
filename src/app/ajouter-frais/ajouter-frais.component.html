@@ -1,0 +1,92 @@
+<div class="container">
+    <h3 class="register-heading">Ajouter un frais</h3>
+    <hr style="border-color: #17a191;">
+    <form #enregistrementForm="ngForm" (ngSubmit)="submitForm()">
+        <div class="content">
+            <div class="groupe">
+                <div class="form-group">
+                    <label for="typeFrais">Type des frais:</label>
+                    <select id="typeFrais" class="form-control input-with-arrow" name="typeFrais" [(ngModel)]="fraisEnregistrement.typeFrais" required>
+                        <option value="" disabled>Choisir type des frais</option>
+                        <option value="Auxiliaire">Auxiliaire</option>
+                        <option value="????">????</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="typeAuxiliaire">Type de l'auxiliaire:</label>
+                    <select id="typeAuxiliaire" class="form-control input-with-arrow" name="typeAuxiliaire" [(ngModel)]="fraisEnregistrement.typeAuxiliaire" required>
+                        <option value="" disabled selected>Select an option</option>
+                        <option value="Auxiliaire">Auxiliaire</option>
+                        <option value="????">????</option>
+                    </select>
+                </div>
+                <div class="form-group space1">
+                    <label for="cinAuxiliaire">Cin de l'auxiliaire:</label>
+                    <input type="text" id="cinAuxiliaire" class="form-control " placeholder="Cin de l'auxiliaire" name="cinAuxiliaire" [(ngModel)]="fraisEnregistrement.cinAuxiliaire">
+                </div>
+                <div class="form-group space2">
+                    <label for="nomAuxiliaire">Nom de l'auxiliaire:</label>
+                    <input type="text" id="nomAuxiliaire" class="form-control redBorder" placeholder="Nom de l'auxiliaire" name="nomAuxiliaire" [(ngModel)]="fraisEnregistrement.nomAuxiliaire">
+                </div>
+                <div class="form-group space2">
+                    <label for="regime">Régime en %:</label>
+                    <select id="regime" class="form-control redBorder input-with-arrow" name="regime" [(ngModel)]="fraisEnregistrement.regime" required >
+                        <option value="" disabled selected>select Regime</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select>
+                </div>
+                <div class="form-group space2">
+                    <label for="numeroAffaire">Numéro de l'affaire:</label>
+                    <input type="text" id="numeroAffaire" placeholder="Numéro Affaire" class="form-control redBorder" name="numeroAffaire" [(ngModel)]="fraisEnregistrement.numeroAffaire">
+                </div>
+                <div class="form-group space1">
+                    <label for="montantHonoraire">Montant des honoraires (En Dinars):</label>
+                    <input type="text" id="montantHonoraire" class="form-control" placeholder="Montant des honoraires" name="montantHonoraire" [(ngModel)]="fraisEnregistrement.montantHonoraire">
+                </div>
+                <div class="form-group space2">
+                    <label for="typePaiement">Type de Paiement:</label>
+                    <select id="typePaiement" class="form-control input-with-arrow" name="typePaiement" [(ngModel)]="fraisEnregistrement.typePaiment" required>
+                        <option value="" disabled>Select an option</option>
+                        <option value="Chèck BCT">Chèque BCT</option>
+                        <option value="Virement Tétécomponcé">Virement Télécomponcé</option>
+                    </select>
+                </div>
+            </div>
+            <div class="groupe">
+                
+                    <div style="margin-bottom: 100px;">
+                        <div class="form-group space1">
+                            <label for="natureAuxiliaire">Nature de l'auxiliaire:</label>
+                            <mat-radio-group id="natureAuxiliaire" class="form-control" name="natureAuxiliaire" [(ngModel)]="fraisEnregistrement.natureAuxiliaire" style="border: none; background-color: rgba(240, 248, 255, 0);">
+                                <mat-radio-button value="Conventionné">Conventionné</mat-radio-button>
+                                <mat-radio-button value="Non Conventionné">Non Conventionné</mat-radio-button>
+                            </mat-radio-group>
+                        </div>
+                        <div *ngIf="fraisEnregistrement.natureAuxiliaire === 'Non Conventionné'">
+                            <div class="form-group space2">
+                                <label for="RneAuxiliaire">RNE de l'auxiliaire:</label>
+                                <input type="text" id="RneAuxiliaire" class="form-control" name="RneAuxiliaire" [(ngModel)]="fraisEnregistrement.RneAuxiliaire">
+                            </div>
+                            <div class="form-group space2">
+                                <label for="prenomAuxiliaire">Prénom de l'auxiliaire:</label>
+                                <input type="text" id="prenomAuxiliaire" class="form-control redBorder" name="prenomAuxiliaire" [(ngModel)]="fraisEnregistrement.prenomAuxiliaire">
+                            </div>
+                        </div>
+                    </div>
+                    <div >
+                        <div class="form-group space2 ">
+                            <label for="dateOperation">Date de l'opération:</label>
+                            <input type="date" id="dateOperation" class="form-control" name="dateOperation" [(ngModel)]="fraisEnregistrement.dateOperation">
+                        </div>
+                        <div class="form-group space2 ">
+                            <label for="montantFrais">Montant des frais (en Dinars):</label>
+                            <input type="text" id="montantFrais" class=" form-control" name="montantFrais" placeholder="0000.00TDN" [(ngModel)]="fraisEnregistrement.montantFrais">
+                        </div>
+                    </div>
+                
+            </div>
+        </div>
+        <button type="submit" class="btn btnRegister">Valider</button>
+    </form>
+</div>

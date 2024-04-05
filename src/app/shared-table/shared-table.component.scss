@@ -20,4 +20,24 @@
     border-color: #17a191;
    
   }
+  .pdf {
+    float: right;
+    background-color: rgb(255, 56, 56);
+    height: 30px;
+    width: 28px;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex; /* Use flexbox */
+    justify-content: center; /* Center content horizontally */
+    align-items: center; /* Center content vertically */
+  }
+  
+  .pdf:hover {
+    background-color: rgb(255, 145, 145);
+  }
+  
+  .pdf-img {
+    height: 20px;
+    width: auto;
+  }
   

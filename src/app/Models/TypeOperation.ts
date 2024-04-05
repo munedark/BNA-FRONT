@@ -1,3 +1,3 @@
 export interface TypeOperation {
-libelleOperaion:string;
+libelleOperation:string;
 }

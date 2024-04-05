@@ -11,11 +11,11 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 export class AffichageRisqueComponent implements OnInit {
   dataSource: MatTableDataSource<Risque> = new MatTableDataSource<Risque>();
   @Input() risquesData: Risque[] | null = null;
-  displayedColumns: string[] = ['id', 'mntFrais', 'soldeRisque', 'mntEntreePrincipale'];
-  @Input() debiteurData: any
-  @ViewChild('modal') modalContent!: TemplateRef<any>; // ViewChild to get a reference to the modal content
-
-  risque: Risque | null = null; // Property to hold the selected risque data
+  displayedColumns: string[] = ['id','produit', 'mntFrais', 'soldeRisque', 'mntEntreePrincipale'];
+  @Input() debiteurData: any;
+  @Input() numCtx!:number;
+  idRisque:number=0;
+  risque!: Risque ; 
 
   constructor(private modalService: NgbModal ) {}
 
@@ -32,8 +32,6 @@ export class AffichageRisqueComponent implements OnInit {
 
   handleRowClick(row: Risque) {
     this.openModal(row);
+    
   }
-
-
-
 }

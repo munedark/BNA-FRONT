@@ -14,7 +14,7 @@ export class RechercheComponent {
   risquesData: Risque[] | any = null; 
   @Output() debiteurDataChange: EventEmitter<DebiteurInfo | null> = new EventEmitter<DebiteurInfo | null>();
   @Output() risques: EventEmitter<Risque[] | null> = new EventEmitter<Risque[] | null>();
-
+  @Output() numCTX: EventEmitter<number>=new EventEmitter<number>();
   constructor(private sharedService: SharedServicesService) { }
 
   search() {
@@ -23,7 +23,7 @@ export class RechercheComponent {
         this.debiteurData = data;
         console.log(this.debiteurData);
         this.debiteurDataChange.emit(this.debiteurData);
-
+        this.numCTX.emit(this.numCtx);
         this.risque();
       });
     }

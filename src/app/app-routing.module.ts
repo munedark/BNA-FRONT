@@ -9,6 +9,7 @@ import { DropDownComponent } from './drop-down/drop-down.component';
 import { UserFormComponent } from './user-form/user-form.component';
 import { RechercheComponent } from './recherche/recherche.component';
 import { DebiteurComponent } from './debiteur/debiteur.component';
+import { FraisGenerauxComponent } from './frais-generaux/frais-generaux.component';
 
 
 const routes: Routes = [
@@ -21,44 +22,53 @@ const routes: Routes = [
   {
     path:"GESTIONNAIRE",
     component:GestionnaireComponent,
-    children: [
-        {
-          path: 'frais', 
           children: [
-      {
-        path: '', 
-        redirectTo: 'debiteur', 
-        pathMatch: 'full'
-      },
-      {
-        path: 'debiteur', 
-        component: DebiteurComponent
-      },
-      {
-        path: 'addUser', 
-        component: UserFormComponent
-      }
-    ]
-  },
-  {
-    path: 'recouvrement', 
-    children: [
-      {
-        path: '', 
-        redirectTo: 'anotherComponent', 
-        pathMatch: 'full'
-      },
-      {
-        path: 'anotherComponent', 
-        component: AdministrateurComponent
-      },
-      {
-        path: 'yetAnotherComponent', 
-        component: AdministrateurComponent
-      }
-    ]
-  }
-]
+            {
+              path:'',
+              redirectTo: 'frais',
+              pathMatch:'full'
+            },
+            {
+              path: 'frais', 
+              children: [
+                            {
+                              path: '', 
+                              redirectTo: 'pec-frais-contentieux', 
+                              pathMatch: 'full'
+                            },
+                            {
+                              path:'pec-frais-contentieux',
+                              component: UserFormComponent
+                            },
+                            {
+                              path: 'frais-jugement', 
+                              component: DebiteurComponent
+                            },
+                            {
+                              path: 'pec-frais-genraux-direction', 
+                              component: FraisGenerauxComponent
+                            }
+                          ]
+        },
+        {
+          path: 'recouvrement', 
+          children: [
+                            {
+                              path: '', 
+                              redirectTo: 'anotherComponent', 
+                              pathMatch: 'full'
+                            },
+                            {
+                              path: 'blabla', 
+                              component: AdministrateurComponent
+                            },
+                            {
+                              path: 'blabla', 
+                              component: AdministrateurComponent
+                            }
+          ]
+        }
+      ]
 },
   {
     path:"login",

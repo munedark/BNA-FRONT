@@ -10,7 +10,7 @@
                 <div class="modal-body">
                   <app-affichage-debiteur [debiteurData]="debiteurData" [isModalOpen]="true"></app-affichage-debiteur>
                   <app-detail-risque></app-detail-risque>
-                  <app-frais-enregistrement></app-frais-enregistrement>
+                  <app-frais-enregistrement [risque]="risque" [dossierDebiteur]="debiteurData" [numCtx]="numCtx"></app-frais-enregistrement>
                   </div>
                   <div class="modal-footer">
                   </div>

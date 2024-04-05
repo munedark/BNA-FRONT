@@ -17,7 +17,6 @@ import { FeesComponent } from './fees/fees.component';
 import { DropDownComponent } from './drop-down/drop-down.component';
 import { UserFormComponent } from './user-form/user-form.component';
 import { RechercheComponent } from './recherche/recherche.component';
-import { RisquesComponent } from './risques/risques.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatInputModule } from '@angular/material/input';
 import { MatTableModule } from '@angular/material/table';
@@ -36,7 +35,12 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
 import { DetailRisqueComponent } from './detail-risque/detail-risque.component';
 import { FraisEnregistrementComponent } from './frais-enregistrement/frais-enregistrement.component';
-
+import { FraisGenerauxComponent } from './frais-generaux/frais-generaux.component';
+import { AjouterFraisComponent } from './ajouter-frais/ajouter-frais.component';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatSelectModule } from '@angular/material/select';
+import { FraisGenerauxValidateurComponent } from './frais-generaux-validateur/frais-generaux-validateur.component';
+import { FraisJugementValidateurComponent } from './frais-jugement-validateur/frais-jugement-validateur.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +56,6 @@ import { FraisEnregistrementComponent } from './frais-enregistrement/frais-enreg
     DropDownComponent,
     UserFormComponent,
     RechercheComponent,
-    RisquesComponent,
     SharedTableComponent,
     ClientFormComponent,
     ShowUsersComponent,
@@ -61,6 +64,10 @@ import { FraisEnregistrementComponent } from './frais-enregistrement/frais-enreg
     AffichageRisqueComponent,
     DetailRisqueComponent,
     FraisEnregistrementComponent,
+    FraisGenerauxComponent,
+    AjouterFraisComponent,
+    FraisGenerauxValidateurComponent,
+    FraisJugementValidateurComponent,
     
 
   ],
@@ -77,6 +84,8 @@ import { FraisEnregistrementComponent } from './frais-enregistrement/frais-enreg
     MatSortModule,
     MatFormFieldModule,
     MatIconModule,
+    MatRadioModule,
+    MatSelectModule,
     MatDialogModule
   ],
   providers: [ { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
