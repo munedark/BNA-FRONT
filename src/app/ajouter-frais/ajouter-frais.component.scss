@@ -16,12 +16,10 @@
 }
 
 .form-group {
-    margin-bottom: 20px;
+    margin-bottom: 15px;
 }
 
-.form-group label {
-    font-weight: bold;
-}
+
 
 .form-control {
     width: 100%;
@@ -56,17 +54,20 @@
     flex-direction: row;
     align-content: center;
     justify-content: space-around;
+    flex-wrap: wrap;
 }
 .groupe{
     display: flex;
     flex-direction: column;
+    
     
 }
 label{
     font-size: medium;
     font-weight: 400;
     color: #17a191;
-    margin-bottom: 3px;
+    margin-bottom: 5px;
+    font-weight: bold;
 }
 
 .mat-radio-button ~ .mat-radio-button {
@@ -88,3 +89,7 @@ label{
     background-size: 15px;
  
   }
+  @media only screen and (min-width: 800px) {
+label{
+    width: 350px;
+}}
