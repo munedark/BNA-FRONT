@@ -21,7 +21,8 @@ export class AjouterFraisComponent {
     RneAuxiliaire: '',
     prenomAuxiliaire: '',
     dateOperation: new Date(),
-    montantFrais: null
+    montantFrais: null,
+    typePiece:''
   };
 
   submitForm() {

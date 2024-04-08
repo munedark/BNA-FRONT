@@ -38,7 +38,8 @@ export class FraisEnregistrementComponent implements OnInit {
   }
 
   submitForm() {
-    this.operation.typeOperations = [{ libelleOperation: '120' }];
+    this.operation.typeOperation = {idOperation: 104,
+       libelleOperation: '130' };
         this.operation.etatOperation="E";
         this.operation.mntOperation=parseFloat(this.fraisEnregistrement.montantFrais)
         this.operation.mntFrais=parseFloat(this.fraisEnregistrement.montantFrais);
@@ -48,26 +49,31 @@ export class FraisEnregistrementComponent implements OnInit {
         this.operation.numAffaireCTX=parseFloat(this.fraisEnregistrement.numeroAffaire);
         this.operation.nomBeneficiairePaiment=this.fraisEnregistrement.recetteFinance;
         this.operation.motifOperationCTX=parseFloat(this.fraisEnregistrement.numeroRouge);
-        this.operation.risque=this.risque;
-        // this.sharedService.dossier(this.numCtx).subscribe((data) => {this.operation.dossierDebiteur=data;
-        //   console.log("this is data",data)});
-        // console.log(this.operation.dossierDebiteur);
-      this.sharedService.submitForm(this.fraisEnregistrement,this.operation).subscribe(
-      (response) => {
-        console.log('Frais ajouté avec succès:', response);
-
+        this.sharedService.risqueById(this.risque.id).subscribe(
+          (response)=>{
+            this.operation.risque=response;
+          },
+          (error) => {
+            console.error('Erreur lors de l\'ajout des risque:', error);}
+        );
         
+        this.sharedService.dossier(this.numCtx).subscribe((data) => {this.operation.dossierDebiteur=data;
+          console.log("this is data",data)});
+        if(this.operation.risque && this.operation.dossierDebiteur){
+            this.sharedService.submitForm(this.operation).subscribe(
+            (response) => {
+              console.log('Frais ajouté avec succès:', response);
+              console.log(this.operation);
 
-        console.log(this.operation);
-
-        this.fraisEnregistrement = { montantFrais: '', numeroRouge: '', numeroAffaire: '', dateDemandeJugement: null, recetteFinance: '' };
-      },
-      (error) => {
-        console.error('Erreur lors de l\'ajout des frais:', error);
-        //nzid display l erreur
-      }
-    );
-
+              this.fraisEnregistrement = { montantFrais: '', numeroRouge: '', numeroAffaire: '', dateDemandeJugement: null, recetteFinance: '' };
+            },
+            (error) => {
+              console.error('Erreur lors de l\'ajout des frais:', error);
+              console.log(this.operation);
+              //nzid display l erreur
+            }
+          );
+        }
   }
 
 }

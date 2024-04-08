@@ -3,6 +3,7 @@
     <hr style="border-color: #17a191;">
     <form #enregistrementForm="ngForm" (ngSubmit)="submitForm()">
         <div class="content">
+            <!-- TYPE DE FRAIS  -->
             <div class="groupe">
                 <div class="form-group">
                     <label for="typeFrais">Type des frais:</label>
@@ -14,24 +15,26 @@
                         <option value="Auxiliaire">Auxiliaire</option>
                     </select>
                 </div>
+            <!-- /TYPE DE FRAIS -->
+            <!-- TYPE PIECE OU TYPE AUXILIAIRE -->
                 <div class="form-group" *ngIf="fraisEnregistrement.typeFrais!='Auxiliaire'">
                     <label for="typePiece" >Type de pièce:</label>
-                    <select *ngIf="fraisEnregistrement.typeFrais=='Enregistrement'|| fraisEnregistrement.typeFrais==''" id="typePiece" class="form-control input-with-arrow" name="typePiece" [(ngModel)]="fraisEnregistrement.typeAuxiliaire" required>
+                    <select *ngIf="fraisEnregistrement.typeFrais=='Enregistrement'|| fraisEnregistrement.typeFrais==''" id="typePiece" class="form-control input-with-arrow" name="typePiece" [(ngModel)]="fraisEnregistrement.typePiece" required>
                         <option value="" disabled selected>Type Pièce</option>
                         <option value="effet">Effet</option>
                         <option value="actionCaution">Action de caution</option>
                         <option value="jugement">Jugement</option>
                     </select>
-                    <select *ngIf="fraisEnregistrement.typeFrais=='Timbrage'" id="typeAuxiliaire" class="form-control input-with-arrow" name="typeAuxiliaire" [(ngModel)]="fraisEnregistrement.typeAuxiliaire" required>
+                    <select *ngIf="fraisEnregistrement.typeFrais=='Timbrage'" id="typeAuxiliaire" class="form-control input-with-arrow" name="typeAuxiliaire" [(ngModel)]="fraisEnregistrement.typePiece" required>
                         <option value="" disabled selected>Type Pièce</option>
                         <option value="effet">Effet</option>
                         <option value="jugement">Jugement</option>
                     </select>
-                    <select *ngIf="fraisEnregistrement.typeFrais=='Divers'" id="typeAuxiliaire" class="form-control input-with-arrow" name="typeAuxiliaire" [(ngModel)]="fraisEnregistrement.typeAuxiliaire" required>
+                    <select *ngIf="fraisEnregistrement.typeFrais=='Divers'" id="typeAuxiliaire" class="form-control input-with-arrow" name="typeAuxiliaire" [(ngModel)]="fraisEnregistrement.typePiece" required>
                         <option value="" disabled selected>Type de pièce:</option>
-                        <option value="Avocat">Frais gardiennage</option>
-                        <option value="Huissier">Retrait de titre CPF</option>
-                        <option value="Expert">Autres</option>
+                        <option value="Frais gardiennage">Frais gardiennage</option>
+                        <option value="Retrait de titre CPF">Retrait de titre CPF</option>
+                        <option value="Autres">Autres</option>
                     </select>
                 </div>
                 <div class="form-group" *ngIf="fraisEnregistrement.typeFrais=='Auxiliaire'">
@@ -43,7 +46,8 @@
                         <option value="Expert">Expert</option>
                     </select>
                 </div>
-                <div class="form-group ">
+                <!-- /TYPE PIECE OU TYPE AUXILIAIRE -->
+                <div class="form-group " *ngIf="fraisEnregistrement.typeFrais=='Auxiliaire' && fraisEnregistrement.natureAuxiliaire=='Conventionné'">
                     <label for="auxiliaire">Auxiliaire:</label>
                     <select id="auxiliaire" class="form-control input-with-arrow redBorder" name="auxiliaire" [(ngModel)]="fraisEnregistrement.typePaiment" required>
                         <option value="" disabled>choisir un auxiliaire</option>
@@ -80,7 +84,10 @@
                 </div>
             </div>
             <div class="groupe">
-                
+                <div class="form-group " *ngIf="fraisEnregistrement.typeFrais=='Divers' && fraisEnregistrement.typePiece=='Autres'">
+                    <label for="nomBeneficiaire">Autre type de pièce:</label>
+                    <textarea id="nomBeneficiaire" class="form-control redBorder" name="nomBeneficiare" placeholder="autre type de pièce"></textarea>
+                    </div>
                     <div style="margin-bottom: 100px;">
                         <div class="form-group "  *ngIf="fraisEnregistrement.typeFrais=='Auxiliaire'">
                             <label for="natureAuxiliaire">Nature de l'auxiliaire:</label>
@@ -101,10 +108,7 @@
                         </div>
                     </div>
                     
-                    <div class="form-group " >
-                        <label for="nomBeneficiaire">Nom du bénéficiaire:</label>
-                        <textarea id="nomBeneficiaire" class="form-control redBorder" name="nomBeneficiare" placeholder="Nom de bénéficiaire"></textarea>
-                        </div>
+                    
                     <div >
                         <div class="form-group  ">
                             <label for="dateOperation">Date de l'opération:</label>

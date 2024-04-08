@@ -12,4 +12,5 @@ export interface AjoutFrais{
     prenomAuxiliaire:string;
     dateOperation:Date;
     montantFrais:number|null;
+    typePiece:string;
 }

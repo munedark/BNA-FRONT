@@ -16,7 +16,7 @@ export interface OperationCTX{
     numAffaireCTX:number;
     nomBeneficiairePaiment:string;
     motifOperationCTX:number;
-    typeOperations:TypeOperation[];
+    typeOperation:TypeOperation;
     typePaiments:TypePaiment[];
     risque:Risque;
     dossierDebiteur:DossierDebiteur;
