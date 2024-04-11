@@ -10,6 +10,7 @@ import { UserFormComponent } from './user-form/user-form.component';
 import { RechercheComponent } from './recherche/recherche.component';
 import { DebiteurComponent } from './debiteur/debiteur.component';
 import { FraisGenerauxComponent } from './frais-generaux/frais-generaux.component';
+import { ConsultationOperationComponent } from './consultation-operation/consultation-operation.component';
 
 
 const routes: Routes = [
@@ -67,6 +68,24 @@ const routes: Routes = [
                               component: AdministrateurComponent
                             }
           ]
+        },
+        {
+          path: 'consultation', 
+          children: [
+                            {
+                              path: '', 
+                              redirectTo: 'anotherComponent', 
+                              pathMatch: 'full'
+                            },
+                            {
+                              path: 'liste-operations', 
+                              component: ConsultationOperationComponent
+                            },
+                            {
+                              path: 'liste-debiteurs', 
+                              component: AdministrateurComponent
+                            }
+          ]
         }
       ]
 },
@@ -80,7 +99,7 @@ const routes: Routes = [
   },
   
   {
-    path:"addfees",
+    path:"fees",
     component:FeesComponent
   },
   { path: '', redirectTo: '/login', pathMatch: 'full' }

@@ -2,7 +2,7 @@ export interface FraisEnregistrement {
     montantFrais: string;
     numeroRouge: string;
     numeroAffaire: string;
-    dateDemandeJugement: Date|null;
+    dateDemandeJugement: string;
     recetteFinance: string;
   }
   

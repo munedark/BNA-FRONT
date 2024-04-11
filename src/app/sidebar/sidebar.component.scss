@@ -41,11 +41,19 @@ ul {
   list-style: none;
   margin: 0;
   padding: 0;
+  
 }  
-
+.sub-menu li:before {
+  content: "\2022"; 
+  color: #6a6a6a; 
+  font-size: 1.2em; 
+  margin-right: 10px; 
+}
 
 li{
+  
   color: #fff;
+  margin-bottom: 5px;
 }
 li:hover{
   color: #17a191;

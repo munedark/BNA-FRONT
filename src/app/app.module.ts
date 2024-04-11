@@ -41,6 +41,7 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
 import { FraisGenerauxValidateurComponent } from './frais-generaux-validateur/frais-generaux-validateur.component';
 import { FraisJugementValidateurComponent } from './frais-jugement-validateur/frais-jugement-validateur.component';
+import { ConsultationOperationComponent } from './consultation-operation/consultation-operation.component';
 
 @NgModule({
   declarations: [
@@ -68,6 +69,7 @@ import { FraisJugementValidateurComponent } from './frais-jugement-validateur/fr
     AjouterFraisComponent,
     FraisGenerauxValidateurComponent,
     FraisJugementValidateurComponent,
+    ConsultationOperationComponent,
     
 
   ],

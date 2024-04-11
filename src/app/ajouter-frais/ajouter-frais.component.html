@@ -32,10 +32,10 @@
                     </select>
                     <select *ngIf="fraisEnregistrement.typeFrais=='Divers'" id="typeAuxiliaire" class="form-control input-with-arrow" name="typeAuxiliaire" [(ngModel)]="fraisEnregistrement.typePiece" required>
                         <option value="" disabled selected>Type de pièce:</option>
-                        <option value="Frais gardiennage">Frais gardiennage</option>
-                        <option value="Retrait de titre CPF">Retrait de titre CPF</option>
+                        <option *ngFor="let diversPiece of diversPieces$ | async" [value]="diversPiece.typePiece">{{diversPiece.typePiece}}</option>
                         <option value="Autres">Autres</option>
                     </select>
+                    
                 </div>
                 <div class="form-group" *ngIf="fraisEnregistrement.typeFrais=='Auxiliaire'">
                     <label for="typeAuxiliaire">Type de l'auxiliaire:</label>
@@ -49,7 +49,7 @@
                 <!-- /TYPE PIECE OU TYPE AUXILIAIRE -->
                 <div class="form-group " *ngIf="fraisEnregistrement.typeFrais=='Auxiliaire' && fraisEnregistrement.natureAuxiliaire=='Conventionné'">
                     <label for="auxiliaire">Auxiliaire:</label>
-                    <select id="auxiliaire" class="form-control input-with-arrow redBorder" name="auxiliaire" [(ngModel)]="fraisEnregistrement.typePaiment" required>
+                    <select id="auxiliaire" class="form-control input-with-arrow redBorder" name="auxiliaire" [(ngModel)]="fraisEnregistrement.auxiliaire" >
                         <option value="" disabled>choisir un auxiliaire</option>
                         <option value="nom de l'auxiliare">nom auxiliaire</option>
                     </select>
@@ -61,6 +61,10 @@
                 <div class="form-group " *ngIf="fraisEnregistrement.typeFrais=='Auxiliaire' && fraisEnregistrement.natureAuxiliaire=='Non Conventionné'">
                     <label for="nomAuxiliaire">Nom de l'auxiliaire:</label>
                     <input type="text" id="nomAuxiliaire" class="form-control redBorder" placeholder="Nom de l'auxiliaire" name="nomAuxiliaire" [(ngModel)]="fraisEnregistrement.nomAuxiliaire">
+                </div>
+                <div class="form-group" *ngIf="fraisEnregistrement.typeFrais!='Auxiliaire'">
+                    <label for="montantFrais">Montant des frais (en Dinars):</label>
+                    <input type="text" id="montantFrais" class=" form-control" name="montantFrais" placeholder="0000.00TDN" [(ngModel)]="fraisEnregistrement.montantFrais">
                 </div>
                 <div class="form-group " *ngIf="fraisEnregistrement.typeFrais=='Auxiliaire'">
                     <label for="numeroAffaire">Numéro de l'affaire:</label>
@@ -75,18 +79,26 @@
                     <select id="typePaiement" class="form-control input-with-arrow redBorder" name="typePaiement" [(ngModel)]="fraisEnregistrement.typePaiment" required>
                         <option value="" disabled>Select an option</option>
                         <option value="Chèque BCT">Chèque BCT</option>
-                        <option value="Virement Tétécomponcé">Virement Télécomponsé</option>
+                        <option value="Virement Tétécomponsé">Virement Télécomponsé</option>
                     </select>
                 </div>
-                <div class="form-group " *ngIf="fraisEnregistrement.typePaiment==='Virement Tétécomponcé'">
+                <div class="form-group " *ngIf="fraisEnregistrement.typePaiment==='Virement Tétécomponsé'">
                     <label for="ribBeneficiaire">RIB du bénéficiaire:</label>
-                    <input type="text" id="ribBeneficiaire" class="form-control redBorder" name="ribBeneficiare" placeholder="RIB de bénéficiaire">
+                    <input type="text" id="ribBeneficiaire" class="form-control redBorder" name="ribBeneficiare" placeholder="RIB de bénéficiaire"[(ngModel)]="fraisEnregistrement.RIB" >
                 </div>
             </div>
+
+
+            <!-- right column -->
+            
             <div class="groupe">
+                <div class="form-group " *ngIf="fraisEnregistrement.typeFrais=='Enregistrement'">
+                    <label for="numeroPiece">N° Pièce:</label>
+                    <input type="text" id="numeroPiece" placeholder="N° Pièce" class="form-control" name="numeroPiece" [(ngModel)]="fraisEnregistrement.numeroPiece">
+                </div>
                 <div class="form-group " *ngIf="fraisEnregistrement.typeFrais=='Divers' && fraisEnregistrement.typePiece=='Autres'">
-                    <label for="nomBeneficiaire">Autre type de pièce:</label>
-                    <textarea id="nomBeneficiaire" class="form-control redBorder" name="nomBeneficiare" placeholder="autre type de pièce"></textarea>
+                    <label for="autre">Autre type de pièce:</label>
+                    <textarea id="autre" class="form-control redBorder" name="autre" placeholder="Autre type de pièce" [(ngModel)]="fraisEnregistrement.autre" required></textarea>
                     </div>
                     <div style="margin-bottom: 100px;">
                         <div class="form-group "  *ngIf="fraisEnregistrement.typeFrais=='Auxiliaire'">
@@ -114,13 +126,13 @@
                             <label for="dateOperation">Date de l'opération:</label>
                             <input type="date" id="dateOperation" class="form-control" name="dateOperation" [(ngModel)]="fraisEnregistrement.dateOperation">
                         </div>
-                        <div class="form-group  ">
+                        <div class="form-group" *ngIf="fraisEnregistrement.typeFrais=='Auxiliaire'">
                             <label for="montantFrais">Montant des frais (en Dinars):</label>
                             <input type="text" id="montantFrais" class=" form-control" name="montantFrais" placeholder="0000.00TDN" [(ngModel)]="fraisEnregistrement.montantFrais">
                         </div>
-                        <div class="form-group " *ngIf="fraisEnregistrement.typeFrais==='Auxiliaire' && fraisEnregistrement.typePaiment==='Chèque BCT'">
+                        <div class="form-group " *ngIf="(fraisEnregistrement.typeFrais==='Auxiliaire' && fraisEnregistrement.typePaiment==='Chèque BCT') || fraisEnregistrement.typeFrais!='Auxiliaire'">
                             <label for="nomBeneficiaire">Nom du bénéficiaire:</label>
-                            <input type="text" id="nomBeneficiaire" class="form-control redBorder" name="nomBeneficiare" placeholder="Nom de bénéficiaire">
+                            <input type="text" id="nomBeneficiaire" class="form-control redBorder" name="nomBeneficiare" placeholder="Nom de bénéficiaire" [(ngModel)]="fraisEnregistrement.nomBeneficiaire" >
                         </div>
                     </div>
                 

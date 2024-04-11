@@ -22,7 +22,7 @@ export class FraisEnregistrementComponent implements OnInit {
     montantFrais: '',
     numeroRouge: '',
     numeroAffaire: '',
-    dateDemandeJugement:null,
+    dateDemandeJugement:'',
     recetteFinance: ''
   };
   
@@ -38,10 +38,11 @@ export class FraisEnregistrementComponent implements OnInit {
   }
 
   submitForm() {
-    this.operation.typeOperation = {idOperation: 104,
-       libelleOperation: '130' };
+    this.sharedService.typeOperation('130').subscribe((data) => {
+      this.operation.typeOperation =data;
+      });
         this.operation.etatOperation="E";
-        this.operation.mntOperation=parseFloat(this.fraisEnregistrement.montantFrais)
+        this.operation.mntOperation=parseFloat(this.fraisEnregistrement.montantFrais);
         this.operation.mntFrais=parseFloat(this.fraisEnregistrement.montantFrais);
         if(this.fraisEnregistrement.dateDemandeJugement){
         this.operation.dateValeurCTX=this.fraisEnregistrement.dateDemandeJugement;}
@@ -59,13 +60,13 @@ export class FraisEnregistrementComponent implements OnInit {
         
         this.sharedService.dossier(this.numCtx).subscribe((data) => {this.operation.dossierDebiteur=data;
           console.log("this is data",data)});
-        if(this.operation.risque && this.operation.dossierDebiteur){
+        if(this.operation.risque && this.operation.dossierDebiteur && this.operation.typeOperation){
             this.sharedService.submitForm(this.operation).subscribe(
             (response) => {
               console.log('Frais ajouté avec succès:', response);
               console.log(this.operation);
 
-              this.fraisEnregistrement = { montantFrais: '', numeroRouge: '', numeroAffaire: '', dateDemandeJugement: null, recetteFinance: '' };
+              this.fraisEnregistrement = { montantFrais: '', numeroRouge: '', numeroAffaire: '', dateDemandeJugement: '', recetteFinance: '' };
             },
             (error) => {
               console.error('Erreur lors de l\'ajout des frais:', error);
