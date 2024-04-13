@@ -1,4 +1,4 @@
 export interface dossierId{
-    NumCtx:number;
-    CodeStructure:string;
+    numCtx:number;
+    codeStructure:string;
 }

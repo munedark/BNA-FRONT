@@ -70,7 +70,7 @@
                     <p [ngClass]="{'sidebar-link':!visibleSubMenus[2],'sidebar-link-clicked':visibleSubMenus[2]}" (click)="toggleSubMenu(2)"> <img src="../../assets/consultation.png" style="width: 20px;height: auto;border-radius: 2px;margin-right: 5px;">    Consultation</p>
                     <ul class="sub-menu" *ngIf="isSubMenuVisible(2)">
                         <li><a routerLink="/GESTIONNAIRE/consultation/liste-operations">Liste des operations</a></li>
-                        <li><a href="#">Recouvrement 2</a></li>
+                        <li><a routerLink="/GESTIONNAIRE/consultation/liste-debiteurs">Liste des debiteurs</a></li>
                     </ul>
                 </li>
             </ul>

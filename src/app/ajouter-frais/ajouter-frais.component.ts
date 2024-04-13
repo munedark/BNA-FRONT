@@ -7,6 +7,10 @@ import { OperationCTX } from '../Models/OperationCTX';
 import { BehaviorSubject, forkJoin } from 'rxjs';
 import { AuthService } from '../services/auth.service';
 import { jwtDecode } from 'jwt-decode';
+import { AuxiliaireConvontionnéService } from '../services/auxiliaire-convontionné.service';
+import { Avocat } from '../Models/Avocat';
+import { Huissier } from '../Models/Huissier';
+import { Expert } from '../Models/Expert';
 
 @Component({
   selector: 'app-ajouter-frais',
@@ -18,10 +22,18 @@ export class AjouterFraisComponent implements OnInit{
   operation:OperationCTX={} as OperationCTX;
   option:DiversPiece={} as DiversPiece;
   matricule!:string;
-  constructor(private sharedService:SharedServicesService,private auth: AuthService){}
+  avocats!:Avocat[];
+  huissiers!:Huissier[];
+  experts!:Expert[];
+  constructor(private sharedService:SharedServicesService,private auth: AuthService,private auxiliaireService:AuxiliaireConvontionnéService){
+    this.auxiliaireService.avocatConvontionne().subscribe((data)=>{this.avocats=data;})
+    this.auxiliaireService.huissierConvontionne().subscribe((data)=>{this.huissiers=data})
+    this.auxiliaireService.expertConvontionne().subscribe((data)=>{this.experts=data})
+  }
   ngOnInit(): void {
     this.sharedService.refreshOption.subscribe(()=>{
       this.getoptions();
+
     })
     this.getoptions();
     const token = this.auth.getToken();

@@ -49,10 +49,19 @@
                 <!-- /TYPE PIECE OU TYPE AUXILIAIRE -->
                 <div class="form-group " *ngIf="fraisEnregistrement.typeFrais=='Auxiliaire' && fraisEnregistrement.natureAuxiliaire=='Conventionné'">
                     <label for="auxiliaire">Auxiliaire:</label>
-                    <select id="auxiliaire" class="form-control input-with-arrow redBorder" name="auxiliaire" [(ngModel)]="fraisEnregistrement.auxiliaire" >
+                    <select id="auxiliaire" class="form-control input-with-arrow redBorder" name="auxiliaire" [(ngModel)]="fraisEnregistrement.auxiliaire">
                         <option value="" disabled>choisir un auxiliaire</option>
-                        <option value="nom de l'auxiliare">nom auxiliaire</option>
+                        <ng-container *ngIf="fraisEnregistrement.typeAuxiliaire=='Avocat'">
+                          <option *ngFor="let avocat of avocats" [value]="avocat.nom + ',' + avocat.prenom">{{ avocat.nom }} {{ avocat.prenom }}</option>
+                        </ng-container>
+                        <ng-container *ngIf="fraisEnregistrement.typeAuxiliaire=='Huissier'">
+                          <option *ngFor="let huissier of huissiers" [value]="huissier.nom + ',' + huissier.prenom">{{ huissier.nom }} {{ huissier.prenom }}</option>
+                        </ng-container>
+                        <ng-container *ngIf="fraisEnregistrement.typeAuxiliaire=='Expert'">
+                          <option *ngFor="let expert of experts" [value]="expert.nom + ',' + expert.prenom">{{ expert.nom }} {{ expert.prenom }}</option>
+                        </ng-container>
                     </select>
+                    
                 </div>
                 <div class="form-group" *ngIf="fraisEnregistrement.typeFrais=='Auxiliaire' && fraisEnregistrement.natureAuxiliaire=='Non Conventionné'">
                     <label for="cinAuxiliaire">Cin de l'auxiliaire:</label>

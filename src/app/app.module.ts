@@ -42,6 +42,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { FraisGenerauxValidateurComponent } from './frais-generaux-validateur/frais-generaux-validateur.component';
 import { FraisJugementValidateurComponent } from './frais-jugement-validateur/frais-jugement-validateur.component';
 import { ConsultationOperationComponent } from './consultation-operation/consultation-operation.component';
+import { ConsultationDebiteurComponent } from './consultation-debiteur/consultation-debiteur.component';
+import { RechercheOperationComponent } from './recherche-operation/recherche-operation.component';
 
 @NgModule({
   declarations: [
@@ -70,6 +72,8 @@ import { ConsultationOperationComponent } from './consultation-operation/consult
     FraisGenerauxValidateurComponent,
     FraisJugementValidateurComponent,
     ConsultationOperationComponent,
+    ConsultationDebiteurComponent,
+    RechercheOperationComponent,
     
 
   ],

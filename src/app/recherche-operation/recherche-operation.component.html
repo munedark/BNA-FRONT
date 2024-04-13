@@ -1,0 +1,15 @@
+<div class="container">
+    <div class="search-text">
+        <p>Rechercher les opérations :</p>
+    </div>
+    <hr style="color: green;">
+    <div>
+        <form (ngSubmit)="search()">
+            <p class="titre">type de l'opération:</p>
+            <div class="searchBar">
+                <input type="text" class="text" placeholder="Rechercher" [(ngModel)]="typeOperation" name="numCtx" required>
+                <button type="submit" class="button">Rechercher</button>
+            </div>
+        </form>
+    </div>
+</div>

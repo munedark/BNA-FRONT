@@ -1,5 +1,9 @@
 import { CompteBancaire } from "./CompteBancaire";
 
 export interface Client{
-    compteBancaires:CompteBancaire[];
+    nom:string;
+    prenom:string;
+    email:string;
+    numtele:string;
+    cin:number;
 }

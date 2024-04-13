@@ -11,6 +11,7 @@ import { RechercheComponent } from './recherche/recherche.component';
 import { DebiteurComponent } from './debiteur/debiteur.component';
 import { FraisGenerauxComponent } from './frais-generaux/frais-generaux.component';
 import { ConsultationOperationComponent } from './consultation-operation/consultation-operation.component';
+import { ConsultationDebiteurComponent } from './consultation-debiteur/consultation-debiteur.component';
 
 
 const routes: Routes = [
@@ -83,7 +84,7 @@ const routes: Routes = [
                             },
                             {
                               path: 'liste-debiteurs', 
-                              component: AdministrateurComponent
+                              component: ConsultationDebiteurComponent
                             }
           ]
         }

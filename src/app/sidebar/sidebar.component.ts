@@ -20,7 +20,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
   constructor(private auth: AuthService, private sidebarToggleService: SidebarToggleService) {
     this.subscription = this.sidebarToggleService.isSidebarOpen$.subscribe(isOpen => {
       this.isSidebarOpen = isOpen;
-      this.visibleSubMenus = Array(2).fill(false);
+      this.visibleSubMenus = Array(3).fill(false);
     });
   }
   
@@ -30,6 +30,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
       const decodedToken: any = jwtDecode(token);
       this.role = decodedToken ? decodedToken.role : 'No Role';
     }
+    
   }
   
   isSubMenuVisible(index: number): boolean {
