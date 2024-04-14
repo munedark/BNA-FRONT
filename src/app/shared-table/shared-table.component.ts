@@ -4,6 +4,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import * as jspdf from 'jspdf';
 import html2canvas from 'html2canvas';
+import { fontWeight } from 'html2canvas/dist/types/css/property-descriptors/font-weight';
 
 @Component({
   selector: 'app-shared-table',
@@ -62,5 +63,55 @@ export class SharedTableComponent {
 
       doc.save(`${this.title}_table.pdf`);
     });
+  }
+
+  // Method to get the style based on etatOperation value
+  getEtatOperationStyle(etatOperation: string): any {
+    let backgroundColor: string;
+    let label: string;
+    let fontWeight: string;
+    switch (etatOperation) {
+      case 'E':
+        backgroundColor = 'orange';
+        label = 'En attente';
+        fontWeight = 'bold'; // Set fontWeight to bold
+        break;
+      case 'V':
+        backgroundColor = 'green';
+        label = 'Accepté';
+        fontWeight = 'bold'; // Set fontWeight to bold
+        break;
+      case 'R':
+        backgroundColor = 'red';
+        label = 'Refusé';
+        fontWeight = 'bold'; // Set fontWeight to bold
+        break;
+      default:
+        backgroundColor = 'transparent';
+        label = '';
+        fontWeight = 'normal'; // Set fontWeight to normal for default case
+    }
+
+    return {
+      'background-color': backgroundColor,
+      'color': 'white',
+      'padding': '4px 8px',
+      'border-radius': '4px',
+      'font-weight': fontWeight 
+    };
+  }
+
+  // Method to get the label based on etatOperation value
+  getEtatOperationLabel(etatOperation: string): string {
+    switch (etatOperation) {
+      case 'E':
+        return 'En attente';
+      case 'V':
+        return 'Accepté';
+      case 'R':
+        return 'Refusé';
+      default:
+        return '';
+    }
   }
 }

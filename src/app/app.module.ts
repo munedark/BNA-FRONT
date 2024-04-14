@@ -44,6 +44,7 @@ import { FraisJugementValidateurComponent } from './frais-jugement-validateur/fr
 import { ConsultationOperationComponent } from './consultation-operation/consultation-operation.component';
 import { ConsultationDebiteurComponent } from './consultation-debiteur/consultation-debiteur.component';
 import { RechercheOperationComponent } from './recherche-operation/recherche-operation.component';
+import { AffichageOperationsComponent } from './affichage-operations/affichage-operations.component';
 
 @NgModule({
   declarations: [
@@ -74,6 +75,7 @@ import { RechercheOperationComponent } from './recherche-operation/recherche-ope
     ConsultationOperationComponent,
     ConsultationDebiteurComponent,
     RechercheOperationComponent,
+    AffichageOperationsComponent,
     
 
   ],

@@ -1,21 +1,28 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { SharedServicesService } from '../services/shared-services.service';
 import { OperationCTX } from '../Models/OperationCTX';
+import { OperationConsultationService } from '../services/operation-consultation.service';
 
 @Component({
   selector: 'app-recherche-operation',
   templateUrl: './recherche-operation.component.html',
   styleUrls: ['./recherche-operation.component.scss']
 })
-export class RechercheOperationComponent {
-  typeOperation: string='' ;
+export class RechercheOperationComponent implements OnDestroy{
+  typeOperation: string = '';
   listeOperation!: OperationCTX[];
-  @Output() type: EventEmitter<OperationCTX[]>=new EventEmitter<OperationCTX[]>();
-  constructor(private sharedService:SharedServicesService) { }
+ 
+  constructor(private sharedService: SharedServicesService,private operationService:OperationConsultationService) { }
+  ngOnDestroy(): void {
+    
+  }
 
   search() {
-    this.sharedService.listeOperations(this.typeOperation).subscribe((data)=>{this.listeOperation=data;this.type.emit(this.listeOperation);})
-        
+    this.sharedService.listeOperations(this.typeOperation).subscribe((data) => {
+      this.listeOperation = data;
+      this.operationService.setOperations(this.listeOperation);
+      this.operationService.setTypeOperation(this.typeOperation);
+    });
   }
 
 }

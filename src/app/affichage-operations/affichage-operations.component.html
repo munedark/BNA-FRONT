@@ -1,0 +1,28 @@
+<div class="container" *ngIf="typeOperation === '120' || typeOperation === '130' || typeOperation === '110'">
+    <p class="title">Type Operation:&nbsp;&nbsp;<span style="color: #5b6462;font-size: larger;">{{typeOperation}}</span></p>
+    <hr style="color: #17a191;">
+    <!-- type 110 -->
+    <div *ngIf="typeOperation==='110'">
+    </div>
+    <!-- type 120 -->
+    <div *ngIf="typeOperation==='120'" >
+        <div class="selecting">
+            <label class="labelGenerale">Type frais:</label>
+            <select [(ngModel)]="fraisType" class="form-select">
+                <option value="Auxiliaire">Auxiliaire</option>
+                <option value="Timbrage">Timbrage</option>
+                <option value="Enregistrement">Enregistrement</option>
+                <option value="Divers">Divers</option>
+            </select>
+        </div>
+        <app-shared-table *ngIf="operations && fraisType==='Auxiliaire'" [dataSource]="dataSourceAux" [displayedColumns]="auxiliaireColumns" title="Frais Auxiliaire:"></app-shared-table>
+        <app-shared-table *ngIf="operations && fraisType==='Timbrage'" [dataSource]="dataSourceTim" [displayedColumns]="timbrageColumns" title="Frais Timbrage:"></app-shared-table>
+        <app-shared-table *ngIf="operations && fraisType==='Enregistrement'" [dataSource]="dataSourceEnr" [displayedColumns]="enregistrementColumns" title="Frais Enregistrement:"></app-shared-table>
+        <app-shared-table *ngIf="operations && fraisType==='Divers'" [dataSource]="dataSourceDiver" [displayedColumns]="timbrageColumns" title="Frais Divers:"></app-shared-table>
+
+    </div>
+    <!-- type 130 -->
+    <div *ngIf="typeOperation==='130'">
+        <app-shared-table *ngIf="operations" [dataSource]="dataSourceJuge" [displayedColumns]="jugementColumns" title="Frais Jugement:"></app-shared-table>
+    </div>
+</div>
