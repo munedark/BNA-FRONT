@@ -144,7 +144,7 @@ resetForm(){
               natureAuxiliaire: '',
               RneAuxiliaire: '',
               prenomAuxiliaire: '',
-              dateOperation: '',
+              dateOperation: undefined,
               montantFrais: null,
               nomBeneficiaire:'',
               autre:'',

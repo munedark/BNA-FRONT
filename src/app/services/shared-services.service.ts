@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { OperationCTX } from '../Models/OperationCTX';
 import { Subject, forkJoin, tap } from 'rxjs';
 import { DiversPiece } from '../Models/DiversPiece';
+import { map } from 'rxjs/operators';
+
 
 
 @Injectable({
@@ -51,6 +53,13 @@ export class SharedServicesService {
     return this.http.get<any>(`${this.url}agent/dossier-debiteur/all`)
   }
   listeOperations(libelle:string){
-    return this.http.get<any>(`${this.url}agent/operation-ctx/libelle/${libelle}`)
-  }
+    return this.http.get<any[]>(`${this.url}agent/operation-ctx/libelle/${libelle}`).pipe(
+      map(operations => {
+        // Format the date for each operation in the list
+        return operations.map(operation => {
+          operation.dateValeurCTX = new Date(operation.dateValeurCTX).toLocaleDateString();
+          return operation;
+        });
+      })
+    );}
 }

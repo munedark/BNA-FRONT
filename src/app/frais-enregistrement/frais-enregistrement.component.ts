@@ -22,7 +22,7 @@ export class FraisEnregistrementComponent implements OnInit {
     montantFrais: '',
     numeroRouge: '',
     numeroAffaire: '',
-    dateDemandeJugement:'',
+    dateDemandeJugement:undefined,
     recetteFinance: ''
   };
   
@@ -66,7 +66,7 @@ export class FraisEnregistrementComponent implements OnInit {
               console.log('Frais ajouté avec succès:', response);
               console.log(this.operation);
 
-              this.fraisEnregistrement = { montantFrais: '', numeroRouge: '', numeroAffaire: '', dateDemandeJugement: '', recetteFinance: '' };
+              this.fraisEnregistrement = { montantFrais: '', numeroRouge: '', numeroAffaire: '', dateDemandeJugement: undefined, recetteFinance: '' };
             },
             (error) => {
               console.error('Erreur lors de l\'ajout des frais:', error);

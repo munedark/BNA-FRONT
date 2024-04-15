@@ -9,7 +9,7 @@ export interface AjoutFrais{
     natureAuxiliaire?:string;
     RneAuxiliaire?:string;
     prenomAuxiliaire?:string;
-    dateOperation?:string;
+    dateOperation?:Date | undefined;
     montantFrais?:number|null;
     typePiece?:string;
     nomBeneficiaire?:string;
