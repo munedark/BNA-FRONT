@@ -6,7 +6,7 @@
                 <li>
                     <p [ngClass]="{'sidebar-link':!visibleSubMenus[0],'sidebar-link-clicked':visibleSubMenus[0]}" (click)="toggleSubMenu(0)">Gestion des agents</p>
                     <ul class="sub-menu" *ngIf="isSubMenuVisible(0)">
-                        <li><a routerLink="ajouter/agent">Ajouter agent</a></li>
+                        <li><a routerLink="/ADMINISTRATEUR/Gestion_agent/ajout">Ajouter agent</a></li>
                         <li><a href="#">Supprimer agent</a></li>
                         <li><a href="#">Modifier agent</a></li>
                         <li><a href="#">Rechercher agent</a></li>
@@ -42,8 +42,8 @@
                 <li>
                     <p [ngClass]="{'sidebar-link':!visibleSubMenus[2],'sidebar-link-clicked':visibleSubMenus[2]}" (click)="toggleSubMenu(2)"> <img src="../../assets/consultation.png" style="width: 20px;height: auto;border-radius: 2px;margin-right: 5px;">    Consultation</p>
                     <ul class="sub-menu" *ngIf="isSubMenuVisible(2)">
-                        <li><a href="#">Recouvrement 1</a></li>
-                        <li><a href="#">Recouvrement 2</a></li>
+                        <li><a routerLink="/VALIDATEUR/consultation/liste-operations">Liste des operations</a></li>
+                        <li><a routerLink="/VALIDATEUR/consultation/liste-debiteurs">Liste des debiteurs</a></li>
                     </ul>
                 </li>
             </ul>
@@ -55,7 +55,7 @@
                     <p [ngClass]="{'sidebar-link':!visibleSubMenus[0],'sidebar-link-clicked':visibleSubMenus[0]}" (click)="toggleSubMenu(0)"><img src="./assets/frais.png" style="width: 20px;height: auto;border-radius: 2px;margin-right: 5px;">    Frais</p>
                     <ul class="sub-menu" *ngIf="isSubMenuVisible(0)">
                         <li><a routerLink="/GESTIONNAIRE/frais/">PEC des frais initiés par le contentieux</a></li>
-                        <li><a routerLink="/GESTIONNAIRE/frais/pec-frais-genraux-direction">PEC des frais generaux (Direction)</a></li>
+                        <li><a routerLink="/GESTIONNAIRE/frais/pec-frais-generaux-direction">PEC des frais generaux (Direction)</a></li>
                         <li><a routerLink="/GESTIONNAIRE/frais/frais-jugement">Frais Enregistrement Jugement</a></li>
                     </ul>
                 </li>

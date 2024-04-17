@@ -3,6 +3,18 @@
     <hr style="color: #17a191;">
     <!-- type 110 -->
     <div *ngIf="typeOperation==='110'">
+        <div class="selecting">
+            <label class="labelGenerale">Type frais:</label>
+            <select [(ngModel)]="fraisType" class="form-select">
+                <option value="Timbrage">Timbrage</option>
+                <option value="Enregistrement">Enregistrement</option>
+                <option value="Divers">Divers</option>
+            </select>
+        </div>
+        <app-shared-table *ngIf="operations && fraisType==='Timbrage'" [dataSource]="dataSourceTim" [displayedColumns]="timbrageColumnsCtx" title="Frais Timbrage:"></app-shared-table>
+        <app-shared-table *ngIf="operations && fraisType==='Enregistrement'" [dataSource]="dataSourceEnr" [displayedColumns]="enregistrementColumnsCtx" title="Frais Enregistrement:"></app-shared-table>
+        <app-shared-table *ngIf="operations && fraisType==='Divers'" [dataSource]="dataSourceDiver" [displayedColumns]="timbrageColumnsCtx" title="Frais Divers:"></app-shared-table>
+
     </div>
     <!-- type 120 -->
     <div *ngIf="typeOperation==='120'" >

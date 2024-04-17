@@ -4,7 +4,6 @@ import { AdministrateurComponent } from './administrateur/administrateur.compone
 import { ValidateurComponent } from './validateur/validateur.component';
 import { GestionnaireComponent } from './gestionnaire/gestionnaire.component';
 import { LoginComponent } from './login/login.component';
-import { FeesComponent } from './fees/fees.component';
 import { DropDownComponent } from './drop-down/drop-down.component';
 import { UserFormComponent } from './user-form/user-form.component';
 import { RechercheComponent } from './recherche/recherche.component';
@@ -12,14 +11,145 @@ import { DebiteurComponent } from './debiteur/debiteur.component';
 import { FraisGenerauxComponent } from './frais-generaux/frais-generaux.component';
 import { ConsultationOperationComponent } from './consultation-operation/consultation-operation.component';
 import { ConsultationDebiteurComponent } from './consultation-debiteur/consultation-debiteur.component';
+import { FraisInitiesContentieuxComponent } from './frais-inities-contentieux/frais-inities-contentieux.component';
 
 
 const routes: Routes = [
   {path:"ADMINISTRATEUR",
-  component:AdministrateurComponent},
+  component:AdministrateurComponent,
+  children: [
+    {
+      path:'',
+      redirectTo: 'frais',
+      pathMatch:'full'
+    },
+    {
+      path: 'Gestion_agent', 
+      children: [
+                    {
+                      path: '', 
+                      redirectTo: 'pec-frais-contentieux', 
+                      pathMatch: 'full'
+                    },
+                    {
+                      path:'ajout',
+                      component: UserFormComponent
+                    },
+                    {
+                      path: 'supprimer', 
+                      component: DebiteurComponent
+                    },
+                    {
+                      path: 'modifier', 
+                      component: FraisGenerauxComponent
+                    }
+                  ]
+},
+{
+  path: 'recouvrement', 
+  children: [
+                    {
+                      path: '', 
+                      redirectTo: 'anotherComponent', 
+                      pathMatch: 'full'
+                    },
+                    {
+                      path: 'blabla', 
+                      component: AdministrateurComponent
+                    },
+                    {
+                      path: 'blabla', 
+                      component: AdministrateurComponent
+                    }
+  ]
+},
+{
+  path: 'consultation', 
+  children: [
+                    {
+                      path: '', 
+                      redirectTo: 'anotherComponent', 
+                      pathMatch: 'full'
+                    },
+                    {
+                      path: 'liste-operations', 
+                      component: ConsultationOperationComponent
+                    },
+                    {
+                      path: 'liste-debiteurs', 
+                      component: ConsultationDebiteurComponent
+                    }
+  ]
+}
+]},
   {
     path:"VALIDATEUR",
-    component:ValidateurComponent
+    component:ValidateurComponent,
+    children: [
+      {
+        path:'',
+        redirectTo: 'frais',
+        pathMatch:'full'
+      },
+      {
+        path: 'frais', 
+        children: [
+                      {
+                        path: '', 
+                        redirectTo: 'pec-frais-contentieux', 
+                        pathMatch: 'full'
+                      },
+                      {
+                        path:'pec-frais-contentieux',
+                        component: FraisInitiesContentieuxComponent
+                      },
+                      {
+                        path: 'frais-jugement', 
+                        component: DebiteurComponent
+                      },
+                      {
+                        path: 'pec-frais-generaux-direction', 
+                        component: FraisGenerauxComponent
+                      }
+                    ]
+  },
+  {
+    path: 'recouvrement', 
+    children: [
+                      {
+                        path: '', 
+                        redirectTo: 'anotherComponent', 
+                        pathMatch: 'full'
+                      },
+                      {
+                        path: 'blabla', 
+                        component: AdministrateurComponent
+                      },
+                      {
+                        path: 'blabla', 
+                        component: AdministrateurComponent
+                      }
+    ]
+  },
+  {
+    path: 'consultation', 
+    children: [
+                      {
+                        path: '', 
+                        redirectTo: 'anotherComponent', 
+                        pathMatch: 'full'
+                      },
+                      {
+                        path: 'liste-operations', 
+                        component: ConsultationOperationComponent
+                      },
+                      {
+                        path: 'liste-debiteurs', 
+                        component: ConsultationDebiteurComponent
+                      }
+    ]
+  }
+]
   },
   {
     path:"GESTIONNAIRE",
@@ -40,14 +170,14 @@ const routes: Routes = [
                             },
                             {
                               path:'pec-frais-contentieux',
-                              component: UserFormComponent
+                              component: FraisInitiesContentieuxComponent
                             },
                             {
                               path: 'frais-jugement', 
                               component: DebiteurComponent
                             },
                             {
-                              path: 'pec-frais-genraux-direction', 
+                              path: 'pec-frais-generaux-direction', 
                               component: FraisGenerauxComponent
                             }
                           ]
@@ -99,10 +229,7 @@ const routes: Routes = [
     component:RechercheComponent
   },
   
-  {
-    path:"fees",
-    component:FeesComponent
-  },
+
   { path: '', redirectTo: '/login', pathMatch: 'full' }
   
 ];

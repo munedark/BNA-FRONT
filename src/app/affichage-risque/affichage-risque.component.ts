@@ -14,6 +14,7 @@ export class AffichageRisqueComponent implements OnInit {
   displayedColumns: string[] = ['id','produit', 'mntFrais', 'soldeRisque', 'mntEntreePrincipale'];
   @Input() debiteurData: any;
   @Input() numCtx!:number;
+  @Input() isDebiteurComponent: boolean = false;
   idRisque:number=0;
   risque!: Risque ; 
 

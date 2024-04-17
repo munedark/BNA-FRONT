@@ -13,7 +13,6 @@ import { ValidateurComponent } from './validateur/validateur.component';
 import { GestionnaireComponent } from './gestionnaire/gestionnaire.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
-import { FeesComponent } from './fees/fees.component';
 import { DropDownComponent } from './drop-down/drop-down.component';
 import { UserFormComponent } from './user-form/user-form.component';
 import { RechercheComponent } from './recherche/recherche.component';
@@ -45,6 +44,8 @@ import { ConsultationOperationComponent } from './consultation-operation/consult
 import { ConsultationDebiteurComponent } from './consultation-debiteur/consultation-debiteur.component';
 import { RechercheOperationComponent } from './recherche-operation/recherche-operation.component';
 import { AffichageOperationsComponent } from './affichage-operations/affichage-operations.component';
+import { FraisInitiesContentieuxComponent } from './frais-inities-contentieux/frais-inities-contentieux.component';
+import { FormeFraisInitiesContentieuxComponent } from './forme-frais-inities-contentieux/forme-frais-inities-contentieux.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,6 @@ import { AffichageOperationsComponent } from './affichage-operations/affichage-o
     GestionnaireComponent,
     NavbarComponent,
     SidebarComponent,
-    FeesComponent,
     DropDownComponent,
     UserFormComponent,
     RechercheComponent,
@@ -76,6 +76,8 @@ import { AffichageOperationsComponent } from './affichage-operations/affichage-o
     ConsultationDebiteurComponent,
     RechercheOperationComponent,
     AffichageOperationsComponent,
+    FraisInitiesContentieuxComponent,
+    FormeFraisInitiesContentieuxComponent,
     
 
   ],

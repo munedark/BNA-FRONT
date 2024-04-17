@@ -14,7 +14,6 @@ import { jwtDecode } from 'jwt-decode';
 })
 export class FraisEnregistrementComponent implements OnInit {
   @Input() risque!:Risque;
-  @Input() dossierDebiteur!:DossierDebiteur;
   @Input() numCtx!:number;
   matricule!:string;
   operation: OperationCTX = {} as OperationCTX;

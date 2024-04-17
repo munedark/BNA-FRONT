@@ -1,43 +1,81 @@
 .container {
-    background: #f8f9fa;
-    padding: 20px;
-    border-radius: 0 0 10px 10px;
-    width: 90%;
-    border-top:2px solid #17a191 ;
-    margin-bottom: 20px ;
+  background: #f8f9fa;
+  padding: 20px;
+  border-radius: 0 0 10px 10px;
+  width: 90%;
+  border-top: 2px solid #17a191;
+  margin-bottom: 20px;
+  overflow: auto; /* Apply overflow auto to the container */
+
+  /* Custom scrollbar styles */
+  scrollbar-width: thin; /* For Firefox */
+  scrollbar-color: #119c79 #d1d1d18c; /* For Firefox */
 }
-.title{
-    font-weight: 700;
-    font-size: large;
-    color: #17a191;
+
+.title {
+  font-weight: 700;
+  font-size: large;
+  color: #17a191;
 }
+
 .mat-mdc-row .mat-mdc-cell {
-    border-bottom: 1px solid transparent;
-    border-top: 1px solid transparent;
-    cursor: pointer;
-  }
+  border-bottom: 1px solid transparent;
+  border-top: 1px solid transparent;
+  cursor: pointer;
+}
+
 .mat-mdc-row:hover .mat-mdc-cell {
-    border-color: #17a191;
-   
-  }
-  .pdf {
-    float: right;
-    background-color: rgb(255, 56, 56);
-    height: 30px;
-    width: 28px;
-    border-radius: 5px;
-    cursor: pointer;
-    display: flex; /* Use flexbox */
-    justify-content: center; /* Center content horizontally */
-    align-items: center; /* Center content vertically */
-  }
-  
-  .pdf:hover {
-    background-color: rgb(255, 145, 145);
-  }
-  
-  .pdf-img {
-    height: 20px;
-    width: auto;
-  }
-  
+  border-color: #17a191;
+}
+
+.pdf {
+  float: right;
+  background-color: rgb(255, 56, 56);
+  height: 30px;
+  width: 28px;
+  border-radius: 5px;
+  cursor: pointer;
+  display: flex; /* Use flexbox */
+  justify-content: center; /* Center content horizontally */
+  align-items: center; /* Center content vertically */
+}
+
+.pdf:hover {
+  background-color: rgb(255, 145, 145);
+}
+
+.pdf-img {
+  height: 20px;
+  width: auto;
+}
+
+.table-container {
+  overflow-x: auto; /* Apply horizontal scrolling to the table container */
+}
+
+table {
+  width: max-content; /* Use max-content to prevent table from stretching beyond container */
+}
+
+th, td {
+  white-space: nowrap; /* Prevent wrapping of content */
+  overflow: hidden; /* Hide overflowing content */
+  text-overflow: ellipsis; /* Display ellipsis (...) for overflow */
+}
+
+/* Custom scrollbar styles for WebKit browsers (Chrome, Safari) */
+.container::-webkit-scrollbar {
+  width: 5px;
+
+}
+
+.container::-webkit-scrollbar-track {
+  background-color: #d1d1d18c;
+  padding-top: 50px;
+}
+
+.container::-webkit-scrollbar-thumb {
+  background: #119c79;
+  border-radius: 10px;
+}
+

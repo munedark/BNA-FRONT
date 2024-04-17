@@ -17,4 +17,5 @@ export interface AjoutFrais{
     RIB?:string;
     numeroPiece?:number|null;
     auxiliaire?:string;
+    matriculeEmploye?:string;
 }

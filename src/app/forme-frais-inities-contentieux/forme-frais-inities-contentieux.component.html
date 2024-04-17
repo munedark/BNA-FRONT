@@ -1,0 +1,74 @@
+<div class="container">
+    <h3 class="register-heading">Ajouter un frais</h3>
+    <hr style="border-color: #17a191;">
+    <form #enregistrementForm="ngForm" (ngSubmit)="submitForm()">
+        <div class="content">
+            <!-- TYPE DE FRAIS  -->
+            <div class="groupe">
+                <div class="form-group">
+                    <label for="typeFrais">Type des frais:</label>
+                    <select id="typeFrais" class="form-control input-with-arrow" name="typeFrais" [(ngModel)]="fraisEnregistrement.typeFrais" required>
+                        <option value="" disabled>Choisir type des frais</option>
+                        <option value="Enregistrement" selected>Enregistrement</option>
+                        <option value="Timbrage">Timbrage</option>
+                        <option value="Divers">Divers</option>
+                    </select>
+                </div>
+                <div class="form-group" *ngIf="fraisEnregistrement.typeFrais=='Enregistrement'||fraisEnregistrement.typeFrais=='Timbrage'||fraisEnregistrement.typeFrais=='Divers'">
+                    <label for="typePiece" >Type de pièce:</label>
+                    <select *ngIf="fraisEnregistrement.typeFrais=='Enregistrement'" id="typePiece" class="form-control input-with-arrow" name="typePiece" [(ngModel)]="fraisEnregistrement.typePiece" required>
+                        <option value="" disabled selected>Type Pièce:</option>
+                        <option value="effet">Effet</option>
+                        <option value="actionCaution">Action de caution</option>
+                        <option value="jugement">Jugement</option>
+                    </select>
+                    <select *ngIf="fraisEnregistrement.typeFrais=='Timbrage'" id="typeAuxiliaire" class="form-control input-with-arrow" name="typeAuxiliaire" [(ngModel)]="fraisEnregistrement.typePiece" required>
+                        <option value="" disabled selected>Type Pièce:</option>
+                        <option value="effet">Effet</option>
+                        <option value="jugement">Jugement</option>
+                    </select>
+                    <select *ngIf="fraisEnregistrement.typeFrais=='Divers'" id="typeAuxiliaire" class="form-control input-with-arrow" name="typeAuxiliaire" [(ngModel)]="fraisEnregistrement.typePiece" required>
+                        <option value="" disabled selected>Type de pièce:</option>
+                        <option *ngFor="let diversPiece of diversPieces$ | async" [value]="diversPiece.typePiece">{{diversPiece.typePiece}}</option>
+                        <option value="Autres">Autres</option>
+                    </select>
+                    
+                </div>
+
+                <div class="form-group" >
+                    <label for="montantFrais">Montant des frais (en Dinars):</label>
+                    <input type="text" id="montantFrais" class=" form-control" name="montantFrais" placeholder="0000.00TDN" [(ngModel)]="fraisEnregistrement.montantFrais">
+                </div>
+                <div class="form-group" >
+                    <label for="matricule">Matricule de l'employé:</label>
+                    <input type="text" id="matricule" class=" form-control" name="matricule-emplyé" placeholder="matricule employé" [(ngModel)]="fraisEnregistrement.matriculeEmploye">
+                </div>
+    
+            </div>
+
+
+            <!-- right column -->
+            
+            <div class="groupe">
+                <div class="form-group " *ngIf="fraisEnregistrement.typeFrais=='Enregistrement'">
+                    <label for="numeroPiece">N° Pièce:</label>
+                    <input type="text" id="numeroPiece" placeholder="N° Pièce" class="form-control" name="numeroPiece" [(ngModel)]="fraisEnregistrement.numeroPiece">
+                </div>
+                <div class="form-group " *ngIf="fraisEnregistrement.typeFrais=='Divers' && fraisEnregistrement.typePiece=='Autres'">
+                    <label for="autre">Autre type de pièce:</label>
+                    <textarea id="autre" class="form-control redBorder" name="autre" placeholder="Autre type de pièce" [(ngModel)]="fraisEnregistrement.autre" required></textarea>
+                    </div>
+                    
+                    <div >
+                        <div class="form-group  ">
+                            <label for="dateOperation">Date de l'opération:</label>
+                            <input type="date" id="dateOperation" class="form-control" name="dateOperation" [(ngModel)]="fraisEnregistrement.dateOperation">
+                        </div>
+
+                    </div>
+                
+            </div>
+        </div>
+        <button type="submit" class="btn btnRegister">Valider</button>
+    </form>
+</div>

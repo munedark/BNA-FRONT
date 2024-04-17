@@ -12,6 +12,7 @@ export class DebiteurComponent {
   debiteurData: DebiteurInfo | null = null;
   risquesData: Risque[] | null = null; // Store risks data
   numCtx!:number;
+  isDebiteurComponent: boolean = true;
   constructor() { }
 
   onDebiteurDataReceived(data: DebiteurInfo | null) {

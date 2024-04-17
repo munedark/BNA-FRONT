@@ -8,10 +8,16 @@
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
                 <div class="modal-body">
+                  <div id="jugement" *ngIf="isDebiteurComponent">
                   <app-affichage-debiteur [debiteurData]="debiteurData" [isModalOpen]="true"></app-affichage-debiteur>
                   <app-detail-risque></app-detail-risque>
-                  <app-frais-enregistrement [risque]="risque" [dossierDebiteur]="debiteurData" [numCtx]="numCtx"></app-frais-enregistrement>
-                  </div>
+                  <app-frais-enregistrement [risque]="risque"  [numCtx]="numCtx"></app-frais-enregistrement>
+                </div>
+                  <div id="contentieux" *ngIf="!isDebiteurComponent">
+                  <app-affichage-debiteur [debiteurData]="debiteurData" [isModalOpen]="true"></app-affichage-debiteur>
+                  <app-forme-frais-inities-contentieux [risque]="risque"  [numCtx]="numCtx"></app-forme-frais-inities-contentieux>
+                </div>
+                </div>
                   <div class="modal-footer">
                   </div>
                 </div>

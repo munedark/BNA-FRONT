@@ -23,6 +23,8 @@ export class AffichageOperationsComponent implements OnInit, OnDestroy {
   timbrageColumns: string[] = ['typePiece', 'mntFrais', 'dateValeurCTX', 'etatOperation'];
   enregistrementColumns: string[] = ['typePiece','numeroPiece', 'mntFrais', 'dateValeurCTX', 'etatOperation'];
   jugementColumns: string[] = ['mntFrais','motifOperationCTX', 'numAffaireCTX', 'dateValeurCTX', 'nomBeneficiairePaiment','etatOperation'];
+  timbrageColumnsCtx: string[] = ['typePiece', 'mntFrais','matriculeEmploye', 'dateValeurCTX', 'etatOperation'];
+  enregistrementColumnsCtx: string[] = ['typePiece','numeroPiece', 'mntFrais','matriculeEmploye', 'dateValeurCTX', 'etatOperation'];
   fraisType!:string;
   constructor(private operationService: OperationConsultationService) {}
 
