@@ -1,41 +1,27 @@
-import { Component } from '@angular/core';
-import { LogoutService } from '../services/logout.service';
+import { Component, OnInit } from '@angular/core';
+import { WebSocketService } from '../services/app-websocket.service';
+
 @Component({
   selector: 'app-validateur',
   templateUrl: './validateur.component.html',
   styleUrls: ['./validateur.component.scss']
 })
-export class ValidateurComponent {
-  isSidebarCollapsed = false;
-  visibleSubMenus: boolean[] = [];
- 
-  constructor(private logoutService: LogoutService) { }
+export class ValidateurComponent implements OnInit {
 
-  ngOnInit(): void {
-    this.toggleSidebar();
-    const token = localStorage.getItem('token');
+  constructor(private webSocketService: WebSocketService) { }
 
+  ngOnInit() {
+    this.webSocketService.getMessage().subscribe(
+      (message: any) => {
+        console.log('Received message from server:', message);
+      },
+      (error: any) => {
+        console.error('Error in receiving message:', error);
+      }
+    );
   }
 
-  isSubMenuVisible(index: number): boolean {
-    if (this.visibleSubMenus[index] === undefined) {
-      this.visibleSubMenus[index] = false;
-    }
-    return this.visibleSubMenus[index];
-  }
-
-  toggleSubMenu(index: number): void {
-    // Toggle the visibility of the sub-menu for the specified index
-    this.visibleSubMenus[index] = !this.visibleSubMenus[index];
-  }
-
-  toggleSidebar(): void {
-    this.isSidebarCollapsed = !this.isSidebarCollapsed;
-  }
-  
-  
-
-  logout(): void {
-    this.logoutService.logout();
+  sendMessage() {
+    this.webSocketService.sendMessage({ test: 'Hello from Angular' });
   }
 }

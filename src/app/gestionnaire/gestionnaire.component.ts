@@ -15,18 +15,7 @@ export class GestionnaireComponent {
    
 
   }
-  click(){ 
-    this.sharedService.recherche(3221).subscribe(
-      (response) => {
-        console.log(response);
-      },
-      (error) => {
-        // Handle any errors here
-      }
-    );
-  }
-
-
+  
 
 
   }

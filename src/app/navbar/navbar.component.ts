@@ -3,6 +3,7 @@ import { AuthService } from '../services/auth.service';
 import { Subscription } from 'rxjs';
 import { SidebarToggleService } from '../services/sidebar-toggle.service';
 import { DropService } from '../services/drop.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -13,7 +14,9 @@ export class NavbarComponent implements OnInit , OnDestroy {
   isSidebarOpen = false;
   private subscription: Subscription;
 
+
   constructor(
+    private router: Router,
     private auth: AuthService,
     private sidebarToggleService: SidebarToggleService,
     private dropService: DropService
@@ -39,7 +42,12 @@ export class NavbarComponent implements OnInit , OnDestroy {
 
   toggleUser(): void {
     this.dropService.toggleIcon();
+  }  
+  toggleNotif(): void {
+    this.dropService.toggleBell();
   }
   
-  
+  isGestionnairePage():boolean{
+    return this.router.url.startsWith('/GESTIONNAIRE/');
+  }
 }

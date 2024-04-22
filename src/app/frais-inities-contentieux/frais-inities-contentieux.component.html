@@ -8,5 +8,4 @@
 
 <app-affichage-debiteur [debiteurData]="debiteurData" *ngIf="debiteurData"></app-affichage-debiteur>
 
-<!-- Display risks only when data is available -->
 <app-affichage-risque [risquesData]="risquesData" [isDebiteurComponent]="isDebiteurComponent" [debiteurData]="debiteurData" [numCtx]="numCtx" *ngIf="risquesData"></app-affichage-risque>

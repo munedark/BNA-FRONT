@@ -12,6 +12,7 @@ import { Avocat } from '../Models/Avocat';
 import { Huissier } from '../Models/Huissier';
 import { Expert } from '../Models/Expert';
 import { Risque } from '../Models/Risque';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-forme-frais-inities-contentieux',
@@ -110,6 +111,13 @@ export class FormeFraisInitiesContentieuxComponent implements OnInit{
               console.log('Frais ajouté avec succès:', response);
               console.log(this.operation);
               this.resetForm();
+              Swal.fire({
+                position: "center",
+                icon: "success",
+                title: "ajouté avec succès",
+                showConfirmButton: false,
+                timer: 1500
+              });
             },
             (error) => {
               console.error('Erreur lors de l\'ajout des frais:', error);

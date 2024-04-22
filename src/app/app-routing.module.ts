@@ -12,6 +12,9 @@ import { FraisGenerauxComponent } from './frais-generaux/frais-generaux.componen
 import { ConsultationOperationComponent } from './consultation-operation/consultation-operation.component';
 import { ConsultationDebiteurComponent } from './consultation-debiteur/consultation-debiteur.component';
 import { FraisInitiesContentieuxComponent } from './frais-inities-contentieux/frais-inities-contentieux.component';
+import { FraisJugementValidateurComponent } from './frais-jugement-validateur/frais-jugement-validateur.component';
+import { FraisGenerauxValidateurComponent } from './frais-generaux-validateur/frais-generaux-validateur.component';
+import { FraisContentieuxValidateurComponent } from './frais-contentieux-validateur/frais-contentieux-validateur.component';
 
 
 const routes: Routes = [
@@ -96,20 +99,20 @@ const routes: Routes = [
         children: [
                       {
                         path: '', 
-                        redirectTo: 'pec-frais-contentieux', 
+                        redirectTo: 'pec-frais-contentieux-validation', 
                         pathMatch: 'full'
                       },
                       {
-                        path:'pec-frais-contentieux',
-                        component: FraisInitiesContentieuxComponent
+                        path:'pec-frais-contentieux-validation',
+                        component: FraisContentieuxValidateurComponent
                       },
                       {
-                        path: 'frais-jugement', 
-                        component: DebiteurComponent
+                        path: 'frais-jugement-validation', 
+                        component: FraisJugementValidateurComponent
                       },
                       {
-                        path: 'pec-frais-generaux-direction', 
-                        component: FraisGenerauxComponent
+                        path: 'pec-frais-generaux-direction-validation', 
+                        component: FraisGenerauxValidateurComponent
                       }
                     ]
   },

@@ -1,0 +1,26 @@
+.wrapper{
+    background-color: rgb(255, 255, 255);
+    color: #21242a;
+    width: 260px;
+    border-radius: 0px 0 10px 10px;
+    padding: 15px 0 20px 10px ;
+    position: absolute;
+    top: 57px; /* Adjust as needed */
+    right: 50px; /* Adjust as needed */
+    z-index: 1000;   
+    float: inline-end; 
+    border: 3px solid #00a9872b;
+
+
+
+}
+
+
+.first{
+    display: flex;
+    align-items: center;
+    border-radius: 10px;
+    padding: 3px 0 4px 0;
+    
+}
+

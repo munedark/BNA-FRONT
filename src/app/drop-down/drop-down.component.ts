@@ -28,5 +28,6 @@ export class DropDownComponent implements OnInit {
     this.logoutService.logout();
     this.auth.updateUsertoken(null);
     this.dropService.toggleIcon();
+    if (this.dropService.isNotifOpen$){this.dropService.toggleBell}
   }
 }

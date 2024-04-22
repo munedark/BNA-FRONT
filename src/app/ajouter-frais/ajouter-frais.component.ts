@@ -11,6 +11,7 @@ import { AuxiliaireConvontionnéService } from '../services/auxiliaire-convontio
 import { Avocat } from '../Models/Avocat';
 import { Huissier } from '../Models/Huissier';
 import { Expert } from '../Models/Expert';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-ajouter-frais',
@@ -114,18 +115,30 @@ getoptions(){
 
       ]).subscribe(([typePaimentData ]) => {
         this.operation.typePaiments = typePaimentData;
-        // Add other assignments if needed
+        
   
-        // Once all assignments are done, proceed to submitForm
         this.sharedService.submitForm(this.operation).subscribe(
           (response) => {
             console.log('Frais ajouté avec succès:', response);
             console.log(this.operation);
             this.resetForm();
+            
+              Swal.fire({
+                position: "center",
+                icon: "success",
+                title: "ajouté avec succès",
+                showConfirmButton: false,
+                timer: 1500
+              });
           },
           (error) => {
             console.error('Erreur lors de l\'ajout des frais:', error);
-            console.log(this.operation);
+            Swal.fire({
+              title: 'Error!',
+              text: 'Do you want to continue',
+              icon: 'error',
+              confirmButtonText: 'Cool'
+            })
         
           }
         );

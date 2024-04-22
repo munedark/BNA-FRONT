@@ -17,8 +17,9 @@
             <img src="./assets/logo_bna.png" alt="BNA Logo">
         </div>
 
-        <div style="display: flex; flex-direction: row;">
-
+        <div style="display: flex; flex-direction: row; justify-content: space-between; width: 95px; margin-right: 3px;">
+            <app-app-notification-button style="display: flex; flex-direction: column; justify-content: center; margin-bottom: 6px;" (click)="toggleNotif()" *ngIf="!isGestionnairePage()"></app-app-notification-button>
+            <div class="holdPlace"></div>
             <img src="./assets/user.png" class="userlogo" alt="Compte" title="Compte" (click)="toggleUser()">
         </div>
     </nav>

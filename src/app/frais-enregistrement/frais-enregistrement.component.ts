@@ -3,9 +3,9 @@ import { SharedServicesService } from '../services/shared-services.service';
 import { FraisEnregistrement } from '../Models/FraisEnregistrement';
 import { OperationCTX } from '../Models/OperationCTX';
 import { Risque } from '../Models/Risque';
-import { DossierDebiteur } from '../Models/DossierDebiteur';
 import { AuthService } from '../services/auth.service';
 import { jwtDecode } from 'jwt-decode';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-frais-enregistrement',
@@ -64,6 +64,13 @@ export class FraisEnregistrementComponent implements OnInit {
             (response) => {
               console.log('Frais ajouté avec succès:', response);
               console.log(this.operation);
+              Swal.fire({
+                position: "center",
+                icon: "success",
+                title: "ajouté avec succès",
+                showConfirmButton: false,
+                timer: 1500
+              });
 
               this.fraisEnregistrement = { montantFrais: '', numeroRouge: '', numeroAffaire: '', dateDemandeJugement: undefined, recetteFinance: '' };
             },

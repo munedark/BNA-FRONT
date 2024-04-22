@@ -4,7 +4,7 @@
     <mat-form-field>
         <input matInput (keyup)="applyFilter($event)" placeholder="Filter">
     </mat-form-field>
-    <div class="pdf" (click)="exportAsPDF()"><img src="../../assets/pdf-icon.png" class="pdf-img" ></div>
+    <div class="pdf" (click)="exportAsPDF()" ><img src="../../assets/pdf-icon.png" class="pdf-img" alt="telecharger comme pdf" title="telecharger comme pdf"></div>
     
     <div class="table-container">
         <table mat-table [dataSource]="dataSource" matSort>

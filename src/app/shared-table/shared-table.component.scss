@@ -30,7 +30,7 @@
 
 .pdf {
   float: right;
-  background-color: rgb(255, 56, 56);
+
   height: 30px;
   width: 28px;
   border-radius: 5px;
@@ -41,11 +41,12 @@
 }
 
 .pdf:hover {
-  background-color: rgb(255, 145, 145);
+
+  cursor: pointer;
 }
 
 .pdf-img {
-  height: 20px;
+  height:50px;
   width: auto;
 }
 

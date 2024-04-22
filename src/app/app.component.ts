@@ -11,6 +11,7 @@ import { Subscription } from 'rxjs';
 export class AppComponent {
   title = 'contentieux';
   isUserOpen:boolean=false;
+  isNotifOpen:boolean=false;
   subscription:Subscription|undefined
   
   
@@ -18,8 +19,14 @@ export class AppComponent {
     this.subscription = this.dropService.isUserOpen$.subscribe(isOpen => {
       this.isUserOpen = isOpen;
    });
+    this.subscription = this.dropService.isNotifOpen$.subscribe(isOpen => {
+      this.isNotifOpen = isOpen;
+   });
   }
   isLoginPage(): boolean {
     return this.router.url === '/login';
 }
+  isGestionnairePage():boolean{
+    return this.router.url.startsWith('/GESTIONNAIRE/');
+  }
 }

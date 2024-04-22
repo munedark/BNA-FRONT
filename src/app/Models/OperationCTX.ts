@@ -4,6 +4,7 @@ import { TypeOperation } from "./TypeOperation";
 import { TypePaiment } from "./TypePaiment";
 
 export interface OperationCTX {
+    
     idOperation?: number;
     mntOperation?: number;
     mntFrais?: number;

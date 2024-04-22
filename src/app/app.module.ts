@@ -4,7 +4,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
-import { AuthService } from './services/auth.service';
 import { FormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -46,6 +45,17 @@ import { RechercheOperationComponent } from './recherche-operation/recherche-ope
 import { AffichageOperationsComponent } from './affichage-operations/affichage-operations.component';
 import { FraisInitiesContentieuxComponent } from './frais-inities-contentieux/frais-inities-contentieux.component';
 import { FormeFraisInitiesContentieuxComponent } from './forme-frais-inities-contentieux/forme-frais-inities-contentieux.component';
+import { AppNotificationButtonComponent } from './app-notification-button/app-notification-button.component';
+import {MatBadgeModule} from "@angular/material/badge";
+import { NotificationOperationComponent } from './notification-operation/notification-operation.component';
+import { FraisContentieuxValidateurComponent } from './frais-contentieux-validateur/frais-contentieux-validateur.component';
+import { ListeOperation110Component } from './liste-operation110/liste-operation110.component';
+import { ListeOperation120Component } from './liste-operation120/liste-operation120.component';
+import { ListeOperation130Component } from './liste-operation130/liste-operation130.component';
+import { Validation110Component } from './validation110/validation110.component';
+import { Validation120Component } from './validation120/validation120.component';
+import { Validation130Component } from './validation130/validation130.component';
+import { MatStepperModule } from '@angular/material/stepper';
 
 @NgModule({
   declarations: [
@@ -78,6 +88,15 @@ import { FormeFraisInitiesContentieuxComponent } from './forme-frais-inities-con
     AffichageOperationsComponent,
     FraisInitiesContentieuxComponent,
     FormeFraisInitiesContentieuxComponent,
+    AppNotificationButtonComponent,
+    NotificationOperationComponent,
+    FraisContentieuxValidateurComponent,
+    ListeOperation110Component,
+    ListeOperation120Component,
+    ListeOperation130Component,
+    Validation110Component,
+    Validation120Component,
+    Validation130Component
     
 
   ],
@@ -96,7 +115,9 @@ import { FormeFraisInitiesContentieuxComponent } from './forme-frais-inities-con
     MatIconModule,
     MatRadioModule,
     MatSelectModule,
-    MatDialogModule
+    MatDialogModule,
+    MatBadgeModule,
+    MatStepperModule
   ],
   providers: [ { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
