@@ -34,35 +34,54 @@ export class Validation120Component {
 
   approuverOperation(operationId?: number) {
     if (operationId !== undefined) {
-      console.log(this.matricule);
-      this.operationService.updateOperationCTX(operationId, this.matricule, new Date(),'V').subscribe((data)=>{
-        console.log(data);
-        this.refreshOperationsList();
-        Swal.fire({
-          position: "center",
-          icon: "success",
-          title: "Accepté avec succès",
-          showConfirmButton: false,
-          timer: 1500
-        }); 
-        
+      Swal.fire({
+        title: "Êtes-vous sûr ?",
+        text: "Vous ne pourrez pas annuler cela !",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Oui, approuver l'opération"
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire({
+            title: "Approuver!",
+            text: "L'opération a été approuver.",
+            icon: "success"
+          }).then(() => {
+            this.operationService.updateOperationCTX(operationId, this.matricule, new Date(),'V').subscribe((data)=>{this.refreshOperationsList();});
+          });
+        }
       });
-    }
+    
+  }
   }
   
   rejeterOperation(operationId?:number) {
     if (operationId !== undefined) {
-      this.operationService.updateOperationCTX(operationId, this.matricule, new Date(),'R').subscribe((data)=>{
-        console.log(data);
-        this.refreshOperationsList();
+      
+        
+        
         Swal.fire({
-          position: "center",
-          icon: "success",
-          title: "ajouté avec succès",
-          showConfirmButton: false,
-          timer: 1500
+          title: "Êtes-vous sûr ?",
+          text: "Vous ne pourrez pas annuler cela !",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Oui, rejeter l'opération"
+        }).then((result) => {
+          if (result.isConfirmed) {
+            Swal.fire({
+              title: "Rejeter!",
+              text: "L'opération a été rejetée.",
+              icon: "success"
+            }).then(() => {
+              this.operationService.updateOperationCTX(operationId, this.matricule, new Date(),'R').subscribe((data)=>{this.refreshOperationsList();});
+            });
+          }
         });
-      });
+      
     }
   }
   

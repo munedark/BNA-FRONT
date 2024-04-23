@@ -11,9 +11,9 @@
                 <option value="Divers">Divers</option>
             </select>
         </div>
-        <app-shared-table *ngIf="operations && fraisType==='Timbrage'" [dataSource]="dataSourceTim" [displayedColumns]="timbrageColumnsCtx" title="Frais Timbrage:"></app-shared-table>
-        <app-shared-table *ngIf="operations && fraisType==='Enregistrement'" [dataSource]="dataSourceEnr" [displayedColumns]="enregistrementColumnsCtx" title="Frais Enregistrement:"></app-shared-table>
-        <app-shared-table *ngIf="operations && fraisType==='Divers'" [dataSource]="dataSourceDiver" [displayedColumns]="timbrageColumnsCtx" title="Frais Divers:"></app-shared-table>
+        <app-shared-table *ngIf="operations && fraisType==='Timbrage'" [dataSource]="dataSourceTim" (rowClicked)="handleRowClick($event)"  [displayedColumns]="timbrageColumnsCtx" title="Frais Timbrage:"></app-shared-table>
+        <app-shared-table *ngIf="operations && fraisType==='Enregistrement'" [dataSource]="dataSourceEnr" (rowClicked)="handleRowClick($event)"  [displayedColumns]="enregistrementColumnsCtx" title="Frais Enregistrement:"></app-shared-table>
+        <app-shared-table *ngIf="operations && fraisType==='Divers'" [dataSource]="dataSourceDiver" (rowClicked)="handleRowClick($event)"  [displayedColumns]="timbrageColumnsCtx" title="Frais Divers:"></app-shared-table>
 
     </div>
     <!-- type 120 -->
@@ -27,14 +27,60 @@
                 <option value="Divers">Divers</option>
             </select>
         </div>
-        <app-shared-table *ngIf="operations && fraisType==='Auxiliaire'" [dataSource]="dataSourceAux" [displayedColumns]="auxiliaireColumns" title="Frais Auxiliaire:"></app-shared-table>
-        <app-shared-table *ngIf="operations && fraisType==='Timbrage'" [dataSource]="dataSourceTim" [displayedColumns]="timbrageColumns" title="Frais Timbrage:"></app-shared-table>
-        <app-shared-table *ngIf="operations && fraisType==='Enregistrement'" [dataSource]="dataSourceEnr" [displayedColumns]="enregistrementColumns" title="Frais Enregistrement:"></app-shared-table>
-        <app-shared-table *ngIf="operations && fraisType==='Divers'" [dataSource]="dataSourceDiver" [displayedColumns]="timbrageColumns" title="Frais Divers:"></app-shared-table>
+        <app-shared-table *ngIf="operations && fraisType==='Auxiliaire'" (rowClicked)="handleRowClick($event)" [dataSource]="dataSourceAux" [displayedColumns]="auxiliaireColumns" title="Frais Auxiliaire:"></app-shared-table>
+        <app-shared-table *ngIf="operations && fraisType==='Timbrage'" (rowClicked)="handleRowClick($event)"  [dataSource]="dataSourceTim" [displayedColumns]="timbrageColumns" title="Frais Timbrage:"></app-shared-table>
+        <app-shared-table *ngIf="operations && fraisType==='Enregistrement'" (rowClicked)="handleRowClick($event)"  [dataSource]="dataSourceEnr" [displayedColumns]="enregistrementColumns" title="Frais Enregistrement:"></app-shared-table>
+        <app-shared-table *ngIf="operations && fraisType==='Divers'" (rowClicked)="handleRowClick($event)" [dataSource]="dataSourceDiver" [displayedColumns]="timbrageColumns" title="Frais Divers:"></app-shared-table>
 
     </div>
     <!-- type 130 -->
     <div *ngIf="typeOperation==='130'">
-        <app-shared-table *ngIf="operations" [dataSource]="dataSourceJuge" [displayedColumns]="jugementColumns" title="Frais Jugement:"></app-shared-table>
+        <app-shared-table *ngIf="operations" [dataSource]="dataSourceJuge" [displayedColumns]="jugementColumns" (rowClicked)="handleRowClick($event)"  title="Frais Jugement:"></app-shared-table>
+    </div>
+</div>
+<div class="modal fade" id="modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel" style="color: #6C7878;"><img src="../../assets/consultaion_modal.png" style="width: 40px;margin-right: 5px;"> Consultation :</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p *ngIf="selectedOperation">
+                    mntOperation: {{selectedOperation.mntOperation}} 
+                    mntFrais:{{selectedOperation.mntFrais}}
+                    typeFrais : {{selectedOperation.typeFrais}}
+                    typeAuxiliaire : {{selectedOperation.typeAuxiliaire}}
+                    typePiece:  {{selectedOperation.typePiece}}
+                    auxiliaire:  {{selectedOperation.auxiliaire}}
+                    cinAuxiliaire: {{selectedOperation.cinAuxiliaire}}
+                    nomAuxiliaire:{{selectedOperation.nomAuxiliaire}}
+                    mntHonoraire:  {{selectedOperation.mntHonoraire}}
+                    rib:  {{selectedOperation.rib}} 
+                    nomBeneficiaire: {{selectedOperation.nomBeneficiaire}}
+                    natureAuxiliaire: {{selectedOperation.natureAuxiliaire}}
+                    rneAuxiliaire: {{selectedOperation.rneAuxiliaire}}
+                    prenomAuxiliaire: {{selectedOperation.prenomAuxiliaire}} 
+                    dateOperation:  {{selectedOperation.dateOperation}}    
+                    dateCreation:  {{selectedOperation.dateCreation}}     
+                    dateValeurCTX:   {{selectedOperation.dateValeurCTX}}   
+                    matriculeAjout: {{selectedOperation.matriculeAjout}} 
+                    matriculeValidateur: {{selectedOperation.matriculeValidateur}}
+                    dateValidation:  {{selectedOperation.dateValidation}}
+                    etatOperation: {{selectedOperation.etatOperation}}
+                    numAffaireCT:  {{selectedOperation.numAffaireCTX}}
+                    nomBeneficiairePaiment:  {{selectedOperation.nomBeneficiairePaiment}}
+                    motifOperationCTX:  {{selectedOperation.motifOperationCTX}}
+                    typeOperation: {{selectedOperation.typeOperation}}
+                    typePaiments: {{selectedOperation.typePaiments}}
+                    risque: {{selectedOperation.risque}}
+                    dossierDebiteur: {{selectedOperation.dossierDebiteur}}
+                    numeroPiece: {{selectedOperation.numeroPiece}}
+                    matriculeEmploye:{{selectedOperation.matriculeEmploye}}
+                </p>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
     </div>
 </div>
