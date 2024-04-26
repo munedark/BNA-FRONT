@@ -10,6 +10,9 @@ export interface Risque {
         journalRisque:JournalRisque;
         detailRisque:DetailRisque[];
         produit:Produit;
+        stade:string;
+        ic:number;
+        ir:number;
         
         
         

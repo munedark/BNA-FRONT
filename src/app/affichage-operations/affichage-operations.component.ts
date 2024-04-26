@@ -19,7 +19,7 @@ export class AffichageOperationsComponent implements OnInit, OnDestroy {
   dataSourceEnr: MatTableDataSource<OperationCTX> = new MatTableDataSource<OperationCTX>();
   dataSourceDiver: MatTableDataSource<OperationCTX> = new MatTableDataSource<OperationCTX>();
   dataSourceJuge: MatTableDataSource<OperationCTX> = new MatTableDataSource<OperationCTX>();
-  auxiliaireColumns: string[] = ['typeAuxiliaire', 'auxiliaire', 'mntFrais', 'dateValeurCTX', 'etatOperation'];
+  auxiliaireColumns: string[] = ['typeAuxiliaire', 'natureAuxiliaire', 'mntFrais', 'dateValeurCTX', 'etatOperation'];
   timbrageColumns: string[] = ['typePiece', 'mntFrais', 'dateValeurCTX', 'etatOperation'];
   enregistrementColumns: string[] = ['typePiece', 'numeroPiece', 'mntFrais', 'dateValeurCTX', 'etatOperation'];
   jugementColumns: string[] = ['mntFrais', 'motifOperationCTX', 'numAffaireCTX', 'dateValeurCTX', 'nomBeneficiairePaiment', 'etatOperation'];

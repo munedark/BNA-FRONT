@@ -15,6 +15,10 @@ import { FraisInitiesContentieuxComponent } from './frais-inities-contentieux/fr
 import { FraisJugementValidateurComponent } from './frais-jugement-validateur/frais-jugement-validateur.component';
 import { FraisGenerauxValidateurComponent } from './frais-generaux-validateur/frais-generaux-validateur.component';
 import { FraisContentieuxValidateurComponent } from './frais-contentieux-validateur/frais-contentieux-validateur.component';
+import { CheckComponent } from './check/check.component';
+import { PecAffectationComponent } from './pec-affectation/pec-affectation.component';
+import { ClotureRisqueComponent } from './cloture-risque/cloture-risque.component';
+import { ClotureDossierComponent } from './cloture-dossier/cloture-dossier.component';
 
 
 const routes: Routes = [
@@ -189,17 +193,20 @@ const routes: Routes = [
           path: 'recouvrement', 
           children: [
                             {
-                              path: '', 
-                              redirectTo: 'anotherComponent', 
-                              pathMatch: 'full'
+                              path: 'PEC-Cheque', 
+                              component: CheckComponent
                             },
                             {
-                              path: 'blabla', 
-                              component: AdministrateurComponent
+                              path: 'PEC-Affectation', 
+                              component: PecAffectationComponent
                             },
                             {
-                              path: 'blabla', 
-                              component: AdministrateurComponent
+                              path: 'Cloture-Risque', 
+                              component: ClotureRisqueComponent
+                            },
+                            {
+                              path: 'Cloture-Dossier', 
+                              component: ClotureDossierComponent
                             }
           ]
         },

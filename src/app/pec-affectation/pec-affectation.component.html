@@ -1,0 +1,11 @@
+<h4 class="titre">PEC affectation</h4>
+<p class="link"><img src="../../assets/maison.png">&nbsp;&nbsp;/&nbsp;&nbsp;recouvrement&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;PEC affectation</p>
+<app-recherche 
+  (debiteurDataChange)="onDebiteurDataReceived($event)"
+  (risques)="onRisquesReceived($event)"
+  (numCTX)="onNumCtxReceived($event)">
+</app-recherche>
+
+<app-affichage-debiteur [debiteurData]="debiteurData" *ngIf="debiteurData"></app-affichage-debiteur>
+
+<app-affichage-risque [risquesData]="risquesData" [isAffectationComponent]="isAffectationComponent" [debiteurData]="debiteurData" [numCtx]="numCtx" *ngIf="risquesData"></app-affichage-risque>

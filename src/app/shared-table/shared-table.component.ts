@@ -77,12 +77,12 @@ export class SharedTableComponent {
         fontWeight = 'bold'; // Set fontWeight to bold
         break;
       case 'V':
-        backgroundColor = 'green';
+        backgroundColor = '#129859';
         label = 'Accepté';
         fontWeight = 'bold'; // Set fontWeight to bold
         break;
       case 'R':
-        backgroundColor = 'red';
+        backgroundColor = '#F6574F';
         label = 'Refusé';
         fontWeight = 'bold'; // Set fontWeight to bold
         break;

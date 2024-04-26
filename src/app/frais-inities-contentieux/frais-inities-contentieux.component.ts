@@ -11,13 +11,12 @@ export class FraisInitiesContentieuxComponent {
   debiteurData: any;
   risquesData: Risque[] | null | undefined;
   numCtx!: number ;
-  isDebiteurComponent: boolean = false;
+  isintiesComponent: boolean = true;
 
   onDebiteurDataReceived(data: DebiteurInfo | null) {
     this.debiteurData = data;
   }
 
-  // Method to receive risks data emitted by RechercheComponent
   onRisquesReceived(risquesData: Risque[] | null) {
     this.risquesData = risquesData;
   }

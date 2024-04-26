@@ -1,0 +1,46 @@
+<div class="container">
+    <h3 class="register-heading"> Ajouter un frais</h3>
+    <hr style="border-color: #17a191;">
+    <form #enregistrementForm="ngForm" (ngSubmit)="submitForm()">
+        <div class="content">
+            <!-- TYPE DE FRAIS  -->
+            <div class="groupe">
+                <div class="form-group">
+                    <label for="numCheque">Numéro de Chèque:</label>
+                    <input type="text" id="numCheque" class="form-control" name="numéro chèque"  required>
+                </div>
+
+                <div class="form-group" >
+                    <label for="montantCheque">Montant cheque (en Dinars):</label>
+                    <input type="text" id="montantCheque" class=" form-control" name="montant cheque" placeholder="0000.00TDN" >
+                </div>
+    
+            </div>
+
+
+            <!-- right column -->
+            
+            <div class="groupe">
+                <div class="form-group " >
+                    <label for="ribDonneur">RIB donneur:</label>
+                    <input type="text" id="ribDonneur" placeholder="RIB donneur" class="form-control" name="RIB donneur" >
+                </div>
+                <div class="form-group">
+                    <label for="typeFrais">Agence ou chèque a été présentés:</label>
+                    <select id="typeFrais" class="form-control input-with-arrow" name="typeFrais"  required>
+                        <option value="" disabled>Choisir type des frais</option>
+                        <option value="Enregistrement" selected>Enregistrement</option>
+                        <option value="Timbrage">Timbrage</option>
+                        <option value="Divers">Divers</option>
+                    </select>
+                </div>
+                
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="motif">Tiré:</label>
+            <textarea  id="motif" class="form-control" name="nouveau solde" ></textarea>
+    </div>
+        <button type="submit" class="btn btnRegister">Valider</button>
+    </form>
+</div>

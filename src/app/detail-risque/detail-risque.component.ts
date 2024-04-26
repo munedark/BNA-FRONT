@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { Risque } from '../Models/Risque';
 
 @Component({
   selector: 'app-detail-risque',
@@ -6,5 +7,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./detail-risque.component.scss']
 })
 export class DetailRisqueComponent {
+  @Input() risque!:Risque;
 
 }

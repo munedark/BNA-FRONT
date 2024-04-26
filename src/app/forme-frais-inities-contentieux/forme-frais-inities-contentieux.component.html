@@ -19,7 +19,7 @@
                     <select *ngIf="fraisEnregistrement.typeFrais=='Enregistrement'" id="typePiece" class="form-control input-with-arrow" name="typePiece" [(ngModel)]="fraisEnregistrement.typePiece" required>
                         <option value="" disabled selected>Type Pièce:</option>
                         <option value="effet">Effet</option>
-                        <option value="actionCaution">Action de caution</option>
+                        <option value="action Caution">Action de caution</option>
                         <option value="jugement">Jugement</option>
                     </select>
                     <select *ngIf="fraisEnregistrement.typeFrais=='Timbrage'" id="typeAuxiliaire" class="form-control input-with-arrow" name="typeAuxiliaire" [(ngModel)]="fraisEnregistrement.typePiece" required>
@@ -41,7 +41,7 @@
                 </div>
                 <div class="form-group" >
                     <label for="matricule">Matricule de l'employé:</label>
-                    <input type="text" id="matricule" class=" form-control" name="matricule-emplyé" placeholder="matricule employé" [(ngModel)]="fraisEnregistrement.matriculeEmploye">
+                    <input type="text" id="matricule" class=" form-control" name="matricule-employé" placeholder="matricule employé" [(ngModel)]="fraisEnregistrement.matriculeEmploye">
                 </div>
     
             </div>

@@ -10,12 +10,17 @@
                 <div class="modal-body">
                   <div id="jugement" *ngIf="isDebiteurComponent">
                   <app-affichage-debiteur [debiteurData]="debiteurData" [isModalOpen]="true"></app-affichage-debiteur>
-                  <app-detail-risque></app-detail-risque>
+                  <app-detail-risque [risque]="risque"></app-detail-risque>
                   <app-frais-enregistrement [risque]="risque"  [numCtx]="numCtx"></app-frais-enregistrement>
                 </div>
-                  <div id="contentieux" *ngIf="!isDebiteurComponent">
+                <div id="contentieux" *ngIf="isintiesComponent">
                   <app-affichage-debiteur [debiteurData]="debiteurData" [isModalOpen]="true"></app-affichage-debiteur>
                   <app-forme-frais-inities-contentieux [risque]="risque"  [numCtx]="numCtx"></app-forme-frais-inities-contentieux>
+                </div>
+                <div id="contentieux" *ngIf="isAffectationComponent">
+                  <app-affichage-debiteur [debiteurData]="debiteurData" [isModalOpen]="true"></app-affichage-debiteur>
+                  <app-detail-risque [risque]="risque"></app-detail-risque>
+                  <app-forme-affectation [risque]="risque"  [numCtx]="numCtx"></app-forme-affectation>
                 </div>
                 </div>
                   <div class="modal-footer">

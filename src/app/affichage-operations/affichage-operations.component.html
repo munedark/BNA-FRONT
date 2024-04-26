@@ -1,5 +1,5 @@
 <div class="container" *ngIf="typeOperation === '120' || typeOperation === '130' || typeOperation === '110'">
-    <p class="title">Type Operation:&nbsp;&nbsp;<span style="color: #5b6462;font-size: larger;">{{typeOperation}}</span></p>
+    <p class="title">Type Operation:&nbsp;&nbsp;<span style="color: #5b6462;font-size: larger;">{{typeOperation}}</span>
     <hr style="color: #17a191;">
     <!-- type 110 -->
     <div *ngIf="typeOperation==='110'">
@@ -46,38 +46,90 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <p *ngIf="selectedOperation">
-                    mntOperation: {{selectedOperation.mntOperation}} 
-                    mntFrais:{{selectedOperation.mntFrais}}
-                    typeFrais : {{selectedOperation.typeFrais}}
-                    typeAuxiliaire : {{selectedOperation.typeAuxiliaire}}
-                    typePiece:  {{selectedOperation.typePiece}}
-                    auxiliaire:  {{selectedOperation.auxiliaire}}
-                    cinAuxiliaire: {{selectedOperation.cinAuxiliaire}}
-                    nomAuxiliaire:{{selectedOperation.nomAuxiliaire}}
-                    mntHonoraire:  {{selectedOperation.mntHonoraire}}
-                    rib:  {{selectedOperation.rib}} 
-                    nomBeneficiaire: {{selectedOperation.nomBeneficiaire}}
-                    natureAuxiliaire: {{selectedOperation.natureAuxiliaire}}
-                    rneAuxiliaire: {{selectedOperation.rneAuxiliaire}}
-                    prenomAuxiliaire: {{selectedOperation.prenomAuxiliaire}} 
-                    dateOperation:  {{selectedOperation.dateOperation}}    
-                    dateCreation:  {{selectedOperation.dateCreation}}     
-                    dateValeurCTX:   {{selectedOperation.dateValeurCTX}}   
-                    matriculeAjout: {{selectedOperation.matriculeAjout}} 
-                    matriculeValidateur: {{selectedOperation.matriculeValidateur}}
-                    dateValidation:  {{selectedOperation.dateValidation}}
-                    etatOperation: {{selectedOperation.etatOperation}}
-                    numAffaireCT:  {{selectedOperation.numAffaireCTX}}
-                    nomBeneficiairePaiment:  {{selectedOperation.nomBeneficiairePaiment}}
-                    motifOperationCTX:  {{selectedOperation.motifOperationCTX}}
-                    typeOperation: {{selectedOperation.typeOperation}}
-                    typePaiments: {{selectedOperation.typePaiments}}
-                    risque: {{selectedOperation.risque}}
-                    dossierDebiteur: {{selectedOperation.dossierDebiteur}}
-                    numeroPiece: {{selectedOperation.numeroPiece}}
-                    matriculeEmploye:{{selectedOperation.matriculeEmploye}}
-                </p>
+                <div *ngIf="selectedOperation">
+                    <div *ngIf="selectedOperation.typeOperation?.libelleOperation === '110'" style="display: flex; justify-content: space-around;">
+                        <div>
+                            <p><span style="color: #00A17D; font-weight: bold;">Dossier debiteur:</span> &nbsp;{{selectedOperation.dossierDebiteur?.dossierId?.numCtx}}</p>
+                            <p><span style="color: #00A17D; font-weight: bold;">Montant frais:</span>&nbsp; {{selectedOperation.mntFrais}} TND</p>
+                            <p><span style="color: #00A17D; font-weight: bold;">Type frais:</span>&nbsp; {{selectedOperation.typeFrais}}</p>
+                            <p><span style="color: #00A17D; font-weight: bold;">Type Piece:</span>&nbsp; {{selectedOperation.typePiece}}</p>
+                            <p *ngIf="selectedOperation.typeFrais === 'Enrgistrement'"><span style="color: #00A17D; font-weight: bold;">Numero Piece:</span>&nbsp; {{selectedOperation.numeroPiece}}</p>
+                            <p><span style="color: #00A17D; font-weight: bold;">Matricule Employé:</span>&nbsp; {{selectedOperation.matriculeEmploye}}</p>
+                            <p><span style="color: #00A17D; font-weight: bold;">Date d'exécution d'operation:</span>&nbsp; {{selectedOperation.dateValeurCTX}}</p>
+                        </div>
+                        <div>
+                            <p><span style="color: #00A17D; font-weight: bold;">MatriculeAjout:</span> &nbsp;{{selectedOperation.matriculeAjout}}</p>
+                            <p><span style="color: #00A17D; font-weight: bold;">Date création:</span> &nbsp;{{selectedOperation.dateCreation}}</p>
+                            <p *ngIf="selectedOperation.etatOperation !== 'E'"><span style="color: #00A17D; font-weight: bold;">MatriculeValidateur:</span>&nbsp; {{selectedOperation.matriculeValidateur}}</p>
+                            <p *ngIf="selectedOperation.etatOperation !== 'E'"><span style="color: #00A17D; font-weight: bold;">DateValidation:</span>&nbsp; {{selectedOperation.dateValidation}}</p>
+                            <p><span style="color: #00A17D; font-weight: bold;">Date operation:</span> &nbsp;{{selectedOperation.dateOperation}}</p>
+                        </div>
+                    </div>
+                    
+
+
+
+
+                    <div *ngIf="selectedOperation.typeOperation?.libelleOperation === '120'" style="display: flex; justify-content: space-around;">
+                        <div *ngIf="selectedOperation.typeFrais!='Auxiliaire'">
+                            <p><span style="color: #00A17D; font-weight: bold;">Montant frais:</span>&nbsp; {{selectedOperation.mntFrais}} TND</p>
+                            <p><span style="color: #00A17D; font-weight: bold;">Type frais:</span> &nbsp;{{selectedOperation.typeFrais}}</p>
+                            <p><span style="color: #00A17D; font-weight: bold;">Type Piece:</span>&nbsp; {{selectedOperation.typePiece}}</p>
+                            <p *ngIf="selectedOperation.typeFrais === 'Enrgistrement'"><span style="color: #00A17D; font-weight: bold;">Numero Piece:</span> &nbsp;{{selectedOperation.numeroPiece}}</p>
+                            <p><span style="color: #00A17D; font-weight: bold;">Date d'exécution d'operation:</span>&nbsp; {{selectedOperation.dateValeurCTX}}</p>
+                        </div>
+                        <div *ngIf="selectedOperation.typeFrais === 'Auxiliaire'">
+                            <p><span style="color: #00A17D; font-weight: bold;">Type frais:</span> &nbsp;{{selectedOperation.typeFrais}}</p>
+                            <p><span style="color: #00A17D; font-weight: bold;">Montant frais:</span>&nbsp; {{selectedOperation.mntFrais}} TND</p>
+                            <p><span style="color: #00A17D; font-weight: bold;">TypeAuxiliaire:</span>&nbsp; {{selectedOperation.typeAuxiliaire}}</p>
+                            <p><span style="color: #00A17D; font-weight: bold;">Nature Auxiliaire:</span>&nbsp; {{selectedOperation.natureAuxiliaire}}</p>
+                            <p *ngIf="selectedOperation.natureAuxiliaire=='Conventionné'" > <span style="color: #00A17D; font-weight: bold;">Auxiliaire:</span>&nbsp; {{selectedOperation.auxiliaire}}</p>
+                            <p *ngIf="selectedOperation.natureAuxiliaire!='Conventionné'"><span style="color: #00A17D; font-weight: bold;">Nom Auxiliaire:</span>&nbsp; {{selectedOperation.nomAuxiliaire}}</p>
+                            <p *ngIf="selectedOperation.natureAuxiliaire!='Conventionné'"><span style="color: #00A17D; font-weight: bold;">Prenom Auxiliaire:</span> &nbsp;{{selectedOperation.prenomAuxiliaire}}</p>
+                            <p *ngIf="selectedOperation.natureAuxiliaire!='Conventionné'"><span style="color: #00A17D; font-weight: bold;">Cin Auxiliaire:</span> &nbsp;{{selectedOperation.cinAuxiliaire}}</p>
+                            <p *ngIf="selectedOperation.natureAuxiliaire!='Conventionné'"><span style="color: #00A17D; font-weight: bold;">Rne Auxiliaire:</span>&nbsp; {{selectedOperation.rneAuxiliaire}}</p>
+                            <p><span style="color: #00A17D; font-weight: bold;">Montant Honoraire:</span>&nbsp; {{selectedOperation.mntHonoraire}} TND</p>
+                            <p><span style="color: #00A17D; font-weight: bold;">Date d'exécution d'operation:</span>&nbsp; {{selectedOperation.dateValeurCTX}}</p>
+                        </div>
+                        <div>
+                            <!-- <p><span style="color: #00A17D; font-weight: bold;">Montant operation:</span> {{selectedOperation.mntOperation}}</p> -->
+                            
+                            <p><span style="color: #00A17D; font-weight: bold;">Date operation:</span> &nbsp;{{selectedOperation.dateOperation}}</p>
+                            <p><span style="color: #00A17D; font-weight: bold;">MatriculeAjout:</span> &nbsp;{{selectedOperation.matriculeAjout}}</p>
+                            <p><span style="color: #00A17D; font-weight: bold;">Date creation:</span> &nbsp;{{selectedOperation.dateCreation}}</p>
+                            <p *ngIf="selectedOperation.etatOperation !== 'E'"><span style="color: #00A17D; font-weight: bold;">MatriculeValidateur:</span>&nbsp; {{selectedOperation.matriculeValidateur}}</p>
+                            <p *ngIf="selectedOperation.etatOperation !== 'E'"><span style="color: #00A17D; font-weight: bold;">DateValidation:</span> &nbsp;{{selectedOperation.dateValidation}}</p>
+                        </div>
+
+                    </div>
+                    
+
+
+
+
+                    <div *ngIf="selectedOperation.typeOperation?.libelleOperation === '130'" style="display: flex; justify-content: space-around;">
+                        
+                            <div>
+                            <p><span style="color: #00A17D; font-weight: bold;">Dossier debiteur:</span>&nbsp; {{selectedOperation.dossierDebiteur?.dossierId?.numCtx}}</p>
+                            <!-- <p><span style="color: #00A17D; font-weight: bold;">Montant operation:</span> {{selectedOperation.mntOperation}}</p> -->
+                            <p><span style="color: #00A17D; font-weight: bold;">Montant frais:</span>&nbsp; {{selectedOperation.mntFrais}} TND</p>
+                            <p><span style="color: #00A17D; font-weight: bold;">Type frais:</span>&nbsp; Jugement</p>
+                            <p><span style="color: #00A17D; font-weight: bold;">Numero rouge:</span> &nbsp;{{selectedOperation.motifOperationCTX}}</p>
+                            <p><span style="color: #00A17D; font-weight: bold;">Recette Finance:</span>&nbsp; {{selectedOperation.nomBeneficiairePaiment}}</p>
+                            <p><span style="color: #00A17D; font-weight: bold;">Numero d'affaire:</span> &nbsp;{{selectedOperation.numAffaireCTX}}</p>
+                            <p><span style="color: #00A17D; font-weight: bold;">Date d'exécution d'operation:</span>&nbsp; {{selectedOperation.dateValeurCTX}}</p>
+                        </div>
+                        <div>
+                            <p><span style="color: #00A17D; font-weight: bold;">Date creation:</span> &nbsp;{{selectedOperation.dateCreation}}</p>
+                            <p><span style="color: #00A17D; font-weight: bold;">Date d'exécution d'operation:</span> {{selectedOperation.dateValeurCTX}}</p>
+                            <p><span style="color: #00A17D; font-weight: bold;">MatriculeAjout:</span> &nbsp;{{selectedOperation.matriculeAjout}}</p>
+                            <p *ngIf="selectedOperation.etatOperation !== 'E'"><span style="color: #00A17D; font-weight: bold;">MatriculeValidateur:</span>&nbsp; {{selectedOperation.matriculeValidateur}}</p>
+                            <p *ngIf="selectedOperation.etatOperation !== 'E'"><span style="color: #00A17D; font-weight: bold;">DateValidation:</span> &nbsp;{{selectedOperation.dateValidation}}</p>
+                            <p><span style="color: #00A17D; font-weight: bold;">Date operation:</span> &nbsp;{{selectedOperation.dateOperation}}</p>
+                            </div>
+                    </div>
+                    
+                </div>
             </div>
             <div class="modal-footer">
             </div>

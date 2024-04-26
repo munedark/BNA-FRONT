@@ -7,16 +7,16 @@
                     <p [ngClass]="{'sidebar-link':!visibleSubMenus[0],'sidebar-link-clicked':visibleSubMenus[0]}" (click)="toggleSubMenu(0)">Gestion des agents</p>
                     <ul class="sub-menu" *ngIf="isSubMenuVisible(0)">
                         <li routerLink="/ADMINISTRATEUR/Gestion_agent/ajout">Ajouter agent</li>
-                        <li><a href="#">Supprimer agent</a></li>
-                        <li><a href="#">Modifier agent</a></li>
-                        <li><a href="#">Rechercher agent</a></li>
+                        <li>Supprimer agent</li>
+                        <li>Modifier agent</li>
+                        <li>Rechercher agent</li>
                     </ul>
                 </li>
                 <li>
                     <p [ngClass]="{'sidebar-link':!visibleSubMenus[1],'sidebar-link-clicked':visibleSubMenus[1]}" (click)="toggleSubMenu(1)">Parent Element 2</p>
                     <ul class="sub-menu" *ngIf="isSubMenuVisible(1)">
-                        <li><a href="#">Sub-Element 1</a></li>
-                        <li><a href="#">Sub-Element 2</a></li>
+                        <li>Sub-Element 1</li>
+                        <li>Sub-Element 2</li>
                     </ul>
                 </li>
             </ul>
@@ -35,8 +35,11 @@
                 <li>
                     <p [ngClass]="{'sidebar-link':!visibleSubMenus[1],'sidebar-link-clicked':visibleSubMenus[1]}" (click)="toggleSubMenu(1)"><img src="./assets/Recouvrement.png" style="width: 20px;height: auto;border-radius: 2px;margin-right: 5px;">    Recouvrement</p>
                     <ul class="sub-menu" *ngIf="isSubMenuVisible(1)">
-                        <li><a href="#">Recouvrement 1</a></li>
-                        <li><a href="#">Recouvrement 2</a></li>
+                        <li routerLink="/GESTIONNAIRE/consultation/liste-operations">PEC Cheque</li>
+                        <li routerLink="/GESTIONNAIRE/consultation/liste-operations">PEC virement Télecomponcé</li>
+                        <li routerLink="/GESTIONNAIRE/consultation/liste-operations">PEC Affectation</li>
+                        <li routerLink="/GESTIONNAIRE/consultation/liste-operations">Cloture Risque</li>
+                        <li routerLink="/GESTIONNAIRE/consultation/liste-operations">Cloture Dossier</li>
                     </ul>
                 </li>
                 <li>
@@ -62,8 +65,10 @@
                 <li>
                     <p [ngClass]="{'sidebar-link':!visibleSubMenus[1],'sidebar-link-clicked':visibleSubMenus[1]}" (click)="toggleSubMenu(1)"> <img src="./assets/Recouvrement.png" style="width: 20px;height: auto;border-radius: 2px;margin-right: 5px;">    Recouvrement</p>
                     <ul class="sub-menu" *ngIf="isSubMenuVisible(1)">
-                        <li><a href="#">Recouvrement 1</a></li>
-                        <li><a href="#">Recouvrement 2</a></li>
+                        <li routerLink="/GESTIONNAIRE/recouvrement/PEC-Cheque">PEC Cheque</li>
+                        <li routerLink="/GESTIONNAIRE/recouvrement/PEC-Affectation">PEC Affectation</li>
+                        <li routerLink="/GESTIONNAIRE/recouvrement/Cloture-Risque">Cloture Risque</li>
+                        <li routerLink="/GESTIONNAIRE/recouvrement/Cloture-Dossier">Cloture Dossier</li>
                     </ul>
                 </li>
                 <li>

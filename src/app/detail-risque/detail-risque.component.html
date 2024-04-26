@@ -4,29 +4,29 @@
     <div class="donnees">
         <div class="first">
             <ul>
-                <li>Titre de creance:</li>
-                <li>Stage du risque:</li>
-                <li>Font du risque:<br>
+                <li><span style="color: black;">Titre de creance:</span></li>
+                <li><span style="color: black;">Stage du risque:</span> <span style="color: #00A17D;">  {{risque.stade}}</span></li>
+                <li><span style="color: black;">Font du risque:<br></span>
                     <ul style="list-style-type: circle;">
-                    <li>Code:</li>
-                    <li>Libellé:</li>
+                    <li><span style="color: black;">Code:</span> <span style="color: #00A17D;">  {{risque.produit.codeProduit}}</span></li>
+                    <li><span style="color: black;">Libellé:</span> <span style="color: #00A17D;">  {{risque.produit.libelleProduit}}</span></li>
                 </ul>
                 </li>
             </ul>
         </div>
         <div class="second">
             <ul>
-                <li>Montant d'entrée en principal:</li>
-                <li>Montant d'entrée en IC:</li>
-                <li>Montant d'entrée en II:</li>
+                <li><span style="color: black;">Montant d'entrée en principal:</span> </li>
+                <li><span style="color: black;">Montant d'entrée en IC:</span> </li>
+                <li><span style="color: black;">Montant d'entrée en II:</span></li>
             </ul>
         </div>
         <div class="third">
             <ul>
-                <li>Solde principal: TND</li>
-                <li>Solde des IC: TND</li>
-                <li>Solde des IR: TND</li>
-                <li>Montant des frais: TND</li>
+                <li><span style="color: black;">Solde principal:</span> <span style="color: #00A17D;">  {{risque.mntEntreePrincipale}} TND</span></li>
+                <li><span style="color: black;">Solde des IC:</span> <span style="color: #00A17D;">  {{risque.ic}} TND</span></li>
+                <li><span style="color: black;">Solde des IR:</span> <span style="color: #00A17D;">  {{risque.ir}} TND</span></li>
+                <li><span style="color: black;">Montant des frais:</span> <span style="color: #00A17D;">  {{risque.mntFrais}} TND</span></li>
             </ul>
         </div>
     </div>

@@ -40,6 +40,7 @@ export class FraisEnregistrementComponent implements OnInit {
     this.sharedService.typeOperation('130').subscribe((data) => {
       this.operation.typeOperation =data;
       });
+        this.operation.typeFrais='Jugement'
         this.operation.etatOperation="E";
         this.operation.mntOperation=parseFloat(this.fraisEnregistrement.montantFrais);
         this.operation.mntFrais=parseFloat(this.fraisEnregistrement.montantFrais);

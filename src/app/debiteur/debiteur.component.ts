@@ -10,7 +10,7 @@ import { Risque } from '../Models/Risque';
 })
 export class DebiteurComponent {
   debiteurData: DebiteurInfo | null = null;
-  risquesData: Risque[] | null = null; // Store risks data
+  risquesData: Risque[] | null = null; 
   numCtx!:number;
   isDebiteurComponent: boolean = true;
   constructor() { }
