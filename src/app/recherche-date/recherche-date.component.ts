@@ -6,5 +6,15 @@ import { Component } from '@angular/core';
   styleUrls: ['./recherche-date.component.scss']
 })
 export class RechercheDateComponent {
+  date!:Date;
 
+
+  constructor() { }
+  ngOnDestroy(): void {
+    
+  }
+
+  search() {
+
+  }
 }

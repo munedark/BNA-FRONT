@@ -12,6 +12,7 @@ import { Avocat } from '../Models/Avocat';
 import { Huissier } from '../Models/Huissier';
 import { Expert } from '../Models/Expert';
 import Swal from 'sweetalert2';
+import { DossierDebiteur } from '../Models/DossierDebiteur';
 
 @Component({
   selector: 'app-ajouter-frais',
@@ -19,6 +20,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./ajouter-frais.component.scss']
 })
 export class AjouterFraisComponent implements OnInit{
+  @Input() numDossier!:number;
   diversPieces$ = new BehaviorSubject<DiversPiece[]>([]);
   operation:OperationCTX={} as OperationCTX;
   option:DiversPiece={} as DiversPiece;
@@ -26,6 +28,7 @@ export class AjouterFraisComponent implements OnInit{
   avocats!:Avocat[];
   huissiers!:Huissier[];
   experts!:Expert[];
+  
   constructor(private sharedService:SharedServicesService,private auth: AuthService,private auxiliaireService:AuxiliaireConvontionnéService){
     this.auxiliaireService.avocatConvontionne().subscribe((data)=>{this.avocats=data;})
     this.auxiliaireService.huissierConvontionne().subscribe((data)=>{this.huissiers=data})
@@ -112,11 +115,10 @@ getoptions(){
 
       forkJoin([
         this.sharedService.typePaiment(this.fraisEnregistrement.typePaiment),
-
-      ]).subscribe(([typePaimentData ]) => {
+        this.sharedService.dossier(this.numDossier)
+      ]).subscribe(([typePaimentData, dossierData]) => {
         this.operation.typePaiments = typePaimentData;
-        
-  
+        this.operation.dossierDebiteur = dossierData;
         this.sharedService.submitForm(this.operation).subscribe(
           (response) => {
             console.log('Frais ajouté avec succès:', response);

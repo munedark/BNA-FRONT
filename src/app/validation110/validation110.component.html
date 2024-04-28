@@ -17,7 +17,7 @@
   </thead>
   <tbody>
     <ng-container *ngFor="let operation of operations">
-      <tr *ngIf="operation.typeFrais === selectedType">
+      <tr *ngIf="operation.typeFrais === selectedType && operation.etatOperation==='E'">
         <td>{{ operation.typeFrais }}</td>
         <td>{{ operation.mntOperation }} DT</td>
         <td>{{ operation.dateValeurCTX }}</td>
@@ -54,7 +54,7 @@
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-danger" (click)="rejeterOperation(operation.idOperation)">Rejeter</button>
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="rejeterOperation(operation.idOperation)">Rejeter</button>
           <button type="button" class="btn btn-success" data-bs-dismiss="modal" (click)="approuverOperation(operation.idOperation)">Approuver</button>
         </div>
       </div>

@@ -20,7 +20,8 @@ export class Validation110Component implements OnInit {
   constructor(private sharedService: SharedServicesService, private auth: AuthService, private operationService: OperationService) { }
 
   ngOnInit(): void {
-    this.sharedService.listeOperations('110').subscribe((data) => { this.operations = data; });
+    this.sharedService.listeOperations('110').subscribe((data) => {
+      this.operations = data.filter(operation => operation.etatOperation === 'E')});
     const token = this.auth.getToken();
     if (token) {
       const decodedToken: any = jwtDecode(token);

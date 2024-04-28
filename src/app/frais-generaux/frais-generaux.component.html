@@ -1,7 +1,8 @@
 <h4 class="titre">PEC des frais généraux (Direction)</h4>
 <p class="link"><img src="../../assets/maison.png">&nbsp;&nbsp;/&nbsp;&nbsp;frais&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;PEC des frais généraux (Direction)</p>
 <app-recherche 
-  (debiteurDataChange)="onDebiteurDataReceived($event)">
+  (debiteurDataChange)="onDebiteurDataReceived($event)"
+  (numCTX)="numCtx($event)">
 </app-recherche>
 <app-affichage-debiteur [debiteurData]="debiteurData" *ngIf="debiteurData"></app-affichage-debiteur>
-<app-ajouter-frais *ngIf="debiteurData"></app-ajouter-frais>
+<app-ajouter-frais *ngIf="debiteurData" [numDossier]="numDossier"></app-ajouter-frais>

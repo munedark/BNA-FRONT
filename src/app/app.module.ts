@@ -66,6 +66,7 @@ import { FormeChequeComponent } from './forme-cheque/forme-cheque.component';
 import { FormeAffectationComponent } from './forme-affectation/forme-affectation.component';
 import { FormeVirmentComponent } from './forme-virment/forme-virment.component';
 import { RechercheDateComponent } from './recherche-date/recherche-date.component';
+import { WebSocketService } from './services/web-socket.service';
 
 @NgModule({
   declarations: [
@@ -139,7 +140,7 @@ import { RechercheDateComponent } from './recherche-date/recherche-date.componen
     MatBadgeModule,
     MatStepperModule
   ],
-  providers: [ { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+  providers: [ WebSocketService,{ provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'outline'}}],
   bootstrap: [AppComponent]

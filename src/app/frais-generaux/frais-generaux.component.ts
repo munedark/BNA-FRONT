@@ -8,10 +8,14 @@ import { DebiteurInfo } from '../Models/DebiteurInfo';
 })
 export class FraisGenerauxComponent {
   debiteurData: DebiteurInfo | null = null;
+  numDossier!:number;
   constructor() { }
 
   onDebiteurDataReceived(data: DebiteurInfo | null) {
     this.debiteurData = data;
     console.log("this is debiteur data", this.debiteurData);
+  }
+  numCtx(data:number){
+    this.numDossier=data;
   }
 }

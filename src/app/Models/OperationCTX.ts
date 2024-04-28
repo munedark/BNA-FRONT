@@ -34,6 +34,6 @@ export interface OperationCTX {
     typePaiments?: TypePaiment;
     risque?: Risque;
     dossierDebiteur?: DossierDebiteur;
-    numeroPiece?:number;
+    numeroPiece?:number|null;
     matriculeEmploye?:string;
 }
