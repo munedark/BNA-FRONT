@@ -6,5 +6,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./forme-risque-cloture.component.scss']
 })
 export class FormeRisqueClotureComponent {
-submit(){}
+submit(){
+}
 }

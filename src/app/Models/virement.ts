@@ -8,4 +8,5 @@ export interface virement{
     motif:string;
     nomDonneur:string;
     ribDonneur:string;
+    validation:string;
 }

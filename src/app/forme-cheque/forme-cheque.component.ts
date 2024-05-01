@@ -52,7 +52,6 @@ export class FormeChequeComponent implements OnInit {
 
     this.sharedService.typeOperation('210').subscribe((data) => {
       this.operation.typeOperation = data;
-      this.operation.matriculeAjout = this.matricule;
 
       forkJoin([
         this.sharedService.dossier(this.numCtx),

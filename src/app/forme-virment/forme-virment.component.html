@@ -1,8 +1,9 @@
-<app-shared-table (rowClicked)="handleRowClick($event)"  *ngIf="dataSource.data != null && dataSource.data.length > 0" [dataSource]="dataSource" [displayedColumns]="displayedColumns" title="Liste des risques:"></app-shared-table>
+<p style="color:#b43c3c ; text-align: center; font-size: large; font-weight: 500; margin-top: 150px;" *ngIf="submitted && dataSource.data && dataSource.data.length === 0">Aucune donnée disponible pour cette date.</p>
+<app-shared-table (rowClicked)="handleRowClick($event)"  *ngIf="dataSource.data != null && dataSource.data.length > 0" [dataSource]="dataSource" [displayedColumns]="displayedColumns" title="Liste des virements:"></app-shared-table>
 
 <div class="modal fade" id="modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
-      <div class="modal-content">
+      <div class="modal-content" >
           <div class="modal-header">
               <h1 class="modal-title fs-5" id="exampleModalLabel" style="color: #6C7878;">
                   <img src="../../assets/virement.png" style="width: 40px;margin-right: 5px;"> Affection virement télecompensé
@@ -10,8 +11,16 @@
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-              <p>Date Operation: {{ virement.dateOperation }}</p>
-              <!-- Add more properties here -->
+            <form>
+            <app-recherche *ngIf="virement.validation!='validé'"
+            (debiteurDataChange)="onDebiteurDataReceived($event)"
+            (numCTX)="onNumCtxReceived($event)">
+          </app-recherche>
+          
+          <app-affichage-debiteur [debiteurData]="debiteurData" *ngIf="debiteurData  && virement.validation!='validé'"></app-affichage-debiteur>
+          <button class="btnRegister" (click)="submit(virement)" *ngIf="debiteurData && virement.validation!='validé'">Valider</button>
+          <p style="color:#b43c3c ; text-align: center; font-size: large; font-weight: 500;" *ngIf="virement.validation=='validé'">Virement déja validé</p>
+        </form>
           </div>
           <div class="modal-footer">
           </div>
