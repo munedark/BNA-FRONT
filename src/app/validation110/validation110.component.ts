@@ -76,8 +76,11 @@ export class Validation110Component implements OnInit {
       });
     }
   }
-
   private refreshOperationsList() {
-    this.sharedService.listeOperations('110').subscribe((data) => { this.operations = data; });
+    this.sharedService.listeOperations('110').subscribe((data) => {
+      this.operations = data.filter(operation => operation.etatOperation === 'E');
+      console.log(this.operations);
+    });
   }
+  
 }

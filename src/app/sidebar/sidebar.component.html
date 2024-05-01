@@ -35,11 +35,10 @@
                 <li>
                     <p [ngClass]="{'sidebar-link':!visibleSubMenus[1],'sidebar-link-clicked':visibleSubMenus[1]}" (click)="toggleSubMenu(1)"><img src="./assets/Recouvrement.png" style="width: 20px;height: auto;border-radius: 2px;margin-right: 5px;">    Recouvrement</p>
                     <ul class="sub-menu" *ngIf="isSubMenuVisible(1)">
-                        <li routerLink="/GESTIONNAIRE/consultation/liste-operations">PEC Cheque</li>
-                        <li routerLink="/GESTIONNAIRE/consultation/liste-operations">PEC virement Télecomponcé</li>
-                        <li routerLink="/GESTIONNAIRE/consultation/liste-operations">PEC Affectation</li>
-                        <li routerLink="/GESTIONNAIRE/consultation/liste-operations">Cloture Risque</li>
-                        <li routerLink="/GESTIONNAIRE/consultation/liste-operations">Cloture Dossier</li>
+                        <li routerLink="/VALIDATEUR/recouvrement/Cheque-Validation">Validation Cheque</li>
+                        <li routerLink="/VALIDATEUR/recouvrement/Virement-Telecompencé">Affectation Virement Télecomponcé</li>
+                        <li routerLink="/VALIDATEUR/recouvrement/Cloture-Risque">Cloture Risque</li>
+                        <li routerLink="/VALIDATEUR/recouvrement/Cloture-Dossier">Cloture Dossier</li>
                     </ul>
                 </li>
                 <li>

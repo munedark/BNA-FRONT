@@ -19,7 +19,6 @@ export class DebiteurComponent {
     this.debiteurData = data;
   }
 
-  // Method to receive risks data emitted by RechercheComponent
   onRisquesReceived(risquesData: Risque[] | null) {
     this.risquesData = risquesData;
   }

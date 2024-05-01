@@ -67,6 +67,10 @@ import { FormeAffectationComponent } from './forme-affectation/forme-affectation
 import { FormeVirmentComponent } from './forme-virment/forme-virment.component';
 import { RechercheDateComponent } from './recherche-date/recherche-date.component';
 import { WebSocketService } from './services/web-socket.service';
+import { ChequeValidationComponent } from './cheque-validation/cheque-validation.component';
+import { ListeOperation210Component } from './liste-operation210/liste-operation210.component';
+import { Validation210Component } from './validation210/validation210.component';
+import { FormeRisqueClotureComponent } from './forme-risque-cloture/forme-risque-cloture.component';
 
 @NgModule({
   declarations: [
@@ -117,7 +121,11 @@ import { WebSocketService } from './services/web-socket.service';
     FormeChequeComponent,
     FormeAffectationComponent,
     FormeVirmentComponent,
-    RechercheDateComponent
+    RechercheDateComponent,
+    ChequeValidationComponent,
+    ListeOperation210Component,
+    Validation210Component,
+    FormeRisqueClotureComponent
     
 
   ],

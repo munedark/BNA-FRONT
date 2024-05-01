@@ -54,6 +54,7 @@
 
             </div>
               <div>
+                <p><span style="color: #17a191; font-weight: bold;">Numéro dossier:</span> {{ operation.dossierDebiteur?.dossierId?.numCtx }}</p>
                 <p  *ngIf="operation.typeFrais==='Enregistrement'"><span style="color: #17a191; font-weight: bold;">N° piece:</span> {{ operation.numeroPiece }}</p>
                 <p><span style="color: #17a191; font-weight: bold;">Date operation:</span> {{ operation.dateValeurCTX }}</p>
                 <p><span style="color: #17a191; font-weight: bold;">Matricule gestionnaire:</span> {{ operation.matriculeAjout }}</p>

@@ -44,6 +44,7 @@
               <p><span style="color: #17a191; font-weight: bold;">Type de pièce :</span> {{ operation.typePiece }}</p>
               <p><span style="color: #17a191; font-weight: bold;">Montant des frais :</span> {{ operation.mntOperation }}</p>
               <p><span style="color: #17a191; font-weight: bold;">Matricule employé :</span> {{ operation.matriculeEmploye }}</p>
+              <p><span style="color: #17a191; font-weight: bold;">Numéro dossier:</span> {{ operation.dossierDebiteur?.dossierId?.numCtx }}</p>
             </div>
             <div>
               <p *ngIf="operation.typeFrais === 'Enregistrement'"><span style="color: #17a191; font-weight: bold;">N° de pièce :</span> {{ operation.numeroPiece }}</p>

@@ -17,6 +17,7 @@ export class AffichageRisqueComponent implements OnInit {
   @Input() isDebiteurComponent: boolean = false;
   @Input() isintiesComponent: boolean = false;
   @Input() isAffectationComponent:boolean =false;
+  @Input() isClotureRisque:boolean=false
   idRisque:number=0;
   risque!: Risque ; 
 

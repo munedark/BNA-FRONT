@@ -1,0 +1,17 @@
+<div class="container">
+    <h3 class="register-heading">Type cloture:</h3>
+    <hr style="border-color: #17a191;">
+    <form #enregistrementForm="ngForm" (ngSubmit)="submit()">
+                <div class="form-group">
+                    <label for="typeRecouvrement">choisir type cloture:</label>
+                    <select id="typeRecouvrement" class="form-control input-with-arrow" name="typeRecouvrement"  required>
+                        <option value="Article 40">Article 40</option>
+                        <option value="Article 48">Article 48</option>
+                        <option value="Article 45">Article 45</option>
+                        <option value="Article 44">Article 44</option>
+                    </select>
+                </div>
+        <button type="submit" class="btn btnRegister">Valider</button>
+
+    </form>
+</div>

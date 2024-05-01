@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { DebiteurInfo } from '../Models/DebiteurInfo';
+import { AgencesService } from '../services/agences.service';
+import { AgenceBank } from '../Models/AgenceBank';
 
 @Component({
   selector: 'app-check',
@@ -6,5 +9,18 @@ import { Component } from '@angular/core';
   styleUrls: ['./check.component.scss']
 })
 export class CheckComponent {
-  submitForm() {}
+
+  debiteurData: DebiteurInfo | null = null;
+
+  numCtx!:number;
+  isDebiteurComponent: boolean = true;
+constructor(){}
+  onDebiteurDataReceived(data: DebiteurInfo | null) {
+    this.debiteurData = data;
+  }
+
+
+  onNumCtxReceived(numCTX:number){
+    this.numCtx=numCTX;
+  }
 }

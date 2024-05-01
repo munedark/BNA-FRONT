@@ -1,15 +1,16 @@
 <div class="container">
     <div class="search-text">
-        <p><img src="../../assets/dateSearch.png" style="width: 43px;"> Rechercher Date :</p>
+      <p><img src="../../assets/dateSearch.png" style="width: 43px;"> Rechercher Date :</p>
     </div>
     <hr style="color: green;">
     <div>
-        <form (ngSubmit)="search()">
-            <p class="titre">date de la journée:</p>
-            <div class="searchBar">
-                <input type="date" class="text"  [(ngModel)]="date" name="date" required>
-                <button type="submit" class="button">Rechercher</button>
-            </div>
-        </form>
+      <form (ngSubmit)="search()">
+        <p class="titre">date de la journée:</p>
+        <div class="searchBar">
+          <input type="date" class="text" [(ngModel)]="date" name="date" required>
+          <button type="submit" class="button">Rechercher</button>
+        </div>
+      </form>
     </div>
-</div>
+  </div>
+  

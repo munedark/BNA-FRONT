@@ -1,4 +1,8 @@
 <h4 class="titre">PEC des chèques</h4>
 <p class="link"><img src="../../assets/maison.png">&nbsp;&nbsp;/&nbsp;&nbsp;recouvrement&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;PEC chèque</p>
-<app-recherche-date></app-recherche-date>
-<app-forme-cheque></app-forme-cheque>
+<app-recherche 
+    (debiteurDataChange)="onDebiteurDataReceived($event)"
+    (numCTX)="onNumCtxReceived($event)">
+</app-recherche>
+<app-affichage-debiteur [debiteurData]="debiteurData" *ngIf="debiteurData"></app-affichage-debiteur>
+<app-forme-cheque [numCtx]="numCtx" *ngIf="numCtx"></app-forme-cheque>

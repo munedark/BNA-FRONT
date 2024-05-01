@@ -1,3 +1,4 @@
+import { Cheque } from "./Cheque";
 import { DossierDebiteur } from "./DossierDebiteur";
 import { Risque } from "./Risque";
 import { TypeOperation } from "./TypeOperation";
@@ -36,4 +37,5 @@ export interface OperationCTX {
     dossierDebiteur?: DossierDebiteur;
     numeroPiece?:number|null;
     matriculeEmploye?:string;
+    cheque:Cheque;
 }

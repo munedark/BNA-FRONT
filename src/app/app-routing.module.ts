@@ -19,6 +19,8 @@ import { CheckComponent } from './check/check.component';
 import { PecAffectationComponent } from './pec-affectation/pec-affectation.component';
 import { ClotureRisqueComponent } from './cloture-risque/cloture-risque.component';
 import { ClotureDossierComponent } from './cloture-dossier/cloture-dossier.component';
+import { ChequeValidationComponent } from './cheque-validation/cheque-validation.component';
+import { VirementTelecomponseComponent } from './virement-telecomponse/virement-telecomponse.component';
 
 
 const routes: Routes = [
@@ -124,17 +126,20 @@ const routes: Routes = [
     path: 'recouvrement', 
     children: [
                       {
-                        path: '', 
-                        redirectTo: 'anotherComponent', 
-                        pathMatch: 'full'
+                        path: 'Cheque-Validation', 
+                        component: ChequeValidationComponent
                       },
                       {
-                        path: 'blabla', 
-                        component: AdministrateurComponent
+                        path: 'Virement-Telecompencé', 
+                        component: VirementTelecomponseComponent
                       },
                       {
-                        path: 'blabla', 
-                        component: AdministrateurComponent
+                        path: 'Cloture-Risque', 
+                        component: ClotureRisqueComponent
+                      },
+                      {
+                        path: 'Cloture-Dossier', 
+                        component: ClotureDossierComponent
                       }
     ]
   },

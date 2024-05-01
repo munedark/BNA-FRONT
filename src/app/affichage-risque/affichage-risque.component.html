@@ -22,6 +22,11 @@
                   <app-detail-risque [risque]="risque"></app-detail-risque>
                   <app-forme-affectation [risque]="risque"  [numCtx]="numCtx"></app-forme-affectation>
                 </div>
+                <div id="contentieux" *ngIf="isClotureRisque">
+                  <div *ngIf="risque.stade=='4- Cloturé' && risque.soldeRisque==0 && risque.ic==0 && risque.ir==0">
+                      <app-forme-risque-cloture></app-forme-risque-cloture>
+                  </div>
+                </div>
                 </div>
                   <div class="modal-footer">
                   </div>

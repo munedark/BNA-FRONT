@@ -58,7 +58,7 @@ export class FormeFraisInitiesContentieuxComponent implements OnInit{
   submitForm() {
     if(this.fraisEnregistrement.numeroPiece){
     this.operation.numeroPiece=this.fraisEnregistrement.numeroPiece;}
-    this.operation.typePiece=this.fraisEnregistrement.typePiece;
+    this.operation.typePiece=this.fraisEnregistrement.typePiece
     this.operation.etatOperation="E";
     if(this.fraisEnregistrement.montantFrais){
       this.operation.mntOperation=this.fraisEnregistrement.montantFrais;

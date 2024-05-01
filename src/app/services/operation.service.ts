@@ -20,4 +20,13 @@ export class OperationService {
     };
     return this.http.put<OperationCTX>(url, body);
   }
+  updateOperationByCheque(id: number, matriculeValidateur: string, dateValidation: Date, etatOperation: string): Observable<OperationCTX> {
+    const url = `${this.baseUrl}/update/cheque/${id}`;
+    const body = {
+      matriculeValidateur,
+      dateValidation,
+      etatOperation 
+    };
+    return this.http.put<OperationCTX>(url, body);
+  }
 }

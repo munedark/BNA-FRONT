@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { VirementService } from '../services/virement.service';
 
 @Component({
   selector: 'app-recherche-date',
@@ -6,15 +7,13 @@ import { Component } from '@angular/core';
   styleUrls: ['./recherche-date.component.scss']
 })
 export class RechercheDateComponent {
-  date!:Date;
+  date: string = '';
 
-
-  constructor() { }
-  ngOnDestroy(): void {
-    
-  }
+  constructor(private virementService: VirementService) { }
 
   search() {
-
+    if (this.date) {
+      this.virementService.virementByDate(this.date);
+    }
   }
 }
