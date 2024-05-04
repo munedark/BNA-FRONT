@@ -33,4 +33,7 @@ export class VirementService {
   setSubmitted(submitted: boolean) {
     this._submittedSource.next(submitted);
   }
+  operationVirementValide(){
+    return this.http.get<any>('http://localhost:8080/agent/operation-ctx/virementValide');
+  }
 }

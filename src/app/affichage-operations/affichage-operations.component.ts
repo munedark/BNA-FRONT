@@ -19,12 +19,18 @@ export class AffichageOperationsComponent implements OnInit, OnDestroy {
   dataSourceEnr: MatTableDataSource<OperationCTX> = new MatTableDataSource<OperationCTX>();
   dataSourceDiver: MatTableDataSource<OperationCTX> = new MatTableDataSource<OperationCTX>();
   dataSourceJuge: MatTableDataSource<OperationCTX> = new MatTableDataSource<OperationCTX>();
+  dataSourceCheque: MatTableDataSource<OperationCTX> = new MatTableDataSource<OperationCTX>();
+  dataSourceVirement: MatTableDataSource<OperationCTX> = new MatTableDataSource<OperationCTX>();
+  dataSourceAffectation: MatTableDataSource<OperationCTX> = new MatTableDataSource<OperationCTX>();
   auxiliaireColumns: string[] = ['typeAuxiliaire', 'natureAuxiliaire', 'mntFrais', 'dateValeurCTX', 'etatOperation'];
   timbrageColumns: string[] = ['typePiece', 'mntFrais', 'dateValeurCTX', 'etatOperation'];
   enregistrementColumns: string[] = ['typePiece', 'numeroPiece', 'mntFrais', 'dateValeurCTX', 'etatOperation'];
   jugementColumns: string[] = ['mntFrais', 'motifOperationCTX', 'numAffaireCTX', 'dateValeurCTX', 'nomBeneficiairePaiment', 'etatOperation'];
   timbrageColumnsCtx: string[] = ['typePiece', 'mntFrais', 'matriculeEmploye', 'dateValeurCTX', 'etatOperation'];
   enregistrementColumnsCtx: string[] = ['typePiece', 'numeroPiece', 'mntFrais', 'matriculeEmploye', 'dateValeurCTX', 'etatOperation'];
+  chequeColumns: string[] = ["numCheque","mntCheque","ribDonneur","motif",'etatOperation'];
+  virementColumns: string[] = ['numVirement','dateOperation','nomBeneficiaire','ribBeneficiaire','montantVirement','motif','nomDonneur','ribDonneur','validation','etatOperation'];
+  affectationColumns: string[] = ['typeRecouvrement','mntAffectationPrincipale','mntFrais','dateAffectation','etatOperation'];
   fraisType!: string;
   operation!: OperationCTX;
   selectedOperation: OperationCTX | undefined;

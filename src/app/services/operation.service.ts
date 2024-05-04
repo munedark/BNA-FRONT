@@ -29,4 +29,7 @@ export class OperationService {
     };
     return this.http.put<OperationCTX>(url, body);
   }
+  getOperations(){
+    return this.http.get<any>("http://localhost:8080/agent/operation-ctx/all")
+  }
 }

@@ -9,7 +9,7 @@ import { Risque } from '../Models/Risque';
 })
 export class PecAffectationComponent {
   debiteurData: DebiteurInfo | null = null;
-  risquesData: Risque[] | null = null; // Store risks data
+  risquesData: Risque[] | null = null; 
   numCtx!:number;
   isAffectationComponent: boolean = true;
   constructor() { }
@@ -18,7 +18,7 @@ export class PecAffectationComponent {
     this.debiteurData = data;
   }
 
-  // Method to receive risks data emitted by RechercheComponent
+
   onRisquesReceived(risquesData: Risque[] | null) {
     this.risquesData = risquesData;
   }

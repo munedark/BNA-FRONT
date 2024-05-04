@@ -1,9 +1,9 @@
 <div class="container">
     <p class="title">détails du risque:</p>
     <hr style="color: #17a191;">
-    <div class="donnees">
+    <div class="donnees" *ngIf="risque">
         <div class="first">
-            <ul>
+            <ul >
                 <li><span style="color: black;">Titre de creance:</span></li>
                 <li><span style="color: black;">Stage du risque:</span> <span style="color: #00A17D;">  {{risque.stade}}</span></li>
                 <li><span style="color: black;">Font du risque:<br></span>
@@ -22,7 +22,7 @@
             </ul>
         </div>
         <div class="third">
-            <ul>
+            <ul >
                 <li><span style="color: black;">Solde principal:</span> <span style="color: #00A17D;">  {{risque.mntEntreePrincipale}} TND</span></li>
                 <li><span style="color: black;">Solde des IC:</span> <span style="color: #00A17D;">  {{risque.ic}} TND</span></li>
                 <li><span style="color: black;">Solde des IR:</span> <span style="color: #00A17D;">  {{risque.ir}} TND</span></li>

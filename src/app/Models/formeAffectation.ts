@@ -1,8 +1,9 @@
-export interface formeAffectation{
-typeRecouvrement:string;
-montantPrincpale:number|null;
-montantFrais:number|null;
-dateValeur:Date;
-nouveauSolde:number|null;
 
+export interface FormeAffectation {
+    idAffectation: number;
+    typeRecouvrement: string;
+    mntAffectationPrincipale: number;
+    mntFrais: number;
+    dateAffectation: Date|null;
+    nouveauSolde:number;
 }

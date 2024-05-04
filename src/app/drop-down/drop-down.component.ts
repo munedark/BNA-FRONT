@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
-import {jwtDecode} from 'jwt-decode'; // Changed import statement
+import { jwtDecode } from 'jwt-decode'; 
 import { LogoutService } from '../services/logout.service';
 import { DropService } from '../services/drop.service';
 
@@ -13,13 +13,14 @@ export class DropDownComponent implements OnInit {
   role: string = '';
   matricule: string = '';
 
-  constructor(private logoutService: LogoutService, private auth: AuthService, private dropService:DropService) {}
+  constructor(private logoutService: LogoutService, private auth: AuthService, private dropService: DropService) {}
 
   ngOnInit(): void {
     const token = this.auth.getToken();
     if (token) {
       const decodedToken: any = jwtDecode(token);
-      this.role = decodedToken ? decodedToken.role : 'No Role';
+      const rawRole = decodedToken ? decodedToken.role : 'No Role';
+      this.role = rawRole.substring(5); 
       this.matricule = decodedToken ? decodedToken.sub : 'No Matricule';
     }
   }
@@ -28,6 +29,6 @@ export class DropDownComponent implements OnInit {
     this.logoutService.logout();
     this.auth.updateUsertoken(null);
     this.dropService.toggleIcon();
-    if (this.dropService.isNotifOpen$){this.dropService.toggleBell}
+    if (this.dropService.isNotifOpen$) { this.dropService.toggleBell(); }
   }
 }

@@ -21,6 +21,7 @@ import { ClotureRisqueComponent } from './cloture-risque/cloture-risque.componen
 import { ClotureDossierComponent } from './cloture-dossier/cloture-dossier.component';
 import { ChequeValidationComponent } from './cheque-validation/cheque-validation.component';
 import { VirementTelecomponseComponent } from './virement-telecomponse/virement-telecomponse.component';
+import { ListeOperation230Component } from './liste-operation230/liste-operation230.component';
 
 
 const routes: Routes = [
@@ -29,7 +30,7 @@ const routes: Routes = [
   children: [
     {
       path:'',
-      redirectTo: 'frais',
+      redirectTo: 'Gestion_agent',
       pathMatch:'full'
     },
     {
@@ -37,7 +38,7 @@ const routes: Routes = [
       children: [
                     {
                       path: '', 
-                      redirectTo: 'pec-frais-contentieux', 
+                      redirectTo: 'ajout', 
                       pathMatch: 'full'
                     },
                     {
@@ -132,6 +133,10 @@ const routes: Routes = [
                       {
                         path: 'Virement-Telecompencé', 
                         component: VirementTelecomponseComponent
+                      },
+                      {
+                        path: 'affectation', 
+                        component: ListeOperation230Component
                       },
                       {
                         path: 'Cloture-Risque', 

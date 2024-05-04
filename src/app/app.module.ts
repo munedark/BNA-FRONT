@@ -56,7 +56,6 @@ import { Validation110Component } from './validation110/validation110.component'
 import { Validation120Component } from './validation120/validation120.component';
 import { Validation130Component } from './validation130/validation130.component';
 import { MatStepperModule } from '@angular/material/stepper';
-import { ChatComponent } from './chat/chat.component';
 import { CheckComponent } from './check/check.component';
 import { VirementTelecomponseComponent } from './virement-telecomponse/virement-telecomponse.component';
 import { PecAffectationComponent } from './pec-affectation/pec-affectation.component';
@@ -71,6 +70,8 @@ import { ChequeValidationComponent } from './cheque-validation/cheque-validation
 import { ListeOperation210Component } from './liste-operation210/liste-operation210.component';
 import { Validation210Component } from './validation210/validation210.component';
 import { FormeRisqueClotureComponent } from './forme-risque-cloture/forme-risque-cloture.component';
+import { ListeOperation230Component } from './liste-operation230/liste-operation230.component';
+import { Validation230Component } from './validation230/validation230.component';
 
 @NgModule({
   declarations: [
@@ -112,7 +113,6 @@ import { FormeRisqueClotureComponent } from './forme-risque-cloture/forme-risque
     Validation110Component,
     Validation120Component,
     Validation130Component,
-    ChatComponent,
     CheckComponent,
     VirementTelecomponseComponent,
     PecAffectationComponent,
@@ -125,7 +125,9 @@ import { FormeRisqueClotureComponent } from './forme-risque-cloture/forme-risque
     ChequeValidationComponent,
     ListeOperation210Component,
     Validation210Component,
-    FormeRisqueClotureComponent
+    FormeRisqueClotureComponent,
+    ListeOperation230Component,
+    Validation230Component
     
 
   ],

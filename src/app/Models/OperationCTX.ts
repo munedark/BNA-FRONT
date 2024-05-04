@@ -3,6 +3,7 @@ import { DossierDebiteur } from "./DossierDebiteur";
 import { Risque } from "./Risque";
 import { TypeOperation } from "./TypeOperation";
 import { TypePaiment } from "./TypePaiment";
+import { FormeAffectation } from "./FormeAffectation";
 import { virement } from "./virement";
 
 export interface OperationCTX {
@@ -40,4 +41,5 @@ export interface OperationCTX {
     matriculeEmploye?:string;
     cheque:Cheque;
     virementTelecomponse:virement;
+    formeAffectation:FormeAffectation;
 }

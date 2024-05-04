@@ -67,7 +67,7 @@ export class FormeChequeComponent implements OnInit {
 
           this.sharedService.submitForm(this.operation).subscribe(
             (response) => {
-              console.log('Frais ajouté avec succès:', response);
+              console.log('Chèque ajouté avec succès:', response);
               this.resetForm();
               Swal.fire({
                 position: "center",

@@ -12,7 +12,6 @@ import { Avocat } from '../Models/Avocat';
 import { Huissier } from '../Models/Huissier';
 import { Expert } from '../Models/Expert';
 import Swal from 'sweetalert2';
-import { DossierDebiteur } from '../Models/DossierDebiteur';
 
 @Component({
   selector: 'app-ajouter-frais',

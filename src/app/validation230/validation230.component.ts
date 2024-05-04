@@ -7,11 +7,12 @@ import { jwtDecode } from 'jwt-decode';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-validation210',
-  templateUrl: './validation210.component.html',
-  styleUrls: ['./validation210.component.scss']
+  selector: 'app-validation230',
+  templateUrl: './validation230.component.html',
+  styleUrls: ['./validation230.component.scss']
 })
-export class Validation210Component {
+export class Validation230Component {
+  selectedType: string = 'Auxiliaire';
   operations: OperationCTX[] = [];
   matricule!: string;
 

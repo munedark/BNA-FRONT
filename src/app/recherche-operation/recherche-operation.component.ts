@@ -22,6 +22,7 @@ export class RechercheOperationComponent implements OnDestroy{
       this.listeOperation = data;
       this.operationService.setOperations(this.listeOperation);
       this.operationService.setTypeOperation(this.typeOperation);
+      console.log(this.listeOperation)
     });
   }
 

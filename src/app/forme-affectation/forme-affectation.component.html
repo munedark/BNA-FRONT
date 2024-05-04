@@ -1,7 +1,7 @@
 <div class="container">
     <h3 class="register-heading">Formulaire d'affectation:</h3>
     <hr style="border-color: #17a191;">
-    <form #enregistrementForm="ngForm" (ngSubmit)="submitForm()">
+    <form #enregistrementForm="ngForm" (ngSubmit)="submitForm(risque)">
         <div class="content">
             <div class="groupe">
                 <div class="form-group">
@@ -16,17 +16,17 @@
                 
                 <div class="form-group">
                     <label for="montantPrincipale">Montant de l'affectation en principal:</label>
-                    <input type="text" id="montantPrincipale" placeholder="0.000 TND" class="form-control" name="montant affectation principal" [(ngModel)]="formeAffectation.montantPrincpale" (input)="updateNouveauSolde()">
+                    <input type="text" id="montantPrincipale" placeholder="0.000 TND" class="form-control" name="montant affectation principal" [(ngModel)]="formeAffectation.mntAffectationPrincipale" (input)="updateNouveauSolde()">
                 </div>
                 <div class="form-group">
                     <label for="montantFrais">Montant des frais:</label>
-                    <input type="text" id="montantFrais" placeholder="0.000 TND" class="form-control" name="montantFrais" [(ngModel)]="formeAffectation.montantFrais">
+                    <input type="text" id="montantFrais" placeholder="0.000 TND" class="form-control" name="montantFrais" [(ngModel)]="formeAffectation.mntFrais">
                 </div>
             </div>
             <div class="groupe">
                 <div class="form-group">
                     <label for="dateValeur">Date valeur:</label>
-                    <input type="date" id="dateValeur" class="form-control" name="Date" [(ngModel)]="formeAffectation.dateValeur">
+                    <input type="date" id="dateValeur" class="form-control" name="Date" [(ngModel)]="formeAffectation.dateAffectation">
                 </div>
                 <div class="form-group">
                     <label for="nouveauSolde">Nouveau solde en instance de recouvrement:</label>
@@ -35,6 +35,6 @@
             </div>
         </div>
     
-        <button type="submit" class="btn btnRegister">Valider</button>
+        <button type="submit" class="btn btnRegister" >Valider</button>
     </form>
 </div>

@@ -74,7 +74,6 @@ export class FraisEnregistrementComponent implements OnInit {
             (error) => {
               console.error('Erreur lors de l\'ajout des frais:', error);
               console.log(this.operation);
-              //nzid display l erreur
             }
           );
         }

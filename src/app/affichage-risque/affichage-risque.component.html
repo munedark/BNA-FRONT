@@ -4,7 +4,8 @@
         <div class="modal-dialog modal-lg">
           <div class="modal-content">
             <div class="modal-header">
-              <h1 class="modal-title fs-5" id="exampleModalLabel" style="color: #6C7878;"><img src="../../assets/forme.png" style="width: 40px;margin-right: 5px;"> Frais Enregistrement</h1>
+              <h1 class="modal-title fs-5" id="exampleModalLabel" style="color: #6C7878;" *ngIf="!isAffectationComponent"><img src="../../assets/forme.png" style="width: 40px;margin-right: 5px;"> Frais Enregistrement</h1>
+              <h1 class="modal-title fs-5" id="exampleModalLabel" style="color: #6C7878;"*ngIf="isAffectationComponent"><img src="../../assets/forme.png" style="width: 40px;margin-right: 5px;"> Pec Affectation</h1>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
                 <div class="modal-body">
@@ -23,8 +24,8 @@
                   <app-forme-affectation [risque]="risque"  [numCtx]="numCtx"></app-forme-affectation>
                 </div>
                 <div id="contentieux" *ngIf="isClotureRisque">
-                  <div *ngIf="risque.stade=='4- Cloturé' && risque.soldeRisque==0 && risque.ic==0 && risque.ir==0">
-                      <app-forme-risque-cloture></app-forme-risque-cloture>
+                  <div *ngIf="risque?.stade=='4- Cloturé' && risque?.soldeRisque==0 && risque?.ic==0 && risque?.ir==0">
+                    <app-forme-risque-cloture></app-forme-risque-cloture>
                   </div>
                 </div>
                 </div>

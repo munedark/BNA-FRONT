@@ -1,4 +1,4 @@
-<div class="container" *ngIf="typeOperation === '120' || typeOperation === '130' || typeOperation === '110'">
+<div class="container" *ngIf="typeOperation === '120' || typeOperation === '130' || typeOperation === '110' || typeOperation === '210' || typeOperation === '220' || typeOperation === '230'">
     <p class="title">Type Operation:&nbsp;&nbsp;<span style="color: #5b6462;font-size: larger;">{{typeOperation}}</span>
     <hr style="color: #17a191;">
     <!-- type 110 -->
@@ -36,6 +36,18 @@
     <!-- type 130 -->
     <div *ngIf="typeOperation==='130'">
         <app-shared-table *ngIf="operations" [dataSource]="dataSourceJuge" [displayedColumns]="jugementColumns" (rowClicked)="handleRowClick($event)"  title="Frais Jugement:"></app-shared-table>
+    </div>
+    <!-- type 210 -->
+    <div *ngIf="typeOperation==='210'">
+        <app-shared-table *ngIf="operations" [dataSource]="dataSourceCheque" [displayedColumns]="chequeColumns" (rowClicked)="handleRowClick($event)"  title="Recouvrement chèque:"></app-shared-table>
+    </div>
+    <!-- type 220 -->
+    <div *ngIf="typeOperation==='220'">
+        <app-shared-table *ngIf="operations" [dataSource]="dataSourceVirement" [displayedColumns]="virementColumns" (rowClicked)="handleRowClick($event)"  title="Recouvrement virement télécompensé:"></app-shared-table>
+    </div>
+    <!-- type 230 -->
+    <div *ngIf="typeOperation==='230'">
+        <app-shared-table *ngIf="operations" [dataSource]="dataSourceAffectation" [displayedColumns]="affectationColumns" (rowClicked)="handleRowClick($event)"  title="Recouvrement en principal:"></app-shared-table>
     </div>
 </div>
 <div class="modal fade" id="modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

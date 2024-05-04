@@ -6,63 +6,94 @@
     border-top:2px solid #17a191 ;
     margin-bottom: 20px ;
 }
-.profile-heading {
-    font-size: 18px;
+.title{
+    font-weight: 700;
+    font-size: large;
     color: #17a191;
 }
-
-.form-container {
+.register-heading {
+    color: #17a191;
+}
+.form-container{
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    align-content: center;
+    justify-content: space-around;
     flex-wrap: wrap;
-    margin: 0 100px 0 60px;
 
 }
 
-.form-container > div {
-    margin-right: 20px; /* Add some space between the two sections */
+.form-group {
+    margin-bottom: 15px;
+    
 }
+
+
+
+.form-control {
+    width: calc(100% - 20px); 
+    padding: 8px; 
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
 
 
 .btnRegister {
-    border: none;
-    border-radius: 1.5rem;
-    padding: 8px 20px;
-    background: #17a191;
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #17a191;
     color: #fff;
-    font-weight: 600;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
     cursor: pointer;
-    float: right;
-    
-    margin-top: 20px;
-    text-align: center;
-   
-    
-}
-.btnRegister:hover{
-    background-color: #89E7D9;
+    transition: background-color 0.3s;
 }
 
-.form-group{
-    margin: 10px;
+.btnRegister:hover {
+    background-color: #128a78;
 }
 
 
-input.ng-invalid.ng-touched {
-    border-color: red;
-    
+.groupe{
+    display: flex;
+    flex-direction: column;
+    flex: 1; 
+    margin-right: 10px;
+    width: 45%;
 }
-select.ng-invalid.ng-touched {
-    border-color: red;
-    
-}
-input.ng-invalid.ng-touched::placeholder {
-    color: rgb(255, 0, 0);
-}
-
-.register-heading{
+label{
+    font-size: medium;
+    font-weight: 400;
     color: #17a191;
-    margin-bottom: 20px;
+    margin-bottom: 5px;
+    font-weight: bold;
 }
 
+.mat-radio-button ~ .mat-radio-button {
+    padding-right: 16px;
+  }
+.line2{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.redBorder{
+    border-left: 5px solid rgb(155, 4, 4);
+}
+.input-with-arrow {
+    background-image: url('../../assets/down.png'); 
+    background-repeat: no-repeat;
+    background-position: right center;
+    padding-right: 30px; 
+    background-size: 15px;
+ 
+  }
+  @media only screen and (min-width: 800px) {
+label{
+    width: 350px;
+}
+}
