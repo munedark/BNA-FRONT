@@ -6,6 +6,8 @@ import { Risque } from '../Models/Risque';
 import { AuthService } from '../services/auth.service';
 import { jwtDecode } from 'jwt-decode';
 import Swal from 'sweetalert2';
+import { OperationJugement } from '../Models/OperationJugement';
+import { FraisJugementService } from '../services/frais-jugement.service';
 
 @Component({
   selector: 'app-frais-enregistrement',
@@ -16,7 +18,7 @@ export class FraisEnregistrementComponent implements OnInit {
   @Input() risque!:Risque;
   @Input() numCtx!:number;
   matricule!:string;
-  operation: OperationCTX = {} as OperationCTX;
+  operation: OperationJugement = {} as OperationJugement;
   fraisEnregistrement: FraisEnregistrement = {
     montantFrais: '',
     numeroRouge: '',
@@ -26,7 +28,7 @@ export class FraisEnregistrementComponent implements OnInit {
   };
   
 
-  constructor(private sharedService: SharedServicesService,private auth: AuthService) {}
+  constructor(private sharedService: SharedServicesService,private jugementService:FraisJugementService,private auth: AuthService) {}
   ngOnInit(): void {
     const token = this.auth.getToken();
     if (token) {
@@ -42,7 +44,6 @@ export class FraisEnregistrementComponent implements OnInit {
       });
         this.operation.typeFrais='Jugement'
         this.operation.etatOperation="E";
-        this.operation.mntOperation=parseFloat(this.fraisEnregistrement.montantFrais);
         this.operation.mntFrais=parseFloat(this.fraisEnregistrement.montantFrais);
         if(this.fraisEnregistrement.dateDemandeJugement){
         this.operation.dateValeurCTX=this.fraisEnregistrement.dateDemandeJugement;}
@@ -57,7 +58,7 @@ export class FraisEnregistrementComponent implements OnInit {
         this.sharedService.dossier(this.numCtx).subscribe((data) => {this.operation.dossierDebiteur=data;
           console.log("this is data",data)});
         if(this.operation.risque && this.operation.dossierDebiteur && this.operation.typeOperation){
-            this.sharedService.submitForm(this.operation).subscribe(
+            this.jugementService.submitForm(this.operation).subscribe(
             (response) => {
               console.log('Frais ajouté avec succès:', response);
               console.log(this.operation);
