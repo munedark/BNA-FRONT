@@ -19,6 +19,7 @@ export class AdminDateJournalComponent {
   submit() {
     console.log(this.date);
     this.dateService.setDate(this.date).subscribe((data) => {
+      window.location.reload();
     });
     
 }
