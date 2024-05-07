@@ -72,6 +72,7 @@ import { Validation210Component } from './validation210/validation210.component'
 import { FormeRisqueClotureComponent } from './forme-risque-cloture/forme-risque-cloture.component';
 import { ListeOperation230Component } from './liste-operation230/liste-operation230.component';
 import { Validation230Component } from './validation230/validation230.component';
+import { AdminDateJournalComponent } from './admin-date-journal/admin-date-journal.component';
 
 @NgModule({
   declarations: [
@@ -127,7 +128,8 @@ import { Validation230Component } from './validation230/validation230.component'
     Validation210Component,
     FormeRisqueClotureComponent,
     ListeOperation230Component,
-    Validation230Component
+    Validation230Component,
+    AdminDateJournalComponent,
     
 
   ],

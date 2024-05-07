@@ -10,6 +10,6 @@ export class FraisInitiesService {
 
   constructor(private http:HttpClient) { }
   submitForm(operation: OperationFraisInities) {
-    return this.http.post<any>(`${this.url}agent/operation-ctx/add`, operation);
+    return this.http.post<any>(`${this.url}agent/operations-frais-inities`, operation);
   }
 }

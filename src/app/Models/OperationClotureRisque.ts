@@ -8,7 +8,7 @@ export interface OperationClotureRisque {
     idOperation?: number;
     mntOperation?: number;
     dateOperation?: Date | null;
-    dateCreation?: Date | null;
+    dateAjout?: Date | null;
     matriculeAjout?: string;
     matriculeValidateur?: string;
     dateValidation?: Date | null;

@@ -12,6 +12,9 @@ import { Avocat } from '../Models/Avocat';
 import { Huissier } from '../Models/Huissier';
 import { Expert } from '../Models/Expert';
 import Swal from 'sweetalert2';
+import { FraisGenerauxAux } from '../Models/FraisGenerauxAux';
+import { FraisGenerauxNonAux } from '../Models/FraisGenerauxNonAux';
+import { FraisGenerauxService } from '../services/frais-generaux.service';
 
 @Component({
   selector: 'app-ajouter-frais',
@@ -21,14 +24,15 @@ import Swal from 'sweetalert2';
 export class AjouterFraisComponent implements OnInit{
   @Input() numDossier!:number;
   diversPieces$ = new BehaviorSubject<DiversPiece[]>([]);
-  operation:OperationCTX={} as OperationCTX;
+  operationAux:FraisGenerauxAux={} as FraisGenerauxAux;
+  operationNonAux:FraisGenerauxNonAux={} as FraisGenerauxNonAux;
   option:DiversPiece={} as DiversPiece;
   matricule!:string;
   avocats!:Avocat[];
   huissiers!:Huissier[];
   experts!:Expert[];
   
-  constructor(private sharedService:SharedServicesService,private auth: AuthService,private auxiliaireService:AuxiliaireConvontionnéService){
+  constructor(private sharedService:SharedServicesService,private auth: AuthService,private auxiliaireService:AuxiliaireConvontionnéService,private fraisGenerauxService:FraisGenerauxService){
     this.auxiliaireService.avocatConvontionne().subscribe((data)=>{this.avocats=data;})
     this.auxiliaireService.huissierConvontionne().subscribe((data)=>{this.huissiers=data})
     this.auxiliaireService.expertConvontionne().subscribe((data)=>{this.experts=data})
@@ -58,93 +62,138 @@ getoptions(){
   fraisEnregistrement: AjoutFrais = {} as AjoutFrais;
 
   submitForm() {
-        // in common
-        this.operation.etatOperation="E";
+    // auxiliaire
+    if(this.fraisEnregistrement.typeFrais=="Auxiliaire"){
+        this.operationAux.etatOperation="E";
         if(this.fraisEnregistrement.montantFrais){
-        this.operation.mntOperation=this.fraisEnregistrement.montantFrais;
-        this.operation.mntFrais=this.fraisEnregistrement.montantFrais;}
-        this.operation.typeFrais=this.fraisEnregistrement.typeFrais;
-        this.operation.matriculeAjout=this.matricule;
-        this.operation.dateValeurCTX=this.fraisEnregistrement.dateOperation;
+        this.operationAux.mntFrais=this.fraisEnregistrement.montantFrais;}
+        this.operationAux.typeFrais=this.fraisEnregistrement.typeFrais;
+        this.operationAux.matriculeAjout=this.matricule;
+        this.operationAux.dateValeurCTX=this.fraisEnregistrement.dateOperation;
         if (this.fraisEnregistrement.RIB && this.fraisEnregistrement.typePaiment=='Virement Tétécomponsé')
-          {this.operation.rib=parseInt(this.fraisEnregistrement.RIB)}
+          {this.operationAux.rib=parseInt(this.fraisEnregistrement.RIB)}
         this.sharedService.typeOperation('120').subscribe((data) => {
-          this.operation.typeOperation =data;
-
-        // auxiliaire
-      if(this.fraisEnregistrement.typeFrais=="Auxiliaire"){
-        this.operation.natureAuxiliaire=this.fraisEnregistrement.natureAuxiliaire;
-        this.operation.auxiliaire=this.fraisEnregistrement.auxiliaire;
-        this.operation.prenomAuxiliaire=this.fraisEnregistrement.prenomAuxiliaire;
-        this.operation.rneAuxiliaire=this.fraisEnregistrement.RneAuxiliaire;
-        if(this.fraisEnregistrement.cinAuxiliaire){
-        this.operation.cinAuxiliaire=this.fraisEnregistrement.cinAuxiliaire;}
+          this.operationAux.typeOperation =data;})
+      
+        this.operationAux.natureAuxiliaire=this.fraisEnregistrement.natureAuxiliaire;
+        
         if(this.fraisEnregistrement.numeroAffaire){
-        this.operation.numAffaireCTX=this.fraisEnregistrement.numeroAffaire;}
-        if(this.fraisEnregistrement.montantHonoraire){
-          this.operation.mntHonoraire=this.fraisEnregistrement.montantHonoraire;
-        }
-        if(this.fraisEnregistrement.typeAuxiliaire){
-          this.operation.typeAuxiliaire=this.fraisEnregistrement.typeAuxiliaire;
-        }
-        if (this.fraisEnregistrement.nomBeneficiaire && this.fraisEnregistrement.typePaiment=='Chèque BCT')
-          {this.operation.nomBeneficiaire=this.fraisEnregistrement.nomBeneficiaire;}
+          this.operationAux.numAffaireCTX=this.fraisEnregistrement.numeroAffaire;}
+          if(this.fraisEnregistrement.montantHonoraire){
+            this.operationAux.mntHonoraire=this.fraisEnregistrement.montantHonoraire;
+          }
+          if(this.fraisEnregistrement.typeAuxiliaire){
+            this.operationAux.typeAuxiliaire=this.fraisEnregistrement.typeAuxiliaire;
+          }
+          if (this.fraisEnregistrement.nomBeneficiaire && this.fraisEnregistrement.typePaiment=='Chèque BCT')
+            {this.operationAux.nomBeneficiaire=this.fraisEnregistrement.nomBeneficiaire;}
+          //conventionne
+          if(this.fraisEnregistrement.natureAuxiliaire=="Conventionné"){
+            this.operationAux.auxiliaire=this.fraisEnregistrement.auxiliaire;
+          }
+          //non conventionne
+          if(this.fraisEnregistrement.natureAuxiliaire=="Non Conventionné"){
+            this.operationAux.nomAuxiliaire=this.fraisEnregistrement.nomAuxiliaire;
+            this.operationAux.rneAuxiliaire=this.fraisEnregistrement.RneAuxiliaire;
+            this.operationAux.prenomAuxiliaire=this.fraisEnregistrement.prenomAuxiliaire;
+            if(this.fraisEnregistrement.cinAuxiliaire){
+              this.operationAux.cinAuxiliaire=this.fraisEnregistrement.cinAuxiliaire;}
+          }
+          forkJoin([
+          this.sharedService.typePaiment(this.fraisEnregistrement.typePaiment),
+          this.sharedService.dossier(this.numDossier)
+        ]).subscribe(([typePaimentData, dossierData]) => {
+          this.operationAux.typePaiments = typePaimentData;
+          this.operationAux.dossierDebiteur = dossierData;
+          this.fraisGenerauxService.submitFormAux(this.operationAux).subscribe(
+            (response) => {
+              console.log('Frais ajouté avec succès:', response);
+              console.log(this.operationAux);
+              this.resetForm();
+              
+                Swal.fire({
+                  position: "center",
+                  icon: "success",
+                  title: "ajouté avec succès",
+                  showConfirmButton: false,
+                  timer: 1500
+                });
+            },
+            (error) => {
+              console.error('Erreur lors de l\'ajout des frais:', error);
+              Swal.fire({
+                title: 'Error!',
+                text: 'tu veux ressayer',
+                icon: 'error',
+                confirmButtonText: 'oui'
+              })
+          
+            }
+          );
+        });
       }
+    
 
 
       // not Auxiliaire
 
       if(this.fraisEnregistrement.typeFrais!='Auxiliaire'){
+        this.operationNonAux.etatOperation="E";
+        if(this.fraisEnregistrement.montantFrais){
+        this.operationNonAux.mntFrais=this.fraisEnregistrement.montantFrais;}
+        this.operationNonAux.typeFrais=this.fraisEnregistrement.typeFrais;
+        this.operationNonAux.matriculeAjout=this.matricule;
+        this.operationNonAux.dateValeurCTX=this.fraisEnregistrement.dateOperation;
+        if (this.fraisEnregistrement.RIB && this.fraisEnregistrement.typePaiment=='Virement Tétécomponsé')
+          {this.operationNonAux.rib=parseInt(this.fraisEnregistrement.RIB)}
+        this.sharedService.typeOperation('120').subscribe((data) => {
+          this.operationNonAux.typeOperation =data;})
         if (this.fraisEnregistrement.typePiece!='Autres'){
-          this.operation.typePiece=this.fraisEnregistrement.typePiece;
+          this.operationNonAux.typePiece=this.fraisEnregistrement.typePiece;
         }
         if (this.fraisEnregistrement.typePiece=='Autres'){
-          this.operation.typePiece=this.fraisEnregistrement.autre;
-          this.option.typePiece=this.operation.typePiece;
+          this.operationNonAux.typePiece=this.fraisEnregistrement.autre;
+          this.option.typePiece=this.operationNonAux.typePiece;
           this.sharedService.addDiversOptions(this.option).subscribe((data)=>{});
         }
         if (this.fraisEnregistrement.nomBeneficiaire)
-          {this.operation.nomBeneficiaire=this.fraisEnregistrement.nomBeneficiaire;}
+          {this.operationNonAux.nomBeneficiaire=this.fraisEnregistrement.nomBeneficiaire;}
         if(this.fraisEnregistrement.typePiece='Enregistrement'){
           if(this.fraisEnregistrement.numeroPiece){
-          this.operation.numeroPiece=this.fraisEnregistrement.numeroPiece;}}
-      }
-
-
-
-      forkJoin([
-        this.sharedService.typePaiment(this.fraisEnregistrement.typePaiment),
-        this.sharedService.dossier(this.numDossier)
-      ]).subscribe(([typePaimentData, dossierData]) => {
-        this.operation.typePaiments = typePaimentData;
-        this.operation.dossierDebiteur = dossierData;
-        this.sharedService.submitForm(this.operation).subscribe(
-          (response) => {
-            console.log('Frais ajouté avec succès:', response);
-            console.log(this.operation);
-            this.resetForm();
+          this.operationNonAux.numeroPiece=this.fraisEnregistrement.numeroPiece;}}
+          forkJoin([
+            this.sharedService.typePaiment(this.fraisEnregistrement.typePaiment),
+            this.sharedService.dossier(this.numDossier)
+          ]).subscribe(([typePaimentData, dossierData]) => {
+            this.operationNonAux.typePaiments = typePaimentData;
+            this.operationNonAux.dossierDebiteur = dossierData;
+            this.fraisGenerauxService.submitFormNonAux(this.operationNonAux).subscribe(
+              (response) => {
+                console.log('Frais ajouté avec succès:', response);
+                console.log(this.operationNonAux);
+                this.resetForm();
+                
+                  Swal.fire({
+                    position: "center",
+                    icon: "success",
+                    title: "ajouté avec succès",
+                    showConfirmButton: false,
+                    timer: 1500
+                  });
+              },
+              (error) => {
+                console.error('Erreur lors de l\'ajout des frais:', error);
+                Swal.fire({
+                  title: 'Error!',
+                  text: 'tu veux ressayer',
+                  icon: 'error',
+                  confirmButtonText: 'oui'
+                })
             
-              Swal.fire({
-                position: "center",
-                icon: "success",
-                title: "ajouté avec succès",
-                showConfirmButton: false,
-                timer: 1500
-              });
-          },
-          (error) => {
-            console.error('Erreur lors de l\'ajout des frais:', error);
-            Swal.fire({
-              title: 'Error!',
-              text: 'Do you want to continue',
-              icon: 'error',
-              confirmButtonText: 'Cool'
-            })
-        
-          }
-        );
-      });
-    });
+              }
+            );
+          });
+      }
         }
 resetForm(){
   this.fraisEnregistrement = { typeFrais: '',

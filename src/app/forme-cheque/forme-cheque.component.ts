@@ -9,6 +9,7 @@ import { SharedServicesService } from '../services/shared-services.service';
 import { forkJoin } from 'rxjs';
 import Swal from 'sweetalert2';
 import { ChequeService } from '../services/cheque.service';
+import { OperationCheque } from '../Models/OperationCheque';
 
 @Component({
   selector: 'app-forme-cheque',
@@ -27,7 +28,7 @@ export class FormeChequeComponent implements OnInit {
   };
   emplacement!: string;
   matricule!: string;
-  operation: OperationCTX = {} as OperationCTX;
+  operation: OperationCheque = {} as OperationCheque;
   idAgence!: number;
 
   constructor(private agence: AgencesService,
@@ -65,7 +66,7 @@ export class FormeChequeComponent implements OnInit {
         this.chequeService.saveCheque(this.cheque).subscribe((savedCheque) => {
           this.operation.cheque = savedCheque;
 
-          this.sharedService.submitForm(this.operation).subscribe(
+          this.chequeService.submitForm(this.operation).subscribe(
             (response) => {
               console.log('Chèque ajouté avec succès:', response);
               this.resetForm();

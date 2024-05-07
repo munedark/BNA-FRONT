@@ -24,7 +24,7 @@ export interface OperationCTX {
     rneAuxiliaire?: string;
     prenomAuxiliaire?: string;
     dateOperation?: Date | null;
-    dateCreation?: Date | null;
+    dateAjout?: Date | null;
     dateValeurCTX?: Date|undefined;
     matriculeAjout?: string;
     matriculeValidateur?: string;

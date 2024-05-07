@@ -8,6 +8,7 @@ import { FormeAffectationService } from '../services/forme-affectation.service';
 import { jwtDecode } from 'jwt-decode';
 import { forkJoin } from 'rxjs';
 import Swal from 'sweetalert2';
+import { OperationAffectation } from '../Models/OperationAffectaion';
 
 @Component({
     selector: 'app-forme-affectation',
@@ -19,7 +20,7 @@ export class FormeAffectationComponent {
     @Input() numCtx!: number;
     matricule!: string;
     formeAffectation: FormeAffectation = {} as FormeAffectation;
-    operation:OperationCTX={} as OperationCTX;
+    operation:OperationAffectation={} as OperationAffectation;
     constructor(private sharedService: SharedServicesService, private auth: AuthService,private affectationService:FormeAffectationService) {}
     
     ngOnInit(): void {
@@ -52,7 +53,7 @@ export class FormeAffectationComponent {
         this.operation.formeAffectation=data;
         
 
-        this.sharedService.submitForm(this.operation).subscribe(
+        this.affectationService.submitForm(this.operation).subscribe(
             (response) => {
             console.log('Affectation ajouté avec succès:', response);
             this.resetForm();
@@ -62,14 +63,14 @@ export class FormeAffectationComponent {
                 title: "ajouté avec succès",
                 showConfirmButton: false,
                 timer: 1500
-              });
+            });
             },
             (error) => {
-              console.error('Erreur lors de l\'ajout des frais:', error);
+            console.error('Erreur lors de l\'ajout des frais:', error);
             }
-          );
+        );
         });
-      });
+    });
     }
     
     resetForm() {

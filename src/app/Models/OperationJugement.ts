@@ -12,14 +12,14 @@ export interface OperationJugement {
     mntFrais?: number;
     typeFrais?: string
     dateOperation?: Date | null;
-    dateCreation?: Date | null;
+    dateAjout?: Date | null;
     dateValeurCTX?: Date|undefined;
     matriculeAjout?: string;
     matriculeValidateur?: string;
     dateValidation?: Date | null;
     etatOperation?: string;
     numAffaireCTX?: number;
-    nomBeneficiairePaiment?: string;
+    recette?: string;
     motifOperationCTX?: number;
     typeOperation?: TypeOperation;
     typePaiments?: TypePaiment;

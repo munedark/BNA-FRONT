@@ -1,0 +1,12 @@
+<div class="container">
+    <h4 class="register-heading"><img src="../../assets/date.png" style="width: 55px; margin-right: 5px;"> Changer Date Journal:</h4>
+    <hr style="border-color: #17a191;">
+    <form (ngSubmit)="submit()">
+        <div class="form-group">
+            <label for="Agences">Date du journal :</label>
+            <input type="date" class=" form-control" [(ngModel)]="date" name="date">
+        </div>
+            <button type="submit" class="btn btnRegister">Modifier</button>
+    </form>
+</div>
+

@@ -9,7 +9,7 @@ export interface OperationFraisInities{
     typeFrais?: string;
     typePiece?: string;
     dateOperation?: Date | null;
-    dateCreation?: Date | null;
+    dateAjout?: Date | null;
     dateValeurCTX?: Date|undefined;
     matriculeAjout?: string;
     matriculeValidateur?: string;

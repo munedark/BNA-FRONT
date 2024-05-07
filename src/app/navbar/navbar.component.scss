@@ -10,7 +10,6 @@ nav{
   color: #21242a;
   border-radius: 10px 10px 0 0 ;
   width: 100%;
-  
 }
 
 .userlogo{
@@ -29,5 +28,13 @@ nav{
   width: 35px;
 
 }
-
+.journal{
+  display:flex; 
+  flex-direction: column; 
+  justify-content: center;
+  padding-left: 2px;
+}
+.journal:hover{
+  cursor: pointer;
+}
 

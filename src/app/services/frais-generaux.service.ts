@@ -11,9 +11,9 @@ export class FraisGenerauxService {
 
   constructor(private http:HttpClient) { }
   submitFormAux(operation: FraisGenerauxAux) {
-    return this.http.post<any>(`${this.url}agent/operation-ctx/add`, operation);
+    return this.http.post<any>(`${this.url}agent/aux/add`, operation);
   }
   submitFormNonAux(operation: FraisGenerauxNonAux) {
-    return this.http.post<any>(`${this.url}agent/operation-ctx/add`, operation);
+    return this.http.post<any>(`${this.url}agent/nonAux/add`, operation);
   }
 }

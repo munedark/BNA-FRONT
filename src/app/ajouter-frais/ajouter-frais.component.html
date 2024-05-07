@@ -52,13 +52,13 @@
                     <select id="auxiliaire" class="form-control input-with-arrow redBorder" name="auxiliaire" [(ngModel)]="fraisEnregistrement.auxiliaire">
                         <option value="" disabled>choisir un auxiliaire</option>
                         <ng-container *ngIf="fraisEnregistrement.typeAuxiliaire=='Avocat'">
-                          <option *ngFor="let avocat of avocats" [value]="avocat.nom + ',' + avocat.prenom">{{ avocat.nom }} {{ avocat.prenom }}</option>
+                          <option *ngFor="let avocat of avocats" [value]="avocat.nom + ' ' + avocat.prenom">{{ avocat.nom }} {{ avocat.prenom }}</option>
                         </ng-container>
                         <ng-container *ngIf="fraisEnregistrement.typeAuxiliaire=='Huissier'">
-                          <option *ngFor="let huissier of huissiers" [value]="huissier.nom + ',' + huissier.prenom">{{ huissier.nom }} {{ huissier.prenom }}</option>
+                          <option *ngFor="let huissier of huissiers" [value]="huissier.nom + ' ' + huissier.prenom">{{ huissier.nom }} {{ huissier.prenom }}</option>
                         </ng-container>
                         <ng-container *ngIf="fraisEnregistrement.typeAuxiliaire=='Expert'">
-                          <option *ngFor="let expert of experts" [value]="expert.nom + ',' + expert.prenom">{{ expert.nom }} {{ expert.prenom }}</option>
+                          <option *ngFor="let expert of experts" [value]="expert.nom + ' ' + expert.prenom">{{ expert.nom }} {{ expert.prenom }}</option>
                         </ng-container>
                     </select>
                     

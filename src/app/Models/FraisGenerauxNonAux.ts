@@ -12,7 +12,7 @@ export interface FraisGenerauxNonAux {
     rib?: number;
     nomBeneficiaire?: string;
     dateOperation?: Date | null;
-    dateCreation?: Date | null;
+    dateAjout?: Date | null;
     dateValeurCTX?: Date|undefined;
     matriculeAjout?: string;
     matriculeValidateur?: string;

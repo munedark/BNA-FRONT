@@ -12,6 +12,8 @@ import { Huissier } from '../Models/Huissier';
 import { Expert } from '../Models/Expert';
 import { Risque } from '../Models/Risque';
 import Swal from 'sweetalert2';
+import { FraisInitiesService } from '../services/frais-inities.service';
+import { OperationFraisInities } from '../Models/OperationFraisInities';
 
 @Component({
   selector: 'app-forme-frais-inities-contentieux',
@@ -22,14 +24,14 @@ export class FormeFraisInitiesContentieuxComponent implements OnInit{
   @Input() risque!:Risque;
   @Input() numCtx!:number;
   diversPieces$ = new BehaviorSubject<DiversPiece[]>([]);
-  operation:OperationCTX={} as OperationCTX;
+  operation:OperationFraisInities={} as OperationFraisInities;
   option:DiversPiece={} as DiversPiece;
   matricule!:string;
   avocats!:Avocat[];
   huissiers!:Huissier[];
   experts!:Expert[];
 
-  constructor(private sharedService:SharedServicesService,private auth: AuthService,private auxiliaireService:AuxiliaireConvontionnéService){
+  constructor(private sharedService:SharedServicesService,private auth: AuthService,private auxiliaireService:AuxiliaireConvontionnéService,private fraisInitiesService:FraisInitiesService){
     this.auxiliaireService.avocatConvontionne().subscribe((data)=>{this.avocats=data;})
     this.auxiliaireService.huissierConvontionne().subscribe((data)=>{this.huissiers=data})
     this.auxiliaireService.expertConvontionne().subscribe((data)=>{this.experts=data})
@@ -61,28 +63,24 @@ export class FormeFraisInitiesContentieuxComponent implements OnInit{
     this.operation.typePiece=this.fraisEnregistrement.typePiece
     this.operation.etatOperation="E";
     if(this.fraisEnregistrement.montantFrais){
-      this.operation.mntOperation=this.fraisEnregistrement.montantFrais;
       this.operation.mntFrais=this.fraisEnregistrement.montantFrais;
     }
     this.operation.typeFrais=this.fraisEnregistrement.typeFrais;
     this.operation.matriculeAjout=this.matricule;
     this.operation.dateValeurCTX=this.fraisEnregistrement.dateOperation;
-    if (this.fraisEnregistrement.RIB && this.fraisEnregistrement.typePaiment=='Virement Tétécomponsé'){
-      this.operation.rib=parseInt(this.fraisEnregistrement.RIB)
-    }
     this.sharedService.typeOperation('110').subscribe((data) => {
       this.operation.typeOperation =data;
       this.operation.matriculeEmploye=this.fraisEnregistrement.matriculeEmploye;
       this.operation.risque=this.risque;
 
       forkJoin([
-     
+
         this.sharedService.dossier(this.numCtx)
       ]).subscribe(([ dossierData]) => {
         
         this.operation.dossierDebiteur = dossierData;
 
-        this.sharedService.submitForm(this.operation).subscribe(
+        this.fraisInitiesService.submitForm(this.operation).subscribe(
           (response) => {
             console.log('Frais ajouté avec succès:', response);
             console.log(this.operation);

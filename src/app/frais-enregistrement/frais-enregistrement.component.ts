@@ -1,13 +1,13 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { SharedServicesService } from '../services/shared-services.service';
 import { FraisEnregistrement } from '../Models/FraisEnregistrement';
-import { OperationCTX } from '../Models/OperationCTX';
 import { Risque } from '../Models/Risque';
 import { AuthService } from '../services/auth.service';
 import { jwtDecode } from 'jwt-decode';
 import Swal from 'sweetalert2';
 import { OperationJugement } from '../Models/OperationJugement';
 import { FraisJugementService } from '../services/frais-jugement.service';
+import { DateService } from '../services/date.service';
 
 @Component({
   selector: 'app-frais-enregistrement',
@@ -26,22 +26,28 @@ export class FraisEnregistrementComponent implements OnInit {
     dateDemandeJugement:undefined,
     recetteFinance: ''
   };
-  
 
-  constructor(private sharedService: SharedServicesService,private jugementService:FraisJugementService,private auth: AuthService) {}
+  constructor(private sharedService: SharedServicesService,
+    private jugementService:FraisJugementService,
+    private auth: AuthService,
+    private dateService:DateService  
+  ) {}
   ngOnInit(): void {
     const token = this.auth.getToken();
     if (token) {
       const decodedToken: any = jwtDecode(token);
       this.matricule = decodedToken ? decodedToken.sub : 'No Matricule';
     }
-
   }
 
   submitForm() {
     this.sharedService.typeOperation('130').subscribe((data) => {
       this.operation.typeOperation =data;
       });
+      this.dateService.getCurrentDate().subscribe((data)=>{
+        this.operation.dateAjout=data;
+      })
+      this.operation.dateOperation=new Date();
         this.operation.typeFrais='Jugement'
         this.operation.etatOperation="E";
         this.operation.mntFrais=parseFloat(this.fraisEnregistrement.montantFrais);
@@ -49,11 +55,9 @@ export class FraisEnregistrementComponent implements OnInit {
         this.operation.dateValeurCTX=this.fraisEnregistrement.dateDemandeJugement;}
         this.operation.matriculeAjout=this.matricule;
         this.operation.numAffaireCTX=parseFloat(this.fraisEnregistrement.numeroAffaire);
-        this.operation.nomBeneficiairePaiment=this.fraisEnregistrement.recetteFinance;
+        this.operation.recette=this.fraisEnregistrement.recetteFinance;
         this.operation.motifOperationCTX=parseFloat(this.fraisEnregistrement.numeroRouge);
- 
             this.operation.risque=this.risque;
-       
         
         this.sharedService.dossier(this.numCtx).subscribe((data) => {this.operation.dossierDebiteur=data;
           console.log("this is data",data)});

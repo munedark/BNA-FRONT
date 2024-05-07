@@ -1,6 +1,7 @@
-// administrateur.component.ts
 import { Component, OnInit } from '@angular/core';
 import { LogoutService } from '../services/logout.service';
+import { DateService } from '../services/date.service';
+import { DateBna } from '../Models/DateBna';
 
 
 
@@ -14,13 +15,14 @@ export class AdministrateurComponent implements OnInit {
   visibleSubMenus: boolean[] = [];
   title:string="liste des risques";
  
-  constructor(private logoutService: LogoutService) { }
+  constructor(
+    private logoutService: LogoutService,
+  ) { }
 
   ngOnInit(): void {
-    
     const token = localStorage.getItem('token');
-
   }
+
 
   isSubMenuVisible(index: number): boolean {
     if (this.visibleSubMenus[index] === undefined) {
@@ -30,7 +32,6 @@ export class AdministrateurComponent implements OnInit {
   }
 
   toggleSubMenu(index: number): void {
-    // Toggle the visibility of the sub-menu for the specified index
     this.visibleSubMenus[index] = !this.visibleSubMenus[index];
   }
 
