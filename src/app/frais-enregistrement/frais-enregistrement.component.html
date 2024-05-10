@@ -4,30 +4,43 @@
     <form #enregistrementForm="ngForm" (ngSubmit)="submitForm()">
         <div class="content">
             <div class="groupe">
-                <div class="form-group space1">
+                <div class="form-group space1" [ngClass]="{'has-error': montantFrais.invalid && (montantFrais.dirty || montantFrais.touched)}">
                     <label for="montantFrais">Montant Frais:</label>
-                    <input type="text" id="montantFrais" class="form-control" placeholder="Montant Frais" name="montantFrais" [(ngModel)]="fraisEnregistrement.montantFrais">
+                    <input type="text" id="montantFrais" class="form-control" placeholder="Montant Frais" name="montantFrais" [(ngModel)]="fraisEnregistrement.montantFrais" required pattern="^[0-9]+(\.[0-9]{1,2})?$" #montantFrais="ngModel">
+                    <div *ngIf="montantFrais.invalid && (montantFrais.dirty || montantFrais.touched)" class="text-danger">
+                        Le montant des frais doit être un nombre valide (par exemple, 1234.56).
+                    </div>
+                </div>
+                <div class="form-group space2" [ngClass]="{'has-error': numeroRouge.invalid && (numeroRouge.dirty || numeroRouge.touched)}">
+                    <label for="numeroRouge">Numéro Rouge:</label>
+                    <input type="text" id="numeroRouge" placeholder="Numéro Rouge" class="form-control" name="numeroRouge" [(ngModel)]="fraisEnregistrement.numeroRouge" required pattern="[0-9]*" #numeroRouge="ngModel">
+                    <div *ngIf="numeroRouge.invalid && (numeroRouge.dirty || numeroRouge.touched)" class="text-danger">
+                        Ce champ doit contenir uniquement des chiffres.
+                    </div>
+                </div>
+                
+            </div>
+            <div class="groupe">
+                <div class="form-group space1">
+                    <label for="numeroAffaire">Numéro Affaire:</label>
+                    <input type="text" id="numeroAffaire" placeholder="Numéro Affaire" class="form-control" name="numeroAffaire" [(ngModel)]="fraisEnregistrement.numeroAffaire" required #numeroAffaire="ngModel">
+                    <div *ngIf="numeroAffaire.invalid && (numeroAffaire.dirty || numeroAffaire.touched)" class="text-danger">
+                        Ce champ est requis.
+                    </div>
                 </div>
                 <div class="form-group space2">
-                    <label for="numeroRouge">Numéro Rouge:</label>
-                    <input type="text" id="numeroRouge" placeholder="Numéro Rouge" class="form-control" name="numeroRouge" [(ngModel)]="fraisEnregistrement.numeroRouge">
-                </div>
-            </div>
-            <div class="groupe ">
-                <div class="form-group space1 ">
-                    <label for="numeroAffaire">Numéro Affaire:</label>
-                    <input type="text" id="numeroAffaire" placeholder="Numéro Affaire" class="form-control" name="numeroAffaire" [(ngModel)]="fraisEnregistrement.numeroAffaire">
-                </div>
-                <div class="form-group space2 ">
                     <label for="dateDemandeJugement">Date demande de jugement:</label>
-                    <input type="date" id="dateDemandeJugement" class="form-control" name="dateDemandeJugement" [(ngModel)]="fraisEnregistrement.dateDemandeJugement">
+                    <input type="date" id="dateDemandeJugement" class="form-control" name="dateDemandeJugement" [(ngModel)]="fraisEnregistrement.dateDemandeJugement" required #dateDemandeJugement="ngModel">
+                    <div *ngIf="dateDemandeJugement.invalid && (dateDemandeJugement.dirty || dateDemandeJugement.touched)" class="text-danger">
+                        Ce champ est requis.
+                    </div>
                 </div>
             </div>
         </div>
-            <div class="form-group ">
-                <label for="recetteFinance">Recette Finance:</label>
-                <textarea id="recetteFinance" placeholder="Recette Finance" class="form-control resizable"  name="recetteFinance" [(ngModel)]="fraisEnregistrement.recetteFinance"></textarea>
-            </div>
-        <button type="submit" class="btn btnRegister">Valider</button>
+        <div class="form-group">
+            <label for="recetteFinance">Recette Finance:</label>
+            <textarea id="recetteFinance" placeholder="Recette Finance" class="form-control resizable"  name="recetteFinance" [(ngModel)]="fraisEnregistrement.recetteFinance"></textarea>
+        </div>
+        <button type="submit" class="btn btnRegister" [disabled]="enregistrementForm.invalid">Valider</button>
     </form>
 </div>

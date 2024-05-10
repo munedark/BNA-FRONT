@@ -1,10 +1,7 @@
-import { Cheque } from "./Cheque";
 import { DossierDebiteur } from "./DossierDebiteur";
-import { Risque } from "./Risque";
 import { TypeOperation } from "./TypeOperation";
 import { TypePaiment } from "./TypePaiment";
-import { FormeAffectation } from "./FormeAffectation";
-import { virement } from "./virement";
+import { Auxiliaire } from "./Auxiliaire";
 
 export interface FraisGenerauxAux {
     
@@ -12,7 +9,7 @@ export interface FraisGenerauxAux {
     mntFrais?: number;
     typeFrais?: string;
     typeAuxiliaire?: string;
-    auxiliaire?: string;
+    auxiliaire?: Auxiliaire;
     cinAuxiliaire?: number;
     nomAuxiliaire?: string;
     mntHonoraire?: number;

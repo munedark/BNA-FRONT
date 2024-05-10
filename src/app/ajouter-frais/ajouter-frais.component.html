@@ -1,24 +1,26 @@
 <div class="container">
     <h3 class="register-heading"><img src="../../assets/forme.png" style="width: 40px;margin-right: 5px;"> Ajouter un frais</h3>
     <hr style="border-color: #17a191;">
-    <form #enregistrementForm="ngForm" (ngSubmit)="submitForm()">
+    <form #enregistrementForm="ngForm" (ngSubmit)="submitForm()" novalidate>
         <div class="content">
             <!-- TYPE DE FRAIS  -->
             <div class="groupe">
                 <div class="form-group">
                     <label for="typeFrais">Type des frais:</label>
-                    <select id="typeFrais" class="form-control input-with-arrow" name="typeFrais" [(ngModel)]="fraisEnregistrement.typeFrais" required>
+                    <select id="typeFrais" class="form-control input-with-arrow" name="typeFrais" [(ngModel)]="fraisEnregistrement['typeFrais']" required #typeFrais="ngModel">
                         <option value="" disabled>Choisir type des frais</option>
                         <option value="Enregistrement" selected>Enregistrement</option>
                         <option value="Timbrage">Timbrage</option>
                         <option value="Divers">Divers</option>
                         <option value="Auxiliaire">Auxiliaire</option>
                     </select>
+                    <div *ngIf="typeFrais.invalid && (typeFrais.dirty || typeFrais.touched)" class="text-danger">Veuillez sélectionner un type de frais.</div>
                 </div>
+                
             <!-- /TYPE DE FRAIS -->
             <!-- TYPE PIECE OU TYPE AUXILIAIRE -->
                 <div class="form-group" *ngIf="fraisEnregistrement.typeFrais!='Auxiliaire'">
-                    <label for="typePiece" >Type de pièce:</label>
+                    <label for="typePiece" *ngIf="fraisEnregistrement.typeFrais=='Enregistrement'||fraisEnregistrement.typeFrais=='Timbrage'||fraisEnregistrement.typeFrais=='Divers'" >Type de pièce:</label>
                     <select *ngIf="fraisEnregistrement.typeFrais=='Enregistrement'|| fraisEnregistrement.typeFrais==''" id="typePiece" class="form-control input-with-arrow" name="typePiece" [(ngModel)]="fraisEnregistrement.typePiece" required>
                         <option value="" disabled selected>Type Pièce</option>
                         <option value="effet">Effet</option>
@@ -37,64 +39,88 @@
                     </select>
                     
                 </div>
-                <div class="form-group" *ngIf="fraisEnregistrement.typeFrais=='Auxiliaire'">
+                
+                <div class="form-group" *ngIf="fraisEnregistrement['typeFrais'] === 'Auxiliaire'">
                     <label for="typeAuxiliaire">Type de l'auxiliaire:</label>
-                    <select id="typeAuxiliaire" class="form-control input-with-arrow" name="typeAuxiliaire" [(ngModel)]="fraisEnregistrement.typeAuxiliaire" required>
+                    <select id="typeAuxiliaire" class="form-control input-with-arrow" name="typeAuxiliaire" [(ngModel)]="fraisEnregistrement['typeAuxiliaire']" required #typeAuxiliaire="ngModel">
                         <option value="" disabled selected>Type Auxiliaire</option>
                         <option value="Avocat">Avocat</option>
                         <option value="Huissier">Huissier</option>
                         <option value="Expert">Expert</option>
                     </select>
+                    <div *ngIf="typeAuxiliaire.invalid && (typeAuxiliaire.dirty || typeAuxiliaire.touched)" class="text-danger">Veuillez sélectionner un type d'auxiliaire.</div>
                 </div>
+                
                 <!-- /TYPE PIECE OU TYPE AUXILIAIRE -->
-                <div class="form-group " *ngIf="fraisEnregistrement.typeFrais=='Auxiliaire' && fraisEnregistrement.natureAuxiliaire=='Conventionné'">
+                <div class="form-group" *ngIf="fraisEnregistrement['typeFrais'] === 'Auxiliaire' && fraisEnregistrement['natureAuxiliaire'] === 'Conventionné'">
                     <label for="auxiliaire">Auxiliaire:</label>
-                    <select id="auxiliaire" class="form-control input-with-arrow redBorder" name="auxiliaire" [(ngModel)]="fraisEnregistrement.auxiliaire">
-                        <option value="" disabled>choisir un auxiliaire</option>
-                        <ng-container *ngIf="fraisEnregistrement.typeAuxiliaire=='Avocat'">
-                          <option *ngFor="let avocat of avocats" [value]="avocat.nom + ' ' + avocat.prenom">{{ avocat.nom }} {{ avocat.prenom }}</option>
+                    <select id="auxiliaire" class="form-control input-with-arrow redBorder" name="auxiliaire" [(ngModel)]="fraisEnregistrement['auxiliaire']" required #auxiliaire="ngModel">
+                        <option value="" disabled selected>Choisir un auxiliaire</option>
+                        <ng-container *ngIf="fraisEnregistrement['typeAuxiliaire'] === 'Avocat'">
+                            <option *ngFor="let avocat of avocats" [ngValue]="avocat">{{ avocat.nom }} {{ avocat.prenom }}</option>
                         </ng-container>
-                        <ng-container *ngIf="fraisEnregistrement.typeAuxiliaire=='Huissier'">
-                          <option *ngFor="let huissier of huissiers" [value]="huissier.nom + ' ' + huissier.prenom">{{ huissier.nom }} {{ huissier.prenom }}</option>
+                        <ng-container *ngIf="fraisEnregistrement['typeAuxiliaire'] === 'Huissier'">
+                            <option *ngFor="let huissier of huissiers" [ngValue]="huissier">{{ huissier.nom }} {{ huissier.prenom }}</option>
                         </ng-container>
-                        <ng-container *ngIf="fraisEnregistrement.typeAuxiliaire=='Expert'">
-                          <option *ngFor="let expert of experts" [value]="expert.nom + ' ' + expert.prenom">{{ expert.nom }} {{ expert.prenom }}</option>
+                        <ng-container *ngIf="fraisEnregistrement['typeAuxiliaire'] === 'Expert'">
+                            <option *ngFor="let expert of experts" [ngValue]="expert">{{ expert.nom }} {{ expert.prenom }}</option>
                         </ng-container>
                     </select>
+                    <div *ngIf="auxiliaire.invalid && (auxiliaire.dirty || auxiliaire.touched)" class="text-danger">Veuillez sélectionner un auxiliaire.</div>
+                </div>
+                
                     
+                    
+                
+                <div class="form-group" *ngIf="fraisEnregistrement['typeFrais'] === 'Auxiliaire' && fraisEnregistrement['natureAuxiliaire'] === 'Non Conventionné'">
+                    <label for="cinAuxiliaire">CIN de l'auxiliaire:</label>
+                    <input type="text" id="cinAuxiliaire" class="form-control" placeholder="CIN de l'auxiliaire" name="cinAuxiliaire" [(ngModel)]="fraisEnregistrement['cinAuxiliaire']" required #cinAuxiliaire="ngModel">
+                    <div *ngIf="cinAuxiliaire.invalid && (cinAuxiliaire.dirty || cinAuxiliaire.touched)" class="text-danger">Le champ CIN de l'auxiliaire est requis.</div>
                 </div>
-                <div class="form-group" *ngIf="fraisEnregistrement.typeFrais=='Auxiliaire' && fraisEnregistrement.natureAuxiliaire=='Non Conventionné'">
-                    <label for="cinAuxiliaire">Cin de l'auxiliaire:</label>
-                    <input type="text" id="cinAuxiliaire" class="form-control " placeholder="Cin de l'auxiliaire" name="cinAuxiliaire" [(ngModel)]="fraisEnregistrement.cinAuxiliaire">
-                </div>
-                <div class="form-group " *ngIf="fraisEnregistrement.typeFrais=='Auxiliaire' && fraisEnregistrement.natureAuxiliaire=='Non Conventionné'">
+                
+                <div class="form-group" *ngIf="fraisEnregistrement['typeFrais'] === 'Auxiliaire' && fraisEnregistrement['natureAuxiliaire'] === 'Non Conventionné'">
                     <label for="nomAuxiliaire">Nom de l'auxiliaire:</label>
-                    <input type="text" id="nomAuxiliaire" class="form-control redBorder" placeholder="Nom de l'auxiliaire" name="nomAuxiliaire" [(ngModel)]="fraisEnregistrement.nomAuxiliaire">
+                    <input type="text" id="nomAuxiliaire" class="form-control redBorder" placeholder="Nom de l'auxiliaire" name="nomAuxiliaire" [(ngModel)]="fraisEnregistrement['nomAuxiliaire']" required #nomAuxiliaire="ngModel">
+                    <div *ngIf="nomAuxiliaire.invalid && (nomAuxiliaire.dirty || nomAuxiliaire.touched)" class="text-danger">Le champ Nom de l'auxiliaire est requis.</div>
                 </div>
-                <div class="form-group" *ngIf="fraisEnregistrement.typeFrais!='Auxiliaire'">
+                
+                <div class="form-group" *ngIf="fraisEnregistrement['typeFrais'] !== 'Auxiliaire'">
                     <label for="montantFrais">Montant des frais (en Dinars):</label>
-                    <input type="text" id="montantFrais" class=" form-control" name="montantFrais" placeholder="0000.00TDN" [(ngModel)]="fraisEnregistrement.montantFrais">
+                    <input type="text" id="montantFrais" class="form-control" name="montantFrais" placeholder="0000.00TDN" [(ngModel)]="fraisEnregistrement['montantFrais']" required pattern="^[0-9]+(\.[0-9]{1,2})?$" #montantFrais="ngModel">
+                    <div *ngIf="montantFrais.invalid && (montantFrais.dirty || montantFrais.touched)" class="text-danger">
+                        Le montant doit être un nombre (par exemple, 1234.56).
+                    </div>
                 </div>
-                <div class="form-group " *ngIf="fraisEnregistrement.typeFrais=='Auxiliaire'">
+                
+                <div class="form-group" *ngIf="fraisEnregistrement['typeFrais'] === 'Auxiliaire'">
                     <label for="numeroAffaire">Numéro de l'affaire:</label>
-                    <input type="text" id="numeroAffaire" placeholder="Numéro Affaire" class="form-control redBorder" name="numeroAffaire" [(ngModel)]="fraisEnregistrement.numeroAffaire">
+                    <input type="text" id="numeroAffaire" placeholder="Numéro Affaire" class="form-control redBorder" name="numeroAffaire" [(ngModel)]="fraisEnregistrement['numeroAffaire']" required #numeroAffaire="ngModel">
+                    <div *ngIf="numeroAffaire.invalid && (numeroAffaire.dirty || numeroAffaire.touched)" class="text-danger">Le champ Numéro de l'affaire est requis.</div>
                 </div>
-                <div class="form-group " *ngIf="fraisEnregistrement.typeFrais=='Auxiliaire'">
+                
+                <div class="form-group" *ngIf="fraisEnregistrement['typeFrais'] === 'Auxiliaire'">
                     <label for="montantHonoraire">Montant des honoraires (En Dinars):</label>
-                    <input type="text" id="montantHonoraire" class="form-control" placeholder="Montant des honoraires" name="montantHonoraire" [(ngModel)]="fraisEnregistrement.montantHonoraire">
-                </div>
-                <div class="form-group ">
-                    <label for="typePaiement">Type de Paiement:</label>
-                    <select id="typePaiement" class="form-control input-with-arrow redBorder" name="typePaiement" [(ngModel)]="fraisEnregistrement.typePaiment" required>
-                        <option value="" disabled>Select an option</option>
+                    <input type="text" id="montantHonoraire" class="form-control" placeholder="Montant des honoraires" name="montantHonoraire" [(ngModel)]="fraisEnregistrement['montantHonoraire']" pattern="^[0-9]+(\.[0-9]{1,2})?$" required #montantHonoraire="ngModel">
+                    <div *ngIf="montantHonoraire.invalid && (montantHonoraire.dirty || montantHonoraire.touched)" class="text-danger">
+                        Le montant doit être un nombre (par exemple, 1234.56).
+                    </div>                </div>
+                
+                <div class="form-group">
+                    <label for="typePaiement">Type de Paiement :</label>
+                    <select id="typePaiement" class="form-control input-with-arrow redBorder" name="typePaiement" [(ngModel)]="fraisEnregistrement['typePaiment']" required #typePaiement="ngModel">
+                        <option value="" disabled selected>Sélectionnez une option</option>
                         <option value="Chèque BCT">Chèque BCT</option>
                         <option value="Virement Tétécomponsé">Virement Télécomponsé</option>
                     </select>
+                    <div *ngIf="typePaiement.invalid && (typePaiement.dirty || typePaiement.touched)" class="text-danger">Le champ Type de Paiement est requis.</div>
                 </div>
-                <div class="form-group " *ngIf="fraisEnregistrement.typePaiment==='Virement Tétécomponsé'">
-                    <label for="ribBeneficiaire">RIB du bénéficiaire:</label>
-                    <input type="text" id="ribBeneficiaire" class="form-control redBorder" name="ribBeneficiare" placeholder="RIB de bénéficiaire"[(ngModel)]="fraisEnregistrement.RIB" >
+                
+                <div class="form-group" *ngIf="fraisEnregistrement['typePaiment'] === 'Virement Tétécomponsé'">
+                    <label for="ribBeneficiaire">RIB du bénéficiaire :</label>
+                    <input type="text" id="ribBeneficiaire" class="form-control redBorder" name="ribBeneficiare" placeholder="RIB de bénéficiaire" [(ngModel)]="fraisEnregistrement.RIB" required #ribBeneficiaire="ngModel">
+                    <div *ngIf="ribBeneficiaire.invalid && (ribBeneficiaire.dirty || ribBeneficiaire.touched)" class="text-danger">Le champ RIB du bénéficiaire est requis.</div>
                 </div>
+                
                 
             </div>
 
@@ -102,52 +128,70 @@
             <!-- right column -->
             
             <div class="groupe">
-                <div class="form-group " *ngIf="fraisEnregistrement.typeFrais=='Enregistrement'">
-                    <label for="numeroPiece">N° Pièce:</label>
-                    <input type="text" id="numeroPiece" placeholder="N° Pièce" class="form-control" name="numeroPiece" [(ngModel)]="fraisEnregistrement.numeroPiece">
+                <div class="form-group" *ngIf="fraisEnregistrement['typeFrais'] === 'Enregistrement'">
+                    <label for="numeroPiece">N° Pièce :</label>
+                    <input type="text" id="numeroPiece" placeholder="N° Pièce" class="form-control" name="numeroPiece" [(ngModel)]="fraisEnregistrement.numeroPiece" required #numeroPiece="ngModel">
+                    <div *ngIf="numeroPiece.invalid && (numeroPiece.dirty || numeroPiece.touched)" class="text-danger">Le champ N° Pièce est requis.</div>
                 </div>
-                <div class="form-group " *ngIf="fraisEnregistrement.typeFrais=='Divers' && fraisEnregistrement.typePiece=='Autres'">
-                    <label for="autre">Autre type de pièce:</label>
-                    <textarea id="autre" class="form-control redBorder" name="autre" placeholder="Autre type de pièce" [(ngModel)]="fraisEnregistrement.autre" required></textarea>
-                    </div>
+                
+                <div class="form-group" *ngIf="fraisEnregistrement['typeFrais'] === 'Divers' && fraisEnregistrement['typePiece'] === 'Autres'">
+                    <label for="autre">Autre type de pièce :</label>
+                    <textarea id="autre" class="form-control redBorder" name="autre" placeholder="Autre type de pièce" [(ngModel)]="fraisEnregistrement.autre" required #autre="ngModel"></textarea>
+                    <div *ngIf="autre.invalid && (autre.dirty || autre.touched)" class="text-danger">Le champ Autre type de pièce est requis.</div>
+                </div>
+                
                     <div style="margin-bottom: 100px;">
-                        <div class="form-group "  *ngIf="fraisEnregistrement.typeFrais=='Auxiliaire'">
-                            <label for="natureAuxiliaire">Nature de l'auxiliaire:</label>
+                        <div class="form-group" *ngIf="fraisEnregistrement['typeFrais'] === 'Auxiliaire'">
+                            <label for="natureAuxiliaire">Nature de l'auxiliaire :</label>
                             <mat-radio-group id="natureAuxiliaire" class="form-control" name="natureAuxiliaire" [(ngModel)]="fraisEnregistrement.natureAuxiliaire" style="border: none; background-color: rgba(240, 248, 255, 0);">
                                 <mat-radio-button value="Conventionné">Conventionné</mat-radio-button>
                                 <mat-radio-button value="Non Conventionné">Non Conventionné</mat-radio-button>
                             </mat-radio-group>
+                            <div *ngIf="fraisEnregistrement['natureAuxiliaire'] === 'Non Conventionné' && fraisEnregistrement['typeFrais'] === 'Auxiliaire'">
+                                Choisir la nature de l'auxiliaire.
+                            </div>
                         </div>
+                        
                         <div *ngIf="fraisEnregistrement.natureAuxiliaire === 'Non Conventionné' && fraisEnregistrement.typeFrais=='Auxiliaire'">
-                            <div class="form-group ">
-                                <label for="RneAuxiliaire">RNE de l'auxiliaire:</label>
-                                <input type="text" id="RneAuxiliaire" class="form-control" name="RneAuxiliaire" [(ngModel)]="fraisEnregistrement.RneAuxiliaire">
+                            <div class="form-group">
+                                <label for="RneAuxiliaire">RNE de l'auxiliaire :</label>
+                                <input type="text" id="RneAuxiliaire" class="form-control" name="RneAuxiliaire" [(ngModel)]="fraisEnregistrement.RneAuxiliaire" required #RneAuxiliaire="ngModel">
+                                <div *ngIf="RneAuxiliaire.invalid && (RneAuxiliaire.dirty || RneAuxiliaire.touched)" class="text-danger">Le champ RNE de l'auxiliaire est requis.</div>
                             </div>
-                            <div class="form-group ">
-                                <label for="prenomAuxiliaire">Prénom de l'auxiliaire:</label>
-                                <input type="text" id="prenomAuxiliaire" class="form-control redBorder" name="prenomAuxiliaire" [(ngModel)]="fraisEnregistrement.prenomAuxiliaire">
+                            
+                            <div class="form-group">
+                                <label for="prenomAuxiliaire">Prénom de l'auxiliaire :</label>
+                                <input type="text" id="prenomAuxiliaire" class="form-control redBorder" name="prenomAuxiliaire" [(ngModel)]="fraisEnregistrement.prenomAuxiliaire" required #prenomAuxiliaire="ngModel">
+                                <div *ngIf="prenomAuxiliaire.invalid && (prenomAuxiliaire.dirty || prenomAuxiliaire.touched)" class="text-danger">Le champ Prénom de l'auxiliaire est requis.</div>
                             </div>
+                            
                         </div>
                     </div>
                     
                     
                     <div >
-                        <div class="form-group  ">
-                            <label for="dateOperation">Date de l'opération:</label>
-                            <input type="date" id="dateOperation" class="form-control" name="dateOperation" [(ngModel)]="fraisEnregistrement.dateOperation">
+                        <div class="form-group">
+                            <label for="dateOperation">Date de l'opération :</label>
+                            <input type="date" id="dateOperation" class="form-control" name="dateOperation" [(ngModel)]="fraisEnregistrement.dateOperation" required #dateOperation="ngModel">
+                            <div *ngIf="dateOperation.invalid && (dateOperation.dirty || dateOperation.touched)" class="text-danger">Le champ Date de l'opération est requis.</div>
                         </div>
-                        <div class="form-group" *ngIf="fraisEnregistrement.typeFrais=='Auxiliaire'">
-                            <label for="montantFrais">Montant des frais (en Dinars):</label>
-                            <input type="text" id="montantFrais" class=" form-control" name="montantFrais" placeholder="0000.00TDN" [(ngModel)]="fraisEnregistrement.montantFrais">
+                        
+                        <div class="form-group" *ngIf="fraisEnregistrement['typeFrais'] === 'Auxiliaire'">
+                            <label for="montantFrais">Montant des frais (en Dinars) :</label>
+                            <input type="text" id="montantFrais" class="form-control" name="montantFrais" placeholder="0000.00TDN" [(ngModel)]="fraisEnregistrement.montantFrais" required pattern="^[0-9]+(\.[0-9]{1,2})?$" #montantFrais="ngModel">
+                            <div *ngIf="montantFrais.invalid && (montantFrais.dirty || montantFrais.touched)" class="text-danger">
+                                Le montant doit être un nombre (par exemple, 1234.56).
+                            </div>                     
                         </div>
-                        <div class="form-group " *ngIf="(fraisEnregistrement.typeFrais==='Auxiliaire' && fraisEnregistrement.typePaiment==='Chèque BCT') || fraisEnregistrement.typeFrais!='Auxiliaire'">
-                            <label for="nomBeneficiaire">Nom du bénéficiaire:</label>
-                            <input type="text" id="nomBeneficiaire" class="form-control redBorder" name="nomBeneficiare" placeholder="Nom de bénéficiaire" [(ngModel)]="fraisEnregistrement.nomBeneficiaire" >
+                        <div class="form-group" *ngIf="(fraisEnregistrement['typeFrais'] === 'Auxiliaire' && fraisEnregistrement['typePaiment'] === 'Chèque BCT') || fraisEnregistrement['typeFrais'] !== 'Auxiliaire'">
+                            <label for="nomBeneficiaire">Nom du bénéficiaire :</label>
+                            <input type="text" id="nomBeneficiaire" class="form-control redBorder" name="nomBeneficiare" placeholder="Nom de bénéficiaire" [(ngModel)]="fraisEnregistrement.nomBeneficiaire">
                         </div>
+                        
                     </div>
                 
             </div>
         </div>
-        <button type="submit" class="btn btnRegister">Valider</button>
+        <button type="submit" class="btn btnRegister" [disabled]="enregistrementForm.invalid">Valider</button>
     </form>
 </div>

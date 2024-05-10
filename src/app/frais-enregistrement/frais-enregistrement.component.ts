@@ -26,6 +26,7 @@ export class FraisEnregistrementComponent implements OnInit {
     dateDemandeJugement:undefined,
     recetteFinance: ''
   };
+numeroRouge: any;
 
   constructor(private sharedService: SharedServicesService,
     private jugementService:FraisJugementService,
@@ -66,15 +67,18 @@ export class FraisEnregistrementComponent implements OnInit {
             (response) => {
               console.log('Frais ajouté avec succès:', response);
               console.log(this.operation);
+              this.fraisEnregistrement = { montantFrais: '', numeroRouge: '', numeroAffaire: '', dateDemandeJugement: undefined, recetteFinance: '' };
               Swal.fire({
                 position: "center",
                 icon: "success",
-                title: "ajouté avec succès",
+                title: "Ajouté avec succès",
                 showConfirmButton: false,
                 timer: 1500
+              }).then(() => {
+                window.location.reload();
               });
 
-              this.fraisEnregistrement = { montantFrais: '', numeroRouge: '', numeroAffaire: '', dateDemandeJugement: undefined, recetteFinance: '' };
+              
             },
             (error) => {
               console.error('Erreur lors de l\'ajout des frais:', error);

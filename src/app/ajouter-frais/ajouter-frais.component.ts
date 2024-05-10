@@ -3,18 +3,16 @@ import { Component, Input, OnInit } from '@angular/core';
 import { AjoutFrais } from '../Models/AjoutFrais';
 import { SharedServicesService } from '../services/shared-services.service';
 import { DiversPiece } from '../Models/DiversPiece';
-import { OperationCTX } from '../Models/OperationCTX';
 import { BehaviorSubject, forkJoin } from 'rxjs';
 import { AuthService } from '../services/auth.service';
 import { jwtDecode } from 'jwt-decode';
 import { AuxiliaireConvontionnéService } from '../services/auxiliaire-convontionné.service';
-import { Avocat } from '../Models/Avocat';
-import { Huissier } from '../Models/Huissier';
-import { Expert } from '../Models/Expert';
 import Swal from 'sweetalert2';
 import { FraisGenerauxAux } from '../Models/FraisGenerauxAux';
 import { FraisGenerauxNonAux } from '../Models/FraisGenerauxNonAux';
 import { FraisGenerauxService } from '../services/frais-generaux.service';
+import { Auxiliaire } from '../Models/Auxiliaire';
+import { DateService } from '../services/date.service';
 
 @Component({
   selector: 'app-ajouter-frais',
@@ -28,14 +26,15 @@ export class AjouterFraisComponent implements OnInit{
   operationNonAux:FraisGenerauxNonAux={} as FraisGenerauxNonAux;
   option:DiversPiece={} as DiversPiece;
   matricule!:string;
-  avocats!:Avocat[];
-  huissiers!:Huissier[];
-  experts!:Expert[];
+  avocats!:Auxiliaire[];
+  huissiers!:Auxiliaire[];
+  experts!:Auxiliaire[];
   
-  constructor(private sharedService:SharedServicesService,private auth: AuthService,private auxiliaireService:AuxiliaireConvontionnéService,private fraisGenerauxService:FraisGenerauxService){
+  constructor(private sharedService:SharedServicesService,private auth: AuthService,private auxiliaireService:AuxiliaireConvontionnéService,private fraisGenerauxService:FraisGenerauxService,private dateService:DateService ){
     this.auxiliaireService.avocatConvontionne().subscribe((data)=>{this.avocats=data;})
-    this.auxiliaireService.huissierConvontionne().subscribe((data)=>{this.huissiers=data})
-    this.auxiliaireService.expertConvontionne().subscribe((data)=>{this.experts=data})
+    this.auxiliaireService.huissierConvontionne().subscribe((data)=>{this.huissiers=data;})
+    this.auxiliaireService.expertConvontionne().subscribe((data)=>{this.experts=data ;})
+
   }
   ngOnInit(): void {
     this.sharedService.refreshOption.subscribe(()=>{
@@ -62,8 +61,14 @@ getoptions(){
   fraisEnregistrement: AjoutFrais = {} as AjoutFrais;
 
   submitForm() {
+    
     // auxiliaire
     if(this.fraisEnregistrement.typeFrais=="Auxiliaire"){
+      this.operationAux.dateOperation=new Date();
+
+      this.dateService.getCurrentDate().subscribe((data)=>{
+        this.operationAux.dateAjout=data;
+      });
         this.operationAux.etatOperation="E";
         if(this.fraisEnregistrement.montantFrais){
         this.operationAux.mntFrais=this.fraisEnregistrement.montantFrais;}
@@ -110,14 +115,15 @@ getoptions(){
               console.log('Frais ajouté avec succès:', response);
               console.log(this.operationAux);
               this.resetForm();
-              
-                Swal.fire({
-                  position: "center",
-                  icon: "success",
-                  title: "ajouté avec succès",
-                  showConfirmButton: false,
-                  timer: 1500
-                });
+              Swal.fire({
+                position: "center",
+                icon: "success",
+                title: "Ajouté avec succès",
+                showConfirmButton: false,
+                timer: 1500
+              }).then(() => {
+                window.location.reload();
+              });
             },
             (error) => {
               console.error('Erreur lors de l\'ajout des frais:', error);
@@ -136,8 +142,11 @@ getoptions(){
 
 
       // not Auxiliaire
-
+      this.operationNonAux.dateOperation=new Date();
       if(this.fraisEnregistrement.typeFrais!='Auxiliaire'){
+        this.dateService.getCurrentDate().subscribe((data)=>{
+          this.operationNonAux.dateAjout=data;
+        })
         this.operationNonAux.etatOperation="E";
         if(this.fraisEnregistrement.montantFrais){
         this.operationNonAux.mntFrais=this.fraisEnregistrement.montantFrais;}
@@ -172,14 +181,15 @@ getoptions(){
                 console.log('Frais ajouté avec succès:', response);
                 console.log(this.operationNonAux);
                 this.resetForm();
-                
-                  Swal.fire({
-                    position: "center",
-                    icon: "success",
-                    title: "ajouté avec succès",
-                    showConfirmButton: false,
-                    timer: 1500
-                  });
+                Swal.fire({
+                  position: "center",
+                  icon: "success",
+                  title: "Ajouté avec succès",
+                  showConfirmButton: false,
+                  timer: 1500
+                }).then(() => {
+                  window.location.reload();
+                });
               },
               (error) => {
                 console.error('Erreur lors de l\'ajout des frais:', error);

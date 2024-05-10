@@ -1,3 +1,5 @@
+import { Auxiliaire } from "./Auxiliaire";
+
 export interface AjoutFrais{
     typeFrais?:string;
     typeAuxiliaire?:string;
@@ -16,6 +18,6 @@ export interface AjoutFrais{
     autre:string;
     RIB?:string;
     numeroPiece?:number|null;
-    auxiliaire?:string;
+    auxiliaire?:Auxiliaire;
     matriculeEmploye?:string;
 }

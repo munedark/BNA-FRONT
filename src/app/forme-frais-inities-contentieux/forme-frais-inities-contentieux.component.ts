@@ -14,6 +14,8 @@ import { Risque } from '../Models/Risque';
 import Swal from 'sweetalert2';
 import { FraisInitiesService } from '../services/frais-inities.service';
 import { OperationFraisInities } from '../Models/OperationFraisInities';
+import { DateService } from '../services/date.service';
+
 
 @Component({
   selector: 'app-forme-frais-inities-contentieux',
@@ -31,7 +33,7 @@ export class FormeFraisInitiesContentieuxComponent implements OnInit{
   huissiers!:Huissier[];
   experts!:Expert[];
 
-  constructor(private sharedService:SharedServicesService,private auth: AuthService,private auxiliaireService:AuxiliaireConvontionnéService,private fraisInitiesService:FraisInitiesService){
+  constructor(private sharedService:SharedServicesService,private auth: AuthService,private auxiliaireService:AuxiliaireConvontionnéService,private fraisInitiesService:FraisInitiesService,private dateService:DateService ){
     this.auxiliaireService.avocatConvontionne().subscribe((data)=>{this.avocats=data;})
     this.auxiliaireService.huissierConvontionne().subscribe((data)=>{this.huissiers=data})
     this.auxiliaireService.expertConvontionne().subscribe((data)=>{this.experts=data})
@@ -58,12 +60,20 @@ export class FormeFraisInitiesContentieuxComponent implements OnInit{
   fraisEnregistrement: AjoutFrais = {} as AjoutFrais;
 
   submitForm() {
-    if(this.fraisEnregistrement.numeroPiece){
+    if(this.fraisEnregistrement.numeroPiece && this.fraisEnregistrement.typeFrais=="Enregistrement"){
     this.operation.numeroPiece=this.fraisEnregistrement.numeroPiece;}
     this.operation.typePiece=this.fraisEnregistrement.typePiece
     this.operation.etatOperation="E";
     if(this.fraisEnregistrement.montantFrais){
       this.operation.mntFrais=this.fraisEnregistrement.montantFrais;
+    }
+    this.dateService.getCurrentDate().subscribe((data)=>{
+      this.operation.dateAjout=data;
+    })
+    if (this.fraisEnregistrement.typePiece=='Autres'){
+      this.operation.typePiece=this.fraisEnregistrement.autre;
+      this.option.typePiece=this.operation.typePiece;
+      this.sharedService.addDiversOptions(this.option).subscribe((data)=>{});
     }
     this.operation.typeFrais=this.fraisEnregistrement.typeFrais;
     this.operation.matriculeAjout=this.matricule;
@@ -79,7 +89,7 @@ export class FormeFraisInitiesContentieuxComponent implements OnInit{
       ]).subscribe(([ dossierData]) => {
         
         this.operation.dossierDebiteur = dossierData;
-
+        this.operation.dateOperation=new Date();
         this.fraisInitiesService.submitForm(this.operation).subscribe(
           (response) => {
             console.log('Frais ajouté avec succès:', response);
@@ -88,9 +98,11 @@ export class FormeFraisInitiesContentieuxComponent implements OnInit{
             Swal.fire({
               position: "center",
               icon: "success",
-              title: "ajouté avec succès",
+              title: "Ajouté avec succès",
               showConfirmButton: false,
               timer: 1500
+            }).then(() => {
+              window.location.reload();
             });
           },
           (error) => {
@@ -106,7 +118,7 @@ export class FormeFraisInitiesContentieuxComponent implements OnInit{
     this.fraisEnregistrement = { 
       typeFrais: '',
       typeAuxiliaire: '',
-      typePiece:'',
+      typePiece: '',
       cinAuxiliaire: null,
       nomAuxiliaire: '',
       numeroAffaire: null,

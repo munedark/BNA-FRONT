@@ -1,18 +1,21 @@
 <div class="container">
     <h3 class="register-heading"> Ajouter un frais</h3>
     <hr style="border-color: #17a191;">
-    <form #enregistrementForm="ngForm" (ngSubmit)="submitForm()">
+    <form  #enregistrementForm="ngForm" (ngSubmit)="submitForm()" novalidate>
         <div class="content">
             <!-- TYPE DE FRAIS  -->
             <div class="groupe">
                 <div class="form-group">
                     <label for="typeFrais">Type des frais:</label>
-                    <select id="typeFrais" class="form-control input-with-arrow" name="typeFrais" [(ngModel)]="fraisEnregistrement.typeFrais" required>
+                    <select id="typeFrais" class="form-control input-with-arrow" name="typeFrais" [(ngModel)]="fraisEnregistrement.typeFrais" required #typeFrais="ngModel">
                         <option value="" disabled>Choisir type des frais</option>
                         <option value="Enregistrement" selected>Enregistrement</option>
                         <option value="Timbrage">Timbrage</option>
                         <option value="Divers">Divers</option>
                     </select>
+                    <div *ngIf="typeFrais.invalid && (typeFrais.dirty || typeFrais.touched)" class="text-danger">
+                        Sélectionner un type de frais
+                    </div>
                 </div>
                 <div class="form-group" *ngIf="fraisEnregistrement.typeFrais=='Enregistrement'||fraisEnregistrement.typeFrais=='Timbrage'||fraisEnregistrement.typeFrais=='Divers'">
                     <label for="typePiece" >Type de pièce:</label>
@@ -35,40 +38,53 @@
                     
                 </div>
 
-                <div class="form-group" >
+
+                <div class="form-group">
                     <label for="montantFrais">Montant des frais (en Dinars):</label>
-                    <input type="text" id="montantFrais" class=" form-control" name="montantFrais" placeholder="0000.00TDN" [(ngModel)]="fraisEnregistrement.montantFrais">
+                    <input type="text" id="montantFrais" class="form-control" name="montantFrais" placeholder="0000.00TDN" [(ngModel)]="fraisEnregistrement.montantFrais" pattern="^[0-9]+(\.[0-9]{1,2})?$" required #montantFrais="ngModel">
+                    <div *ngIf="montantFrais.invalid && (montantFrais.dirty || montantFrais.touched)" class="text-danger">
+                        Le montant doit être un nombre (par exemple, 1234.56).
+                    </div>
                 </div>
-                <div class="form-group" >
+                <div class="form-group">
                     <label for="matricule">Matricule de l'employé:</label>
-                    <input type="text" id="matricule" class=" form-control" name="matricule-employé" placeholder="matricule employé" [(ngModel)]="fraisEnregistrement.matriculeEmploye">
+                    <input type="text" id="matricule" class="form-control" name="matricule-employé" placeholder="matricule employé" [(ngModel)]="fraisEnregistrement.matriculeEmploye" required #matriculeEmploye="ngModel">
+                    <div *ngIf="matriculeEmploye.invalid && (matriculeEmploye.dirty || matriculeEmploye.touched)" class="text-danger">
+                        Le matricule de l'employé est obligatoire
+                    </div>
                 </div>
-    
             </div>
-
-
             <!-- right column -->
             
             <div class="groupe">
-                <div class="form-group " *ngIf="fraisEnregistrement.typeFrais=='Enregistrement'">
+                <div class="form-group" *ngIf="fraisEnregistrement.typeFrais=='Enregistrement'">
                     <label for="numeroPiece">N° Pièce:</label>
-                    <input type="text" id="numeroPiece" placeholder="N° Pièce" class="form-control" name="numeroPiece" [(ngModel)]="fraisEnregistrement.numeroPiece">
+                    <input type="text" id="numeroPiece" placeholder="N° Pièce" class="form-control" name="numeroPiece" [(ngModel)]="fraisEnregistrement.numeroPiece" pattern="^[0-9]+$" required #numeroPiece="ngModel">
+                    <div *ngIf="numeroPiece.invalid && (numeroPiece.dirty || numeroPiece.touched)" class="text-danger">
+                        Veuillez entrer un numéro de pièce valide (chiffres uniquement).
+                    </div>
                 </div>
                 <div class="form-group " *ngIf="fraisEnregistrement.typeFrais=='Divers' && fraisEnregistrement.typePiece=='Autres'">
                     <label for="autre">Autre type de pièce:</label>
-                    <textarea id="autre" class="form-control redBorder" name="autre" placeholder="Autre type de pièce" [(ngModel)]="fraisEnregistrement.autre" required></textarea>
+                    <textarea id="autre" class="form-control redBorder" name="autre" placeholder="Autre type de pièce" [(ngModel)]="fraisEnregistrement.autre" required #autre="ngModel"></textarea>
+                    <!-- Ajoutez la validation pour autre ici -->
+                    <div *ngIf="autre.invalid && (autre.dirty || autre.touched)" class="text-danger">
+                        La description de la pièce est obligatoire
                     </div>
+                </div>
                     
-                    <div >
-                        <div class="form-group  ">
-                            <label for="dateOperation">Date de l'opération:</label>
-                            <input type="date" id="dateOperation" class="form-control" name="dateOperation" [(ngModel)]="fraisEnregistrement.dateOperation">
-                        </div>
-
+                <div class="form-group">
+                    <label for="dateOperation">Date de l'opération :</label>
+                    <input type="date" id="dateOperation" class="form-control" name="dateOperation" [(ngModel)]="fraisEnregistrement.dateOperation" required #dateOperation="ngModel">
+                    <div *ngIf="dateOperation.invalid && (dateOperation.dirty || dateOperation.touched)" class="text-danger">
+                        Veuillez sélectionner une date d'opération.
                     </div>
+                </div>
+                
                 
             </div>
         </div>
-        <button type="submit" class="btn btnRegister">Valider</button>
+        <button type="submit" class="btn btnRegister" [disabled]="enregistrementForm.invalid">Valider</button>
+
     </form>
 </div>
