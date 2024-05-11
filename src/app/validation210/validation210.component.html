@@ -4,19 +4,17 @@
       <th scope="col">Numéro chèque:</th>
       <th scope="col">Montant chèque:</th>
       <th scope="col">Agence:</th>
-      <th scope="col">Date Operation:</th>
       <th scope="col">Afficher plus:</th>
     </tr>
   </thead>
   <tbody>
     
       <tr *ngFor="let operation of operations" >
-        <td>{{ operation.cheque.numCheque }}</td>
-        <td>{{ operation.cheque.mntCheque }} DT</td>
-        <td>{{ operation.cheque.agenceCheque.emplacement }} </td>
-        <td>{{ operation.dateValeurCTX }}</td>
+        <td>{{ operation.cheque?.numCheque }}</td>
+        <td>{{ operation.cheque?.mntCheque }} DT</td>
+        <td>{{ operation.cheque?.agenceCheque?.nomAgence }} </td>
         <td>
-          <button class="btn button" data-bs-toggle="modal" [attr.data-bs-target]="'#exampleModal' + operation.idOperation">Ouvrir</button>
+          <button class="btn button" data-bs-toggle="modal" [attr.data-bs-target]="'#exampleModal' + operation.idOperationCtx">Ouvrir</button>
         </td>
       </tr>
  
@@ -24,7 +22,7 @@
 </table>
 
 <ng-container *ngFor="let operation of operations">
-  <div class="modal fade" [id]="'exampleModal' + operation.idOperation" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade" [id]="'exampleModal' + operation.idOperationCtx" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -34,24 +32,22 @@
         <div class="modal-body">
           <div style="display: flex; justify-content: space-around;">
             <div>
-              <p><span style="color: #17a191; font-weight: bold;">Numero de chèque :</span> {{ operation.cheque.numCheque }}</p>
-              <p><span style="color: #17a191; font-weight: bold;">Montant chèque :</span> {{ operation.cheque.mntCheque }} DT</p>
-              <p><span style="color: #17a191; font-weight: bold;">RIB donneur :</span> {{ operation.cheque.ribDonneur }}</p>
-              <p><span style="color: #17a191; font-weight: bold;">Agence ou chèque a été présenté :</span> {{ operation.cheque.agenceCheque.emplacement }}</p>
+              <p><span style="color: #17a191; font-weight: bold;">Numero de chèque :</span> {{ operation.cheque?.numCheque }}</p>
+              <p><span style="color: #17a191; font-weight: bold;">Montant chèque :</span> {{ operation.cheque?.mntCheque }} DT</p>
+              <p><span style="color: #17a191; font-weight: bold;">RIB donneur :</span> {{ operation.cheque?.ribDonneur }}</p>
+              <p><span style="color: #17a191; font-weight: bold;">Agence ou chèque a été présenté :</span> {{ operation.cheque?.agenceCheque?.nomAgence }}</p>
               <p><span style="color: #17a191; font-weight: bold;">Numéro dossier:</span> {{ operation.dossierDebiteur?.dossierId?.numCtx }}</p>
 
             </div>
             <div>
-              <p *ngIf="operation.typeFrais === 'Enregistrement'"><span style="color: #17a191; font-weight: bold;">Motif :</span> {{ operation.cheque.motif }}</p>
-              <p><span style="color: #17a191; font-weight: bold;">Date de l'opération :</span> {{ operation.dateValeurCTX }}</p>
-              <p><span style="color: #17a191; font-weight: bold;">Matricule du gestionnaire :</span> {{ operation.matriculeAjout }}</p>
+              <p><span style="color: #17a191; font-weight: bold;">Gestionnaire :</span> {{ operation.matriculeAjout }}</p>
               <p><span style="color: #17a191; font-weight: bold;">Date de création :</span> {{ operation.dateAjout }}</p>
             </div>
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="rejeterOperation(operation.idOperation)">Rejeter</button>
-          <button type="button" class="btn btn-success" data-bs-dismiss="modal" (click)="approuverOperation(operation.idOperation)">Approuver</button>
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="rejeterOperation(operation.idOperationCtx)">Rejeter</button>
+          <button type="button" class="btn btn-success" data-bs-dismiss="modal" (click)="approuverOperation(operation.idOperationCtx)">Approuver</button>
         </div>
       </div>
     </div>

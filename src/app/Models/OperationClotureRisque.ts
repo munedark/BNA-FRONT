@@ -5,7 +5,7 @@ import { TypeOperation } from "./TypeOperation";
 
 export interface OperationClotureRisque {
     
-    idOperation?: number;
+    idOperationCtx?: number;
     mntOperation?: number;
     dateOperation?: Date | null;
     dateAjout?: Date | null;

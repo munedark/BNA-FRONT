@@ -33,7 +33,7 @@
                     <label for="Agences">Agence ou chèque a été présenté:</label>
                     <select id="Agences" class="form-control input-with-arrow" name="Agence" required   [(ngModel)]="idAgence" #Agences="ngModel">
                         <option value="" disabled selected >Choisir Agence</option>
-                        <option *ngFor="let agence of agences" [value]="agence.idAgence">{{ agence.emplacement }}</option>
+                        <option *ngFor="let agence of agences" [value]="agence.idAgence">{{ agence.nomAgence }}</option>
                     </select>
                     <div *ngIf="Agences.invalid && (Agences.dirty || Agences.touched)" class="text-danger">
                         Veuillez sélectionner une agence.

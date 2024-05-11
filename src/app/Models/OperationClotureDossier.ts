@@ -4,7 +4,7 @@ import { TypeOperation } from "./TypeOperation";
 
 export interface OperationClotureDossier {
     
-    idOperation?: number;
+    idOperationCtx?: number;
     mntOperation?: number;
     dateOperation?: Date | null;
     dateAjout?: Date | null;

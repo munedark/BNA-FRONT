@@ -1,7 +1,6 @@
-import { CompteBancaire } from "./CompteBancaire";
-
-export interface AgenceBank{
-    idAgence:number;
-    emplacement:string;
-
+export interface AgenceBank {
+    idAgence?: number;
+    identifiantUnique?: string;
+    nomAgence?: string;
+    ville?: string;
 }

@@ -5,7 +5,7 @@ import { Auxiliaire } from "./Auxiliaire";
 
 export interface FraisGenerauxAux {
     
-    idOperation?: number;
+    idOperationCtx?: number;
     mntFrais?: number;
     typeFrais?: string;
     typeAuxiliaire?: string;

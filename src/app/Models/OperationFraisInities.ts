@@ -4,7 +4,7 @@ import { TypeOperation } from "./TypeOperation";
 
 export interface OperationFraisInities{
     
-    idOperation?: number;
+    idOperationCtx?: number;
     mntFrais?: number;
     typeFrais?: string;
     typePiece?: string;

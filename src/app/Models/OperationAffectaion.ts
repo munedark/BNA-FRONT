@@ -6,7 +6,7 @@ import { FormeAffectation } from "./FormeAffectation";
 
 export interface OperationAffectation {
     
-    idOperation?: number;
+    idOperationCtx?: number;
     mntOperation?: number;
     dateOperation?: Date | null;
     dateAjout?: Date | null;

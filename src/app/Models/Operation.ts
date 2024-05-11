@@ -1,13 +1,12 @@
 import { Cheque } from "./Cheque";
 import { DossierDebiteur } from "./DossierDebiteur";
+import { Risque } from "./Risque";
 import { TypeOperation } from "./TypeOperation";
-
-
-
-export interface OperationCheque {
-    
+import { TypePaiment } from "./TypePaiment";
+import { FormeAffectation } from "./FormeAffectation";
+import { virement } from "./virement";
+export interface Operation {
     idOperationCtx?: number;
-    mntOperation?: number;
     dateOperation?: Date | null;
     dateAjout?: Date | null;
     matriculeAjout?: string;
@@ -15,8 +14,12 @@ export interface OperationCheque {
     dateValidation?: Date | null;
     etatOperation?: string;
     typeOperation?: TypeOperation;
+    typePaiments?: TypePaiment;
+    risque?: Risque;
     dossierDebiteur?: DossierDebiteur;
-    matriculeEmploye?:string;
-    cheque:Cheque;
-
+    cheque?: Cheque;
+    virementTelecomponse?: virement;
+    formeAffectation?: FormeAffectation;
 }
+
+

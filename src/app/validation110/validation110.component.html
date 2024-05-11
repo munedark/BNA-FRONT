@@ -18,10 +18,10 @@
     <ng-container *ngFor="let operation of operations">
       <tr *ngIf="operation.typeFrais === selectedType && operation.etatOperation==='E'">
         <td>{{ operation.typeFrais }}</td>
-        <td>{{ operation.mntOperation }} DT</td>
+        <td>{{ operation.mntFrais }} DT</td>
         <td>{{ operation.dateValeurCTX }}</td>
         <td>
-          <button class="btn button" data-bs-toggle="modal" [attr.data-bs-target]="'#exampleModal' + operation.idOperation">Ouvrir</button>
+          <button class="btn button" data-bs-toggle="modal" [attr.data-bs-target]="'#exampleModal' + operation.idOperationCtx">Ouvrir</button>
         </td>
       </tr>
     </ng-container>
@@ -29,7 +29,7 @@
 </table>
 
 <ng-container *ngFor="let operation of operations">
-  <div class="modal fade" [id]="'exampleModal' + operation.idOperation" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade" [id]="'exampleModal' + operation.idOperationCtx" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -41,21 +41,21 @@
             <div>
               <p><span style="color: #17a191; font-weight: bold;">Type frais :</span> {{ operation.typeFrais }}</p>
               <p><span style="color: #17a191; font-weight: bold;">Type de pièce :</span> {{ operation.typePiece }}</p>
-              <p><span style="color: #17a191; font-weight: bold;">Montant des frais :</span> {{ operation.mntOperation }}</p>
+              <p><span style="color: #17a191; font-weight: bold;">Montant des frais :</span> {{ operation.mntFrais}}</p>
               <p><span style="color: #17a191; font-weight: bold;">Matricule employé :</span> {{ operation.matriculeEmploye }}</p>
               <p><span style="color: #17a191; font-weight: bold;">Numéro dossier:</span> {{ operation.dossierDebiteur?.dossierId?.numCtx }}</p>
             </div>
             <div>
               <p *ngIf="operation.typeFrais === 'Enregistrement'"><span style="color: #17a191; font-weight: bold;">N° de pièce :</span> {{ operation.numeroPiece }}</p>
               <p><span style="color: #17a191; font-weight: bold;">Date de l'opération :</span> {{ operation.dateValeurCTX }}</p>
-              <p><span style="color: #17a191; font-weight: bold;">Matricule du gestionnaire :</span> {{ operation.matriculeAjout }}</p>
+              <p><span style="color: #17a191; font-weight: bold;">Gestionnaire :</span> {{ operation.matriculeAjout }}</p>
               <p><span style="color: #17a191; font-weight: bold;">Date de création :</span> {{ operation.dateAjout }}</p>
             </div>
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="rejeterOperation(operation.idOperation)">Rejeter</button>
-          <button type="button" class="btn btn-success" data-bs-dismiss="modal" (click)="approuverOperation(operation.idOperation)">Approuver</button>
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="rejeterOperation(operation.idOperationCtx)">Rejeter</button>
+          <button type="button" class="btn btn-success" data-bs-dismiss="modal" (click)="approuverOperation(operation.idOperationCtx)">Approuver</button>
         </div>
       </div>
     </div>

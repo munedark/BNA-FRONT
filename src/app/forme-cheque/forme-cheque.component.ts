@@ -4,12 +4,12 @@ import { AgencesService } from '../services/agences.service';
 import { Cheque } from '../Models/Cheque';
 import { AuthService } from '../services/auth.service';
 import { jwtDecode } from 'jwt-decode';
-import { OperationCTX } from '../Models/OperationCTX';
 import { SharedServicesService } from '../services/shared-services.service';
 import { forkJoin } from 'rxjs';
 import Swal from 'sweetalert2';
 import { ChequeService } from '../services/cheque.service';
 import { OperationCheque } from '../Models/OperationCheque';
+import { DateService } from '../services/date.service';
 
 @Component({
   selector: 'app-forme-cheque',
@@ -34,7 +34,8 @@ export class FormeChequeComponent implements OnInit {
   constructor(private agence: AgencesService,
               private auth: AuthService,
               private sharedService: SharedServicesService,
-              private chequeService: ChequeService) { }
+              private chequeService: ChequeService,
+            private dateService:DateService) { }
 
   ngOnInit(): void {
     this.agence.Agences().subscribe((data) => {
@@ -48,6 +49,9 @@ export class FormeChequeComponent implements OnInit {
   }
 
   submitForm() {
+    this.dateService.getCurrentDate().subscribe((data)=>{
+      this.operation.dateAjout=data;
+    })
     this.operation.etatOperation = "E";
     this.operation.matriculeAjout = this.matricule;
 
@@ -61,7 +65,7 @@ export class FormeChequeComponent implements OnInit {
         this.operation.dossierDebiteur = dossierData;
 
         
-        this.cheque.agenceCheque.emplacement = agence.emplacement;
+        this.cheque.agenceCheque.nomAgence = agence.nomAgence;
         this.cheque.agenceCheque.idAgence = agence.idAgence;
         this.chequeService.saveCheque(this.cheque).subscribe((savedCheque) => {
           this.operation.cheque = savedCheque;

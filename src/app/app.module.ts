@@ -150,7 +150,9 @@ import { AdminDateJournalComponent } from './admin-date-journal/admin-date-journ
     MatSelectModule,
     MatDialogModule,
     MatBadgeModule,
-    MatStepperModule
+    MatStepperModule,
+    
+    
   ],
   providers: [ WebSocketService,{ provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

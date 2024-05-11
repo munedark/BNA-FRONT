@@ -10,14 +10,14 @@
     <tbody>
       <tr *ngFor="let operation of operations">
         <td>Jugement</td>
-        <td>{{ operation.mntOperation }} DT</td>
+        <td>{{ operation.mntFrais }} DT</td>
         <td>{{ operation.dateValeurCTX }}</td>
         <td>
           <!-- Modal trigger button -->
-          <button class="btn button" data-bs-toggle="modal" [attr.data-bs-target]="'#exampleModal' + operation.idOperation">Ouvrir</button>
+          <button class="btn button" data-bs-toggle="modal" [attr.data-bs-target]="'#exampleModal' + operation.idOperationCtx">Ouvrir</button>
   
           <!-- Modal -->
-          <div class="modal fade" [id]="'exampleModal' + operation.idOperation" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal fade" [id]="'exampleModal' + operation.idOperationCtx" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg" role="document">
               <div class="modal-content">
                 <div class="modal-header">
@@ -30,19 +30,19 @@
                       <p><span style="color: #17a191; font-weight: bold;">Type frais:</span> Jugement</p>
                       <p><span style="color: #17a191; font-weight: bold;">Numero affaire:</span> {{ operation.numAffaireCTX }}</p>
                       <p><span style="color: #17a191; font-weight: bold;">Numero rouge:</span> {{ operation.motifOperationCTX }}</p>
-                      <p><span style="color: #17a191; font-weight: bold;">Recette finance:</span> {{ operation.nomBeneficiairePaiment }}</p>
+                      <p><span style="color: #17a191; font-weight: bold;">Recette finance:</span> {{ operation.recette }}</p>
                       <p><span style="color: #17a191; font-weight: bold;">Date demande jugement:</span> {{ operation.dateValeurCTX }}</p>
                     </div>
                     <div>
                       <p><span style="color: #17a191; font-weight: bold;">Numéro dossier:</span> {{ operation.dossierDebiteur?.dossierId?.numCtx }}</p>
-                      <p><span style="color: #17a191; font-weight: bold;">Matricule gestionnaire:</span> {{ operation.matriculeAjout }}</p>
+                      <p><span style="color: #17a191; font-weight: bold;">Gestionnaire:</span> {{ operation.matriculeAjout }}</p>
                       <p><span style="color: #17a191; font-weight: bold;">Date creation:</span> {{ operation.dateAjout }}</p>
                     </div>
                   </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="rejeterOperation(operation?.idOperation)">Rejeter</button>
-                    <button type="button" class="btn btn-success" data-bs-dismiss="modal" (click)="approuverOperation(operation?.idOperation)">Approuver</button>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="rejeterOperation(operation?.idOperationCtx)">Rejeter</button>
+                    <button type="button" class="btn btn-success" data-bs-dismiss="modal" (click)="approuverOperation(operation?.idOperationCtx)">Approuver</button>
                 </div>
               </div>
             </div>

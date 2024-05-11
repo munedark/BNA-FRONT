@@ -36,11 +36,11 @@ export class FormeVirmentComponent implements OnInit {
   isDebiteurComponent: boolean = true;
   matricule!: string;
   submitted: boolean = false; 
-
+  date!:Date;
   constructor(
     private virementService: VirementService,
     private auth: AuthService,
-    private sharedService: SharedServicesService
+    private sharedService: SharedServicesService,
   ) {}
 
   ngOnInit() {

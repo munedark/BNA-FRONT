@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
-import { SharedServicesService } from '../services/shared-services.service';
-import { OperationCTX } from '../Models/OperationCTX';
 import { jwtDecode } from 'jwt-decode';
 import { AuthService } from '../services/auth.service';
-import { OperationService } from '../services/operation.service';
 import Swal from 'sweetalert2';
+import { FraisGenerauxAux } from '../Models/FraisGenerauxAux';
+import { FraisGenerauxNonAux } from '../Models/FraisGenerauxNonAux';
+import { FraisGenerauxService } from '../services/frais-generaux.service';
+import { DateService } from '../services/date.service';
 
 @Component({
   selector: 'app-validation120',
@@ -12,17 +13,24 @@ import Swal from 'sweetalert2';
   styleUrls: ['./validation120.component.scss']
 })
 export class Validation120Component {
-  operations: OperationCTX[] = [];
   selectedType: string = 'Auxiliaire';
   matricule!: string;
+  operationAux: FraisGenerauxAux[]=[];
+  operationNonAux: FraisGenerauxNonAux[]=[];
+  date!:Date;
+  constructor(
+     private auth: AuthService, 
+     private operationGerneralService:FraisGenerauxService,
+     private dateService:DateService) { }
 
-  constructor(private sharedService: SharedServicesService, private auth: AuthService, private operationService: OperationService) { }
+  ngOnInit(): void {  
+    this.operationGerneralService.listValidationAux().subscribe((data) => {
+      this.operationAux = data.filter(operation => operation.etatOperation === 'E');
+    });  
+    this.operationGerneralService.listValidationNonAux().subscribe((data) => {
+      this.operationNonAux = data.filter(operation => operation.etatOperation === 'E');
+    });  
 
-  ngOnInit(): void {
-    this.sharedService.listeOperations('120').subscribe((data) => {
-      this.operations = data.filter(operation => operation.etatOperation === 'E');
-      console.log(this.operations);
-    });
   
     const token = this.auth.getToken();
     if (token) {
@@ -32,8 +40,11 @@ export class Validation120Component {
   }
   
 
-  approuverOperation(operationId?: number) {
+  approuverOperation(operationId?: number, typeOperation?: string) {
     if (operationId !== undefined) {
+      this.dateService.getCurrentDate().subscribe((data)=>{
+        this.date=data;
+      })
       Swal.fire({
         title: "Êtes-vous sûr ?",
         text: "Vous ne pourrez pas annuler cela !",
@@ -46,21 +57,32 @@ export class Validation120Component {
         if (result.isConfirmed) {
           Swal.fire({
             title: "Approuver!",
-            text: "L'opération a été approuver.",
+            text: "L'opération a été approuvée.",
             icon: "success"
           }).then(() => {
-            this.operationService.updateOperationCTX(operationId, this.matricule, new Date(),'V').subscribe((data)=>{this.refreshOperationsList();});
+            if (typeOperation === "Auxiliaire") {
+              this.operationGerneralService.updateOperationAux(operationId, this.matricule, this.date, 'V').subscribe((data) => {
+                this.refreshOperationsListAux();
+              });
+            }
+            if (typeOperation !== "Auxiliaire") {
+              this.operationGerneralService.updateOperationNonAux(operationId, this.matricule, this.date, 'V').subscribe((data) => {
+                this.refreshOperationsListNonAux();
+              });
+            }
           });
         }
       });
-    
-  }
+    }
   }
   
-  rejeterOperation(operationId?:number) {
+  
+  rejeterOperation(operationId?:number, typeOperation?: string) {
     if (operationId !== undefined) {
       
-        
+      this.dateService.getCurrentDate().subscribe((data)=>{
+        this.date=data;
+      })
         
         Swal.fire({
           title: "Êtes-vous sûr ?",
@@ -77,7 +99,12 @@ export class Validation120Component {
               text: "L'opération a été rejetée.",
               icon: "success"
             }).then(() => {
-              this.operationService.updateOperationCTX(operationId, this.matricule, new Date(),'R').subscribe((data)=>{this.refreshOperationsList();});
+              if(typeOperation=="Auxiliaire"){
+              this.operationGerneralService.updateOperationAux(operationId, this.matricule, this.date,'R').subscribe((data)=>{this.refreshOperationsListAux();});
+              }
+              if(typeOperation!="Auxiliaire"){
+              this.operationGerneralService.updateOperationNonAux(operationId, this.matricule, this.date,'R').subscribe((data)=>{this.refreshOperationsListNonAux();});
+              }
             });
           }
         });
@@ -85,10 +112,15 @@ export class Validation120Component {
     }
   }
   
-  private refreshOperationsList() {
-    this.sharedService.listeOperations('120').subscribe((data) => {
-      this.operations = data.filter(operation => operation.etatOperation === 'E');
-      console.log(this.operations);
+  private refreshOperationsListAux() {
+    this.operationGerneralService.listValidationAux().subscribe((data) => {
+      this.operationAux = data.filter(operation => operation.etatOperation === 'E');
+      console.log(this.operationAux);
+    });  }
+    private refreshOperationsListNonAux() {
+    this.operationGerneralService.listValidationNonAux().subscribe((data) => {
+      this.operationNonAux = data.filter(operation => operation.etatOperation === 'E');
+      console.log(this.operationNonAux);
     });
   }
   

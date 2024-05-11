@@ -27,7 +27,7 @@ export class VirementService {
   }
 
   updateVirement(operation: OperationCTX) {
-    return this.http.post<any>("http://localhost:8080/agent/operation-ctx/update/virement", operation);
+    return this.http.post<any>("http://localhost:8080//agent/operations/update/virement", operation);
   }
 
   setSubmitted(submitted: boolean) {

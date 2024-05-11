@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { SharedServicesService } from '../services/shared-services.service';
-import { OperationCTX } from '../Models/OperationCTX';
 import { jwtDecode } from 'jwt-decode';
 import { AuthService } from '../services/auth.service';
 import { OperationService } from '../services/operation.service';
 import Swal from 'sweetalert2';
+import { DateService } from '../services/date.service';
+import { OperationFraisInities } from '../Models/OperationFraisInities';
+import { FraisInitiesService } from '../services/frais-inities.service';
 
 @Component({
   selector: 'app-validation110',
@@ -13,14 +15,19 @@ import Swal from 'sweetalert2';
 })
 export class Validation110Component implements OnInit {
   selectedType: string = 'Auxiliaire';
-  operations: OperationCTX[] = [];
+  operations: OperationFraisInities[] = [];
   matricule!: string;
   decline: boolean = false;
-
-  constructor(private sharedService: SharedServicesService, private auth: AuthService, private operationService: OperationService) { }
+  date!:Date;
+  constructor(private sharedService: SharedServicesService,
+    private auth: AuthService, 
+    private operationService: OperationService,
+    private dateService:DateService,
+    private fraisInitiesService:FraisInitiesService
+    ) { }
 
   ngOnInit(): void {
-    this.sharedService.listeOperations('110').subscribe((data) => {
+    this.fraisInitiesService.listValidation().subscribe((data) => {
       this.operations = data.filter(operation => operation.etatOperation === 'E')});
     const token = this.auth.getToken();
     if (token) {
@@ -31,6 +38,9 @@ export class Validation110Component implements OnInit {
 
   approuverOperation(operationId?: number) {
     if (operationId !== undefined) {
+      this.dateService.getCurrentDate().subscribe((data)=>{
+        this.date=data;
+      })
       Swal.fire({
         title: "Êtes-vous sûr ?",
         text: "Vous ne pourrez pas annuler cela !",
@@ -46,7 +56,7 @@ export class Validation110Component implements OnInit {
             text: "L'opération a été approuvée.",
             icon: "success"
           }).then(() => {
-            this.operationService.updateOperationCTX(operationId, this.matricule, new Date(), 'V').subscribe((data) => { this.refreshOperationsList(); });
+            this.fraisInitiesService.updateOperation(operationId, this.matricule, this.date, 'V').subscribe((data) => { this.refreshOperationsList(); });
           });
         }
       });
@@ -55,6 +65,9 @@ export class Validation110Component implements OnInit {
 
   rejeterOperation(operationId?: number) {
     if (operationId !== undefined) {
+      this.dateService.getCurrentDate().subscribe((data)=>{
+        this.date=data;
+      })
       Swal.fire({
         title: "Êtes-vous sûr ?",
         text: "Vous ne pourrez pas annuler cela !",
@@ -70,14 +83,14 @@ export class Validation110Component implements OnInit {
             text: "L'opération a été rejetée.",
             icon: "success"
           }).then(() => {
-            this.operationService.updateOperationCTX(operationId, this.matricule, new Date(), 'R').subscribe((data) => { this.refreshOperationsList(); });
+            this.fraisInitiesService.updateOperation(operationId, this.matricule, this.date, 'R').subscribe((data) => { this.refreshOperationsList(); });
           });
         }
       });
     }
   }
   private refreshOperationsList() {
-    this.sharedService.listeOperations('110').subscribe((data) => {
+    this.fraisInitiesService.listValidation().subscribe((data) => {
       this.operations = data.filter(operation => operation.etatOperation === 'E');
       console.log(this.operations);
     });

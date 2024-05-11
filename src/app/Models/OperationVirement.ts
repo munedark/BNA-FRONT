@@ -7,7 +7,7 @@ import { FormeAffectation } from "./FormeAffectation";
 import { virement } from "./virement";
 
 export interface OperationVirement   {
-idOperation?: number;
+idOperationCtx?: number;
 mntOperation?: number;
 dateOperation?: Date | null;
 dateAjout?: Date | null;

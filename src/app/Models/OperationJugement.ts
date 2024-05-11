@@ -8,7 +8,7 @@ import { virement } from "./virement";
 
 export interface OperationJugement {
     
-    idOperation?: number;
+    idOperationCtx?: number;
     mntFrais?: number;
     typeFrais?: string
     dateOperation?: Date | null;

@@ -18,4 +18,7 @@ export class ChequeService {
   submitForm(operation: OperationCheque) {
     return this.http.post<any>(`${this.url}agent/operations`, operation);
 }
+findOperations(){
+  return this.http.get<any>(`${this.url}agent/operations/chequeNonValide`);
+}
 }

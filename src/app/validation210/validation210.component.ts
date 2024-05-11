@@ -5,6 +5,8 @@ import { AuthService } from '../services/auth.service';
 import { OperationService } from '../services/operation.service';
 import { jwtDecode } from 'jwt-decode';
 import Swal from 'sweetalert2';
+import { Operation } from '../Models/operation';
+import { ChequeService } from '../services/cheque.service';
 
 @Component({
   selector: 'app-validation210',
@@ -12,15 +14,15 @@ import Swal from 'sweetalert2';
   styleUrls: ['./validation210.component.scss']
 })
 export class Validation210Component {
-  operations: OperationCTX[] = [];
+  operations: Operation[] = [];
   matricule!: string;
 
 
-  constructor(private sharedService: SharedServicesService, private auth: AuthService, private operationService: OperationService) { }
+  constructor(private sharedService: SharedServicesService, private auth: AuthService, private operationService: OperationService,private chequeService :ChequeService) { }
 
   ngOnInit(): void {
-    this.sharedService.listeOperations('210').subscribe((data) => {
-      this.operations = data.filter(operation => operation.etatOperation === 'E')});
+    this.chequeService.findOperations().subscribe((data) => {
+      this.operations = data});
     const token = this.auth.getToken();
     if (token) {
       const decodedToken: any = jwtDecode(token);
@@ -77,8 +79,8 @@ export class Validation210Component {
   }
 
   private refreshOperationsList() {
-    this.sharedService.listeOperations('210').subscribe((data) => {
-      this.operations = data.filter(operation => operation.etatOperation === 'E');
+    this.chequeService.findOperations().subscribe((data) => {
+      this.operations = data.filter;
       console.log(this.operations);
     });
   }
