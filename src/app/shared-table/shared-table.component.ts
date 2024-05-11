@@ -114,4 +114,5 @@ export class SharedTableComponent {
         return '';
     }
   }
+  
 }

@@ -10,6 +10,7 @@ import Swal from 'sweetalert2';
 import { ChequeService } from '../services/cheque.service';
 import { OperationCheque } from '../Models/OperationCheque';
 import { DateService } from '../services/date.service';
+import { DossierDebiteur } from '../Models/DossierDebiteur';
 
 @Component({
   selector: 'app-forme-cheque',
@@ -30,7 +31,7 @@ export class FormeChequeComponent implements OnInit {
   matricule!: string;
   operation: OperationCheque = {} as OperationCheque;
   idAgence!: number;
-
+  dossier!:DossierDebiteur;
   constructor(private agence: AgencesService,
               private auth: AuthService,
               private sharedService: SharedServicesService,
@@ -54,7 +55,7 @@ export class FormeChequeComponent implements OnInit {
     })
     this.operation.etatOperation = "E";
     this.operation.matriculeAjout = this.matricule;
-
+    this.operation.dateOperation= new Date();
     this.sharedService.typeOperation('210').subscribe((data) => {
       this.operation.typeOperation = data;
 

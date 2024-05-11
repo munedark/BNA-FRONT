@@ -5,4 +5,4 @@
     (numCTX)="onNumCtxReceived($event)">
 </app-recherche>
 <app-affichage-debiteur [debiteurData]="debiteurData" *ngIf="debiteurData"></app-affichage-debiteur>
-<app-forme-cheque [numCtx]="numCtx" *ngIf="numCtx"></app-forme-cheque>
+<app-forme-cheque [numCtx]="numCtx" *ngIf="debiteurData"></app-forme-cheque>

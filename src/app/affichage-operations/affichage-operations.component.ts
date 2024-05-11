@@ -25,7 +25,7 @@ export class AffichageOperationsComponent implements OnInit, OnDestroy {
   auxiliaireColumns: string[] = ['typeAuxiliaire', 'natureAuxiliaire', 'mntFrais', 'dateValeurCTX', 'etatOperation'];
   timbrageColumns: string[] = ['typePiece', 'mntFrais', 'dateValeurCTX', 'etatOperation'];
   enregistrementColumns: string[] = ['typePiece', 'numeroPiece', 'mntFrais', 'dateValeurCTX', 'etatOperation'];
-  jugementColumns: string[] = ['mntFrais', 'motifOperationCTX', 'numAffaireCTX', 'dateValeurCTX', 'nomBeneficiairePaiment', 'etatOperation'];
+  jugementColumns: string[] = ['mntFrais', 'motifOperationCTX', 'numAffaireCTX', 'dateValeurCTX', 'etatOperation'];
   timbrageColumnsCtx: string[] = ['typePiece', 'mntFrais', 'matriculeEmploye', 'dateValeurCTX', 'etatOperation'];
   enregistrementColumnsCtx: string[] = ['typePiece', 'numeroPiece', 'mntFrais', 'matriculeEmploye', 'dateValeurCTX', 'etatOperation'];
   chequeColumns: string[] = ["numCheque","mntCheque","ribDonneur","motif",'etatOperation'];
