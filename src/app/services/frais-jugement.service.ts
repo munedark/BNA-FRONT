@@ -28,4 +28,5 @@ export class FraisJugementService {
 operations(){
   return this.http.get<any>(`${this.url}agent/operation-frais-jugement/all`)
 }
+
 }

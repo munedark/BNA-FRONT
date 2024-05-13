@@ -4,6 +4,7 @@ import { TypePaiment } from "./TypePaiment";
 
 
 export interface FraisGenerauxNonAux {
+    filter(arg0: (op: any) => boolean): FraisGenerauxNonAux[];
     
     idOperationCtx?: number;
     mntFrais?: number;

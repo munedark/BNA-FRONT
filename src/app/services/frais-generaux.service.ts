@@ -42,4 +42,10 @@ updateOperationNonAux(id: number, matriculeValidateur: string, dateValidation: D
   };
   return this.http.put<any>(url, body);
 }
+allOperationAux(){
+  return this.http.get<any>(`${this.url}agent/aux/all`)
+}
+allOperationNonAux(){
+ return this.http.get<any>(`${this.url}agent/nonAux/all`)
+}
 }

@@ -11,7 +11,7 @@
             
             <!-- Define columns -->
             <ng-container *ngFor="let col of displayedColumns" [matColumnDef]="col">
-            <ng-container *ngIf="col!='mntFrais'&& col!='soldeRisque' && col!='mntEntreePrincipale' && col!='numero_dossier' && col!='etat_Ctx' && col!='solde_recouvrement' && col!='date_Transfert' && col!='prenom'">
+            <ng-container *ngIf="col!='mntFrais'&& col!='soldeRisque' && col!='mntEntreePrincipale' && col!='numero_dossier' && col!='etat_Ctx' && col!='solde_recouvrement' && col!='date_Transfert' && col!='prenom' && col!='numAffaireCTX' && col!='dateValeurCTX' && col!='etatOperation' && col!='motifOperationCTX' && col!='typePiece' && col!='matriculeEmploye' && col!='numeroPiece' && col!='typeAuxiliaire' && col!='natureAuxiliaire'">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ col }} </th>
             </ng-container>
             <ng-container *ngIf="col=='mntFrais'">
@@ -37,6 +37,33 @@
             </ng-container>
             <ng-container *ngIf="col=='prenom'">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> prénom </th>
+            </ng-container>
+            <ng-container *ngIf="col=='motifOperationCTX'">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> motif </th>
+            </ng-container>
+            <ng-container *ngIf="col=='numAffaireCTX'">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> numéro d'affaire </th>
+            </ng-container>
+            <ng-container *ngIf="col=='dateValeurCTX'">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> date d'éxécution </th>
+            </ng-container>
+            <ng-container *ngIf="col=='etatOperation'">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> état d'opération</th>
+            </ng-container>
+            <ng-container *ngIf="col=='typePiece'">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> type de piéce</th>
+            </ng-container>
+            <ng-container *ngIf="col=='matriculeEmploye'">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> matricule de l'employé</th>
+            </ng-container>
+            <ng-container *ngIf="col=='numeroPiece'">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> numéro de pièce</th>
+            </ng-container>
+            <ng-container *ngIf="col=='typeAuxiliaire'">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> type de l'auxiliaire</th>
+            </ng-container>
+            <ng-container *ngIf="col=='natureAuxiliaire'">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> nature de l'auxiliaire</th>
             </ng-container>
                 <td mat-cell *matCellDef="let element" (click)="onRowClick(element)">
                     <ng-container *ngIf="col === 'etatOperation'">

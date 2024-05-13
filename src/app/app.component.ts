@@ -29,4 +29,8 @@ export class AppComponent {
   isGestionnairePage():boolean{
     return this.router.url.startsWith('/GESTIONNAIRE/');
   }
+
+
+
+
 }

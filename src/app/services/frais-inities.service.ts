@@ -25,4 +25,7 @@ export class FraisInitiesService {
     };
     return this.http.put<any>(url, body);
 }
+operations(){
+  return this.http.get<OperationFraisInities[]>(`${this.url}agent/operations-frais-inities/all`)
+}
 }

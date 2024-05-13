@@ -6,9 +6,9 @@
             <div class="groupe">
                 <div class="form-group" [ngClass]="{'has-error': numCheque.invalid && (numCheque.dirty || numCheque.touched)}">
                     <label for="numCheque">Numéro de Chèque:</label>
-                    <input type="text" id="numCheque" class="form-control" name="numéro chèque"  required [(ngModel)]="cheque.numCheque" #numCheque="ngModel">
+                    <input type="text" id="numCheque" class="form-control" name="numéro chèque" required [(ngModel)]="cheque.numCheque" #numCheque="ngModel" pattern="[0-9]{7}">
                     <div *ngIf="numCheque.invalid && (numCheque.dirty || numCheque.touched)" class="text-danger">
-                        Le numéro de chèque est requis.
+                        Le numéro de chèque est requis et doit être composé de 7 chiffres.
                     </div>
                 </div>
 

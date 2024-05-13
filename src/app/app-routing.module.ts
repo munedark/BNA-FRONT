@@ -4,7 +4,6 @@ import { AdministrateurComponent } from './administrateur/administrateur.compone
 import { ValidateurComponent } from './validateur/validateur.component';
 import { GestionnaireComponent } from './gestionnaire/gestionnaire.component';
 import { LoginComponent } from './login/login.component';
-import { DropDownComponent } from './drop-down/drop-down.component';
 import { UserFormComponent } from './user-form/user-form.component';
 import { RechercheComponent } from './recherche/recherche.component';
 import { DebiteurComponent } from './debiteur/debiteur.component';
@@ -22,10 +21,20 @@ import { ClotureDossierComponent } from './cloture-dossier/cloture-dossier.compo
 import { ChequeValidationComponent } from './cheque-validation/cheque-validation.component';
 import { VirementTelecomponseComponent } from './virement-telecomponse/virement-telecomponse.component';
 import { ListeOperation230Component } from './liste-operation230/liste-operation230.component';
-
+import { authGuard } from './auth.guard';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 const routes: Routes = [
+  
+  {
+    path:"login",
+    component:LoginComponent
+  },
+  
+  
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
   {path:"ADMINISTRATEUR",
+  canActivate: [authGuard],
   component:AdministrateurComponent,
   children: [
     {
@@ -36,12 +45,12 @@ const routes: Routes = [
     {
       path: 'Gestion_agent', 
       children: [
-                    {
-                      path: '', 
-                      redirectTo: 'ajout', 
-                      pathMatch: 'full'
-                    },
-                    {
+        {
+          path: '', 
+          redirectTo: 'ajout', 
+          pathMatch: 'full'
+        },
+        {
                       path:'ajout',
                       component: UserFormComponent
                     },
@@ -54,10 +63,10 @@ const routes: Routes = [
                       component: FraisGenerauxComponent
                     }
                   ]
-},
-{
-  path: 'recouvrement', 
-  children: [
+                },
+                {
+                  path: 'recouvrement', 
+                  children: [
                     {
                       path: '', 
                       redirectTo: 'anotherComponent', 
@@ -71,38 +80,39 @@ const routes: Routes = [
                       path: 'blabla', 
                       component: AdministrateurComponent
                     }
-  ]
+                  ]
 },
 {
   path: 'consultation', 
   children: [
-                    {
-                      path: '', 
-                      redirectTo: 'anotherComponent', 
-                      pathMatch: 'full'
-                    },
-                    {
-                      path: 'liste-operations', 
-                      component: ConsultationOperationComponent
-                    },
-                    {
-                      path: 'liste-debiteurs', 
-                      component: ConsultationDebiteurComponent
-                    }
+    {
+      path: '', 
+      redirectTo: 'anotherComponent', 
+      pathMatch: 'full'
+    },
+    {
+      path: 'liste-operations', 
+      component: ConsultationOperationComponent
+    },
+    {
+      path: 'liste-debiteurs', 
+      component: ConsultationDebiteurComponent
+    }
   ]
 }
 ]},
-  {
-    path:"VALIDATEUR",
-    component:ValidateurComponent,
-    children: [
-      {
-        path:'',
-        redirectTo: 'frais',
-        pathMatch:'full'
-      },
-      {
-        path: 'frais', 
+{
+  path:"VALIDATEUR",
+  component:ValidateurComponent,
+  canActivate: [authGuard],
+  children: [
+    {
+      path:'',
+      redirectTo: 'frais',
+      pathMatch:'full'
+    },
+    {
+      path: 'frais', 
         children: [
                       {
                         path: '', 
@@ -126,13 +136,13 @@ const routes: Routes = [
   {
     path: 'recouvrement', 
     children: [
-                      {
-                        path: 'Cheque-Validation', 
-                        component: ChequeValidationComponent
-                      },
-                      {
-                        path: 'Virement-Telecompencé', 
-                        component: VirementTelecomponseComponent
+      {
+        path: 'Cheque-Validation', 
+        component: ChequeValidationComponent
+      },
+      {
+        path: 'Virement-Telecompencé', 
+        component: VirementTelecomponseComponent
                       },
                       {
                         path: 'affectation', 
@@ -146,43 +156,44 @@ const routes: Routes = [
                         path: 'Cloture-Dossier', 
                         component: ClotureDossierComponent
                       }
-    ]
-  },
-  {
+                    ]
+                  },
+                  {
     path: 'consultation', 
     children: [
-                      {
-                        path: '', 
-                        redirectTo: 'anotherComponent', 
-                        pathMatch: 'full'
-                      },
-                      {
-                        path: 'liste-operations', 
-                        component: ConsultationOperationComponent
-                      },
-                      {
-                        path: 'liste-debiteurs', 
-                        component: ConsultationDebiteurComponent
-                      }
+      {
+        path: '', 
+        redirectTo: 'anotherComponent', 
+        pathMatch: 'full'
+      },
+      {
+        path: 'liste-operations', 
+        component: ConsultationOperationComponent
+      },
+      {
+        path: 'liste-debiteurs', 
+        component: ConsultationDebiteurComponent
+      }
     ]
   }
 ]
-  },
-  {
-    path:"GESTIONNAIRE",
-    component:GestionnaireComponent,
-          children: [
-            {
-              path:'',
-              redirectTo: 'frais',
-              pathMatch:'full'
-            },
-            {
-              path: 'frais', 
-              children: [
-                            {
-                              path: '', 
-                              redirectTo: 'pec-frais-contentieux', 
+},
+{
+  path:"GESTIONNAIRE",
+  canActivate: [authGuard],
+  component:GestionnaireComponent,
+  children: [
+    {
+      path:'',
+      redirectTo: 'frais',
+      pathMatch:'full'
+    },
+    {
+      path: 'frais', 
+      children: [
+        {
+          path: '', 
+          redirectTo: 'pec-frais-contentieux', 
                               pathMatch: 'full'
                             },
                             {
@@ -198,60 +209,50 @@ const routes: Routes = [
                               component: FraisGenerauxComponent
                             }
                           ]
-        },
+                        },
         {
           path: 'recouvrement', 
           children: [
-                            {
-                              path: 'PEC-Cheque', 
-                              component: CheckComponent
-                            },
-                            {
-                              path: 'PEC-Affectation', 
-                              component: PecAffectationComponent
-                            },
-                            {
-                              path: 'Cloture-Risque', 
-                              component: ClotureRisqueComponent
-                            },
-                            {
-                              path: 'Cloture-Dossier', 
-                              component: ClotureDossierComponent
-                            }
+            {
+              path: 'PEC-Cheque', 
+              component: CheckComponent
+            },
+            {
+              path: 'PEC-Affectation', 
+              component: PecAffectationComponent
+            },
+            {
+              path: 'Cloture-Risque', 
+              component: ClotureRisqueComponent
+            },
+            {
+              path: 'Cloture-Dossier', 
+              component: ClotureDossierComponent
+            }
           ]
         },
         {
           path: 'consultation', 
           children: [
-                            {
-                              path: '', 
-                              redirectTo: 'anotherComponent', 
-                              pathMatch: 'full'
-                            },
-                            {
-                              path: 'liste-operations', 
-                              component: ConsultationOperationComponent
+            {
+              path: '', 
+              redirectTo: 'anotherComponent', 
+              pathMatch: 'full'
+            },
+            {
+              path: 'liste-operations', 
+              component: ConsultationOperationComponent
                             },
                             {
                               path: 'liste-debiteurs', 
                               component: ConsultationDebiteurComponent
                             }
-          ]
-        }
-      ]
+                          ]
+                        }
+                      ]
 },
-  {
-    path:"login",
-    component:LoginComponent
-  },
-  {
-    path:"recherche",
-    component:RechercheComponent
-  },
   
-
-  { path: '', redirectTo: '/login', pathMatch: 'full' }
-  
+{ path: '**', component: PageNotFoundComponent },
 ];
 
 @NgModule({

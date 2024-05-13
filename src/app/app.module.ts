@@ -73,6 +73,7 @@ import { FormeRisqueClotureComponent } from './forme-risque-cloture/forme-risque
 import { ListeOperation230Component } from './liste-operation230/liste-operation230.component';
 import { Validation230Component } from './validation230/validation230.component';
 import { AdminDateJournalComponent } from './admin-date-journal/admin-date-journal.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
@@ -130,6 +131,7 @@ import { AdminDateJournalComponent } from './admin-date-journal/admin-date-journ
     ListeOperation230Component,
     Validation230Component,
     AdminDateJournalComponent,
+    PageNotFoundComponent,
     
 
   ],

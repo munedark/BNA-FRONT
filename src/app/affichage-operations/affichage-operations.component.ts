@@ -3,6 +3,14 @@ import { OperationConsultationService } from '../services/operation-consultation
 import { OperationCTX } from '../Models/OperationCTX';
 import { Subscription } from 'rxjs';
 import { MatTableDataSource } from '@angular/material/table';
+import { OperationJugement } from '../Models/OperationJugement';
+import { FraisGenerauxAux } from '../Models/FraisGenerauxAux';
+import { FraisGenerauxNonAux } from '../Models/FraisGenerauxNonAux';
+import { OperationCheque } from '../Models/OperationCheque';
+import { OperationVirement } from '../Models/OperationVirement';
+import { OperationAffectation } from '../Models/OperationAffectaion';
+import { FraisGenerauxService } from '../services/frais-generaux.service';
+import { OperationFraisInities } from '../Models/OperationFraisInities';
 
 @Component({
   selector: 'app-affichage-operations',
@@ -14,14 +22,17 @@ export class AffichageOperationsComponent implements OnInit, OnDestroy {
   typeOperation: string = '';
   typeOperationSubscription!: Subscription;
   operationsSubscription!: Subscription;
-  dataSourceAux: MatTableDataSource<OperationCTX> = new MatTableDataSource<OperationCTX>();
-  dataSourceTim: MatTableDataSource<OperationCTX> = new MatTableDataSource<OperationCTX>();
-  dataSourceEnr: MatTableDataSource<OperationCTX> = new MatTableDataSource<OperationCTX>();
-  dataSourceDiver: MatTableDataSource<OperationCTX> = new MatTableDataSource<OperationCTX>();
-  dataSourceJuge: MatTableDataSource<OperationCTX> = new MatTableDataSource<OperationCTX>();
-  dataSourceCheque: MatTableDataSource<OperationCTX> = new MatTableDataSource<OperationCTX>();
-  dataSourceVirement: MatTableDataSource<OperationCTX> = new MatTableDataSource<OperationCTX>();
-  dataSourceAffectation: MatTableDataSource<OperationCTX> = new MatTableDataSource<OperationCTX>();
+  dataSourceAux: MatTableDataSource<FraisGenerauxAux> = new MatTableDataSource<FraisGenerauxAux>();
+  dataSourceTim: MatTableDataSource<FraisGenerauxNonAux> = new MatTableDataSource<FraisGenerauxNonAux>();
+  dataSourceEnr: MatTableDataSource<FraisGenerauxNonAux> = new MatTableDataSource<FraisGenerauxNonAux>();
+  dataSourceDiver: MatTableDataSource<FraisGenerauxNonAux> = new MatTableDataSource<FraisGenerauxNonAux>();
+  dataSourceTimInities: MatTableDataSource<OperationFraisInities> = new MatTableDataSource<OperationFraisInities>();
+  dataSourceEnrInities: MatTableDataSource<OperationFraisInities> = new MatTableDataSource<OperationFraisInities>();
+  dataSourceDiverInities: MatTableDataSource<OperationFraisInities> = new MatTableDataSource<OperationFraisInities>();
+  dataSourceJuge: MatTableDataSource<OperationJugement> = new MatTableDataSource<OperationJugement>();
+  dataSourceCheque: MatTableDataSource<OperationCheque> = new MatTableDataSource<OperationCheque>();
+  dataSourceVirement: MatTableDataSource<OperationVirement> = new MatTableDataSource<OperationVirement>();
+  dataSourceAffectation: MatTableDataSource<OperationAffectation> = new MatTableDataSource<OperationAffectation>();
   auxiliaireColumns: string[] = ['typeAuxiliaire', 'natureAuxiliaire', 'mntFrais', 'dateValeurCTX', 'etatOperation'];
   timbrageColumns: string[] = ['typePiece', 'mntFrais', 'dateValeurCTX', 'etatOperation'];
   enregistrementColumns: string[] = ['typePiece', 'numeroPiece', 'mntFrais', 'dateValeurCTX', 'etatOperation'];
@@ -35,18 +46,32 @@ export class AffichageOperationsComponent implements OnInit, OnDestroy {
   operation!: OperationCTX;
   selectedOperation: OperationCTX | undefined;
 
-  constructor(private operationService: OperationConsultationService) {}
+  constructor(private operationService: OperationConsultationService,
+    private fraisGenerauxService:FraisGenerauxService,
+
+  ) {}
 
   ngOnInit(): void {
     this.typeOperationSubscription = this.operationService.typeOperation$.subscribe(type => {
       this.typeOperation = type;
     });
 
-    this.operationsSubscription = this.operationService.operations$.subscribe(operations => {
+    this.operationsSubscription = this.operationService.operationsGenerauxAux$.subscribe(operations => {
       this.dataSourceAux.data = operations.filter(op => op.typeFrais === 'Auxiliaire');
+    });
+    this.operationsSubscription = this.operationService.operationsGenerauxNonAux$.subscribe(operations => {
       this.dataSourceTim.data = operations.filter(op => op.typeFrais === 'Timbrage');
       this.dataSourceEnr.data = operations.filter(op => op.typeFrais === 'Enregistrement');
       this.dataSourceDiver.data = operations.filter(op => op.typeFrais === 'Divers');
+    });
+    this.operationsSubscription = this.operationService.operationsInties$.subscribe(operations => {
+
+      this.dataSourceTimInities.data = operations.filter(op => op.typeFrais === 'Timbrage');
+      this.dataSourceEnrInities.data = operations.filter(op => op.typeFrais === 'Enregistrement');
+      this.dataSourceDiverInities.data = operations.filter(op => op.typeFrais === 'Divers');
+      
+    });
+    this.operationsSubscription = this.operationService.operationsJugement$.subscribe(operations => {
       this.dataSourceJuge.data = operations.filter(op => op.typeOperation?.libelleOperation === '130' || op.typeOperation === undefined);
     });
   }
@@ -55,7 +80,10 @@ export class AffichageOperationsComponent implements OnInit, OnDestroy {
     this.typeOperationSubscription.unsubscribe();
     this.operationsSubscription.unsubscribe();
     this.operationService.setTypeOperation('');
-    this.operationService.setOperations([]);
+    this.operationService.setOperationsGenerauxAux([]);
+    this.operationService.setOperationsGenerauxNonAux([]);
+    this.operationService.setOperationsInities([]);
+    this.operationService.setOperationsJugement([]);
   }
 
   openModal(operation: OperationCTX) {

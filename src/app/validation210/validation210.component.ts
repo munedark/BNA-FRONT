@@ -5,7 +5,7 @@ import { AuthService } from '../services/auth.service';
 import { OperationService } from '../services/operation.service';
 import { jwtDecode } from 'jwt-decode';
 import Swal from 'sweetalert2';
-import { Operation } from '../Models/operation';
+import { Operation } from '../Models/Operation';
 import { ChequeService } from '../services/cheque.service';
 
 @Component({
