@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs';
 import { virement } from '../Models/virement';
 import { OperationCTX } from '../Models/OperationCTX';
+import { OperationVirement } from '../Models/OperationVirement';
 
 @Injectable({
   providedIn: 'root'
@@ -26,14 +27,12 @@ export class VirementService {
     );
   }
 
-  updateVirement(operation: OperationCTX) {
-    return this.http.post<any>("http://localhost:8080//agent/operations/update/virement", operation);
+  updateVirement(operation: OperationVirement) {
+    return this.http.put<any>("http://localhost:8080/agent/operations/update/virement", operation);
   }
 
   setSubmitted(submitted: boolean) {
     this._submittedSource.next(submitted);
   }
-  operationVirementValide(){
-    return this.http.get<any>('http://localhost:8080/agent/operation-ctx/virementValide');
-  }
+
 }

@@ -76,8 +76,6 @@ numeroRouge: any;
                 title: "Ajouté avec succès",
                 showConfirmButton: false,
                 timer: 1500
-              }).then(() => {
-                window.location.reload();
               });
 
               

@@ -10,6 +10,7 @@ import { jwtDecode } from 'jwt-decode';
 import { SharedServicesService } from '../services/shared-services.service';
 import Swal from 'sweetalert2';
 import { TypeOperationService } from '../services/type-operation.service';
+import { OperationVirement } from '../Models/OperationVirement';
 
 @Component({
   selector: 'app-forme-virment',
@@ -31,7 +32,7 @@ export class FormeVirmentComponent implements OnInit {
     ribDonneur: '',
     validation:''
   };
-  operation: OperationCTX = {} as OperationCTX;
+  operation: OperationVirement = {} as OperationVirement;
   debiteurData: DebiteurInfo | null = null;
   numCtx!: number;
   isDebiteurComponent: boolean = true;
