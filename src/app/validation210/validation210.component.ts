@@ -7,6 +7,7 @@
   import Swal from 'sweetalert2';
   import { Operation } from '../Models/Operation';
   import { ChequeService } from '../services/cheque.service';
+import { DateService } from '../services/date.service';
 
   @Component({
     selector: 'app-validation210',
@@ -16,9 +17,9 @@
   export class Validation210Component {
     operations: Operation[] = [];
     matricule!: string;
+    date!:Date;
 
-
-    constructor(private sharedService: SharedServicesService, private auth: AuthService, private operationService: OperationService,private chequeService :ChequeService) { }
+    constructor(private sharedService: SharedServicesService,    private dateService:DateService, private auth: AuthService, private operationService: OperationService,private chequeService :ChequeService) { }
 
     ngOnInit(): void {
       this.chequeService.findOperations().subscribe((data) => {
@@ -32,6 +33,9 @@
 
     approuverOperation(operationId?: number) {
       if (operationId !== undefined) {
+        this.dateService.getCurrentDate().subscribe((data)=>{
+          this.date=data;
+        })
         Swal.fire({
           title: "Êtes-vous sûr ?",
           text: "Vous ne pourrez pas annuler cela !",
@@ -47,7 +51,7 @@
               text: "L'opération a été approuvée.",
               icon: "success"
             }).then(() => {
-              this.operationService.updateOperationByCheque(operationId, this.matricule, new Date(), 'V').subscribe((data) => { this.refreshOperationsList(); });
+              this.operationService.updateOperationByCheque(operationId, this.matricule, this.date, 'V').subscribe((data) => { this.refreshOperationsList(); });
             });
           }
         });
@@ -56,6 +60,9 @@
 
     rejeterOperation(operationId?: number) {
       if (operationId !== undefined) {
+        this.dateService.getCurrentDate().subscribe((data)=>{
+          this.date=data;
+        })
         Swal.fire({
           title: "Êtes-vous sûr ?",
           text: "Vous ne pourrez pas annuler cela !",
@@ -71,7 +78,7 @@
               text: "L'opération a été rejetée.",
               icon: "success"
             }).then(() => {
-              this.operationService.updateOperationByCheque(operationId, this.matricule, new Date(), 'R').subscribe((data) => { this.refreshOperationsList(); });
+              this.operationService.updateOperationByCheque(operationId, this.matricule, this.date, 'R').subscribe((data) => { this.refreshOperationsList(); });
             });
           }
         });

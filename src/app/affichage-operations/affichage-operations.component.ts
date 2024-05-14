@@ -24,6 +24,9 @@ export class AffichageOperationsComponent implements OnInit, OnDestroy {
   typeOperation: string = '';
   typeOperationSubscription!: Subscription;
   operationsSubscription!: Subscription;
+  
+  
+  // Data sources
   dataSourceAux: MatTableDataSource<FraisGenerauxAux> = new MatTableDataSource<FraisGenerauxAux>();
   dataSourceTim: MatTableDataSource<FraisGenerauxNonAux> = new MatTableDataSource<FraisGenerauxNonAux>();
   dataSourceEnr: MatTableDataSource<FraisGenerauxNonAux> = new MatTableDataSource<FraisGenerauxNonAux>();
@@ -35,15 +38,21 @@ export class AffichageOperationsComponent implements OnInit, OnDestroy {
   dataSourceCheque: MatTableDataSource<OperationCheque> = new MatTableDataSource<OperationCheque>();
   dataSourceVirement: MatTableDataSource<OperationVirement> = new MatTableDataSource<OperationVirement>();
   dataSourceAffectation: MatTableDataSource<OperationAffectation> = new MatTableDataSource<OperationAffectation>();
+  
+  
+  
+  // columns
   auxiliaireColumns: string[] = ['typeAuxiliaire', 'natureAuxiliaire', 'mntFrais', 'dateValeurCTX', 'etatOperation'];
   timbrageColumns: string[] = ['typePiece', 'mntFrais', 'dateValeurCTX', 'etatOperation'];
   enregistrementColumns: string[] = ['typePiece', 'numeroPiece', 'mntFrais', 'dateValeurCTX', 'etatOperation'];
   jugementColumns: string[] = ['mntFrais', 'motifOperationCTX', 'numAffaireCTX', 'dateValeurCTX', 'etatOperation'];
   timbrageColumnsCtx: string[] = ['typePiece', 'mntFrais', 'matriculeEmploye', 'dateValeurCTX', 'etatOperation'];
   enregistrementColumnsCtx: string[] = ['typePiece', 'numeroPiece', 'mntFrais', 'matriculeEmploye', 'dateValeurCTX', 'etatOperation'];
-  chequeColumns: string[] = ["numCheque","mntCheque","ribDonneur","motif",'etatOperation'];
+  chequeColumns: string[] = ["cheque","mntCheque","ribDonneur","motif",'etatOperation'];
   virementColumns: string[] = ['numVirement','dateOperation','nomBeneficiaire','ribBeneficiaire','montantVirement','motif','nomDonneur','ribDonneur','validation','etatOperation'];
   affectationColumns: string[] = ['typeRecouvrement','mntAffectationPrincipale','mntFrais','dateAffectation','etatOperation'];
+ 
+ 
   fraisType!: string;
   operation!: OperationCTX;
   selectedOperation: OperationCTX | undefined;
@@ -56,8 +65,9 @@ export class AffichageOperationsComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.typeOperationSubscription = this.operationService.typeOperation$.subscribe(type => {
       this.NumeroOperation = type;
+      if(type){
       this.typeOperationService.typeOperationByNumero(type).subscribe((data)=>{this.typeOperation=data.libelleOperation});
-
+      }
     });
 
     this.operationsSubscription = this.operationService.operationsGenerauxAux$.subscribe(operations => {
@@ -76,7 +86,10 @@ export class AffichageOperationsComponent implements OnInit, OnDestroy {
       
     });
     this.operationsSubscription = this.operationService.operationsJugement$.subscribe(operations => {
-      this.dataSourceJuge.data = operations.filter(op => op.typeOperation?.libelleOperation === '130' || op.typeOperation === undefined);
+      this.dataSourceJuge.data = operations;
+    });    
+    this.operationsSubscription = this.operationService.operationsCheque$.subscribe(operations => {
+      this.dataSourceCheque.data = operations;
     });
   }
 
@@ -88,6 +101,7 @@ export class AffichageOperationsComponent implements OnInit, OnDestroy {
     this.operationService.setOperationsGenerauxNonAux([]);
     this.operationService.setOperationsInities([]);
     this.operationService.setOperationsJugement([]);
+    this.operationService.setOperationsCheque([]);
   }
 
   openModal(operation: OperationCTX) {

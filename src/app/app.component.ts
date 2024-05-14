@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { DropService } from './services/drop.service';
 import { Subscription } from 'rxjs';
+import { PageIndisponibleService } from './services/page-indisponible.service';
 
 @Component({
   selector: 'app-root',
@@ -15,7 +16,7 @@ export class AppComponent {
   subscription:Subscription|undefined
   
   
-  constructor(private router: Router , private dropService:DropService) {
+  constructor(private router: Router , private dropService:DropService,private pageDisponibleService:PageIndisponibleService) {
     this.subscription = this.dropService.isUserOpen$.subscribe(isOpen => {
       this.isUserOpen = isOpen;
    });
@@ -30,7 +31,8 @@ export class AppComponent {
     return this.router.url.startsWith('/GESTIONNAIRE');
   }
   isAvailable():boolean{
-    return (this.router.url.startsWith('/GESTIONNAIRE') || this.router.url.startsWith("/login") || this.router.url.startsWith("/VALIDATEUR") || this.router.url.startsWith("/ADMINISTRATEUR") )
+    // return (this.router.url.startsWith('/GESTIONNAIRE') || this.router.url.startsWith("/login") || this.router.url.startsWith("/VALIDATEUR") || this.router.url.startsWith("/ADMINISTRATEUR") )
+  return this.pageDisponibleService.estDansPageNotFound;
   }
 
 

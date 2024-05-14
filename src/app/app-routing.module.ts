@@ -5,7 +5,6 @@ import { ValidateurComponent } from './validateur/validateur.component';
 import { GestionnaireComponent } from './gestionnaire/gestionnaire.component';
 import { LoginComponent } from './login/login.component';
 import { UserFormComponent } from './user-form/user-form.component';
-import { RechercheComponent } from './recherche/recherche.component';
 import { DebiteurComponent } from './debiteur/debiteur.component';
 import { FraisGenerauxComponent } from './frais-generaux/frais-generaux.component';
 import { ConsultationOperationComponent } from './consultation-operation/consultation-operation.component';

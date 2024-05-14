@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { OperationCTX } from '../Models/OperationCTX';
 import { OperationJugement } from '../Models/OperationJugement';
 import { FraisGenerauxAux } from '../Models/FraisGenerauxAux';
 import { FraisGenerauxNonAux } from '../Models/FraisGenerauxNonAux';
 import { OperationFraisInities } from '../Models/OperationFraisInities';
+import { OperationCheque } from '../Models/OperationCheque';
 
 @Injectable({
   providedIn: 'root'
@@ -15,12 +15,14 @@ export class OperationConsultationService {
   private operationsGenerauxAux: BehaviorSubject<FraisGenerauxAux[]> = new BehaviorSubject<FraisGenerauxAux[]>([]);
   private operationsGenerauxNonAux: BehaviorSubject<FraisGenerauxNonAux[]> = new BehaviorSubject<FraisGenerauxNonAux[]>([]);
   private operationsInities: BehaviorSubject<OperationFraisInities[]> = new BehaviorSubject<OperationFraisInities[]>([]);
+  private operationsCheque: BehaviorSubject<OperationCheque[]> = new BehaviorSubject<OperationCheque[]>([]);
 
   typeOperation$ = this.typeOperationSubject.asObservable();
   operationsJugement$ = this.operationsJugement.asObservable();
   operationsGenerauxAux$ = this.operationsGenerauxAux.asObservable();
   operationsGenerauxNonAux$ = this.operationsGenerauxNonAux.asObservable();
   operationsInties$ = this.operationsInities.asObservable();
+  operationsCheque$ = this.operationsCheque.asObservable();
 
   constructor() {}
 
@@ -39,5 +41,8 @@ export class OperationConsultationService {
   } 
    setOperationsInities(operations: OperationFraisInities[]) {
     this.operationsInities.next(operations);
+  }   
+  setOperationsCheque(operations: OperationCheque[]) {
+   this.operationsCheque.next(operations);
   }
 }

@@ -59,14 +59,14 @@
             </div>
             <div class="modal-body">
                 <div *ngIf="selectedOperation">
-                    <div *ngIf="selectedOperation.typeOperation?.numeroType" style="display: flex; justify-content: space-around;">
+                    <div *ngIf="selectedOperation.typeOperation?.numeroType=='110'" style="display: flex; justify-content: space-around;">
                         <div>
                             <p><span style="color: #00A17D; font-weight: bold;">Dossier débiteur:</span> &nbsp;{{selectedOperation.dossierDebiteur?.dossierId?.numCtx}}</p>
                             <p><span style="color: #00A17D; font-weight: bold;">Montant frais:</span>&nbsp; {{selectedOperation.mntFrais}} TND</p>
                             <p><span style="color: #00A17D; font-weight: bold;">Type frais:</span>&nbsp; {{selectedOperation.typeFrais}}</p>
                             <p><span style="color: #00A17D; font-weight: bold;">Type Pièce:</span>&nbsp; {{selectedOperation.typePiece}}</p>
                             <p *ngIf="selectedOperation.typeFrais === 'Enrgistrement'"><span style="color: #00A17D; font-weight: bold;">Numéro Pièce:</span>&nbsp; {{selectedOperation.numeroPiece}}</p>
-                            <p><span style="color: #00A17D; font-weight: bold;">Matricule Employé:</span>&nbsp; {{selectedOperation.matriculeEmploye}}</p>
+                            <p ><span style="color: #00A17D; font-weight: bold;">Matricule Employé:</span>&nbsp; {{selectedOperation.matriculeEmploye}}</p>
                             <p><span style="color: #00A17D; font-weight: bold;">Date d'exécution d'opération:</span>&nbsp; {{selectedOperation.dateValeurCTX}}</p>
                         </div>
                         <div>
@@ -95,7 +95,7 @@
                             <p><span style="color: #00A17D; font-weight: bold;">Montant frais:</span>&nbsp; {{selectedOperation.mntFrais}} TND</p>
                             <p><span style="color: #00A17D; font-weight: bold;">Type Auxiliaire:</span>&nbsp; {{selectedOperation.typeAuxiliaire}}</p>
                             <p><span style="color: #00A17D; font-weight: bold;">Nature Auxiliaire:</span>&nbsp; {{selectedOperation.natureAuxiliaire}}</p>
-                            <p *ngIf="selectedOperation.natureAuxiliaire=='Conventionné'" > <span style="color: #00A17D; font-weight: bold;">Auxiliaire:</span>&nbsp; {{selectedOperation.auxiliaire}}</p>
+                            <p *ngIf="selectedOperation.natureAuxiliaire=='Conventionné'" > <span style="color: #00A17D; font-weight: bold;">Auxiliaire:</span>&nbsp; {{selectedOperation.auxiliaire.nom}} {{selectedOperation.auxiliaire.prenom}}</p>
                             <p *ngIf="selectedOperation.natureAuxiliaire!='Conventionné'"><span style="color: #00A17D; font-weight: bold;">Nom Auxiliaire:</span>&nbsp; {{selectedOperation.nomAuxiliaire}}</p>
                             <p *ngIf="selectedOperation.natureAuxiliaire!='Conventionné'"><span style="color: #00A17D; font-weight: bold;">Prenom Auxiliaire:</span> &nbsp;{{selectedOperation.prenomAuxiliaire}}</p>
                             <p *ngIf="selectedOperation.natureAuxiliaire!='Conventionné'"><span style="color: #00A17D; font-weight: bold;">Cin Auxiliaire:</span> &nbsp;{{selectedOperation.cinAuxiliaire}}</p>
@@ -123,7 +123,7 @@
                             <p><span style="color: #00A17D; font-weight: bold;">Montant frais:</span>&nbsp; {{selectedOperation.mntFrais}} TND</p>
                             <p><span style="color: #00A17D; font-weight: bold;">Type frais:</span>&nbsp; Jugement</p>
                             <p><span style="color: #00A17D; font-weight: bold;">Numéro rouge:</span> &nbsp;{{selectedOperation.motifOperationCTX}}</p>
-                            <p><span style="color: #00A17D; font-weight: bold;">Recette Finance:</span>&nbsp; {{selectedOperation.nomBeneficiairePaiment}}</p>
+                            <p><span style="color: #00A17D; font-weight: bold;">Recette Finance:</span>&nbsp; {{selectedOperation.recette}}</p>
                             <p><span style="color: #00A17D; font-weight: bold;">Numéro d'affaire:</span> &nbsp;{{selectedOperation.numAffaireCTX}}</p>
                             <p><span style="color: #00A17D; font-weight: bold;">Date d'exécution d'opération:</span>&nbsp; {{selectedOperation.dateValeurCTX}}</p>
                         </div>

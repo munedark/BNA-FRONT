@@ -21,4 +21,5 @@ export class ChequeService {
 findOperations(){
   return this.http.get<any>(`${this.url}agent/operations/chequeNonValide`);
 }
+
 }

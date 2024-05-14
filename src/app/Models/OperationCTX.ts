@@ -5,6 +5,7 @@ import { TypeOperation } from "./TypeOperation";
 import { TypePaiment } from "./TypePaiment";
 import { FormeAffectation } from "./FormeAffectation";
 import { virement } from "./virement";
+import { Auxiliaire } from "./Auxiliaire";
 
 export interface OperationCTX {
     
@@ -14,11 +15,12 @@ export interface OperationCTX {
     typeFrais?: string;
     typeAuxiliaire?: string;
     typePiece?: string;
-    auxiliaire?: string;
+    auxiliaire: Auxiliaire;
     cinAuxiliaire?: number;
     nomAuxiliaire?: string;
     mntHonoraire?: number;
     rib?: number;
+    recette?: string;
     nomBeneficiaire?: string;
     natureAuxiliaire?: string;
     rneAuxiliaire?: string;

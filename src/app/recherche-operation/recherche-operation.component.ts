@@ -9,6 +9,8 @@ import { OperationJugement } from '../Models/OperationJugement';
 import { FraisGenerauxAux } from '../Models/FraisGenerauxAux';
 import { FraisGenerauxNonAux } from '../Models/FraisGenerauxNonAux';
 import { OperationFraisInities } from '../Models/OperationFraisInities';
+import { OperationService } from '../services/operation.service';
+import { OperationCheque } from '../Models/OperationCheque';
 
 @Component({
   selector: 'app-recherche-operation',
@@ -21,11 +23,13 @@ export class RechercheOperationComponent implements OnDestroy{
   listeOperationAux!: FraisGenerauxAux[];
   listeOperationNonAux!: FraisGenerauxNonAux[];
   listeOperationInities!: OperationFraisInities[];
+  listOperationCheque!: OperationCheque[];
 
   constructor(private fraisJugementService: FraisJugementService,
-    private operationService:OperationConsultationService,
+    private operationConsultationService:OperationConsultationService,
   private fraisGenerauxService:FraisGenerauxService,
-private fraisInitiesService:FraisInitiesService) { }
+private fraisInitiesService:FraisInitiesService,
+private operationService:OperationService) { }
   ngOnDestroy(): void {
     
   }
@@ -34,28 +38,34 @@ private fraisInitiesService:FraisInitiesService) { }
     if(this.typeOperation=="130"){
     this.fraisJugementService.operations().subscribe((data) => {
       this.listeOperationJugement = data;
-      this.operationService.setOperationsJugement(this.listeOperationJugement);
-      this.operationService.setTypeOperation(this.typeOperation);
+      this.operationConsultationService.setOperationsJugement(this.listeOperationJugement);
+      this.operationConsultationService.setTypeOperation(this.typeOperation);
     });    }
     if(this.typeOperation=="120"){
     this.fraisGenerauxService.allOperationAux().subscribe((data) => {
       this.listeOperationAux = data;
-      this.operationService.setOperationsGenerauxAux(this.listeOperationAux);
-      this.operationService.setTypeOperation(this.typeOperation);
+      this.operationConsultationService.setOperationsGenerauxAux(this.listeOperationAux);
+      this.operationConsultationService.setTypeOperation(this.typeOperation);
     });     
     this.fraisGenerauxService.allOperationNonAux().subscribe((data) => {
       this.listeOperationNonAux = data;
-      this.operationService.setOperationsGenerauxNonAux(this.listeOperationNonAux);
-      this.operationService.setTypeOperation(this.typeOperation);
+      this.operationConsultationService.setOperationsGenerauxNonAux(this.listeOperationNonAux);
+      this.operationConsultationService.setTypeOperation(this.typeOperation);
     });   }
      if(this.typeOperation=="110"){
     this.fraisInitiesService.operations().subscribe((data) => {
       this.listeOperationInities = data;
-      this.operationService.setOperationsInities(this.listeOperationInities);
-      this.operationService.setTypeOperation(this.typeOperation);
+      this.operationConsultationService.setOperationsInities(this.listeOperationInities);
+      this.operationConsultationService.setTypeOperation(this.typeOperation);
       console.log(this.listeOperationInities)
     });    
   }
+  if(this.typeOperation=="210"){
+    this.operationService.allOperationCheque().subscribe((data) => {
+      this.listOperationCheque = data;
+      this.operationConsultationService.setOperationsCheque(this.listOperationCheque);
+      this.operationConsultationService.setTypeOperation(this.typeOperation);
+    });    }
   }
 
 }

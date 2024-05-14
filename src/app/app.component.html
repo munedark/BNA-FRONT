@@ -1,4 +1,4 @@
-<app-navbar *ngIf="!isLoginPage() && isAvailable()"></app-navbar>
+<app-navbar *ngIf="!isLoginPage() && !isAvailable()"></app-navbar>
 <app-drop-down *ngIf="!isLoginPage()&& isUserOpen"></app-drop-down>
 <app-notification-operation *ngIf="!isLoginPage()&& isNotifOpen && !isGestionnairePage()"></app-notification-operation>
 <router-outlet></router-outlet>
