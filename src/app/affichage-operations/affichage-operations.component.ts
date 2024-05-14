@@ -11,6 +11,7 @@ import { OperationVirement } from '../Models/OperationVirement';
 import { OperationAffectation } from '../Models/OperationAffectaion';
 import { FraisGenerauxService } from '../services/frais-generaux.service';
 import { OperationFraisInities } from '../Models/OperationFraisInities';
+import { TypeOperationService } from '../services/type-operation.service';
 
 @Component({
   selector: 'app-affichage-operations',
@@ -19,6 +20,7 @@ import { OperationFraisInities } from '../Models/OperationFraisInities';
 })
 export class AffichageOperationsComponent implements OnInit, OnDestroy {
   operations: OperationCTX[] = [];
+  NumeroOperation: string = '';
   typeOperation: string = '';
   typeOperationSubscription!: Subscription;
   operationsSubscription!: Subscription;
@@ -47,13 +49,15 @@ export class AffichageOperationsComponent implements OnInit, OnDestroy {
   selectedOperation: OperationCTX | undefined;
 
   constructor(private operationService: OperationConsultationService,
-    private fraisGenerauxService:FraisGenerauxService,
+  private typeOperationService :TypeOperationService
 
   ) {}
 
   ngOnInit(): void {
     this.typeOperationSubscription = this.operationService.typeOperation$.subscribe(type => {
-      this.typeOperation = type;
+      this.NumeroOperation = type;
+      this.typeOperationService.typeOperationByNumero(type).subscribe((data)=>{this.typeOperation=data.libelleOperation});
+
     });
 
     this.operationsSubscription = this.operationService.operationsGenerauxAux$.subscribe(operations => {

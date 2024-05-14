@@ -9,6 +9,7 @@ import { AuthService } from '../services/auth.service';
 import { jwtDecode } from 'jwt-decode';
 import { SharedServicesService } from '../services/shared-services.service';
 import Swal from 'sweetalert2';
+import { TypeOperationService } from '../services/type-operation.service';
 
 @Component({
   selector: 'app-forme-virment',
@@ -41,6 +42,7 @@ export class FormeVirmentComponent implements OnInit {
     private virementService: VirementService,
     private auth: AuthService,
     private sharedService: SharedServicesService,
+    private typeOperationService:TypeOperationService
   ) {}
 
   ngOnInit() {
@@ -84,7 +86,7 @@ export class FormeVirmentComponent implements OnInit {
     this.operation.matriculeAjout = this.matricule;
     this.operation.matriculeValidateur = this.matricule;
 
-    this.sharedService.typeOperation('220').subscribe((data) => {
+    this.typeOperationService.typeOperationByNumero('220').subscribe((data) => {
       this.operation.typeOperation = data;
 
       this.sharedService.dossier(this.numCtx).subscribe((dossierData) => {

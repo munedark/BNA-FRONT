@@ -8,6 +8,7 @@ import Swal from 'sweetalert2';
 import { OperationJugement } from '../Models/OperationJugement';
 import { FraisJugementService } from '../services/frais-jugement.service';
 import { DateService } from '../services/date.service';
+import { TypeOperationService } from '../services/type-operation.service';
 
 @Component({
   selector: 'app-frais-enregistrement',
@@ -31,7 +32,8 @@ numeroRouge: any;
   constructor(private sharedService: SharedServicesService,
     private jugementService:FraisJugementService,
     private auth: AuthService,
-    private dateService:DateService  
+    private dateService:DateService ,
+    private typeOperationService:TypeOperationService
   ) {}
   ngOnInit(): void {
     const token = this.auth.getToken();
@@ -42,7 +44,7 @@ numeroRouge: any;
   }
 
   submitForm() {
-    this.sharedService.typeOperation('130').subscribe((data) => {
+    this.typeOperationService.typeOperationByNumero('130').subscribe((data) => {
       this.operation.typeOperation =data;
       });
       this.dateService.getCurrentDate().subscribe((data)=>{

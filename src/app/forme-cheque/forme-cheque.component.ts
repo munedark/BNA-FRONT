@@ -11,6 +11,7 @@ import { ChequeService } from '../services/cheque.service';
 import { OperationCheque } from '../Models/OperationCheque';
 import { DateService } from '../services/date.service';
 import { DossierDebiteur } from '../Models/DossierDebiteur';
+import { TypeOperationService } from '../services/type-operation.service';
 
 @Component({
   selector: 'app-forme-cheque',
@@ -36,7 +37,9 @@ export class FormeChequeComponent implements OnInit {
               private auth: AuthService,
               private sharedService: SharedServicesService,
               private chequeService: ChequeService,
-            private dateService:DateService) { }
+              private dateService:DateService,
+              private typeOperationService:TypeOperationService
+          ) { }
 
   ngOnInit(): void {
     this.agence.Agences().subscribe((data) => {
@@ -56,7 +59,7 @@ export class FormeChequeComponent implements OnInit {
     this.operation.etatOperation = "E";
     this.operation.matriculeAjout = this.matricule;
     this.operation.dateOperation= new Date();
-    this.sharedService.typeOperation('210').subscribe((data) => {
+    this.typeOperationService.typeOperationByNumero('210').subscribe((data) => {
       this.operation.typeOperation = data;
 
       forkJoin([

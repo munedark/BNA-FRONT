@@ -9,6 +9,7 @@ import { jwtDecode } from 'jwt-decode';
 import { forkJoin } from 'rxjs';
 import Swal from 'sweetalert2';
 import { OperationAffectation } from '../Models/OperationAffectaion';
+import { TypeOperationService } from '../services/type-operation.service';
 
 @Component({
     selector: 'app-forme-affectation',
@@ -21,7 +22,11 @@ export class FormeAffectationComponent {
     matricule!: string;
     formeAffectation: FormeAffectation = {} as FormeAffectation;
     operation:OperationAffectation={} as OperationAffectation;
-    constructor(private sharedService: SharedServicesService, private auth: AuthService,private affectationService:FormeAffectationService) {}
+    constructor(private sharedService: SharedServicesService,
+        private auth: AuthService,
+        private affectationService:FormeAffectationService,
+        private typeOperationService:TypeOperationService
+        ) {}
     
     ngOnInit(): void {
         this.formeAffectation.nouveauSolde = this.risque?.mntEntreePrincipale;
@@ -42,7 +47,7 @@ export class FormeAffectationComponent {
     this.operation.etatOperation = "E";
     this.operation.matriculeAjout = this.matricule;
 
-    this.sharedService.typeOperation('230').subscribe((data) => {
+    this.typeOperationService.typeOperationByNumero('230').subscribe((data) => {
     this.operation.typeOperation = data;
     this.operation.risque=risque;
     forkJoin([

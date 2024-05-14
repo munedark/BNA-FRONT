@@ -15,6 +15,7 @@ import Swal from 'sweetalert2';
 import { FraisInitiesService } from '../services/frais-inities.service';
 import { OperationFraisInities } from '../Models/OperationFraisInities';
 import { DateService } from '../services/date.service';
+import { TypeOperationService } from '../services/type-operation.service';
 
 
 @Component({
@@ -33,7 +34,12 @@ export class FormeFraisInitiesContentieuxComponent implements OnInit{
   huissiers!:Huissier[];
   experts!:Expert[];
 
-  constructor(private sharedService:SharedServicesService,private auth: AuthService,private auxiliaireService:AuxiliaireConvontionnéService,private fraisInitiesService:FraisInitiesService,private dateService:DateService ){
+  constructor(private sharedService:SharedServicesService,
+    private auth: AuthService,
+    private auxiliaireService:AuxiliaireConvontionnéService,
+    private fraisInitiesService:FraisInitiesService,
+    private dateService:DateService ,
+  private typeOperationService:TypeOperationService){
     this.auxiliaireService.avocatConvontionne().subscribe((data)=>{this.avocats=data;})
     this.auxiliaireService.huissierConvontionne().subscribe((data)=>{this.huissiers=data})
     this.auxiliaireService.expertConvontionne().subscribe((data)=>{this.experts=data})
@@ -78,7 +84,7 @@ export class FormeFraisInitiesContentieuxComponent implements OnInit{
     this.operation.typeFrais=this.fraisEnregistrement.typeFrais;
     this.operation.matriculeAjout=this.matricule;
     this.operation.dateValeurCTX=this.fraisEnregistrement.dateOperation;
-    this.sharedService.typeOperation('110').subscribe((data) => {
+    this.typeOperationService.typeOperationByNumero('110').subscribe((data) => {
       this.operation.typeOperation =data;
       this.operation.matriculeEmploye=this.fraisEnregistrement.matriculeEmploye;
       this.operation.risque=this.risque;

@@ -34,9 +34,7 @@ export class SharedServicesService {
   risqueById(id:number){
     return this.http.get<any>(`${this.url}agent/risque/${id}`)
   }
-  typeOperation(libelle:string){
-    return this.http.get<any>(`${this.url}agent/type-operation/libelle/${libelle}`)
-  }
+
   diverOptions(){
     return this.http.get<any>(`${this.url}agent/divers/pieces`)
   }

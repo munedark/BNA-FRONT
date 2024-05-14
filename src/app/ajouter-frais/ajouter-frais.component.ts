@@ -13,6 +13,7 @@ import { FraisGenerauxNonAux } from '../Models/FraisGenerauxNonAux';
 import { FraisGenerauxService } from '../services/frais-generaux.service';
 import { Auxiliaire } from '../Models/Auxiliaire';
 import { DateService } from '../services/date.service';
+import { TypeOperationService } from '../services/type-operation.service';
 
 @Component({
   selector: 'app-ajouter-frais',
@@ -30,7 +31,11 @@ export class AjouterFraisComponent implements OnInit{
   huissiers!:Auxiliaire[];
   experts!:Auxiliaire[];
   
-  constructor(private sharedService:SharedServicesService,private auth: AuthService,private auxiliaireService:AuxiliaireConvontionnéService,private fraisGenerauxService:FraisGenerauxService,private dateService:DateService ){
+  constructor(private sharedService:SharedServicesService,private auth: AuthService,
+    private auxiliaireService:AuxiliaireConvontionnéService,
+    private fraisGenerauxService:FraisGenerauxService,
+    private dateService:DateService,
+    private typeOperationService:TypeOperationService ){
     this.auxiliaireService.avocatConvontionne().subscribe((data)=>{this.avocats=data;})
     this.auxiliaireService.huissierConvontionne().subscribe((data)=>{this.huissiers=data;})
     this.auxiliaireService.expertConvontionne().subscribe((data)=>{this.experts=data ;})
@@ -77,7 +82,7 @@ getoptions(){
         this.operationAux.dateValeurCTX=this.fraisEnregistrement.dateOperation;
         if (this.fraisEnregistrement.RIB && this.fraisEnregistrement.typePaiment=='Virement Tétécomponsé')
           {this.operationAux.rib=parseInt(this.fraisEnregistrement.RIB)}
-        this.sharedService.typeOperation('120').subscribe((data) => {
+        this.typeOperationService.typeOperationByNumero('120').subscribe((data) => {
           this.operationAux.typeOperation =data;})
       
         this.operationAux.natureAuxiliaire=this.fraisEnregistrement.natureAuxiliaire;
@@ -155,7 +160,7 @@ getoptions(){
         this.operationNonAux.dateValeurCTX=this.fraisEnregistrement.dateOperation;
         if (this.fraisEnregistrement.RIB && this.fraisEnregistrement.typePaiment=='Virement Tétécomponsé')
           {this.operationNonAux.rib=parseInt(this.fraisEnregistrement.RIB)}
-        this.sharedService.typeOperation('120').subscribe((data) => {
+        this.typeOperationService.typeOperationByNumero('120').subscribe((data) => {
           this.operationNonAux.typeOperation =data;})
         if (this.fraisEnregistrement.typePiece!='Autres'){
           this.operationNonAux.typePiece=this.fraisEnregistrement.typePiece;

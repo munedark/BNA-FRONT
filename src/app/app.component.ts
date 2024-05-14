@@ -27,9 +27,11 @@ export class AppComponent {
     return this.router.url === '/login';
 }
   isGestionnairePage():boolean{
-    return this.router.url.startsWith('/GESTIONNAIRE/');
+    return this.router.url.startsWith('/GESTIONNAIRE');
   }
-
+  isAvailable():boolean{
+    return (this.router.url.startsWith('/GESTIONNAIRE') || this.router.url.startsWith("/login") || this.router.url.startsWith("/VALIDATEUR") || this.router.url.startsWith("/ADMINISTRATEUR") )
+  }
 
 
 

@@ -70,7 +70,7 @@ export class Validation230Component {
             text: "L'opération a été rejetée.",
             icon: "success"
           }).then(() => {
-            this.operationService.updateOperationCTX(operationId, this.matricule, new Date(), 'R').subscribe((data) => { this.refreshOperationsList(); });
+            // this.operationService.updateOperationCTX(operationId, this.matricule, new Date(), 'R').subscribe((data) => { this.refreshOperationsList(); });
           });
         }
       });
