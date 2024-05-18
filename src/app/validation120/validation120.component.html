@@ -1,117 +1,212 @@
-
-<p style="margin-right: 15px; font-weight: 600; color:#707C7C ;">Sélectionner le type de frais :</p>
-<select [(ngModel)]="selectedType"  class="form-select" style="margin: 5px 0 10px 0;">
+<!-- Sélectionner le type de frais -->
+<p style="margin-right: 15px; font-weight: 600; color:#707C7C;">Sélectionner le type de frais :</p>
+<select [(ngModel)]="selectedType" class="form-select" style="margin: 5px 0 10px 0;">
   <option value="Auxiliaire">Auxiliaire</option>
-  <option value="Enregistrement" >Enregistrement</option>
+  <option value="Enregistrement">Enregistrement</option>
   <option value="Timbrage">Timbrage</option>
   <option value="Divers">Divers</option>
 </select>
+
+<!-- Tableau des opérations -->
 <table class="table">
-    <thead>
-      <tr>
-        <th scope="col">Type frais</th>
-        <th scope="col">Montant frais</th>
-        <th scope="col">Date Operation</th>
-        <th scope="col">Afficher plus</th>
+  <thead>
+    <tr>
+      <th scope="col">Type frais</th>
+      <th scope="col">Montant frais</th>
+      <th scope="col">Date Operation</th>
+      <th scope="col">Afficher plus</th>
+    </tr>
+  </thead>
+  <tbody>
+    <!-- Opérations auxiliaires -->
+    <ng-container *ngFor="let operation of operationAux">
+      <tr *ngIf="selectedType === 'Auxiliaire'">
+        <td>{{ operation.typeFrais }}</td>
+        <td>{{ operation.mntFrais }} DT</td>
+        <td>{{ operation.dateValeurCTX }}</td>
+        <td>
+          <button (click)="onRisqueSelectionFalse(operation.dossierDebiteur?.dossierId?.numCtx)" class="btn button" data-bs-toggle="modal" [attr.data-bs-target]="'#exampleModal' + operation.idOperationCtx">ouvrir</button>
+        </td>
       </tr>
-    </thead>
-    <tbody>
-      <ng-container *ngFor="let operation of operationAux ">
-        <tr *ngIf="selectedType==='Auxiliaire'">
-          <td>{{ operation.typeFrais }}</td>
-          <td>{{ operation.mntFrais }} DT</td>
-          <td>{{ operation.dateValeurCTX }}</td>
-          <td >
-            <button class="btn button" data-bs-toggle="modal" [attr.data-bs-target]="'#exampleModal' + operation.idOperationCtx">ouvrir</button>
-          </td>
-        </tr>
-      </ng-container>
-      <ng-container *ngFor="let operation of operationNonAux ">
-        <tr *ngIf=" operation.typeFrais===selectedType">
-          <td>{{ operation.typeFrais }}</td>
-          <td>{{ operation.mntFrais }} DT</td>
-          <td>{{ operation.dateValeurCTX }}</td>
-          <td >
-            <button class="btn button" data-bs-toggle="modal" [attr.data-bs-target]="'#exampleModal' + operation.idOperationCtx">ouvrir</button>
-          </td>
-        </tr>
-      </ng-container>
-    </tbody>
-  </table>
-  <!-- auxiliaire -->
-  <ng-container *ngFor="let operation of operationAux">
-    <div class="modal fade" [id]="'exampleModal' + operation.idOperationCtx" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h1 class="modal-title fs-5" id="exampleModalLabel" style="color: #707C7C;"><img src="../../assets/validation.png" style="width: 35px; margin-right: 8px;">Validation Operation</h1>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            <div style="display: flex; justify-content: space-around;">
-              <div>
-                <p><span style="color: #17a191; font-weight: bold;">Type frais:</span> {{ operation.typeFrais }}</p>
-                <div *ngIf="operation.typeFrais=='Auxiliaire'">
-                <p ><span style="color: #17a191; font-weight: bold;">Type auxiliaire:</span> {{ operation.typeAuxiliaire }}</p>
-                <p><span style="color: #17a191; font-weight: bold;">Nature auxiliaire:</span> {{ operation.natureAuxiliaire }}</p>
-                <p *ngIf="operation.natureAuxiliaire=='Conventionné'"><span style="color: #17a191; font-weight: bold;">Auxiliaire:</span> {{ operation.auxiliaire?.nom }} {{operation.auxiliaire?.prenom}}</p>
-                <p ><span style="color: #17a191; font-weight: bold;">Numero affaire:</span> {{ operation.numAffaireCTX }}</p>
-                <p ><span style="color: #17a191; font-weight: bold;">Montant honoraires:</span> {{ operation.mntHonoraire }}</p>
-                </div>
-            <p><span style="color: #17a191; font-weight: bold;">Montant de frais:</span> {{ operation.mntFrais }}</p>
-            <p><span style="color: #17a191; font-weight: bold;">Type paiement:</span> {{ operation.typePaiments?.libelle }}</p>
-
-            </div>
-              <div>
-                <p><span style="color: #17a191; font-weight: bold;">Numéro dossier:</span> {{ operation.dossierDebiteur?.dossierId?.numCtx }}</p>
-                <p><span style="color: #17a191; font-weight: bold;">Date operation:</span> {{ operation.dateValeurCTX }}</p>
-                <p><span style="color: #17a191; font-weight: bold;">Gestionnaire:</span> {{ operation.matriculeAjout }}</p>
-                <p><span style="color: #17a191; font-weight: bold;">Date creation:</span> {{ operation.dateAjout }}</p>
-              </div>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="rejeterOperation(operation?.idOperationCtx,operation?.typeFrais)">Rejeter</button>
-            <button type="button" class="btn btn-success" data-bs-dismiss="modal" (click)="approuverOperation(operation?.idOperationCtx,operation?.typeFrais)">Approuver</button>
-        </div>
-        </div>
-      </div>
-    </div>
-    <!-- non auxiliaire -->
+    </ng-container>
+    <!-- Autres opérations -->
     <ng-container *ngFor="let operation of operationNonAux">
-      <div class="modal fade" [id]="'exampleModal' + operation.idOperationCtx" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h1 class="modal-title fs-5" id="exampleModalLabel" style="color: #707C7C;"><img src="../../assets/validation.png" style="width: 35px; margin-right: 8px;">Validation Operation</h1>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-            <div style="display: flex; justify-content: space-around;">
-              <div>
-                <p><span style="color: #17a191; font-weight: bold;">Type frais:</span> {{ operation.typeFrais }}</p>
-                <p *ngIf="operation.typeFrais!='Auxiliaire'"><span style="color: #17a191; font-weight: bold;">Type piece:</span> {{ operation.typePiece }}</p>
-                <div *ngIf="operation.typeFrais=='Auxiliaire'">
-                </div>
-            <p><span style="color: #17a191; font-weight: bold;">Montant de frais:</span> {{ operation.mntFrais }}</p>
-            <p><span style="color: #17a191; font-weight: bold;">Type paiement:</span> {{ operation.typePaiments?.libelle }}</p>
+      <tr *ngIf="operation.typeFrais === selectedType">
+        <td>{{ operation.typeFrais }}</td>
+        <td>{{ operation.mntFrais }} DT</td>
+        <td>{{ operation.dateValeurCTX }}</td>
+        <td>
+          <button (click)="onRisqueSelectionFalse(operation.dossierDebiteur?.dossierId?.numCtx)" class="btn button" data-bs-toggle="modal" [attr.data-bs-target]="'#exampleModal' + operation.idOperationCtx">ouvrir</button>
+        </td>
+      </tr>
+    </ng-container>
+  </tbody>
+</table>
 
-            </div>
-              <div>
-                <p><span style="color: #17a191; font-weight: bold;">Numéro dossier:</span> {{ operation.dossierDebiteur?.dossierId?.numCtx }}</p>
-                <p  *ngIf="operation.typeFrais==='Enregistrement'"><span style="color: #17a191; font-weight: bold;">N° piece:</span> {{ operation.numeroPiece }}</p>
-                <p><span style="color: #17a191; font-weight: bold;">Date operation:</span> {{ operation.dateValeurCTX }}</p>
-                <p><span style="color: #17a191; font-weight: bold;">Gestionnaire:</span> {{ operation.matriculeAjout }}</p>
-                <p><span style="color: #17a191; font-weight: bold;">Date creation:</span> {{ operation.dateAjout }}</p>
+<!-- Modales pour les opérations -->
+<ng-container *ngFor="let operation of operationAux">
+  <div class="modal fade" [id]="'exampleModal' + operation.idOperationCtx" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 *ngIf="!onRisqueSelection" class="modal-title fs-5" id="exampleModalLabel" style="color: #707C7C;">
+            <img src="../../assets/validation.png" style="width: 35px; margin-right: 8px;">Validation Operation
+          </h1>
+          <h1 *ngIf="onRisqueSelection" class="modal-title fs-5" id="exampleModalLabel" style="color: #707C7C;">
+            <img src="../../assets/validation.png" style="width: 35px; margin-right: 8px;">Choisir Risque
+          </h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div style="display: flex; justify-content: space-around;" *ngIf="!onRisqueSelection">
+            <div>
+              <p><span style="color: #17a191; font-weight: bold;">Type frais:</span> {{ operation.typeFrais }}</p>
+              <div *ngIf="operation.typeFrais === 'Auxiliaire'">
+                <p><span style="color: #17a191; font-weight: bold;">Type auxiliaire:</span> {{ operation.typeAuxiliaire }}</p>
+                <p><span style="color: #17a191; font-weight: bold;">Nature auxiliaire:</span> {{ operation.natureAuxiliaire }}</p>
+                <p *ngIf="operation.natureAuxiliaire === 'Conventionné'"><span style="color: #17a191; font-weight: bold;">Auxiliaire:</span> {{ operation.auxiliaire?.nom }} {{ operation.auxiliaire?.prenom }}</p>
+                <p><span style="color: #17a191; font-weight: bold;">Numero affaire:</span> {{ operation.numAffaireCTX }}</p>
               </div>
             </div>
+            <div>
+              <p><span style="color: #17a191; font-weight: bold;">Montant honoraires:</span> {{ operation.mntHonoraire }}</p>
+              <p><span style="color: #17a191; font-weight: bold;">Montant de frais:</span> {{ operation.mntFrais }}</p>
+              <p><span style="color: #17a191; font-weight: bold;">Type paiement:</span> {{ operation.typePaiments?.libelle }}</p>
+              <p><span style="color: #17a191; font-weight: bold;">Numéro dossier:</span> {{ operation.dossierDebiteur?.dossierId?.numCtx }}</p>
+            </div>
+            <div>
+              <p><span style="color: #17a191; font-weight: bold;">Date operation:</span> {{ operation.dateValeurCTX }}</p>
+              <p><span style="color: #17a191; font-weight: bold;">Gestionnaire:</span> {{ operation.matriculeAjout }}</p>
+              <p><span style="color: #17a191; font-weight: bold;">Date creation:</span> {{ operation.dateAjout }}</p>
+              <p *ngIf="risqueSelected.id"><span style="color: #17a191; font-weight: bold;">Risque:</span> {{ risqueSelected.id }}</p>
+            </div>
           </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="rejeterOperation(operation?.idOperationCtx,operation?.typeFrais)">Rejeter</button>
-            <button type="button" class="btn btn-success" data-bs-dismiss="modal" (click)="approuverOperation(operation?.idOperationCtx,operation?.typeFrais)">Approuver</button>
+
+          <!-- Sélection de risque -->
+          <div style="display: flex; justify-content: center;" *ngIf="!onRisqueSelection">
+            <button (click)="onRisqueSelectionTrue()" class="button" style="height: 40px; margin: 10px; width: 80%;">Choisir Risque</button>
+          </div>
+          <div *ngIf="onRisqueSelection">
+            <table class="table">
+              <thead>
+                <tr>
+                  <td style="color: #707C7C;" scope="col">ID</td>
+                  <td style="color: #707C7C;" scope="col">Produit</td>
+                  <td style="color: #707C7C;" scope="col">Montant frais</td>
+                  <td style="color: #707C7C;" scope="col">Solde Principale Risque</td>
+                  <td style="color: #707C7C;" scope="col">Montant entrée principale</td>
+                  <td style="color: #707C7C;" scope="col">IR</td>
+                  <td style="color: #707C7C;" scope="col">IC</td>
+                  <td style="color: #707C7C;" scope="col">Choisir</td>
+                </tr>
+              </thead>
+              <tbody>
+                <ng-container *ngFor="let risque of risques">
+                  <tr>
+                    <td>{{ risque.id }}</td>
+                    <td>{{ risque.produit.libelleProduit }} DT</td>
+                    <td>{{ risque.mntFrais }}</td>
+                    <td>{{ risque.soldePrincipaleRisque }}</td>
+                    <td>{{ risque.mntEntreePrincipale }} DT</td>
+                    <td>{{ risque.ir }}</td>
+                    <td>{{ risque.ic }}</td>
+                    <td>
+                      <button class="btn button" (click)="onRisqueSelectionFalse(); affectationRisque(risque)">Choisir</button>
+                    </td>
+                  </tr>
+                </ng-container>
+              </tbody>
+            </table>
+          </div>
         </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="rejeterOperation(operation?.idOperationCtx, operation?.typeFrais)">Rejeter</button>
+          <button type="button" class="btn btn-success" [disabled]="!risqueSelected.id" data-bs-dismiss="modal" (click)="approuverOperation(operation?.idOperationCtx, operation?.typeFrais)">Approuver</button>
         </div>
       </div>
     </div>
-  </ng-container>
-  
+  </div>
+</ng-container>
+
+<!-- Modales pour les opérations non auxiliaires -->
+<ng-container *ngFor="let operation of operationNonAux">
+  <div class="modal fade" [id]="'exampleModal' + operation.idOperationCtx" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 *ngIf="!onRisqueSelection" class="modal-title fs-5" id="exampleModalLabel" style="color: #707C7C;">
+            <img src="../../assets/validation.png" style="width: 35px; margin-right: 8px;">Validation Operation
+          </h1>
+          <h1 *ngIf="onRisqueSelection" class="modal-title fs-5" id="exampleModalLabel" style="color: #707C7C;">
+            <img src="../../assets/validation.png" style="width: 35px; margin-right: 8px;">Choisir Risque
+          </h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div style="display: flex; justify-content: space-around;" *ngIf="!onRisqueSelection">
+            <div>
+              <p><span style="color: #17a191; font-weight: bold;">Type frais:</span> {{ operation.typeFrais }}</p>
+              <p *ngIf="operation.typeFrais !== 'Auxiliaire'"><span style="color: #17a191; font-weight: bold;">Type piece:</span> {{ operation.typePiece }}</p>
+              <p><span style="color: #17a191; font-weight: bold;">Montant de frais:</span> {{ operation.mntFrais }}</p>
+            </div>
+            <div>
+              <p><span style="color: #17a191; font-weight: bold;">Type paiement:</span> {{ operation.typePaiments?.libelle }}</p>
+              <p><span style="color: #17a191; font-weight: bold;">Numéro dossier:</span> {{ operation.dossierDebiteur?.dossierId?.numCtx }}</p>
+              <p><span style="color: #17a191; font-weight: bold;">Date operation:</span> {{ operation.dateValeurCTX }}</p>
+            </div>
+            <div>
+              <p *ngIf="operation.typeFrais === 'Enregistrement'"><span style="color: #17a191; font-weight: bold;">N° piece:</span> {{ operation.numeroPiece }}</p>
+              <p><span style="color: #17a191; font-weight: bold;">Gestionnaire:</span> {{ operation.matriculeAjout }}</p>
+              <p><span style="color: #17a191; font-weight: bold;">Date creation:</span> {{ operation.dateAjout }}</p>
+              <p *ngIf="risqueSelected.id && operation.typeFrais!='Enregistrement'"><span style="color: #17a191; font-weight: bold;">Risque:</span> {{ risqueSelected.id }}</p>
+            </div>
+            <div>
+              <p *ngIf="risqueSelected.id && operation.typeFrais=='Enregistrement'"><span style="color: #17a191; font-weight: bold;">Risque:</span> {{ risqueSelected.id }}</p>
+            </div>
+          </div>
+
+          <!-- Sélection de risque -->
+          <div style="display: flex; justify-content: center;" *ngIf="!onRisqueSelection">
+            <button (click)="onRisqueSelectionTrue()" class="button" style="height: 40px; margin: 10px; width: 80%;">Choisir Risque</button>
+          </div>
+          <div *ngIf="onRisqueSelection">
+            <table class="table">
+              <thead>
+                <tr>
+                  <td style="color: #707C7C;" scope="col">ID</td>
+                  <td style="color: #707C7C;" scope="col">Produit</td>
+                  <td style="color: #707C7C;" scope="col">Montant frais</td>
+                  <td style="color: #707C7C;" scope="col">Solde Principale Risque</td>
+                  <td style="color: #707C7C;" scope="col">Montant entrée principale</td>
+                  <td style="color: #707C7C;" scope="col">IR</td>
+                  <td style="color: #707C7C;" scope="col">IC</td>
+                  <td style="color: #707C7C;" scope="col">Choisir</td>
+                </tr>
+              </thead>
+              <tbody>
+                <ng-container *ngFor="let risque of risques">
+                  <tr>
+                    <td>{{ risque.id }}</td>
+                    <td>{{ risque.produit.libelleProduit }} DT</td>
+                    <td>{{ risque.mntFrais }}</td>
+                    <td>{{ risque.soldePrincipaleRisque }}</td>
+                    <td>{{ risque.mntEntreePrincipale }} DT</td>
+                    <td>{{ risque.ir }}</td>
+                    <td>{{ risque.ic }}</td>
+                    <td>
+                      <button class="btn button" (click)="onRisqueSelectionFalse(); affectationRisque(risque)">Choisir</button>
+                    </td>
+                  </tr>
+                </ng-container>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger"  data-bs-dismiss="modal" (click)="rejeterOperation(operation?.idOperationCtx, operation?.typeFrais)">Rejeter</button>
+          <button type="button" class="btn btn-success" [disabled]="!risqueSelected.id" data-bs-dismiss="modal" (click)="approuverOperation(operation?.idOperationCtx, operation?.typeFrais)">Approuver</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container>

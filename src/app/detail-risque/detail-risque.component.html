@@ -4,7 +4,6 @@
     <div class="donnees" *ngIf="risque">
         <div class="first">
             <ul >
-                <li><span style="color: black;">Titre de creance:</span></li>
                 <li><span style="color: black;">Stage du risque:</span> <span style="color: #00A17D;">  {{risque.stade}}</span></li>
                 <li><span style="color: black;">Font du risque:<br></span>
                     <ul style="list-style-type: circle;">
@@ -16,15 +15,13 @@
         </div>
         <div class="second">
             <ul>
-                <li><span style="color: black;">Montant d'entrée en principal:</span> </li>
-                <li><span style="color: black;">Montant d'entrée en IC:</span> </li>
-                <li><span style="color: black;">Montant d'entrée en II:</span></li>
+                <li><span style="color: black;">Solde principal:</span> <span style="color: #00A17D;">  {{risque.mntEntreePrincipale}} TND</span></li>
+                <li><span style="color: black;">Solde des IC:</span> <span style="color: #00A17D;">  {{risque.ic}} TND</span></li>
             </ul>
         </div>
         <div class="third">
             <ul >
-                <li><span style="color: black;">Solde principal:</span> <span style="color: #00A17D;">  {{risque.mntEntreePrincipale}} TND</span></li>
-                <li><span style="color: black;">Solde des IC:</span> <span style="color: #00A17D;">  {{risque.ic}} TND</span></li>
+
                 <li><span style="color: black;">Solde des IR:</span> <span style="color: #00A17D;">  {{risque.ir}} TND</span></li>
                 <li><span style="color: black;">Montant des frais:</span> <span style="color: #00A17D;">  {{risque.mntFrais}} TND</span></li>
             </ul>

@@ -5,26 +5,38 @@
           <div class="modal-content">
             <div class="modal-header">
               <h1 class="modal-title fs-5" id="exampleModalLabel" style="color: #6C7878;" *ngIf="!isAffectationComponent"><img src="../../assets/forme.png" style="width: 40px;margin-right: 5px;"> Frais Enregistrement</h1>
-              <h1 class="modal-title fs-5" id="exampleModalLabel" style="color: #6C7878;"*ngIf="isAffectationComponent"><img src="../../assets/forme.png" style="width: 40px;margin-right: 5px;"> Pec Affectation</h1>
+              <h1 class="modal-title fs-5" id="exampleModalLabel" style="color: #6C7878;"*ngIf="isAffectationComponent=='principale'"><img src="../../assets/forme.png" style="width: 40px;margin-right: 5px;"> Pec Affectation principale</h1>
+              <h1 class="modal-title fs-5" id="exampleModalLabel" style="color: #6C7878;"*ngIf="isAffectationComponent=='ir'"><img src="../../assets/forme.png" style="width: 40px;margin-right: 5px;"> Pec Affectation IR</h1>
+              <h1 class="modal-title fs-5" id="exampleModalLabel" style="color: #6C7878;"*ngIf="isAffectationComponent=='ic'"><img src="../../assets/forme.png" style="width: 40px;margin-right: 5px;"> Pec Affectation IC</h1>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
                 <div class="modal-body">
                   <div id="jugement" *ngIf="isDebiteurComponent">
                   <app-affichage-debiteur [debiteurData]="debiteurData" [isModalOpen]="true"></app-affichage-debiteur>
                   <app-detail-risque [risque]="risque"></app-detail-risque>
-                  <app-frais-enregistrement [risque]="risque"  [numCtx]="numCtx"></app-frais-enregistrement>
+                  <app-forme-jugement [risque]="risque"  [numCtx]="numCtx"></app-forme-jugement>
                 </div>
                 <div id="contentieux" *ngIf="isintiesComponent">
                   <app-affichage-debiteur [debiteurData]="debiteurData" [isModalOpen]="true"></app-affichage-debiteur>
                   <app-forme-frais-inities-contentieux [risque]="risque"  [numCtx]="numCtx"></app-forme-frais-inities-contentieux>
                 </div>
-                <div id="contentieux" *ngIf="isAffectationComponent">
+                <div id="contentieux" *ngIf="isAffectationComponent=='principale'">
                   <app-affichage-debiteur [debiteurData]="debiteurData" [isModalOpen]="true"></app-affichage-debiteur>
                   <app-detail-risque [risque]="risque"></app-detail-risque>
-                  <app-forme-affectation [risque]="risque"  [numCtx]="numCtx"></app-forme-affectation>
+                  <app-forme-affectation-principale [risque]="risque"  [numCtx]="numCtx"></app-forme-affectation-principale>
+                </div>
+                <div id="contentieux" *ngIf="isAffectationComponent=='ir'">
+                  <app-affichage-debiteur [debiteurData]="debiteurData" [isModalOpen]="true"></app-affichage-debiteur>
+                  <app-detail-risque [risque]="risque"></app-detail-risque>
+                  <app-forme-affectation-ir [risque]="risque"  [numCtx]="numCtx"></app-forme-affectation-ir>
+                </div>
+                <div id="contentieux" *ngIf="isAffectationComponent=='ic'">
+                  <app-affichage-debiteur [debiteurData]="debiteurData" [isModalOpen]="true"></app-affichage-debiteur>
+                  <app-detail-risque [risque]="risque"></app-detail-risque>
+                  <app-forme-affectation-ic [risque]="risque"  [numCtx]="numCtx"></app-forme-affectation-ic>
                 </div>
                 <div id="contentieux" *ngIf="isClotureRisque">
-                  <div *ngIf="risque?.stade=='4- Cloturé' && risque?.soldeRisque==0 && risque?.ic==0 && risque?.ir==0">
+                  <div *ngIf="risque?.stade=='4- Cloturé' && risque?.soldePrincipaleRisque==0 && risque?.ic==0 && risque?.ir==0">
                     <app-forme-risque-cloture></app-forme-risque-cloture>
                   </div>
                 </div>

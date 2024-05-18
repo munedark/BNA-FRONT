@@ -1,11 +1,9 @@
 import { Component } from '@angular/core';
 import { jwtDecode } from 'jwt-decode';
 import { AuthService } from '../services/auth.service';
-import { OperationService } from '../services/operation.service';
 import Swal from 'sweetalert2';
 import { OperationJugement } from '../Models/OperationJugement';
 import { FraisJugementService } from '../services/frais-jugement.service';
-import { DateService } from '../services/date.service';
 
 @Component({
   selector: 'app-validation130',
@@ -16,10 +14,8 @@ export class Validation130Component {
   operations:  OperationJugement[] = [];
   selectedType: string = 'Auxiliaire';
   matricule!: string;
-  date!:Date;
   constructor(private jugementService:FraisJugementService, 
-    private auth: AuthService, 
-    private dateService:DateService  ) { }
+    private auth: AuthService ) { }
 
   ngOnInit(): void {
     this.jugementService.listValidation().subscribe((data) => {
@@ -38,9 +34,7 @@ export class Validation130Component {
   approuverOperation(operationId?: number) {
     console.log(operationId)
     if (operationId !== undefined) {
-      this.dateService.getCurrentDate().subscribe((data)=>{
-        this.date=data;
-      })
+
       Swal.fire({
         title: "Êtes-vous sûr ?",
         text: "Vous ne pourrez pas annuler cela !",
@@ -56,7 +50,7 @@ export class Validation130Component {
             text: "L'opération a été approuver.",
             icon: "success"
           }).then(() => {
-            this.jugementService.updateOperationCTX(operationId, this.matricule, this.date,'V').subscribe((data)=>{this.refreshOperationsList();});
+            this.jugementService.updateOperationCTX(operationId, this.matricule,new Date(),'V').subscribe((data)=>{this.refreshOperationsList();});
           });
         }
       });
@@ -67,9 +61,7 @@ export class Validation130Component {
   rejeterOperation(operationId?:number) {
     console.log(operationId)
     if (operationId !== undefined) {
-        this.dateService.getCurrentDate().subscribe((data)=>{
-          this.date=data;
-        })
+
           Swal.fire({
           title: "Êtes-vous sûr ?",
           text: "Vous ne pourrez pas annuler cela !",
@@ -85,7 +77,7 @@ export class Validation130Component {
               text: "L'opération a été rejetée.",
               icon: "success"
             }).then(() => {
-              this.jugementService.updateOperationCTX(operationId, this.matricule, this.date,'R').subscribe((data)=>{this.refreshOperationsList();});
+              this.jugementService.updateOperationCTX(operationId, this.matricule,new Date(),'R').subscribe((data)=>{this.refreshOperationsList();});
             });
           }
         });

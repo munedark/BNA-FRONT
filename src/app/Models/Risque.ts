@@ -4,7 +4,7 @@ import { Produit } from "./Produit";
 
 export interface Risque {
         id:number;
-        soldeRisque:number;
+        soldePrincipaleRisque:number;
         mntFrais:number;
         mntEntreePrincipale:number;
         journalRisque:JournalRisque;

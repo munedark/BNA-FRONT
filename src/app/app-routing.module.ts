@@ -5,7 +5,7 @@ import { ValidateurComponent } from './validateur/validateur.component';
 import { GestionnaireComponent } from './gestionnaire/gestionnaire.component';
 import { LoginComponent } from './login/login.component';
 import { UserFormComponent } from './user-form/user-form.component';
-import { DebiteurComponent } from './debiteur/debiteur.component';
+import { FraisJugementComponent } from './frais-jugement/frais-jugement.component';
 import { FraisGenerauxComponent } from './frais-generaux/frais-generaux.component';
 import { ConsultationOperationComponent } from './consultation-operation/consultation-operation.component';
 import { ConsultationDebiteurComponent } from './consultation-debiteur/consultation-debiteur.component';
@@ -13,8 +13,7 @@ import { FraisInitiesContentieuxComponent } from './frais-inities-contentieux/fr
 import { FraisJugementValidateurComponent } from './frais-jugement-validateur/frais-jugement-validateur.component';
 import { FraisGenerauxValidateurComponent } from './frais-generaux-validateur/frais-generaux-validateur.component';
 import { FraisContentieuxValidateurComponent } from './frais-contentieux-validateur/frais-contentieux-validateur.component';
-import { CheckComponent } from './check/check.component';
-import { PecAffectationComponent } from './pec-affectation/pec-affectation.component';
+import { RecouvrementChequeComponent } from './recouvrement-cheque/recouvrement-cheque.component';
 import { ClotureRisqueComponent } from './cloture-risque/cloture-risque.component';
 import { ClotureDossierComponent } from './cloture-dossier/cloture-dossier.component';
 import { ChequeValidationComponent } from './cheque-validation/cheque-validation.component';
@@ -22,6 +21,9 @@ import { VirementTelecomponseComponent } from './virement-telecomponse/virement-
 import { ListeOperation230Component } from './liste-operation230/liste-operation230.component';
 import { authGuard } from './auth.guard';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { PecAffectationPrincipaleComponent } from './pec-affectation-principale/pec-affectation-principale.component';
+import { PecAffectationIrComponent } from './pec-affectation-ir/pec-affectation-ir.component';
+import { PecAffectationIcComponent } from './pec-affectation-ic/pec-affectation-ic.component';
 
 const routes: Routes = [
   
@@ -55,7 +57,7 @@ const routes: Routes = [
                     },
                     {
                       path: 'supprimer', 
-                      component: DebiteurComponent
+                      component: FraisJugementComponent
                     },
                     {
                       path: 'modifier', 
@@ -143,18 +145,19 @@ const routes: Routes = [
         path: 'Virement-Telecompencé', 
         component: VirementTelecomponseComponent
                       },
-                      {
-                        path: 'affectation', 
-                        component: ListeOperation230Component
-                      },
-                      {
-                        path: 'Cloture-Risque', 
-                        component: ClotureRisqueComponent
-                      },
-                      {
-                        path: 'Cloture-Dossier', 
-                        component: ClotureDossierComponent
-                      }
+      {
+        path: 'affectation', 
+        component: ListeOperation230Component
+        },
+        {
+          path: 'Cloture-Risque', 
+          component: ClotureRisqueComponent
+        },
+        {
+          path: 'Cloture-Dossier', 
+          component: ClotureDossierComponent
+        }
+                      
                     ]
                   },
                   {
@@ -201,7 +204,7 @@ const routes: Routes = [
                             },
                             {
                               path: 'frais-jugement', 
-                              component: DebiteurComponent
+                              component: FraisJugementComponent
                             },
                             {
                               path: 'pec-frais-generaux-direction', 
@@ -214,20 +217,21 @@ const routes: Routes = [
           children: [
             {
               path: 'PEC-Cheque', 
-              component: CheckComponent
+              component: RecouvrementChequeComponent
             },
             {
-              path: 'PEC-Affectation', 
-              component: PecAffectationComponent
+              path: 'PEC-Affectation-Principale', 
+              component: PecAffectationPrincipaleComponent
             },
             {
-              path: 'Cloture-Risque', 
-              component: ClotureRisqueComponent
+              path: 'PEC-Affectation-Ir', 
+              component: PecAffectationIrComponent
             },
             {
-              path: 'Cloture-Dossier', 
-              component: ClotureDossierComponent
-            }
+              path: 'PEC-Affectation-Ic', 
+              component: PecAffectationIcComponent
+            },
+
           ]
         },
         {

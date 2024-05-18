@@ -1,14 +1,14 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 
 import { DebiteurInfo } from '../Models/DebiteurInfo';
 import { Risque } from '../Models/Risque';
 
 @Component({
-  selector: 'app-debiteur',
-  templateUrl: './debiteur.component.html',
-  styleUrls: ['./debiteur.component.scss']
+  selector: 'app-frais-jugement',
+  templateUrl: './frais-jugement.component.html',
+  styleUrls: ['./frais-jugement.component.scss']
 })
-export class DebiteurComponent {
+export class FraisJugementComponent {
   debiteurData: DebiteurInfo | null = null;
   risquesData: Risque[] | null = null; 
   numCtx!:number;

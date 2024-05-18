@@ -1,14 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { DebiteurInfo } from '../Models/DebiteurInfo';
-import { AgencesService } from '../services/agences.service';
-import { AgenceBank } from '../Models/AgenceBank';
 
 @Component({
-  selector: 'app-check',
-  templateUrl: './check.component.html',
-  styleUrls: ['./check.component.scss']
+  selector: 'app-recouvrement-cheque',
+  templateUrl: './recouvrement-cheque.component.html',
+  styleUrls: ['./recouvrement-cheque.component.scss']
 })
-export class CheckComponent {
+export class RecouvrementChequeComponent {
 
   debiteurData: DebiteurInfo | null = null;
 

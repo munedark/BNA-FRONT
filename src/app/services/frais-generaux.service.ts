@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { FraisGenerauxNonAux } from '../Models/FraisGenerauxNonAux';
 import { FraisGenerauxAux } from '../Models/FraisGenerauxAux';
 import { Observable } from 'rxjs';
+import { Risque } from '../Models/Risque';
 
 @Injectable({
   providedIn: 'root'
@@ -24,7 +25,7 @@ export class FraisGenerauxService {
     return this.http.get<FraisGenerauxNonAux[]>(`${this.url}agent/nonAux/validation`)
   }
 
-  updateOperationAux(id: number, matriculeValidateur: string, dateValidation: Date, etatOperation: string): Observable<FraisGenerauxAux> {
+  updateOperationAux(id: number, matriculeValidateur: string, dateValidation: Date, etatOperation: string , risque:Risque): Observable<FraisGenerauxAux> {
     const url = `${this.url}agent/aux/${id}`;
     const body = {
       matriculeValidateur,
@@ -33,12 +34,13 @@ export class FraisGenerauxService {
     };
     return this.http.put<any>(url, body);
 }
-updateOperationNonAux(id: number, matriculeValidateur: string, dateValidation: Date, etatOperation: string): Observable<FraisGenerauxNonAux> {
+updateOperationNonAux(id: number, matriculeValidateur: string, dateValidation: Date, etatOperation: string, risque:Risque): Observable<FraisGenerauxNonAux> {
   const url = `${this.url}agent/nonAux/${id}`;
   const body = {
     matriculeValidateur,
     dateValidation,
-    etatOperation 
+    etatOperation ,
+    risque
   };
   return this.http.put<any>(url, body);
 }

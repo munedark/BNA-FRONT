@@ -15,4 +15,7 @@ export class FormeAffectationService {
   submitForm(operation: OperationAffectation) {
     return this.http.post<any>(`http://localhost:8080/agent/operations`, operation);
 }
+findOperationsNonValide(){
+  return this.http.get<any>(`http://localhost:8080/agent/operations/forme-affectationNonValide`);
+}
 }

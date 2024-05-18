@@ -16,11 +16,11 @@ import { DateService } from '../services/date.service';
 import { TypeOperationService } from '../services/type-operation.service';
 
 @Component({
-  selector: 'app-ajouter-frais',
-  templateUrl: './ajouter-frais.component.html',
-  styleUrls: ['./ajouter-frais.component.scss']
+  selector: 'app-ajout-frais-generaux',
+  templateUrl: './ajout-frais-generaux.component.html',
+  styleUrls: ['./ajout-frais-generaux.component.scss']
 })
-export class AjouterFraisComponent implements OnInit{
+export class AjoutFraisGenerauxComponent implements OnInit{
   @Input() numDossier!:number;
   diversPieces$ = new BehaviorSubject<DiversPiece[]>([]);
   operationAux:FraisGenerauxAux={} as FraisGenerauxAux;
@@ -69,10 +69,10 @@ getoptions(){
     
     // auxiliaire
     if(this.fraisEnregistrement.typeFrais=="Auxiliaire"){
-      this.operationAux.dateOperation=new Date();
+      this.operationAux.dateAjout=new Date();
 
       this.dateService.getCurrentDate().subscribe((data)=>{
-        this.operationAux.dateAjout=data;
+        this.operationAux.dateOperation=data;
       });
         this.operationAux.etatOperation="E";
         if(this.fraisEnregistrement.montantFrais){
@@ -147,10 +147,10 @@ getoptions(){
 
 
       // not Auxiliaire
-      this.operationNonAux.dateOperation=new Date();
       if(this.fraisEnregistrement.typeFrais!='Auxiliaire'){
+        this.operationNonAux.dateAjout=new Date();
         this.dateService.getCurrentDate().subscribe((data)=>{
-          this.operationNonAux.dateAjout=data;
+          this.operationNonAux.dateOperation=data;
         })
         this.operationNonAux.etatOperation="E";
         if(this.fraisEnregistrement.montantFrais){

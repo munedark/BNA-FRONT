@@ -5,7 +5,8 @@ import Swal from 'sweetalert2';
 import { FraisGenerauxAux } from '../Models/FraisGenerauxAux';
 import { FraisGenerauxNonAux } from '../Models/FraisGenerauxNonAux';
 import { FraisGenerauxService } from '../services/frais-generaux.service';
-import { DateService } from '../services/date.service';
+import { Risque } from '../Models/Risque';
+import { SharedServicesService } from '../services/shared-services.service';
 
 @Component({
   selector: 'app-validation120',
@@ -17,11 +18,14 @@ export class Validation120Component {
   matricule!: string;
   operationAux: FraisGenerauxAux[]=[];
   operationNonAux: FraisGenerauxNonAux[]=[];
-  date!:Date;
+  risques!:Risque[];
+  risqueSelected:Risque={} as Risque;
+  onRisqueSelection:Boolean=false;
   constructor(
-     private auth: AuthService, 
-     private operationGerneralService:FraisGenerauxService,
-     private dateService:DateService) { }
+    private auth: AuthService, 
+    private operationGerneralService:FraisGenerauxService,
+    private risqueService:SharedServicesService
+) { }
 
   ngOnInit(): void {  
     this.operationGerneralService.listValidationAux().subscribe((data) => {
@@ -31,7 +35,7 @@ export class Validation120Component {
       this.operationNonAux = data.filter(operation => operation.etatOperation === 'E');
     });  
 
-  
+
     const token = this.auth.getToken();
     if (token) {
       const decodedToken: any = jwtDecode(token);
@@ -42,9 +46,7 @@ export class Validation120Component {
 
   approuverOperation(operationId?: number, typeOperation?: string) {
     if (operationId !== undefined) {
-      this.dateService.getCurrentDate().subscribe((data)=>{
-        this.date=data;
-      })
+
       Swal.fire({
         title: "Êtes-vous sûr ?",
         text: "Vous ne pourrez pas annuler cela !",
@@ -61,12 +63,12 @@ export class Validation120Component {
             icon: "success"
           }).then(() => {
             if (typeOperation === "Auxiliaire") {
-              this.operationGerneralService.updateOperationAux(operationId, this.matricule, this.date, 'V').subscribe((data) => {
+              this.operationGerneralService.updateOperationAux(operationId, this.matricule,new Date(), 'V',this.risqueSelected).subscribe((data) => {
                 this.refreshOperationsListAux();
               });
             }
             if (typeOperation !== "Auxiliaire") {
-              this.operationGerneralService.updateOperationNonAux(operationId, this.matricule, this.date, 'V').subscribe((data) => {
+              this.operationGerneralService.updateOperationNonAux(operationId, this.matricule,new Date(), 'V',this.risqueSelected).subscribe((data) => {
                 this.refreshOperationsListNonAux();
               });
             }
@@ -74,16 +76,13 @@ export class Validation120Component {
         }
       });
     }
+
+    
   }
   
   
   rejeterOperation(operationId?:number, typeOperation?: string) {
     if (operationId !== undefined) {
-      
-      this.dateService.getCurrentDate().subscribe((data)=>{
-        this.date=data;
-      })
-        
         Swal.fire({
           title: "Êtes-vous sûr ?",
           text: "Vous ne pourrez pas annuler cela !",
@@ -100,10 +99,10 @@ export class Validation120Component {
               icon: "success"
             }).then(() => {
               if(typeOperation=="Auxiliaire"){
-              this.operationGerneralService.updateOperationAux(operationId, this.matricule, this.date,'R').subscribe((data)=>{this.refreshOperationsListAux();});
+              this.operationGerneralService.updateOperationAux(operationId, this.matricule, new Date(),'R',this.risqueSelected).subscribe((data)=>{this.refreshOperationsListAux();});
               }
               if(typeOperation!="Auxiliaire"){
-              this.operationGerneralService.updateOperationNonAux(operationId, this.matricule, this.date,'R').subscribe((data)=>{this.refreshOperationsListNonAux();});
+              this.operationGerneralService.updateOperationNonAux(operationId, this.matricule, new Date(),'R',this.risqueSelected).subscribe((data)=>{this.refreshOperationsListNonAux();});
               }
             });
           }
@@ -122,6 +121,25 @@ export class Validation120Component {
       this.operationNonAux = data.filter(operation => operation.etatOperation === 'E');
       console.log(this.operationNonAux);
     });
+  }
+
+  onRisqueSelectionTrue(){
+    this.onRisqueSelection=true;
+    
+    console.log(this.onRisqueSelection)
+  }
+  onRisqueSelectionFalse(numCtx?:number){
+    this.onRisqueSelection=false;
+    this.risqueSelected={} as Risque;
+    console.log(numCtx)
+    if(numCtx){this.risqueService.risques(numCtx).subscribe((data)=>
+      {
+        this.risques=data;
+      })}
+
+  }
+  affectationRisque(risque:Risque){
+    this.risqueSelected=risque;
   }
   
 }

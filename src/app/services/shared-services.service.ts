@@ -4,6 +4,7 @@ import { OperationCTX } from '../Models/OperationCTX';
 import { Subject, forkJoin, tap } from 'rxjs';
 import { DiversPiece } from '../Models/DiversPiece';
 import { map } from 'rxjs/operators';
+import { Risque } from '../Models/Risque';
 
 
 
@@ -20,7 +21,7 @@ export class SharedServicesService {
     return this.http.get<any>(`${this.url}agent/debiteur/recherche/${numCtx}`);
   }
   risques(numCtx:number){
-    return this.http.get(`${this.url}agent/debiteur/risque/${numCtx}`);
+    return this.http.get<Risque[]>(`${this.url}agent/debiteur/risque/${numCtx}`);
   }
   operationByType(libelle:String){
     return this.http.get(`${this.url}agent/operation-ctx${libelle}`);

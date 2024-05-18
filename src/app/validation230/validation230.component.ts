@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
-import { OperationCTX } from '../Models/OperationCTX';
 import { SharedServicesService } from '../services/shared-services.service';
 import { AuthService } from '../services/auth.service';
 import { OperationService } from '../services/operation.service';
 import { jwtDecode } from 'jwt-decode';
 import Swal from 'sweetalert2';
+import { OperationAffectation } from '../Models/OperationAffectaion';
+import { FormeAffectationService } from '../services/forme-affectation.service';
 
 @Component({
   selector: 'app-validation230',
@@ -13,15 +14,17 @@ import Swal from 'sweetalert2';
 })
 export class Validation230Component {
   selectedType: string = 'Auxiliaire';
-  operations: OperationCTX[] = [];
+  operations: OperationAffectation[] = [];
   matricule!: string;
 
-
-  constructor(private sharedService: SharedServicesService, private auth: AuthService, private operationService: OperationService) { }
+  constructor(private sharedService: SharedServicesService, 
+    private auth: AuthService, 
+    private operationService: OperationService,
+    private affectationService: FormeAffectationService,) { }
 
   ngOnInit(): void {
-    this.sharedService.listeOperations('210').subscribe((data) => {
-      this.operations = data.filter(operation => operation.etatOperation === 'E')});
+    this.affectationService.findOperationsNonValide().subscribe((data) => {
+      this.operations = data});
     const token = this.auth.getToken();
     if (token) {
       const decodedToken: any = jwtDecode(token);
@@ -31,6 +34,7 @@ export class Validation230Component {
 
   approuverOperation(operationId?: number) {
     if (operationId !== undefined) {
+
       Swal.fire({
         title: "Êtes-vous sûr ?",
         text: "Vous ne pourrez pas annuler cela !",
@@ -46,7 +50,7 @@ export class Validation230Component {
             text: "L'opération a été approuvée.",
             icon: "success"
           }).then(() => {
-            this.operationService.updateOperationByCheque(operationId, this.matricule, new Date(), 'V').subscribe((data) => { this.refreshOperationsList(); });
+            this.operationService.updateOperationByAffectation(operationId, this.matricule, new Date(), 'V').subscribe((data) => { this.refreshOperationsList(); });
           });
         }
       });
@@ -55,6 +59,7 @@ export class Validation230Component {
 
   rejeterOperation(operationId?: number) {
     if (operationId !== undefined) {
+
       Swal.fire({
         title: "Êtes-vous sûr ?",
         text: "Vous ne pourrez pas annuler cela !",
@@ -70,7 +75,7 @@ export class Validation230Component {
             text: "L'opération a été rejetée.",
             icon: "success"
           }).then(() => {
-            // this.operationService.updateOperationCTX(operationId, this.matricule, new Date(), 'R').subscribe((data) => { this.refreshOperationsList(); });
+            this.operationService.updateOperationByAffectation(operationId, this.matricule, new Date(), 'R').subscribe((data) => { this.refreshOperationsList(); });
           });
         }
       });
@@ -78,8 +83,8 @@ export class Validation230Component {
   }
 
   private refreshOperationsList() {
-    this.sharedService.listeOperations('210').subscribe((data) => {
-      this.operations = data.filter(operation => operation.etatOperation === 'E');
+    this.affectationService.findOperationsNonValide().subscribe((data) => {
+      this.operations = data;
       console.log(this.operations);
     });
   }

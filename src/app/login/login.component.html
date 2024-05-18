@@ -8,10 +8,10 @@
             <!-- Login Form -->
             <form #loginForm="ngForm" (ngSubmit)="login()">
                 <input type="text" id="username" class="fadeIn second" [(ngModel)]="username" name="username" placeholder="matricule" required>
-                <div *ngIf="loginForm.controls['username']?.hasError('required') && loginForm.submitted" class="error-message">Username is required.
+                <div *ngIf="loginForm.controls['username']?.hasError('required') && loginForm.submitted" class="error-message">Matricule est requis.
                 </div>
                 <input type="password" id="password" class="fadeIn third" [(ngModel)]="password" name="password" placeholder="mot de passe" required>
-                <div *ngIf="loginForm.controls['password']?.hasError('required') && loginForm.submitted" class="error-message">Password is required.</div>
+                <div *ngIf="loginForm.controls['password']?.hasError('required') && loginForm.submitted" class="error-message">Mot de passe est requis.</div>
                 <input type="submit" class="fadeIn fourth submit" value="Log In" [disabled]="!loginForm.valid">
             </form>
         </div>

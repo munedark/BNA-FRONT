@@ -33,7 +33,6 @@ export class RechercheComponent {
     if (this.numCtx) {
       this.sharedService.risques(this.numCtx).subscribe(data => {
         this.risquesData = data;
-        console.log(this.risquesData);
         this.risques.emit(this.risquesData);
       });
     }

@@ -4,7 +4,6 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import * as jspdf from 'jspdf';
 import html2canvas from 'html2canvas';
-import { fontWeight } from 'html2canvas/dist/types/css/property-descriptors/font-weight';
 
 @Component({
   selector: 'app-shared-table',

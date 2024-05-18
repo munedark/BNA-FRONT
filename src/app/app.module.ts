@@ -26,15 +26,12 @@ import { ShowUsersComponent } from './show-users/show-users.component';
 import { AffichageDebiteurComponent } from './affichage-debiteur/affichage-debiteur.component';
 import { JwtInterceptor } from './jwt.interceptor';
 import { AuthInterceptor } from './auth-interceptor.service';
-import { DebiteurComponent } from './debiteur/debiteur.component';
 import {MAT_FORM_FIELD_DEFAULT_OPTIONS, MatFormFieldModule} from '@angular/material/form-field';
 import { AffichageRisqueComponent } from './affichage-risque/affichage-risque.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
 import { DetailRisqueComponent } from './detail-risque/detail-risque.component';
-import { FraisEnregistrementComponent } from './frais-enregistrement/frais-enregistrement.component';
 import { FraisGenerauxComponent } from './frais-generaux/frais-generaux.component';
-import { AjouterFraisComponent } from './ajouter-frais/ajouter-frais.component';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
 import { FraisGenerauxValidateurComponent } from './frais-generaux-validateur/frais-generaux-validateur.component';
@@ -56,13 +53,10 @@ import { Validation110Component } from './validation110/validation110.component'
 import { Validation120Component } from './validation120/validation120.component';
 import { Validation130Component } from './validation130/validation130.component';
 import { MatStepperModule } from '@angular/material/stepper';
-import { CheckComponent } from './check/check.component';
 import { VirementTelecomponseComponent } from './virement-telecomponse/virement-telecomponse.component';
-import { PecAffectationComponent } from './pec-affectation/pec-affectation.component';
 import { ClotureRisqueComponent } from './cloture-risque/cloture-risque.component';
 import { ClotureDossierComponent } from './cloture-dossier/cloture-dossier.component';
 import { FormeChequeComponent } from './forme-cheque/forme-cheque.component';
-import { FormeAffectationComponent } from './forme-affectation/forme-affectation.component';
 import { FormeVirmentComponent } from './forme-virment/forme-virment.component';
 import { RechercheDateComponent } from './recherche-date/recherche-date.component';
 import { WebSocketService } from './services/web-socket.service';
@@ -74,6 +68,16 @@ import { ListeOperation230Component } from './liste-operation230/liste-operation
 import { Validation230Component } from './validation230/validation230.component';
 import { AdminDateJournalComponent } from './admin-date-journal/admin-date-journal.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { FormeAffectationIrComponent } from './forme-affectation-ir/forme-affectation-ir.component';
+import { FormeAffectationIcComponent } from './forme-affectation-ic/forme-affectation-ic.component';
+import { FormeAffectationPrincipaleComponent } from './forme-affectation-principale/forme-affectation-principale.component';
+import { PecAffectationPrincipaleComponent } from './pec-affectation-principale/pec-affectation-principale.component';
+import { PecAffectationIrComponent } from './pec-affectation-ir/pec-affectation-ir.component';
+import { PecAffectationIcComponent } from './pec-affectation-ic/pec-affectation-ic.component';
+import { AjoutFraisGenerauxComponent } from './ajout-frais-generaux/ajout-frais-generaux.component';
+import { FraisJugementComponent } from './frais-jugement/frais-jugement.component';
+import { RecouvrementChequeComponent } from './recouvrement-cheque/recouvrement-cheque.component';
+import { FormeJugementComponent } from './forme-jugement/forme-jugement.component';
 
 @NgModule({
   declarations: [
@@ -92,12 +96,9 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     ClientFormComponent,
     ShowUsersComponent,
     AffichageDebiteurComponent,
-    DebiteurComponent,
     AffichageRisqueComponent,
     DetailRisqueComponent,
-    FraisEnregistrementComponent,
     FraisGenerauxComponent,
-    AjouterFraisComponent,
     FraisGenerauxValidateurComponent,
     FraisJugementValidateurComponent,
     ConsultationOperationComponent,
@@ -115,13 +116,10 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     Validation110Component,
     Validation120Component,
     Validation130Component,
-    CheckComponent,
     VirementTelecomponseComponent,
-    PecAffectationComponent,
     ClotureRisqueComponent,
     ClotureDossierComponent,
     FormeChequeComponent,
-    FormeAffectationComponent,
     FormeVirmentComponent,
     RechercheDateComponent,
     ChequeValidationComponent,
@@ -132,6 +130,16 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     Validation230Component,
     AdminDateJournalComponent,
     PageNotFoundComponent,
+    FormeAffectationIrComponent,
+    FormeAffectationIcComponent,
+    FormeAffectationPrincipaleComponent,
+    PecAffectationPrincipaleComponent,
+    PecAffectationIrComponent,
+    PecAffectationIcComponent,
+    AjoutFraisGenerauxComponent,
+    FraisJugementComponent,
+    RecouvrementChequeComponent,
+    FormeJugementComponent,
     
 
   ],

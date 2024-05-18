@@ -66,6 +66,7 @@ export class FormeFraisInitiesContentieuxComponent implements OnInit{
   fraisEnregistrement: AjoutFrais = {} as AjoutFrais;
 
   submitForm() {
+    this.operation.dateAjout=new Date();
     if(this.fraisEnregistrement.numeroPiece && this.fraisEnregistrement.typeFrais=="Enregistrement"){
     this.operation.numeroPiece=this.fraisEnregistrement.numeroPiece;}
     this.operation.typePiece=this.fraisEnregistrement.typePiece
@@ -74,7 +75,7 @@ export class FormeFraisInitiesContentieuxComponent implements OnInit{
       this.operation.mntFrais=this.fraisEnregistrement.montantFrais;
     }
     this.dateService.getCurrentDate().subscribe((data)=>{
-      this.operation.dateAjout=data;
+      this.operation.dateOperation=data;
     })
     if (this.fraisEnregistrement.typePiece=='Autres'){
       this.operation.typePiece=this.fraisEnregistrement.autre;
@@ -95,7 +96,6 @@ export class FormeFraisInitiesContentieuxComponent implements OnInit{
       ]).subscribe(([ dossierData]) => {
         
         this.operation.dossierDebiteur = dossierData;
-        this.operation.dateOperation=new Date();
         this.fraisInitiesService.submitForm(this.operation).subscribe(
           (response) => {
             console.log('Frais ajouté avec succès:', response);

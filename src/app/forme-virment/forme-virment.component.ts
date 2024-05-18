@@ -2,15 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { virement } from '../Models/virement';
 import { VirementService } from '../services/virement.service';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DebiteurInfo } from '../Models/DebiteurInfo';
-import { OperationCTX } from '../Models/OperationCTX';
 import { AuthService } from '../services/auth.service';
 import { jwtDecode } from 'jwt-decode';
 import { SharedServicesService } from '../services/shared-services.service';
 import Swal from 'sweetalert2';
 import { TypeOperationService } from '../services/type-operation.service';
 import { OperationVirement } from '../Models/OperationVirement';
+import { DateService } from '../services/date.service';
 
 @Component({
   selector: 'app-forme-virment',
@@ -43,7 +42,8 @@ export class FormeVirmentComponent implements OnInit {
     private virementService: VirementService,
     private auth: AuthService,
     private sharedService: SharedServicesService,
-    private typeOperationService:TypeOperationService
+    private typeOperationService:TypeOperationService,
+    private dateService:DateService
   ) {}
 
   ngOnInit() {
@@ -65,8 +65,6 @@ export class FormeVirmentComponent implements OnInit {
 
   openModal(virement: virement) {
     this.virement = virement; 
-    console.log(virement);
-    console.log(virement.dateOperation);
   }
 
   handleRowClick(row: virement) {
@@ -86,7 +84,12 @@ export class FormeVirmentComponent implements OnInit {
     this.operation.etatOperation = "V";
     this.operation.matriculeAjout = this.matricule;
     this.operation.matriculeValidateur = this.matricule;
-
+    this.dateService.getCurrentDate().subscribe((data)=>
+    {this.operation.dateOperation=data;
+    })
+    this.operation.dateAjout=new Date();
+    this.operation.dateValidation=new Date();
+    
     this.typeOperationService.typeOperationByNumero('220').subscribe((data) => {
       this.operation.typeOperation = data;
 

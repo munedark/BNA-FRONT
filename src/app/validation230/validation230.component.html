@@ -1,0 +1,55 @@
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Type de recouvrement:</th>
+        <th scope="col">Montant affectation principale:</th>
+        <th scope="col">Date valeur:</th>
+        <th scope="col">Afficher plus:</th>
+      </tr>
+    </thead>
+    <tbody>
+      
+        <tr *ngFor="let operation of operations" >
+          <td>{{ operation.formeAffectation?.typeRecouvrement }}</td>
+          <td>{{ operation.formeAffectation?.mntAffectationPrincipale }} DT</td>
+          <td>{{ operation.formeAffectation?.dateAffectation }} </td>
+          <td>
+            <button class="btn button" data-bs-toggle="modal" [attr.data-bs-target]="'#exampleModal' + operation.idOperationCtx">Ouvrir</button>
+          </td>
+        </tr>
+   
+    </tbody>
+  </table>
+  
+  <ng-container *ngFor="let operation of operations">
+    <div class="modal fade" [id]="'exampleModal' + operation.idOperationCtx" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel" style="color: #707C7C;"><img src="../../assets/validation.png" style="width: 35px; margin-right: 8px;">Validation Operation</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div style="display: flex; justify-content: space-around;">
+              <div>
+                <p><span style="color: #17a191; font-weight: bold;">Type de recouvrement:</span> {{ operation.formeAffectation.typeRecouvrement}}</p>
+                <p><span style="color: #17a191; font-weight: bold;">Montant affectation principale:</span> {{operation.formeAffectation.mntAffectationPrincipale }} DT</p>
+                <p><span style="color: #17a191; font-weight: bold;">Date valeur:</span> {{ operation.formeAffectation.dateAffectation }}</p>
+                <p><span style="color: #17a191; font-weight: bold;">Numéro dossier:</span> {{ operation.dossierDebiteur?.dossierId?.numCtx }}</p>
+  
+              </div>
+              <div>
+                <p><span style="color: #17a191; font-weight: bold;">Gestionnaire :</span> {{ operation.matriculeAjout }}</p>
+                <p><span style="color: #17a191; font-weight: bold;">Date de création :</span> {{ operation.dateAjout }}</p>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="rejeterOperation(operation.idOperationCtx)">Rejeter</button>
+            <button type="button" class="btn btn-success" data-bs-dismiss="modal" (click)="approuverOperation(operation.idOperationCtx)">Approuver</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+  

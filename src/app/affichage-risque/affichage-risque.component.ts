@@ -11,12 +11,12 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 export class AffichageRisqueComponent implements OnInit {
   dataSource: MatTableDataSource<Risque> = new MatTableDataSource<Risque>();
   @Input() risquesData: Risque[] | null = null;
-  displayedColumns: string[] = ['id','produit', 'mntFrais', 'soldeRisque', 'mntEntreePrincipale'];
+  displayedColumns: string[] = ['id','produit', 'mntFrais', 'soldePrincipaleRisque', 'mntEntreePrincipale','ir','ic'];
   @Input() debiteurData: any;
   @Input() numCtx!:number;
   @Input() isDebiteurComponent: boolean = false;
   @Input() isintiesComponent: boolean = false;
-  @Input() isAffectationComponent:boolean =false;
+  @Input() isAffectationComponent:string="";
   @Input() isClotureRisque:boolean=false
   idRisque:number=0;
   risque!: Risque ; 

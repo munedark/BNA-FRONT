@@ -11,14 +11,14 @@
             
             <!-- Define columns -->
             <ng-container *ngFor="let col of displayedColumns" [matColumnDef]="col">
-            <ng-container *ngIf="col!='mntFrais'&& col!='soldeRisque' && col!='mntEntreePrincipale' && col!='numero_dossier' && col!='etat_Ctx' && col!='solde_recouvrement' && col!='date_Transfert' && col!='prenom' && col!='numAffaireCTX' && col!='dateValeurCTX' && col!='etatOperation' && col!='motifOperationCTX' && col!='typePiece' && col!='matriculeEmploye' && col!='numeroPiece' && col!='typeAuxiliaire' && col!='natureAuxiliaire' && col!='numVirement' && col!='dateOperation' && col!='montantVirement' && col!='ribBeneficiaire' && col!='nomDonneur' && col!='ribDonneur'">
+            <ng-container *ngIf="col!='mntFrais'&& col!='soldePincipaleRisque' && col!='mntEntreePrincipale' && col!='numero_dossier' && col!='etat_Ctx' && col!='solde_recouvrement' && col!='date_Transfert' && col!='prenom' && col!='numAffaireCTX' && col!='dateValeurCTX' && col!='etatOperation' && col!='motifOperationCTX' && col!='typePiece' && col!='matriculeEmploye' && col!='numeroPiece' && col!='typeAuxiliaire' && col!='natureAuxiliaire' && col!='numVirement' && col!='dateOperation' && col!='montantVirement' && col!='ribBeneficiaire' && col!='nomDonneur' && col!='ribDonneur'">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ col }} </th>
             </ng-container>
             <ng-container *ngIf="col=='mntFrais'">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> montant frais </th>
             </ng-container>
-            <ng-container *ngIf="col=='soldeRisque'">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> solde risque </th>
+            <ng-container *ngIf="col=='soldePrincipaleRisque'">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> solde principale risque </th>
             </ng-container>
             <ng-container *ngIf="col=='mntEntreePrincipale'">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> montant entrée principale </th>

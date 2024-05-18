@@ -11,7 +11,7 @@ import {jwtDecode} from 'jwt-decode'; // Modified import statement
 export class LoginComponent implements OnInit {
   invalidLogin = false;
   loginSuccess = false;
-  errorMessage = 'Wrong password or username'; // Corrected string type
+  errorMessage = 'Matricule ou mot de passe incorrect'; 
   username = "";
   password = "";
   

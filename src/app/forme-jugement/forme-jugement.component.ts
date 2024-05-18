@@ -11,11 +11,11 @@ import { DateService } from '../services/date.service';
 import { TypeOperationService } from '../services/type-operation.service';
 
 @Component({
-  selector: 'app-frais-enregistrement',
-  templateUrl: './frais-enregistrement.component.html',
-  styleUrls: ['./frais-enregistrement.component.scss']
+  selector: 'app-forme-jugement',
+  templateUrl: './forme-jugement.component.html',
+  styleUrls: ['./forme-jugement.component.scss']
 })
-export class FraisEnregistrementComponent implements OnInit {
+export class FormeJugementComponent  implements OnInit {
   @Input() risque!:Risque;
   @Input() numCtx!:number;
   matricule!:string;
@@ -48,9 +48,9 @@ numeroRouge: any;
       this.operation.typeOperation =data;
       });
       this.dateService.getCurrentDate().subscribe((data)=>{
-        this.operation.dateAjout=data;
+        this.operation.dateOperation=data;
       })
-      this.operation.dateOperation=new Date();
+      this.operation.dateAjout=new Date();
         this.operation.typeFrais='Jugement'
         this.operation.etatOperation="E";
         this.operation.mntFrais=parseFloat(this.fraisEnregistrement.montantFrais);

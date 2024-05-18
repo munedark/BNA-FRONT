@@ -3,21 +3,20 @@ import { DebiteurInfo } from '../Models/DebiteurInfo';
 import { Risque } from '../Models/Risque';
 
 @Component({
-  selector: 'app-pec-affectation',
-  templateUrl: './pec-affectation.component.html',
-  styleUrls: ['./pec-affectation.component.scss']
+  selector: 'app-pec-affectation-ic',
+  templateUrl: './pec-affectation-ic.component.html',
+  styleUrls: ['./pec-affectation-ic.component.scss']
 })
-export class PecAffectationComponent {
+export class PecAffectationIcComponent {
   debiteurData: DebiteurInfo | null = null;
   risquesData: Risque[] | null = null; 
   numCtx!:number;
-  isAffectationComponent: boolean = true;
+  isAffectationComponent: string="ic";
   constructor() { }
 
   onDebiteurDataReceived(data: DebiteurInfo | null) {
     this.debiteurData = data;
   }
-
 
   onRisquesReceived(risquesData: Risque[] | null) {
     this.risquesData = risquesData;

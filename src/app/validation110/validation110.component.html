@@ -47,6 +47,7 @@
             </div>
             <div>
               <p *ngIf="operation.typeFrais === 'Enregistrement'"><span style="color: #17a191; font-weight: bold;">N° de pièce :</span> {{ operation.numeroPiece }}</p>
+              <p><span style="color: #17a191; font-weight: bold;">N° de risque :</span> {{ operation.risque?.id }}</p>
               <p><span style="color: #17a191; font-weight: bold;">Date de l'opération :</span> {{ operation.dateValeurCTX }}</p>
               <p><span style="color: #17a191; font-weight: bold;">Gestionnaire :</span> {{ operation.matriculeAjout }}</p>
               <p><span style="color: #17a191; font-weight: bold;">Date de création :</span> {{ operation.dateAjout }}</p>
