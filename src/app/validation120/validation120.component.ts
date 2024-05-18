@@ -64,6 +64,7 @@ export class Validation120Component {
           }).then(() => {
             if (typeOperation === "Auxiliaire") {
               this.operationGerneralService.updateOperationAux(operationId, this.matricule,new Date(), 'V',this.risqueSelected).subscribe((data) => {
+                console.log(this.risqueSelected);
                 this.refreshOperationsListAux();
               });
             }
@@ -99,10 +100,10 @@ export class Validation120Component {
               icon: "success"
             }).then(() => {
               if(typeOperation=="Auxiliaire"){
-              this.operationGerneralService.updateOperationAux(operationId, this.matricule, new Date(),'R',this.risqueSelected).subscribe((data)=>{this.refreshOperationsListAux();});
+              this.operationGerneralService.updateOperationAux(operationId, this.matricule, new Date(),'R').subscribe((data)=>{this.refreshOperationsListAux();});
               }
               if(typeOperation!="Auxiliaire"){
-              this.operationGerneralService.updateOperationNonAux(operationId, this.matricule, new Date(),'R',this.risqueSelected).subscribe((data)=>{this.refreshOperationsListNonAux();});
+              this.operationGerneralService.updateOperationNonAux(operationId, this.matricule, new Date(),'R').subscribe((data)=>{this.refreshOperationsListNonAux();});
               }
             });
           }

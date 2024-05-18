@@ -25,16 +25,17 @@ export class FraisGenerauxService {
     return this.http.get<FraisGenerauxNonAux[]>(`${this.url}agent/nonAux/validation`)
   }
 
-  updateOperationAux(id: number, matriculeValidateur: string, dateValidation: Date, etatOperation: string , risque:Risque): Observable<FraisGenerauxAux> {
+  updateOperationAux(id: number, matriculeValidateur: string, dateValidation: Date, etatOperation: string , risque?:Risque): Observable<FraisGenerauxAux> {
     const url = `${this.url}agent/aux/${id}`;
     const body = {
       matriculeValidateur,
       dateValidation,
-      etatOperation 
+      etatOperation ,
+      risque
     };
     return this.http.put<any>(url, body);
 }
-updateOperationNonAux(id: number, matriculeValidateur: string, dateValidation: Date, etatOperation: string, risque:Risque): Observable<FraisGenerauxNonAux> {
+updateOperationNonAux(id: number, matriculeValidateur: string, dateValidation: Date, etatOperation: string, risque?:Risque): Observable<FraisGenerauxNonAux> {
   const url = `${this.url}agent/nonAux/${id}`;
   const body = {
     matriculeValidateur,
