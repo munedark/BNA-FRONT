@@ -1,5 +1,6 @@
 <h4 class="titre">Cloture du risque</h4>
-<p class="link"><img src="../../assets/maison.png">&nbsp;&nbsp;/&nbsp;&nbsp;recouvrement&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;cloture risqu</p><app-recherche 
+<p class="link"><img src="../../assets/maison.png">&nbsp;&nbsp;/&nbsp;&nbsp;recouvrement&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;cloture risqu</p>
+<app-recherche [isClotureRisque]="true"
 (debiteurDataChange)="onDebiteurDataReceived($event)"
 (risques)="onRisquesReceived($event)"
 (numCTX)="onNumCtxReceived($event)">

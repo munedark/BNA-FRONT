@@ -1,7 +1,8 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter, Input } from '@angular/core';
 import { SharedServicesService } from '../services/shared-services.service';
 import { DebiteurInfo } from '../Models/DebiteurInfo';
 import { Risque } from '../Models/Risque';
+import { RisqueService } from '../services/risque.service';
 
 @Component({
   selector: 'app-recherche',
@@ -12,10 +13,11 @@ export class RechercheComponent {
   numCtx: number | undefined;
   debiteurData: DebiteurInfo | null = null;
   risquesData: Risque[] | any = null; 
+  @Input() isClotureRisque:boolean=false;
   @Output() debiteurDataChange: EventEmitter<DebiteurInfo | null> = new EventEmitter<DebiteurInfo | null>();
   @Output() risques: EventEmitter<Risque[] | null> = new EventEmitter<Risque[] | null>();
   @Output() numCTX: EventEmitter<number>=new EventEmitter<number>();
-  constructor(private sharedService: SharedServicesService) { }
+  constructor(private sharedService: SharedServicesService,private risqueService:RisqueService) { }
 
   search() {
     if (this.numCtx) {
@@ -30,8 +32,14 @@ export class RechercheComponent {
   }
 
   risque() {
-    if (this.numCtx) {
+    if (this.numCtx && !this.isClotureRisque) {
       this.sharedService.risques(this.numCtx).subscribe(data => {
+        this.risquesData = data;
+        this.risques.emit(this.risquesData);
+      });
+    }
+    if (this.numCtx && this.isClotureRisque) {
+      this.risqueService.risqueNull().subscribe(data => {
         this.risquesData = data;
         this.risques.emit(this.risquesData);
       });
