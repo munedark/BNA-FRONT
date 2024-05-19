@@ -10,6 +10,9 @@ import { DateService } from '../services/date.service';
 import { jwtDecode } from 'jwt-decode';
 import { forkJoin } from 'rxjs';
 import Swal from 'sweetalert2';
+import { DossierDebiteur } from '../Models/DossierDebiteur';
+import { data } from 'jquery';
+
 @Component({
   selector: 'app-forme-affectation-ir',
   templateUrl: './forme-affectation-ir.component.html',
@@ -18,6 +21,7 @@ import Swal from 'sweetalert2';
 export class FormeAffectationIrComponent {
   @Input() risque!: Risque;
   @Input() numCtx!: number;
+  dossier: DossierDebiteur = {} as DossierDebiteur;
   matricule!: string;
   formeAffectation: FormeAffectation = {
     idAffectation: 0,
@@ -26,75 +30,86 @@ export class FormeAffectationIrComponent {
     dateAffectation: null,
     nouveauSolde: 0
   } as FormeAffectation;
-  operation:OperationAffectation={} as OperationAffectation;
+  operation: OperationAffectation = {} as OperationAffectation;
+
   constructor(private sharedService: SharedServicesService,
-      private auth: AuthService,
-      private affectationService:FormeAffectationService,
-      private typeOperationService:TypeOperationService,
-      private dateService:DateService,
-      ) {}
-  
+              private auth: AuthService,
+              private affectationService: FormeAffectationService,
+              private typeOperationService: TypeOperationService,
+              private dateService: DateService) { }
+
   ngOnInit(): void {
-      this.formeAffectation.nouveauSolde = this.risque?.mntEntreePrincipale;
-      const token = this.auth.getToken();
-  if (token) {
+    this.sharedService.dossier(this.numCtx).subscribe((data) => {
+      this.dossier = data;
+    })
+    this.formeAffectation.nouveauSolde = this.dossier?.soldeRecouvrement;
+    const token = this.auth.getToken();
+    if (token) {
       const decodedToken: any = jwtDecode(token);
       this.matricule = decodedToken ? decodedToken.sub : 'No Matricule';
-  }
+    }
   }
 
   updateNouveauSolde() {
-      if (this.formeAffectation.mntAffectationPrincipale && this.risque.mntEntreePrincipale) {
-          this.formeAffectation.nouveauSolde = this.risque.mntEntreePrincipale - this.formeAffectation.mntAffectationPrincipale;
-          if(this.formeAffectation.nouveauSolde<0){
-              this.formeAffectation.nouveauSolde=0;
-          }
-      }
+    if (this.formeAffectation.mntAffectationPrincipale && this.dossier.soldeRecouvrement) {
+      this.formeAffectation.nouveauSolde = this.dossier.soldeRecouvrement - this.formeAffectation.mntAffectationPrincipale;
+    }
   }
 
-  submitForm(risque:Risque) {
-    this.formeAffectation.typeAffectation='IR';
-  this.operation.etatOperation = "E";
-  this.operation.matriculeAjout = this.matricule;
-  this.dateService.getCurrentDate().subscribe((data)=>{
-    this.operation.dateOperation=data;
-})
-this.operation.dateAjout=new Date();
-  this.typeOperationService.typeOperationByNumero('230').subscribe((data) => {
-  this.operation.typeOperation = data;
-  this.operation.risque=risque;
-  forkJoin([
-      this.sharedService.dossier(this.numCtx),
-      this.affectationService.addForme(this.formeAffectation)
-  ]).subscribe(([dossierData, data]) => {
-      this.operation.dossierDebiteur = dossierData;
-      this.operation.formeAffectation=data;
-      
+  validateMontantPrincipale(): boolean {
+    return this.formeAffectation.mntAffectationPrincipale <= this.risque.ir && this.formeAffectation.mntAffectationPrincipale<= this.dossier.soldeRecouvrement;
+  }
 
-      this.affectationService.submitForm(this.operation).subscribe(
+  submitForm(risque: Risque) {
+    if (!this.validateMontantPrincipale()) {
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "Le montant de l'affectation en principal ne doit pas dépasser le montant IR du risque ou le solde de recouvrement.",
+        showConfirmButton: true
+      });
+      return;
+    }
+
+    this.formeAffectation.typeAffectation = 'IR';
+    this.operation.etatOperation = "E";
+    this.operation.matriculeAjout = this.matricule;
+    this.dateService.getCurrentDate().subscribe((data) => {
+      this.operation.dateOperation = data;
+    })
+    this.operation.dateAjout = new Date();
+    this.typeOperationService.typeOperationByNumero('230').subscribe((data) => {
+      this.operation.typeOperation = data;
+      this.operation.risque = risque;
+      this.operation.dossierDebiteur = this.dossier;
+
+      this.affectationService.addForme(this.formeAffectation).subscribe((data) => {
+        this.operation.formeAffectation = data;
+
+        this.affectationService.submitForm(this.operation).subscribe(
           (response) => {
-          console.log('Affectation ajouté avec succès:', response);
-          this.resetForm();
-          Swal.fire({
+            console.log('Affectation ajouté avec succès:', response);
+            this.resetForm();
+            Swal.fire({
               position: "center",
               icon: "success",
               title: "ajouté avec succès",
               showConfirmButton: false,
               timer: 1500
-          });
+            });
           },
           (error) => {
-          console.error('Erreur lors de l\'ajout des forme:', error);
+            console.error('Erreur lors de l\'ajout des forme:', error);
           }
-      );
+        );
       });
-  });
+    });
   }
-  
+
   resetForm() {
-      this.formeAffectation.typeRecouvrement='';
-      this.formeAffectation.mntAffectationPrincipale=0;
-      this.formeAffectation.dateAffectation=null;
-      this.formeAffectation.nouveauSolde=0;
+    this.formeAffectation.typeRecouvrement = '';
+    this.formeAffectation.mntAffectationPrincipale = 0;
+    this.formeAffectation.dateAffectation = null;
+    this.formeAffectation.nouveauSolde = 0;
   }
 }

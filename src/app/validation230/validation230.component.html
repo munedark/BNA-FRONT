@@ -10,14 +10,15 @@
     <tbody>
       
         <tr *ngFor="let operation of operations" >
-          <td>{{ operation.formeAffectation?.typeRecouvrement }}</td>
-          <td>{{ operation.formeAffectation?.mntAffectationPrincipale }} DT</td>
-          <td>{{ operation.formeAffectation?.dateAffectation }} </td>
+          <td>{{ operation.formeAffectation.typeRecouvrement }}</td>
+          <td>{{ operation.formeAffectation.mntAffectationPrincipale }} DT</td>
+          <td>{{ operation.formeAffectation.dateAffectation }} </td>
+          <td>{{ operation.formeAffectation.typeAffectation}}</td>
           <td>
             <button class="btn button" data-bs-toggle="modal" [attr.data-bs-target]="'#exampleModal' + operation.idOperationCtx">Ouvrir</button>
           </td>
         </tr>
-   
+
     </tbody>
   </table>
   
@@ -39,6 +40,8 @@
   
               </div>
               <div>
+                <p><span style="color: #17a191; font-weight: bold;">N° risque :</span> {{ operation.risque?.id }}</p>
+                <p><span style="color: #17a191; font-weight: bold;">Type affectation :</span> {{ operation.formeAffectation.typeAffectation }}</p>
                 <p><span style="color: #17a191; font-weight: bold;">Gestionnaire :</span> {{ operation.matriculeAjout }}</p>
                 <p><span style="color: #17a191; font-weight: bold;">Date de création :</span> {{ operation.dateAjout }}</p>
               </div>

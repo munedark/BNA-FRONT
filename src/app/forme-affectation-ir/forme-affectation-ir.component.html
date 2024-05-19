@@ -1,44 +1,48 @@
 <div class="container">
-    <h3 class="register-heading">Formulaire d'affectation IR :</h3>
+    <h3 class="register-heading">Formulaire d'affectation principale :</h3>
     <hr style="border-color: #17a191;">
     <form #enregistrementForm="ngForm" (ngSubmit)="submitForm(risque)" novalidate>
-        <div class="content">
-            <div class="groupe">
-                <div class="form-group">
-                    <label for="typeRecouvrement">Type Recouvrement :</label>
-                    <select id="typeRecouvrement" class="form-control input-with-arrow" name="typeRecouvrement" [(ngModel)]="formeAffectation.typeRecouvrement" required>
-                        <option value="" disabled selected>Choisir un type de recouvrement</option>
-                        <option value="Consolidation">Consolidation</option>
-                        <option value="SOTUGAR">SOTUGAR</option>
-                        <option value="Reaffectation">Reaffectation</option>
-                        <option value="Accord Transactional">Accord Transactional</option>
-                    </select>
-                    <div *ngIf="enregistrementForm.controls['typeRecouvrement'].invalid && enregistrementForm.controls['typeRecouvrement'].touched" class="text-danger">
-                        Le type de recouvrement est requis.
-                    </div>
-                </div>
-                
-                <div class="form-group">
-                    <label for="montantPrincipale">Montant de l'affectation en principal :</label>
-                    <input type="text" id="montantPrincipale" placeholder="0.000 TND" class="form-control" name="montant affectation principal" [(ngModel)]="formeAffectation.mntAffectationPrincipale" (input)="updateNouveauSolde()" required pattern="^\d+(\.\d{1,3})?$" #montantPrincipale="ngModel">
-                    <div *ngIf="montantPrincipale.invalid && (montantPrincipale.dirty || montantPrincipale.touched)" class="text-danger">
-                        Le montant de l'affectation en principal doit être un nombre valide.
-                    </div>
-                </div>
-                
+      <div class="content">
+        <div class="groupe">
+          <div class="form-group">
+            <label for="typeRecouvrement">Type Recouvrement :</label>
+            <select id="typeRecouvrement" class="form-control input-with-arrow" name="typeRecouvrement" [(ngModel)]="formeAffectation.typeRecouvrement" required>
+              <option value="" disabled selected>Choisir un type de recouvrement</option>
+              <option value="Consolidation">Consolidation</option>
+              <option value="SOTUGAR">SOTUGAR</option>
+              <option value="Reaffectation">Reaffectation</option>
+              <option value="Accord Transactional">Accord Transactional</option>
+            </select>
+            <div *ngIf="enregistrementForm.controls['typeRecouvrement'].invalid && enregistrementForm.controls['typeRecouvrement'].touched" class="text-danger">
+              Le type de recouvrement est requis.
             </div>
-            <div class="groupe">
-                <div class="form-group">
-                    <label for="dateValeur">Date valeur :</label>
-                    <input type="date" id="dateValeur" class="form-control" name="Date" [(ngModel)]="formeAffectation.dateAffectation" required>
-                </div>
-                <div class="form-group">
-                    <label for="nouveauSolde">Nouveau solde en instance de recouvrement :</label>
-                    <input type="text" id="nouveauSolde" class="form-control" name="nouveau solde" [(ngModel)]="formeAffectation.nouveauSolde" disabled>
-                </div>
+          </div>
+  
+          <div class="form-group">
+            <label for="montantPrincipale">Montant de l'affectation en principal :</label>
+            <input type="text" id="montantPrincipale" placeholder="0.000 TND" class="form-control" name="montant affectation principal" [(ngModel)]="formeAffectation.mntAffectationPrincipale" (input)="updateNouveauSolde()" required pattern="^\d+(\.\d{1,3})?$" #montantPrincipale="ngModel">
+            <div *ngIf="montantPrincipale.invalid && (montantPrincipale.dirty || montantPrincipale.touched)" class="text-danger">
+              Le montant de l'affectation en principal doit être un nombre valide.
             </div>
+            <div *ngIf="!validateMontantPrincipale()" class="text-danger">
+              Le montant de l'affectation en principal ne doit pas dépasser le montant IR du risque ou le solde de recouvrement.
+            </div>
+          </div>
+  
         </div>
-    
-        <button type="submit" class="btn btnRegister" [disabled]="enregistrementForm.invalid">Valider</button>
+        <div class="groupe">
+          <div class="form-group">
+            <label for="dateValeur">Date valeur :</label>
+            <input type="date" id="dateValeur" class="form-control" name="Date" [(ngModel)]="formeAffectation.dateAffectation" required>
+          </div>
+          <div class="form-group">
+            <label for="nouveauSolde">Nouveau solde en instance de recouvrement :</label>
+            <input type="text" id="nouveauSolde" class="form-control" name="nouveau solde" [(ngModel)]="formeAffectation.nouveauSolde" disabled>
+          </div>
+        </div>
+      </div>
+  
+      <button type="submit" class="btn btnRegister" [disabled]="enregistrementForm.invalid || !validateMontantPrincipale()">Valider</button>
     </form>
-</div>
+  </div>
+  
