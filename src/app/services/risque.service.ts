@@ -10,6 +10,6 @@ export class RisqueService {
 
   constructor(private http:HttpClient) { }
   risqueNull(){
-    return this.http.get(`${this.url}agent/risque/risqueNull`)
+    return this.http.get(`${this.url}agent/risque/risqueNonCloture`)
   }
 }

@@ -11,7 +11,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 export class AffichageRisqueComponent implements OnInit {
   dataSource: MatTableDataSource<Risque> = new MatTableDataSource<Risque>();
   @Input() risquesData: Risque[] | null = null;
-  displayedColumns: string[] = ['id','produit', 'mntFrais', 'soldePrincipaleRisque', 'mntEntreePrincipale','ir','ic'];
+  displayedColumns: string[] = ['id','produit','stade', 'mntFrais', 'soldePrincipaleRisque', 'mntEntreePrincipale','ir','ic'];
   @Input() debiteurData: any;
   @Input() numCtx!:number;
   @Input() isDebiteurComponent: boolean = false;
@@ -31,10 +31,10 @@ export class AffichageRisqueComponent implements OnInit {
 
   openModal(risque: Risque) {
     this.risque = risque; 
-   
   }
 
   handleRowClick(row: Risque) {
+  
     this.openModal(row);
     
   }

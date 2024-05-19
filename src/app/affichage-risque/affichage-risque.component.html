@@ -11,7 +11,7 @@
               <h1 class="modal-title fs-5" id="exampleModalLabel" style="color: #6C7878;"*ngIf="isClotureRisque"><img src="../../assets/cloture.png" style="width: 50px;margin-right: 5px;"> Cloture risque</h1>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-                <div class="modal-body">
+                <div class="modal-body" >
                   <div id="jugement" *ngIf="isDebiteurComponent">
                   <app-affichage-debiteur [debiteurData]="debiteurData" [isModalOpen]="true"></app-affichage-debiteur>
                   <app-detail-risque [risque]="risque"></app-detail-risque>

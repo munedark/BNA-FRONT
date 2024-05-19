@@ -16,25 +16,23 @@ import { Risque } from '../Models/Risque';
   styleUrls: ['./forme-risque-cloture.component.scss']
 })
 export class FormeRisqueClotureComponent {
-  crd:ClotureRisqueDto={} as ClotureRisqueDto;
+  crd: ClotureRisqueDto = {} as ClotureRisqueDto;
   operation: OperationVirement = {} as OperationVirement;
   matricule!: string;
-  date!:Date;
-  typeCloture!:string;
-  @Input() numCtx!:number;
-  @Input() risque!:Risque;
+  date!: Date;
+  typeCloture!: string;
+  @Input() numCtx!: number;
+  @Input() risque!: Risque;
 
-  
   constructor(
     private auth: AuthService,
-    private typeOperationService:TypeOperationService,
-    private dateService:DateService,
-    private operationService:OperationService,
-    private sharedService:SharedServicesService
+    private typeOperationService: TypeOperationService,
+    private dateService: DateService,
+    private operationService: OperationService,
+    private sharedService: SharedServicesService
   ) {}
 
   ngOnInit() {
-
     const token = this.auth.getToken();
     if (token) {
       const decodedToken: any = jwtDecode(token);
@@ -42,27 +40,25 @@ export class FormeRisqueClotureComponent {
     }
   }
 
-
-
   submit() {
     this.operation.etatOperation = "V";
     this.operation.matriculeAjout = this.matricule;
     this.operation.matriculeValidateur = this.matricule;
-    this.dateService.getCurrentDate().subscribe((data)=>
-    {this.operation.dateOperation=data;
-    })
-    this.operation.dateAjout=new Date();
-    this.operation.dateValidation=new Date();
-    this.risque.stade='4- Cloturé'
-    this.risque.typeCloture=this.typeCloture
-    
+    this.dateService.getCurrentDate().subscribe((data) => {
+      this.operation.dateOperation = data;
+    });
+    this.operation.dateAjout = new Date();
+    this.operation.dateValidation = new Date();
+    this.risque.stade = '4- Cloturé';
+    this.risque.typeCloture = this.typeCloture;
+
     this.typeOperationService.typeOperationByNumero('260').subscribe((data) => {
       this.operation.typeOperation = data;
       this.sharedService.dossier(this.numCtx).subscribe((dossierData) => {
         this.operation.dossierDebiteur = dossierData;
-        this.crd.operation=this.operation;
-        this.crd.risque=this.risque;
-        this.operation.risque=this.risque;
+        this.crd.operation = this.operation;
+        this.crd.risque = this.risque;
+        this.operation.risque = this.risque;
         this.operationService.clotureRisque(this.crd).subscribe(
           (response) => {
             console.log('virement validé avec succès:', response);
@@ -72,15 +68,15 @@ export class FormeRisqueClotureComponent {
               title: "validé avec succès",
               showConfirmButton: false,
               timer: 1500
+            }).then(() => {
+              window.location.reload();
             });
           },
           (error) => {
             console.error('Erreur lors de validation:', error);
           }
         );
-      },
-      );
+      });
     });
   }
-
 }
