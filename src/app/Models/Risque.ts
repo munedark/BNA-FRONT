@@ -13,6 +13,7 @@ export interface Risque {
         stade?:string;
         ic:number;
         ir:number;
+        typeCloture:string;
         
         
         

@@ -37,7 +37,7 @@
                   <app-forme-affectation-ic [risque]="risque"  [numCtx]="numCtx"></app-forme-affectation-ic>
                 </div>
                 <div id="contentieux" *ngIf="isClotureRisque">
-                    <app-forme-risque-cloture></app-forme-risque-cloture>
+                    <app-forme-risque-cloture [numCtx]="numCtx" [risque]="risque"></app-forme-risque-cloture>
                 </div>
                 </div>
                   <div class="modal-footer">

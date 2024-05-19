@@ -76,7 +76,7 @@ export class FormeAffectationIcComponent {
       this.operation.dateOperation = data;
     })
     this.operation.dateAjout = new Date();
-    this.typeOperationService.typeOperationByNumero('230').subscribe((data) => {
+    this.typeOperationService.typeOperationByNumero('250').subscribe((data) => {
       this.operation.typeOperation = data;
       this.operation.risque = risque;
       this.operation.dossierDebiteur = this.dossier;

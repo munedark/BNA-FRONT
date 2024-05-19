@@ -5,6 +5,7 @@ import { OperationCTX } from '../Models/OperationCTX';
 import { OperationCheque } from '../Models/OperationCheque';
 import { OperationAffectation } from '../Models/OperationAffectaion';
 import { Operation } from '../Models/Operation';
+import { ClotureRisqueDto } from '../Models/ClotureRisqueDto';
 
 @Injectable({
   providedIn: 'root'
@@ -40,5 +41,8 @@ export class OperationService {
   }
 clotureDossier(operation:Operation){
   return this.http.put<any>("http://localhost:8080/agent/operations/clotureDossier",operation);
+}
+clotureRisque(crd:ClotureRisqueDto){
+  return this.http.put<any>("http://localhost:8080/agent/operations/clotureRisque",crd);
 }
 }

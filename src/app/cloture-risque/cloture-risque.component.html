@@ -8,4 +8,4 @@
 
 <app-affichage-debiteur [debiteurData]="debiteurData" *ngIf="debiteurData"></app-affichage-debiteur>
 
-<app-affichage-risque [risquesData]="risquesData" [isClotureRisque]="isClotureRisqueComponent" [debiteurData]="debiteurData" [numCtx]="numCtx" *ngIf="risquesData"></app-affichage-risque>
+<app-affichage-risque [risquesData]="risquesData" [isClotureRisque]="isClotureRisqueComponent" [debiteurData]="debiteurData" [numCtx]="numCtx" *ngIf="debiteurData && risquesData "></app-affichage-risque>

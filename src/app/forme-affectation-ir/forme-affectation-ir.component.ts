@@ -8,10 +8,9 @@ import { FormeAffectationService } from '../services/forme-affectation.service';
 import { AuthService } from '../services/auth.service';
 import { DateService } from '../services/date.service';
 import { jwtDecode } from 'jwt-decode';
-import { forkJoin } from 'rxjs';
 import Swal from 'sweetalert2';
 import { DossierDebiteur } from '../Models/DossierDebiteur';
-import { data } from 'jquery';
+
 
 @Component({
   selector: 'app-forme-affectation-ir',
@@ -78,7 +77,7 @@ export class FormeAffectationIrComponent {
       this.operation.dateOperation = data;
     })
     this.operation.dateAjout = new Date();
-    this.typeOperationService.typeOperationByNumero('230').subscribe((data) => {
+    this.typeOperationService.typeOperationByNumero('240').subscribe((data) => {
       this.operation.typeOperation = data;
       this.operation.risque = risque;
       this.operation.dossierDebiteur = this.dossier;

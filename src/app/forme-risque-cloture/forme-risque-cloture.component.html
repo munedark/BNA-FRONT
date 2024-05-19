@@ -4,7 +4,7 @@
     <form #enregistrementForm="ngForm" (ngSubmit)="submit()">
                 <div class="form-group">
                     <label for="typeRecouvrement">choisir type cloture:</label>
-                    <select id="typeRecouvrement" class="form-control input-with-arrow" name="typeRecouvrement"  required>
+                    <select id="typeRecouvrement" class="form-control input-with-arrow" name="typeRecouvrement" [(ngModel)]="typeCloture" required>
                         <option value="Article 40">Article 40</option>
                         <option value="Article 48">Article 48</option>
                         <option value="Article 45">Article 45</option>
