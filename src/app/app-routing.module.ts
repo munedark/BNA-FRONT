@@ -147,8 +147,12 @@ const routes: Routes = [
         component: VirementTelecomponseComponent
                       },
       {
-        path: 'affectation', 
+        path: 'Affectation', 
         component: ListeOperation230Component
+        },
+      {
+        path: 'Arrangement', 
+        component: ArrangementComponent
         },
         {
           path: 'Cloture-Risque', 
