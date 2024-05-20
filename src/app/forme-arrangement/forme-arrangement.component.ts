@@ -67,12 +67,12 @@ export class FormeArrangementComponent {
 
     img.onload = () => {
       // Add the logo
-      doc.addImage(img, 'PNG', 10, 10, 20, 20);
+      doc.addImage(img, 'PNG', 10, 10, 15, 15);
 
-      // Add the text "BNA BANK" in front of the image
-      doc.setFontSize(30);
+      // Add the text "BNA BANK" next to the image
+      doc.setFontSize(20);
       doc.setTextColor('#657272');
-      doc.text('BNA BANK', 35, 25);
+      doc.text('BNA BANK', 30, 20);
 
       // Add the title "Arrangement" centered
       doc.setFontSize(20);
@@ -108,7 +108,7 @@ export class FormeArrangementComponent {
       // Add the total
       const finalY = (doc as any).lastAutoTable.finalY + 10;
       doc.text(`Totale: ${this.total.toFixed(3)} TND`, 14, finalY);
-      doc.save('table.pdf');
+      doc.save('Arrangement.pdf');
     };
   }
 }
