@@ -24,6 +24,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { PecAffectationPrincipaleComponent } from './pec-affectation-principale/pec-affectation-principale.component';
 import { PecAffectationIrComponent } from './pec-affectation-ir/pec-affectation-ir.component';
 import { PecAffectationIcComponent } from './pec-affectation-ic/pec-affectation-ic.component';
+import { ArrangementComponent } from './arrangement/arrangement.component';
 
 const routes: Routes = [
   
@@ -230,6 +231,10 @@ const routes: Routes = [
             {
               path: 'PEC-Affectation-Ic', 
               component: PecAffectationIcComponent
+            },
+            {
+              path: 'Arrangement', 
+              component: ArrangementComponent
             },
 
           ]

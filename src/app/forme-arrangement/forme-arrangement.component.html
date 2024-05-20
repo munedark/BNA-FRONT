@@ -1,0 +1,46 @@
+<div class="container">
+    <h5 class="register-heading"><img src="../../assets/arrangement.png" style="width: 40px;"> Arrangement</h5>
+    <hr style="border-color: #17a191;">
+    <form #enregistrementForm="ngForm" (ngSubmit)="submit()">
+        <div class="content">
+            <div class="form-group">
+                <div class="groupe">
+                    <label for="numCtx">Numéro du dossier contentieux :</label>
+                    <input type="text" id="numCtx" placeholder="num CTX" class="form-control" [(ngModel)]="numCtx" name="numCtx" required>
+                </div>
+                <div class="groupe">
+                    <label for="dateDebut">Date début :</label>
+                    <input type="date" id="dateDebut" class="form-control" [(ngModel)]="dateDebut" name="dateDebut" required>
+                </div>
+                <div class="groupe">
+                    <label for="duree">Durée (mois) :</label>
+                    <input type="number" id="duree" placeholder="nombre de mois" class="form-control" [(ngModel)]="duree" name="duree" required>
+                </div>
+            </div>
+            <div class="groupe">
+                <button type="submit" class="btn btnRegister" [disabled]="enregistrementForm.invalid">Valider</button>
+            </div>
+        </div>
+    </form>
+
+    <app-affichage-debiteur [debiteurData]="debiteurData" *ngIf="debiteurData"></app-affichage-debiteur>
+
+    <div *ngIf="echeances.length > 0">
+        <table>
+            <thead>
+                <tr>
+                    <th>Échéance</th>
+                    <th>Montant</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let echeance of echeances">
+                    <td>{{ echeance.date | date: 'dd/MM/yyyy' }}</td>
+                    <td>{{ echeance.montant.toFixed(3) }} TND</td>
+                </tr>
+            </tbody>
+        </table>
+        <p>Totale: {{ total.toFixed(3) }} TND</p>
+        <button (click)="exportAsPDF()" class="btn btnRegister">Exporter en PDF</button>
+    </div>
+</div>

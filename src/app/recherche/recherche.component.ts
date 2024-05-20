@@ -23,7 +23,6 @@ export class RechercheComponent {
     if (this.numCtx) {
       this.sharedService.recherche(this.numCtx).subscribe(data => {
         this.debiteurData = data;
-        console.log(this.debiteurData);
         this.debiteurDataChange.emit(this.debiteurData);
         this.numCTX.emit(this.numCtx);
         this.risque();

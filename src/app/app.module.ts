@@ -78,6 +78,8 @@ import { AjoutFraisGenerauxComponent } from './ajout-frais-generaux/ajout-frais-
 import { FraisJugementComponent } from './frais-jugement/frais-jugement.component';
 import { RecouvrementChequeComponent } from './recouvrement-cheque/recouvrement-cheque.component';
 import { FormeJugementComponent } from './forme-jugement/forme-jugement.component';
+import { FormeArrangementComponent } from './forme-arrangement/forme-arrangement.component';
+import { ArrangementComponent } from './arrangement/arrangement.component';
 
 @NgModule({
   declarations: [
@@ -140,6 +142,8 @@ import { FormeJugementComponent } from './forme-jugement/forme-jugement.componen
     FraisJugementComponent,
     RecouvrementChequeComponent,
     FormeJugementComponent,
+    FormeArrangementComponent,
+    ArrangementComponent,
     
 
   ],
