@@ -5,4 +5,4 @@
   (numCTX)="numCtx($event)">
 </app-recherche>
 <app-affichage-debiteur [debiteurData]="debiteurData" *ngIf="debiteurData"></app-affichage-debiteur>
-<app-ajout-frais-generaux *ngIf="debiteurData" [numDossier]="numDossier"></app-ajout-frais-generaux>
+<app-ajout-frais-generaux *ngIf="debiteurData && debiteurData.etat_CTX==true" [numDossier]="numDossier"></app-ajout-frais-generaux>

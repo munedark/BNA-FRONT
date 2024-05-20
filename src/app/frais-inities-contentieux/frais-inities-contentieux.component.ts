@@ -8,7 +8,7 @@ import { DebiteurInfo } from '../Models/DebiteurInfo';
   styleUrls: ['./frais-inities-contentieux.component.scss']
 })
 export class FraisInitiesContentieuxComponent {
-  debiteurData: any;
+  debiteurData: DebiteurInfo | null = null; ;
   risquesData: Risque[] | null | undefined;
   numCtx!: number ;
   isintiesComponent: boolean = true;
