@@ -40,6 +40,7 @@ export class FormeRisqueClotureComponent {
     }
   }
 
+  
   submit() {
     this.operation.etatOperation = "V";
     this.operation.matriculeAjout = this.matricule;
@@ -61,11 +62,11 @@ export class FormeRisqueClotureComponent {
         this.operation.risque = this.risque;
         this.operationService.clotureRisque(this.crd).subscribe(
           (response) => {
-            console.log('virement validé avec succès:', response);
+            console.log('virement validé avec succès');
             Swal.fire({
               position: "center",
               icon: "success",
-              title: "validé avec succès",
+              title: "Cloturé avec succès",
               showConfirmButton: false,
               timer: 1500
             }).then(() => {

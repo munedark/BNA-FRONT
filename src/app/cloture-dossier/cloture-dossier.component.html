@@ -7,7 +7,7 @@
 </app-recherche>
 
 <app-affichage-debiteur [debiteurData]="debiteurData" *ngIf="debiteurData"></app-affichage-debiteur>
-<button class="btnRegister" *ngIf="debiteurData && risquesData " (click)="cloture()">Cloture du dossier</button>
-<ng-container *ngIf="debiteurData?.soldeRecouvrement!=0 && debiteurData && risquesData && clicked">
-    <p style="color: rgb(247, 72, 72); text-align: center ;">Solde recouvrement different de 0 DTN ou il y'a un risque non cloturé! </p>
+<button class="btnRegister"  *ngIf="debiteurData && !debiteurData.etat_CTX==false" (click)="cloture()">Clôture du dossier</button>
+<ng-container *ngIf="(debiteurData?.soldeRecouvrement!=0 || !allRisquesClotures()) && clicked">
+    <p style="color: rgb(247, 72, 72); text-align: center ;">Solde recouvrement different de 0 DTN ou il y'a un risque non cloturé!</p>
 </ng-container>
