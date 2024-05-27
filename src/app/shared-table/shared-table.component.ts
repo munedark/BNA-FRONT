@@ -4,6 +4,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import * as jspdf from 'jspdf';
 import html2canvas from 'html2canvas';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-shared-table',
@@ -36,7 +37,17 @@ export class SharedTableComponent {
   }
 
   onRowClick(element: any) {
-    this.rowClicked.emit(element);
+    if (element.stade === '4- Cloturé') {
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "Ce risque est cloturé.",
+        showConfirmButton: true,
+        confirmButtonText: 'OK'
+      });
+    } else {
+      this.rowClicked.emit(element);
+    }
   }
 
   exportAsPDF() {
@@ -64,7 +75,6 @@ export class SharedTableComponent {
     });
   }
 
-  // Method to get the style based on etatOperation value
   getEtatOperationStyle(etatOperation: string): any {
     let backgroundColor: string;
     let label: string;
@@ -73,22 +83,22 @@ export class SharedTableComponent {
       case 'E':
         backgroundColor = 'orange';
         label = 'En attente';
-        fontWeight = 'bold'; // Set fontWeight to bold
+        fontWeight = 'bold';
         break;
       case 'V':
         backgroundColor = '#129859';
         label = 'Accepté';
-        fontWeight = 'bold'; // Set fontWeight to bold
+        fontWeight = 'bold';
         break;
       case 'R':
         backgroundColor = '#F6574F';
         label = 'Refusé';
-        fontWeight = 'bold'; // Set fontWeight to bold
+        fontWeight = 'bold';
         break;
       default:
         backgroundColor = 'transparent';
         label = '';
-        fontWeight = 'normal'; // Set fontWeight to normal for default case
+        fontWeight = 'normal';
     }
 
     return {
@@ -100,7 +110,6 @@ export class SharedTableComponent {
     };
   }
 
-  // Method to get the label based on etatOperation value
   getEtatOperationLabel(etatOperation: string): string {
     switch (etatOperation) {
       case 'E':
@@ -113,5 +122,4 @@ export class SharedTableComponent {
         return '';
     }
   }
-  
 }

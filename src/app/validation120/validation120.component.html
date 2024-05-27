@@ -102,7 +102,7 @@
               </thead>
               <tbody>
                 <ng-container *ngFor="let risque of risques">
-                  <tr>
+                  <tr *ngIf="!risque.typeCloture">
                     <td>{{ risque.id }}</td>
                     <td>{{ risque.produit.libelleProduit }} DT</td>
                     <td>{{ risque.mntFrais }}</td>

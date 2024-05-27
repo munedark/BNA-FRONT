@@ -25,6 +25,7 @@ import { PecAffectationPrincipaleComponent } from './pec-affectation-principale/
 import { PecAffectationIrComponent } from './pec-affectation-ir/pec-affectation-ir.component';
 import { PecAffectationIcComponent } from './pec-affectation-ic/pec-affectation-ic.component';
 import { ArrangementComponent } from './arrangement/arrangement.component';
+import { AdminDateJournalComponent } from './admin-date-journal/admin-date-journal.component';
 
 const routes: Routes = [
   
@@ -39,6 +40,10 @@ const routes: Routes = [
   canActivate: [authGuard],
   component:AdministrateurComponent,
   children: [
+    {
+      path:'Date',
+      component:AdminDateJournalComponent
+    },
     {
       path:'',
       redirectTo: 'Gestion_agent',
@@ -235,10 +240,6 @@ const routes: Routes = [
             {
               path: 'PEC-Affectation-Ic', 
               component: PecAffectationIcComponent
-            },
-            {
-              path: 'Arrangement', 
-              component: ArrangementComponent
             },
 
           ]

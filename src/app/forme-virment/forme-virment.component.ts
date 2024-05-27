@@ -10,6 +10,7 @@ import Swal from 'sweetalert2';
 import { TypeOperationService } from '../services/type-operation.service';
 import { OperationVirement } from '../Models/OperationVirement';
 import { DateService } from '../services/date.service';
+import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-forme-virment',
@@ -38,6 +39,7 @@ export class FormeVirmentComponent implements OnInit {
   matricule!: string;
   submitted: boolean = false; 
   date!:Date;
+
   constructor(
     private virementService: VirementService,
     private auth: AuthService,
@@ -47,20 +49,21 @@ export class FormeVirmentComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.virementService.refreshData();
     this.virementService.selectedDate$.subscribe(data => {
       if (data) {
         this.dataSource.data = data;
       }
+
     });
+    
     const token = this.auth.getToken();
     if (token) {
       const decodedToken: any = jwtDecode(token);
       this.matricule = decodedToken ? decodedToken.sub : 'No Matricule';
     }
 
-    this.virementService.submitted$.subscribe(submitted => { 
-      this.submitted = submitted;
-    });
+  
   }
 
   openModal(virement: virement) {

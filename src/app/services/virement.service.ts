@@ -4,6 +4,8 @@ import { BehaviorSubject } from 'rxjs';
 import { virement } from '../Models/virement';
 import { OperationCTX } from '../Models/OperationCTX';
 import { OperationVirement } from '../Models/OperationVirement';
+import Swal from 'sweetalert2';
+import { VirementTelecomponseComponent } from '../virement-telecomponse/virement-telecomponse.component';
 
 @Injectable({
   providedIn: 'root'
@@ -11,8 +13,6 @@ import { OperationVirement } from '../Models/OperationVirement';
 export class VirementService {
   private _selectedDateSource: BehaviorSubject<virement[] | null> = new BehaviorSubject<virement[] | null>(null);
   selectedDate$ = this._selectedDateSource.asObservable();
-  private _submittedSource: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-  submitted$ = this._submittedSource.asObservable();
 
   constructor(private http: HttpClient) {}
 
@@ -20,6 +20,15 @@ export class VirementService {
     this.http.get<virement[]>(`http://localhost:8080/agent/virement/date/${date}`).subscribe(
       (data) => {
         this._selectedDateSource.next(data);
+        if (data.length==0 ){
+          Swal.fire({
+            position: "center",
+            icon: "error",
+            title: "Cette date n'a pas de virements.",
+            showConfirmButton: true,
+            confirmButtonText: 'OK'
+          });
+        }
       },
       (error) => {
         console.error('Error fetching virements by date:', error);
@@ -30,9 +39,9 @@ export class VirementService {
   updateVirement(operation: OperationVirement) {
     return this.http.put<any>("http://localhost:8080/agent/operations/update/virement", operation);
   }
+  refreshData(){
+    const v:virement[]={} as virement[];
+    this._selectedDateSource.next(v);
 
-  setSubmitted(submitted: boolean) {
-    this._submittedSource.next(submitted);
-  }
-
+}
 }

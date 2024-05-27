@@ -126,9 +126,7 @@ getoptions(){
                 title: "Ajouté avec succès",
                 showConfirmButton: false,
                 timer: 1500
-              }).then(() => {
-                window.location.reload();
-              });
+              })
             },
             (error) => {
               console.error('Erreur lors de l\'ajout des frais:', error);

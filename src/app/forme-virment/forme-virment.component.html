@@ -1,5 +1,5 @@
 <p style="color:#b43c3c ; text-align: center; font-size: large; font-weight: 500; margin-top: 150px;" *ngIf="submitted && dataSource.data && dataSource.data.length === 0">Aucune donnée disponible pour cette date.</p>
-<app-shared-table (rowClicked)="handleRowClick($event)"  *ngIf="dataSource.data != null && dataSource.data.length > 0" [dataSource]="dataSource" [displayedColumns]="displayedColumns" title="Liste des virements:"></app-shared-table>
+<app-shared-table  (rowClicked)="handleRowClick($event)"  *ngIf="dataSource.data != null && dataSource.data.length > 0" [dataSource]="dataSource" [displayedColumns]="displayedColumns" title="Liste des virements:"></app-shared-table>
 
 <div class="modal fade" id="modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
@@ -18,7 +18,7 @@
           </app-recherche>
           
           <app-affichage-debiteur [debiteurData]="debiteurData" *ngIf="debiteurData  && virement.validation!='validé'"></app-affichage-debiteur>
-          <button class="btnRegister" (click)="submit(virement)" *ngIf="debiteurData && virement.validation!='validé'">Valider</button>
+          <button class="btnRegister" (click)="submit(virement)" *ngIf="debiteurData && virement.validation!='validé' && debiteurData.etat_CTX!=false">Valider</button>
           <p style="color:#b43c3c ; text-align: center; font-size: large; font-weight: 500;" *ngIf="virement.validation=='validé'">Virement déja validé</p>
         </form>
           </div>

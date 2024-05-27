@@ -80,6 +80,8 @@ import { RecouvrementChequeComponent } from './recouvrement-cheque/recouvrement-
 import { FormeJugementComponent } from './forme-jugement/forme-jugement.component';
 import { FormeArrangementComponent } from './forme-arrangement/forme-arrangement.component';
 import { ArrangementComponent } from './arrangement/arrangement.component';
+import { SupprimerAgentComponent } from './supprimer-agent/supprimer-agent.component';
+import { RechercherAgentComponent } from './rechercher-agent/rechercher-agent.component';
 
 @NgModule({
   declarations: [
@@ -144,6 +146,8 @@ import { ArrangementComponent } from './arrangement/arrangement.component';
     FormeJugementComponent,
     FormeArrangementComponent,
     ArrangementComponent,
+    SupprimerAgentComponent,
+    RechercherAgentComponent,
     
 
   ],
