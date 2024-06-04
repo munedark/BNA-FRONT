@@ -59,7 +59,6 @@ import { ClotureDossierComponent } from './cloture-dossier/cloture-dossier.compo
 import { FormeChequeComponent } from './forme-cheque/forme-cheque.component';
 import { FormeVirmentComponent } from './forme-virment/forme-virment.component';
 import { RechercheDateComponent } from './recherche-date/recherche-date.component';
-import { WebSocketService } from './services/web-socket.service';
 import { ChequeValidationComponent } from './cheque-validation/cheque-validation.component';
 import { ListeOperation210Component } from './liste-operation210/liste-operation210.component';
 import { Validation210Component } from './validation210/validation210.component';
@@ -82,6 +81,13 @@ import { FormeArrangementComponent } from './forme-arrangement/forme-arrangement
 import { ArrangementComponent } from './arrangement/arrangement.component';
 import { SupprimerAgentComponent } from './supprimer-agent/supprimer-agent.component';
 import { RechercherAgentComponent } from './rechercher-agent/rechercher-agent.component';
+import { PageAccueilComponent } from './page-accueil/page-accueil.component';
+import { LoginClientComponent } from './login-client/login-client.component';
+import { InscriptionClientComponent } from './inscription-client/inscription-client.component';
+import { ClientComponent } from './client/client.component';
+import { MonDossierComponent } from './mon-dossier/mon-dossier.component';
+import { InfoCtxComponent } from './info-ctx/info-ctx.component';
+import { RistourneAgenceComponent } from './ristourne-agence/ristourne-agence.component';
 
 @NgModule({
   declarations: [
@@ -148,6 +154,13 @@ import { RechercherAgentComponent } from './rechercher-agent/rechercher-agent.co
     ArrangementComponent,
     SupprimerAgentComponent,
     RechercherAgentComponent,
+    PageAccueilComponent,
+    LoginClientComponent,
+    InscriptionClientComponent,
+    ClientComponent,
+    MonDossierComponent,
+    InfoCtxComponent,
+    RistourneAgenceComponent,
     
 
   ],
@@ -172,7 +185,7 @@ import { RechercherAgentComponent } from './rechercher-agent/rechercher-agent.co
     
     
   ],
-  providers: [ WebSocketService,{ provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'outline'}}],
   bootstrap: [AppComponent]

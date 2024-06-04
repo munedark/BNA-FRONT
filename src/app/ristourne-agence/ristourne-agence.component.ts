@@ -1,28 +1,28 @@
 import { Component } from '@angular/core';
-import { Risque } from '../Models/Risque';
 import { DebiteurInfo } from '../Models/DebiteurInfo';
-import { OperationService } from '../services/operation.service';
-import { DateService } from '../services/date.service';
-import { Operation } from '../Models/Operation';
+import { Risque } from '../Models/Risque';
 import { AuthService } from '../services/auth.service';
-import { jwtDecode } from 'jwt-decode';
 import { TypeOperationService } from '../services/type-operation.service';
+import { DateService } from '../services/date.service';
+import { OperationService } from '../services/operation.service';
 import { SharedServicesService } from '../services/shared-services.service';
+import { jwtDecode } from 'jwt-decode';
+import { Operation } from '../Models/Operation';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-cloture-dossier',
-  templateUrl: './cloture-dossier.component.html',
-  styleUrls: ['./cloture-dossier.component.scss']
+  selector: 'app-ristourne-agence',
+  templateUrl: './ristourne-agence.component.html',
+  styleUrls: ['./ristourne-agence.component.scss']
 })
-export class ClotureDossierComponent {
+export class RistourneAgenceComponent {
   debiteurData: DebiteurInfo | null = null;
   risquesData: Risque[] | null = null; 
   numCtx!: number;
-  operation: Operation={} as Operation;
   date!: Date;
   matricule!: string;
   clicked:boolean=false;
+  operation: Operation={} as Operation;
 
 
   constructor(
@@ -101,4 +101,5 @@ export class ClotureDossierComponent {
         console.error('Erreur lors de la clôture du dossier : ', error);
       });})})
   }
+
 }

@@ -26,16 +26,34 @@ import { PecAffectationIrComponent } from './pec-affectation-ir/pec-affectation-
 import { PecAffectationIcComponent } from './pec-affectation-ic/pec-affectation-ic.component';
 import { ArrangementComponent } from './arrangement/arrangement.component';
 import { AdminDateJournalComponent } from './admin-date-journal/admin-date-journal.component';
+import { PageAccueilComponent } from './page-accueil/page-accueil.component';
+import { LoginClientComponent } from './login-client/login-client.component';
+import { InscriptionClientComponent } from './inscription-client/inscription-client.component';
+import { client } from 'stompjs';
+import { ClientComponent } from './client/client.component';
+import { RistourneAgenceComponent } from './ristourne-agence/ristourne-agence.component';
 
 const routes: Routes = [
-  
+  {
+    path:"pageAccueil",
+    component:PageAccueilComponent
+  },
   {
     path:"login",
     component:LoginComponent
   },
+   {
+    path:"login_client",
+    component:LoginClientComponent
+  },
+  {
+    path:"inscription",
+    component:InscriptionClientComponent
+  },
   
   
-  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: '', redirectTo: '/pageAccueil', pathMatch: 'full' },
+  {path:"CLIENT",component:ClientComponent},
   {path:"ADMINISTRATEUR",
   canActivate: [authGuard],
   component:AdministrateurComponent,
@@ -123,11 +141,11 @@ const routes: Routes = [
         children: [
                       {
                         path: '', 
-                        redirectTo: 'pec-frais-contentieux-validation', 
+                        redirectTo: 'frais-contentieux-validation', 
                         pathMatch: 'full'
                       },
                       {
-                        path:'pec-frais-contentieux-validation',
+                        path:'frais-contentieux-validation',
                         component: FraisContentieuxValidateurComponent
                       },
                       {
@@ -135,7 +153,7 @@ const routes: Routes = [
                         component: FraisJugementValidateurComponent
                       },
                       {
-                        path: 'pec-frais-generaux-direction-validation', 
+                        path: 'frais-generaux-direction-validation', 
                         component: FraisGenerauxValidateurComponent
                       }
                     ]
@@ -166,6 +184,10 @@ const routes: Routes = [
         {
           path: 'Cloture-Dossier', 
           component: ClotureDossierComponent
+        },
+        {
+          path: 'Ristourne-Agence',
+          component: RistourneAgenceComponent
         }
                       
                     ]

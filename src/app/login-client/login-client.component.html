@@ -7,13 +7,17 @@
             <h3>Se Connecter</h3>
             <!-- Login Form -->
             <form #loginForm="ngForm" (ngSubmit)="login()">
-                <input type="text" id="username" class="fadeIn second" [(ngModel)]="username" name="username" placeholder="matricule" required>
-                <div *ngIf="loginForm.controls['username']?.hasError('required') && loginForm.submitted" class="error-message">Matricule est requis.
+                <input type="text" id="username" class="fadeIn second" [(ngModel)]="username" name="username" placeholder="Identifiant" required>
+                <div *ngIf="loginForm.controls['username']?.hasError('required') && loginForm.submitted" class="error-message">Identifiant est requis.
                 </div>
                 <input type="password" id="password" class="fadeIn third" [(ngModel)]="password" name="password" placeholder="mot de passe" required>
                 <div *ngIf="loginForm.controls['password']?.hasError('required') && loginForm.submitted" class="error-message">Mot de passe est requis.</div>
-                <input type="submit" class="fadeIn fourth submit" value="Se connecter" [disabled]="!loginForm.valid">
+                <input type="submit" class="fadeIn fourth submit" value="Se connecter"[disabled]="!loginForm.valid">
             </form>
+            <div class="exception">
+                <a href="" class="except fadeIn">Mot de passe oublié ?</a>
+                <a href="/inscription" class="except">S'inscrire</a>
+            </div>
         </div>
     </div>
 </div>

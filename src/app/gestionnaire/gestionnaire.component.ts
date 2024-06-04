@@ -9,7 +9,6 @@ import { SharedServicesService } from '../services/shared-services.service';
 })
 export class GestionnaireComponent {
 
-  constructor(private sharedService:SharedServicesService,private router:Router) { }
 
   ngOnInit(): void {
    

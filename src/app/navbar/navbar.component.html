@@ -18,7 +18,7 @@
         </div>
         <div style="display: flex; flex-direction: row; justify-content: flex-end; width: 150px; margin-right: 3px;">
             <div class="journal" title="Terminer la journée" *ngIf="!isGestionnairePage()" (click)="passeJournee()" style="order: 1; margin-right: 12px;"><img src="../../assets/terminerJour.png" style="width:25px;"></div>
-            <app-app-notification-button title="notification" style="display: flex; flex-direction: column; justify-content: center; margin-bottom: 6px; order: 2; margin-right: 20px;" (click)="toggleNotif()" *ngIf="!isGestionnairePage()"></app-app-notification-button>
+            <app-app-notification-button title="notification" style="display: flex; flex-direction: column; justify-content: center; margin-bottom: 6px; order: 2; margin-right: 20px;" (click)="toggleNotif()" *ngIf="!isGestionnairePage() && !isAdminPage()"></app-app-notification-button>
             <img src="./assets/user.png" class="userlogo" alt="Compte" title="Compte" (click)="toggleUser()" style="order: 3;">
         </div>
         

@@ -1,0 +1,72 @@
+<div class="page">
+    <div class="container">
+        <div style="display: flex; justify-content: space-between; margin-top: 5px;">
+            <h3 class="register-heading">S'inscrire</h3>
+            <img src="../../assets/sign up.png" style="width: 50px;">
+        </div>
+        <hr style="border-color: #17a191;">
+        <form #enregistrementForm="ngForm" (ngSubmit)="submitForm()">
+            <div class="content">
+                <div class="groupe">
+                    <div class="form-group space1 slide-in-left" [ngClass]="{'has-error': nom.invalid && (nom.dirty || nom.touched)}">
+                        <label for="nom">Nom:</label>
+                        <input type="text" id="nom" class="form-control" placeholder="Nom" name="nom" [(ngModel)]="enregistrement.nom" required #nom="ngModel">
+                        <div *ngIf="nom.invalid && (nom.dirty || nom.touched)" class="text-danger">
+                            Ce champ est requis.
+                        </div>
+                    </div>
+                    <div class="form-group space2 slide-in-right" [ngClass]="{'has-error': prenom.invalid && (prenom.dirty || prenom.touched)}">
+                        <label for="prenom">Prénom:</label>
+                        <input type="text" id="prenom" placeholder="Prénom" class="form-control" name="prenom" [(ngModel)]="enregistrement.prenom" required #prenom="ngModel">
+                        <div *ngIf="prenom.invalid && (prenom.dirty || prenom.touched)" class="text-danger">
+                            Ce champ est requis.
+                        </div>
+                    </div>
+                </div>
+                <div class="groupe">
+                    <div class="form-group space1 slide-in-left" [ngClass]="{'has-error': cin.invalid && (cin.dirty || cin.touched)}">
+                        <label for="cin">CIN:</label>
+                        <input type="text" id="cin" class="form-control" placeholder="CIN" name="cin" [(ngModel)]="enregistrement.cin" required pattern="\d{8}" #cin="ngModel">
+                        <div *ngIf="cin.invalid && (cin.dirty || cin.touched)" class="text-danger">
+                            Ce champ doit contenir exactement 8 chiffres.
+                        </div>
+                    </div>
+                    <div class="form-group space2 slide-in-right" [ngClass]="{'has-error': numeroCompte.invalid && (numeroCompte.dirty || numeroCompte.touched)}">
+                        <label for="numeroCompte">Numéro du compte bancaire:</label>
+                        <input type="text" id="numeroCompte" placeholder="Numéro du compte bancaire" class="form-control" name="numeroCompte" [(ngModel)]="enregistrement.numeroCompte" required pattern="[0-9]*" #numeroCompte="ngModel">
+                        <div *ngIf="numeroCompte.invalid && (numeroCompte.dirty || numeroCompte.touched)" class="text-danger">
+                            Ce champ doit contenir uniquement des chiffres.
+                        </div>
+                    </div>
+                </div>
+                <div class="groupe">
+                    <div class="form-group space1 slide-in-left" [ngClass]="{'has-error': numeroTelephone.invalid && (numeroTelephone.dirty || numeroTelephone.touched)}">
+                        <label for="numeroTelephone">Numéro de téléphone:</label>
+                        <input type="text" id="numeroTelephone" placeholder="Numéro de téléphone" class="form-control" name="numeroTelephone" [(ngModel)]="enregistrement.numeroTelephone" required pattern="[0-9]*" #numeroTelephone="ngModel">
+                        <div *ngIf="numeroTelephone.invalid && (numeroTelephone.dirty || numeroTelephone.touched)" class="text-danger">
+                            Ce champ doit contenir uniquement des chiffres.
+                        </div>
+                    </div>
+                    <div class="form-group space2 slide-in-right" [ngClass]="{'has-error': email.invalid && (email.dirty || email.touched)}">
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" placeholder="Email" class="form-control" name="email" [(ngModel)]="enregistrement.email" required #email="ngModel">
+                        <div *ngIf="email.invalid && (email.dirty || email.touched)" class="text-danger">
+                            Ce champ doit contenir une adresse email valide.
+                        </div>
+                    </div>
+                </div>
+                <div class="groupe">
+                    
+                    <div class="form-group space2 slide-in-right" [ngClass]="{'has-error': motDePasse.invalid && (motDePasse.dirty || motDePasse.touched)}">
+                        <label for="motDePasse">Mot de passe:</label>
+                        <input type="password" id="motDePasse" placeholder="Mot de passe" class="form-control" name="motDePasse" [(ngModel)]="enregistrement.motDePasse" required #motDePasse="ngModel">
+                        <div *ngIf="motDePasse.invalid && (motDePasse.dirty || motDePasse.touched)" class="text-danger">
+                            Ce champ est requis.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="btn btnRegister">Valider</button>
+        </form>
+    </div>
+</div>

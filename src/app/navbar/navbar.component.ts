@@ -56,6 +56,9 @@ export class NavbarComponent implements OnInit , OnDestroy {
   
   isGestionnairePage():boolean{
     return this.router.url.startsWith('/GESTIONNAIRE/');
+  }  
+  isAdminPage():boolean{
+    return this.router.url.startsWith('/ADMINISTRATEUR/');
   }
   passeJournee(){
     this.dateService.incrementDate().subscribe(()=>{

@@ -14,6 +14,6 @@ export class LogoutService {
     localStorage.removeItem('token');
 
     // Redirect to the login page
-    this.router.navigate(['/login']);
+    this.router.navigate(['/pageAccueil']);
   }
 }

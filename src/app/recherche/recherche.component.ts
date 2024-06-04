@@ -3,6 +3,7 @@ import { SharedServicesService } from '../services/shared-services.service';
 import { DebiteurInfo } from '../Models/DebiteurInfo';
 import { Risque } from '../Models/Risque';
 import { RisqueService } from '../services/risque.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-recherche',
@@ -23,6 +24,16 @@ export class RechercheComponent {
     if (this.numCtx) {
       this.sharedService.recherche(this.numCtx).subscribe(data => {
         this.debiteurData = data;
+        if (!this.debiteurData) {
+          Swal.fire({
+            position: "center",
+            icon: "error",
+            title: "Aucun dossier débiteur trouvé.",
+            showConfirmButton: true,
+            confirmButtonText: 'OK'
+          });
+          return;
+        }
         this.debiteurDataChange.emit(this.debiteurData);
         this.numCTX.emit(this.numCtx);
         this.risque();

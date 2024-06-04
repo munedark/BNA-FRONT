@@ -12,6 +12,14 @@
                         <li>Rechercher agent</li>
                     </ul>
                 </li>
+                <li>
+                    <p [ngClass]="{'sidebar-link':!visibleSubMenus[1],'sidebar-link-clicked':visibleSubMenus[1]}" (click)="toggleSubMenu(0)"><img src="./assets/frais.png" style="width: 20px;height: auto;border-radius: 2px;margin-right: 5px;">    Frais</p>
+                    <ul class="sub-menu" *ngIf="isSubMenuVisible(1)">
+                        <li routerLink="/VALIDATEUR/frais/">Validation des frais initiés par le contentieux</li>
+                        <li routerLink="/VALIDATEUR/frais/pec-frais-generaux-direction-validation">Validation des frais généraux (Direction)</li>
+                        <li routerLink="/VALIDATEUR/frais/frais-jugement-validation">Validation des frais enregistrement jugement</li>
+                    </ul>
+                </li>
                 
             </ul>
             <li style="margin-left: 35px;cursor: pointer;"  routerLink="/ADMINISTRATEUR/Date">Changer date</li>
@@ -22,8 +30,8 @@
                 <li>
                     <p [ngClass]="{'sidebar-link':!visibleSubMenus[0],'sidebar-link-clicked':visibleSubMenus[0]}" (click)="toggleSubMenu(0)"><img src="./assets/frais.png" style="width: 20px;height: auto;border-radius: 2px;margin-right: 5px;">    Frais</p>
                     <ul class="sub-menu" *ngIf="isSubMenuVisible(0)">
-                        <li routerLink="/VALIDATEUR/frais/">Validation des frais initiés par le contentieux</li>
-                        <li routerLink="/VALIDATEUR/frais/pec-frais-generaux-direction-validation">Validation des frais généraux (Direction)</li>
+                        <li routerLink="/VALIDATEUR/frais/frais-contentieux-validation">Validation des frais initiés par le contentieux</li>
+                        <li routerLink="/VALIDATEUR/frais/frais-generaux-direction-validation">Validation des frais généraux (Direction)</li>
                         <li routerLink="/VALIDATEUR/frais/frais-jugement-validation">Validation des frais enregistrement jugement</li>
                     </ul>
                 </li>
@@ -35,9 +43,11 @@
                         <li routerLink="/VALIDATEUR/recouvrement/Affectation">Affectation des recouvrements</li>
                         <li routerLink="/VALIDATEUR/recouvrement/Arrangement">Arrangement</li>
                         <li routerLink="/VALIDATEUR/recouvrement/Cloture-Risque">Cloture Risque</li>
+                        <li routerLink="/VALIDATEUR/recouvrement/Ristourne-Agence">Ristourne Agence</li>
                         <li routerLink="/VALIDATEUR/recouvrement/Cloture-Dossier">Cloture Dossier</li>
                     </ul>
                 </li>
+
                 <li>
                     <p [ngClass]="{'sidebar-link':!visibleSubMenus[2],'sidebar-link-clicked':visibleSubMenus[2]}" (click)="toggleSubMenu(2)"> <img src="../../assets/consultation.png" style="width: 20px;height: auto;border-radius: 2px;margin-right: 5px;">    Consultation</p>
                     <ul class="sub-menu" *ngIf="isSubMenuVisible(2)">
