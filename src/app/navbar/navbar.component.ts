@@ -1,5 +1,4 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { AuthService } from '../services/auth.service';
 import { Subscription } from 'rxjs';
 import { SidebarToggleService } from '../services/sidebar-toggle.service';
 import { DropService } from '../services/drop.service';
@@ -64,5 +63,8 @@ export class NavbarComponent implements OnInit , OnDestroy {
     this.dateService.incrementDate().subscribe(()=>{
       window.location.reload();
     });
+  }
+  isClientPage():boolean{
+    return this.router.url.startsWith('/CLIENT');
   }
 }

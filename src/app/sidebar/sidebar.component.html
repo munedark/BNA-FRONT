@@ -1,30 +1,112 @@
 <div class="wrapper">
     <aside id="sidebar"  [ngClass]="{ 'collapsed': isSidebarOpen }">
-        <p class="module">Modules :</p>
+        <p class="module" *ngIf="!isClientPage()">Modules :</p>
+        <p class="module" *ngIf="isClientPage()">Options :</p>
+
         <ng-container *ngIf="role === 'ROLE_ADMINISTRATEUR'">
             <ul class="sidebar-nav">
                 <li>
-                    <p [ngClass]="{'sidebar-link':!visibleSubMenus[0],'sidebar-link-clicked':visibleSubMenus[0]}" (click)="toggleSubMenu(0)">Gestion des agents</p>
+                    <p [ngClass]="{'sidebar-link': !visibleSubMenus[0], 'sidebar-link-clicked': visibleSubMenus[0]}" (click)="toggleSubMenu(0)">
+                        <img src="../../assets/gerer_client.png" style="width: 22px; height: auto; border-radius: 2px; margin-right: 5px; padding-bottom: 3px;">
+                        Gérer utilisateur
+                    </p>
                     <ul class="sub-menu" *ngIf="isSubMenuVisible(0)">
-                        <li routerLink="/ADMINISTRATEUR/Gestion_agent/ajout">Ajouter agent</li>
-                        <li>Supprimer agent</li>
-                        <li>Modifier agent</li>
-                        <li>Rechercher agent</li>
+                        <li routerLink="/ADMINISTRATEUR/Gestion_Utilisateur/Gestion_agent">Gérer agent</li>
+                        <li routerLink="/ADMINISTRATEUR/Gestion_Utilisateur/Gestion_client">Gérer client</li>
+                    </ul>
+                </li>
+            </ul>
+            <ul class="sidebar-nav">
+                <li>
+                    <p [ngClass]="{'sidebar-link': !visibleSubMenus[1], 'sidebar-link-clicked': visibleSubMenus[1]}" (click)="toggleSubMenu(1)">
+                        <img src="../../assets/date.png" style="width: 26px; height: auto; border-radius: 2px; margin-right: 5px; padding-bottom: 3px;">
+                        Gérer date
+                    </p>
+                    <ul class="sub-menu" *ngIf="isSubMenuVisible(1)">
+                        <li routerLink="/ADMINISTRATEUR/Date">Changer date</li>
+                    </ul>
+                </li>
+            </ul>
+            <ul class="sidebar-nav">
+                <li>
+                    <p [ngClass]="{'sidebar-link': !visibleSubMenus[5], 'sidebar-link-clicked': visibleSubMenus[5]}" (click)="toggleSubMenu(5)">
+                        <img src="./assets/frais.png" style="width: 20px; height: auto; border-radius: 2px; margin-right: 5px;">
+                        PEC Frais
+                    </p>
+                    <ul class="sub-menu" *ngIf="isSubMenuVisible(5)">
+                        <li routerLink="/GESTIONNAIRE/frais/">PEC des frais initiés par le contentieux</li>
+                        <li routerLink="/GESTIONNAIRE/frais/pec-frais-generaux-direction">PEC des frais généraux (Direction)</li>
+                        <li routerLink="/GESTIONNAIRE/frais/frais-jugement">Frais Enregistrement Jugement</li>
                     </ul>
                 </li>
                 <li>
-                    <p [ngClass]="{'sidebar-link':!visibleSubMenus[1],'sidebar-link-clicked':visibleSubMenus[1]}" (click)="toggleSubMenu(0)"><img src="./assets/frais.png" style="width: 20px;height: auto;border-radius: 2px;margin-right: 5px;">    Frais</p>
-                    <ul class="sub-menu" *ngIf="isSubMenuVisible(1)">
-                        <li routerLink="/VALIDATEUR/frais/">Validation des frais initiés par le contentieux</li>
-                        <li routerLink="/VALIDATEUR/frais/pec-frais-generaux-direction-validation">Validation des frais généraux (Direction)</li>
+                    <p [ngClass]="{'sidebar-link': !visibleSubMenus[6], 'sidebar-link-clicked': visibleSubMenus[6]}" (click)="toggleSubMenu(6)">
+                        <img src="./assets/Recouvrement.png" style="width: 20px; height: auto; border-radius: 2px; margin-right: 5px;">
+                        PEC Recouvrement
+                    </p>
+                    <ul class="sub-menu" *ngIf="isSubMenuVisible(6)">
+                        <li routerLink="/GESTIONNAIRE/recouvrement/PEC-Cheque">PEC Cheque</li>
+                        <li routerLink="/GESTIONNAIRE/recouvrement/PEC-Affectation-Principale">PEC Affectation Principale</li>
+                        <li routerLink="/GESTIONNAIRE/recouvrement/PEC-Affectation-Ir">PEC Affectation Ir</li>
+                        <li routerLink="/GESTIONNAIRE/recouvrement/PEC-Affectation-Ic">PEC Affectation Ic</li>
+                    </ul>
+                </li>
+                </ul>
+            <ul class="sidebar-nav">
+                <li>
+                    <p [ngClass]="{'sidebar-link': !visibleSubMenus[2], 'sidebar-link-clicked': visibleSubMenus[2]}" (click)="toggleSubMenu(2)">
+                        <img src="./assets/frais.png" style="width: 20px; height: auto; border-radius: 2px; margin-right: 5px;">
+                        Val Frais
+                    </p>
+                    <ul class="sub-menu" *ngIf="isSubMenuVisible(2)">
+                        <li routerLink="/VALIDATEUR/frais/frais-contentieux-validation">Validation des frais initiés par le contentieux</li>
+                        <li routerLink="/VALIDATEUR/frais/frais-generaux-direction-validation">Validation des frais généraux (Direction)</li>
                         <li routerLink="/VALIDATEUR/frais/frais-jugement-validation">Validation des frais enregistrement jugement</li>
                     </ul>
                 </li>
-                
             </ul>
-            <li style="margin-left: 35px;cursor: pointer;"  routerLink="/ADMINISTRATEUR/Date">Changer date</li>
+            <ul class="sidebar-nav">
+                <li>
+                    <p [ngClass]="{'sidebar-link': !visibleSubMenus[3], 'sidebar-link-clicked': visibleSubMenus[3]}" (click)="toggleSubMenu(3)">
+                        <img src="./assets/Recouvrement.png" style="width: 20px; height: auto; border-radius: 2px; margin-right: 5px;">
+                        Val Recouvrement
+                    </p>
+                    <ul class="sub-menu" *ngIf="isSubMenuVisible(3)">
+                        <li routerLink="/VALIDATEUR/recouvrement/Cheque-Validation">Validation Cheque</li>
+                        <li routerLink="/VALIDATEUR/recouvrement/Virement-Telecompencé">Affectation Virement Télécomponsé</li>
+                        <li routerLink="/VALIDATEUR/recouvrement/Affectation">Affectation des recouvrements</li>
+                        <li routerLink="/VALIDATEUR/recouvrement/Cloture-Risque">Cloture Risque</li>
+                        <li routerLink="/VALIDATEUR/recouvrement/Ristourne-Agence">Ristourne Agence</li>
+                        <li routerLink="/VALIDATEUR/recouvrement/Cloture-Dossier">Cloture Dossier</li>
+                    </ul>
+                </li>
+            </ul>
+            <ul class="sidebar-nav">
+                <li>
+                    <p [ngClass]="{'sidebar-link': !visibleSubMenus[4], 'sidebar-link-clicked': visibleSubMenus[4]}" (click)="toggleSubMenu(4)">
+                        <img src="./../../assets/arrangement.png" style="width: 20px; height: auto; border-radius: 2px; margin-right: 5px;">
+                        Arrangement
+                    </p>
+                    <ul class="sub-menu" *ngIf="isSubMenuVisible(4)"> 
+                        <li routerLink="/VALIDATEUR/recouvrement/Arrangement">Arrangement</li>
+                    </ul>
+                </li>
+            </ul>
+            <ul class="sidebar-nav">
+                
+                <li>
+                    <p [ngClass]="{'sidebar-link': !visibleSubMenus[7], 'sidebar-link-clicked': visibleSubMenus[7]}" (click)="toggleSubMenu(7)">
+                        <img src="../../assets/consultation.png" style="width: 20px; height: auto; border-radius: 2px; margin-right: 5px;">
+                        Consultation
+                    </p>
+                    <ul class="sub-menu" *ngIf="isSubMenuVisible(7)">
+                        <li routerLink="/GESTIONNAIRE/consultation/liste-operations">Liste des operations</li>
+                        <li routerLink="/GESTIONNAIRE/consultation/liste-debiteurs">Liste des debiteurs</li>
+                    </ul>
+                </li>
+            </ul>
         </ng-container>
-
+        
         <ng-container *ngIf="role === 'ROLE_VALIDATEUR'">
             <ul class="sidebar-nav">
                 <li>
@@ -41,16 +123,22 @@
                         <li routerLink="/VALIDATEUR/recouvrement/Cheque-Validation">Validation Cheque</li>
                         <li routerLink="/VALIDATEUR/recouvrement/Virement-Telecompencé">Affectation Virement Télécomponsé</li>
                         <li routerLink="/VALIDATEUR/recouvrement/Affectation">Affectation des recouvrements</li>
-                        <li routerLink="/VALIDATEUR/recouvrement/Arrangement">Arrangement</li>
                         <li routerLink="/VALIDATEUR/recouvrement/Cloture-Risque">Cloture Risque</li>
                         <li routerLink="/VALIDATEUR/recouvrement/Ristourne-Agence">Ristourne Agence</li>
                         <li routerLink="/VALIDATEUR/recouvrement/Cloture-Dossier">Cloture Dossier</li>
                     </ul>
                 </li>
+                <li>
+                    <p [ngClass]="{'sidebar-link':!visibleSubMenus[2],'sidebar-link-clicked':visibleSubMenus[2]}" (click)="toggleSubMenu(2)"><img src="./../../assets/arrangement.png" style="width: 20px;height: auto;border-radius: 2px;margin-right: 5px;">    Arrangement</p>
+                    <ul class="sub-menu" *ngIf="isSubMenuVisible(2)"> 
+                        <li routerLink="/VALIDATEUR/recouvrement/Arrangement">Arrangement</li>
+                    </ul>
+                </li>
 
                 <li>
-                    <p [ngClass]="{'sidebar-link':!visibleSubMenus[2],'sidebar-link-clicked':visibleSubMenus[2]}" (click)="toggleSubMenu(2)"> <img src="../../assets/consultation.png" style="width: 20px;height: auto;border-radius: 2px;margin-right: 5px;">    Consultation</p>
-                    <ul class="sub-menu" *ngIf="isSubMenuVisible(2)">
+
+                    <p [ngClass]="{'sidebar-link':!visibleSubMenus[3],'sidebar-link-clicked':visibleSubMenus[3]}" (click)="toggleSubMenu(3)"> <img src="../../assets/consultation.png" style="width: 20px;height: auto;border-radius: 2px;margin-right: 5px;">    Consultation</p>
+                    <ul class="sub-menu" *ngIf="isSubMenuVisible(3)">
                         <li routerLink="/VALIDATEUR/consultation/liste-operations">Liste des operations</li>
                         <li routerLink="/VALIDATEUR/consultation/liste-debiteurs">Liste des debiteurs</li>
                     </ul>

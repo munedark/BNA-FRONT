@@ -3,6 +3,7 @@ import { AuthService } from '../services/auth.service';
 import { Subscription } from 'rxjs';
 import { SidebarToggleService } from '../services/sidebar-toggle.service';
 import { jwtDecode } from 'jwt-decode';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -17,7 +18,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
   private subscription: Subscription | undefined;
 
 
-  constructor(private auth: AuthService, private sidebarToggleService: SidebarToggleService) {
+  constructor(private auth: AuthService, private sidebarToggleService: SidebarToggleService, private router:Router) {
     this.subscription = this.sidebarToggleService.isSidebarOpen$.subscribe(isOpen => {
       this.isSidebarOpen = isOpen;
       this.visibleSubMenus = Array(3).fill(false);
@@ -47,4 +48,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
     if (this.subscription) {
       this.subscription.unsubscribe();
     }}
+  isClientPage():boolean{
+    return this.router.url.startsWith('/CLIENT');
+  }
 }

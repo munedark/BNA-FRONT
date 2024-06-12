@@ -10,15 +10,15 @@
                     <path fill-rule="evenodd" d="M3.5 4a.5.5 0 0 0-.5.5v7a.5.5 0 0 0 1 0v-7a.5.5 0 0 0-.5-.5"/>
                 </svg>
             </button>
-            <p style="margin-bottom: 0; display: flex;flex-direction: column;justify-content: center; margin-left:30px;border-radius: 10px; color: rgba(10, 135, 54, 0.92); border: 1px solid green;padding: 0 5px 0 5px;">{{ currentDate }}</p>
+            <p *ngIf="!isClientPage()" style="margin-bottom: 0; display: flex;flex-direction: column;justify-content: center; margin-left:30px;border-radius: 10px; color: rgba(10, 135, 54, 0.92); border: 1px solid green;padding: 0 5px 0 5px;">{{ currentDate }}</p>
         </div>
 
         <div style="padding-left: 50px;">
             <img src="./assets/logo_bna.png" alt="BNA Logo">
         </div>
         <div style="display: flex; flex-direction: row; justify-content: flex-end; width: 150px; margin-right: 3px;">
-            <div class="journal" title="Terminer la journée" *ngIf="!isGestionnairePage()" (click)="passeJournee()" style="order: 1; margin-right: 12px;"><img src="../../assets/terminerJour.png" style="width:25px;"></div>
-            <app-app-notification-button title="notification" style="display: flex; flex-direction: column; justify-content: center; margin-bottom: 6px; order: 2; margin-right: 20px;" (click)="toggleNotif()" *ngIf="!isGestionnairePage() && !isAdminPage()"></app-app-notification-button>
+            <div class="journal" title="Terminer la journée" *ngIf="!isGestionnairePage() && !isClientPage()" (click)="passeJournee()" style="order: 1; margin-right: 12px;"><img src="../../assets/terminerJour.png" style="width:25px;"></div>
+            <app-app-notification-button title="notification" style="display: flex; flex-direction: column; justify-content: center; margin-bottom: 6px; order: 2; margin-right: 20px;" (click)="toggleNotif()" *ngIf="!isGestionnairePage() && !isAdminPage() && !isClientPage()"></app-app-notification-button>
             <img src="./assets/user.png" class="userlogo" alt="Compte" title="Compte" (click)="toggleUser()" style="order: 3;">
         </div>
         

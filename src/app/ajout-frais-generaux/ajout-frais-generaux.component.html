@@ -86,7 +86,7 @@
                 
                 <div class="form-group" *ngIf="fraisEnregistrement['typeFrais'] !== 'Auxiliaire'">
                     <label for="montantFrais">Montant des frais (en Dinars):</label>
-                    <input type="text" id="montantFrais" class="form-control" name="montantFrais" placeholder="0000.00TDN" [(ngModel)]="fraisEnregistrement['montantFrais']" required pattern="^[0-9]+(\.[0-9]{1,2})?$" #montantFrais="ngModel">
+                    <input type="text" id="montantFrais" class="form-control" name="montantFrais" placeholder="0000.00TND" [(ngModel)]="fraisEnregistrement['montantFrais']" required pattern="^[0-9]+(\.[0-9]{1,2})?$" #montantFrais="ngModel">
                     <div *ngIf="montantFrais.invalid && (montantFrais.dirty || montantFrais.touched)" class="text-danger">
                         Le montant doit être un nombre (par exemple, 1234.56).
                     </div>

@@ -88,6 +88,10 @@ import { ClientComponent } from './client/client.component';
 import { MonDossierComponent } from './mon-dossier/mon-dossier.component';
 import { InfoCtxComponent } from './info-ctx/info-ctx.component';
 import { RistourneAgenceComponent } from './ristourne-agence/ristourne-agence.component';
+import { GererAgentComponent } from './gerer-agent/gerer-agent.component';
+import { GererClientComponent } from './gerer-client/gerer-client.component';
+import { SupprimerUtilisateurComponent } from './supprimer-utilisateur/supprimer-utilisateur.component';
+import { ModifierUtilisateurComponent } from './modifier-utilisateur/modifier-utilisateur.component';
 
 @NgModule({
   declarations: [
@@ -161,6 +165,11 @@ import { RistourneAgenceComponent } from './ristourne-agence/ristourne-agence.co
     MonDossierComponent,
     InfoCtxComponent,
     RistourneAgenceComponent,
+    GererAgentComponent,
+    GererClientComponent,
+    SupprimerUtilisateurComponent,
+    ModifierUtilisateurComponent,
+    
     
 
   ],

@@ -36,7 +36,8 @@ export class RechercheComponent {
         }
         this.debiteurDataChange.emit(this.debiteurData);
         this.numCTX.emit(this.numCtx);
-        this.risque();
+        if (data){
+        this.risque();}
       });
     }
   }

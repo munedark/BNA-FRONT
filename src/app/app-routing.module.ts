@@ -29,9 +29,9 @@ import { AdminDateJournalComponent } from './admin-date-journal/admin-date-journ
 import { PageAccueilComponent } from './page-accueil/page-accueil.component';
 import { LoginClientComponent } from './login-client/login-client.component';
 import { InscriptionClientComponent } from './inscription-client/inscription-client.component';
-import { client } from 'stompjs';
 import { ClientComponent } from './client/client.component';
 import { RistourneAgenceComponent } from './ristourne-agence/ristourne-agence.component';
+import { GererAgentComponent } from './gerer-agent/gerer-agent.component';
 
 const routes: Routes = [
   {
@@ -53,79 +53,41 @@ const routes: Routes = [
   
   
   { path: '', redirectTo: '/pageAccueil', pathMatch: 'full' },
-  {path:"CLIENT",component:ClientComponent},
-  {path:"ADMINISTRATEUR",
-  canActivate: [authGuard],
-  component:AdministrateurComponent,
-  children: [
-    {
-      path:'Date',
-      component:AdminDateJournalComponent
-    },
-    {
-      path:'',
-      redirectTo: 'Gestion_agent',
-      pathMatch:'full'
-    },
-    {
-      path: 'Gestion_agent', 
-      children: [
-        {
-          path: '', 
-          redirectTo: 'ajout', 
-          pathMatch: 'full'
-        },
-        {
-                      path:'ajout',
-                      component: UserFormComponent
-                    },
-                    {
-                      path: 'supprimer', 
-                      component: FraisJugementComponent
-                    },
-                    {
-                      path: 'modifier', 
-                      component: FraisGenerauxComponent
-                    }
-                  ]
-                },
-                {
-                  path: 'recouvrement', 
-                  children: [
-                    {
-                      path: '', 
-                      redirectTo: 'anotherComponent', 
-                      pathMatch: 'full'
-                    },
-                    {
-                      path: 'blabla', 
-                      component: AdministrateurComponent
-                    },
-                    {
-                      path: 'blabla', 
-                      component: AdministrateurComponent
-                    }
-                  ]
-},
-{
-  path: 'consultation', 
-  children: [
-    {
-      path: '', 
-      redirectTo: 'anotherComponent', 
-      pathMatch: 'full'
-    },
-    {
-      path: 'liste-operations', 
-      component: ConsultationOperationComponent
-    },
-    {
-      path: 'liste-debiteurs', 
-      component: ConsultationDebiteurComponent
-    }
-  ]
-}
-]},
+
+  {path:"CLIENT",component:ClientComponent,canActivate: [authGuard],},
+
+  //                                                                 Administrateur
+
+  {
+    path: "ADMINISTRATEUR",
+    canActivate: [authGuard],
+    component: AdministrateurComponent,
+    children: [
+      {
+        path: '',
+        redirectTo: 'Gestion_Utilisateur/Gestion_agent',
+        pathMatch: 'full'
+      },
+      {
+        path: 'Date',
+        component: AdminDateJournalComponent
+      },
+      {
+        path: 'Gestion_Utilisateur',
+        children: [
+          {
+            path: 'Gestion_agent',
+            component: GererAgentComponent,
+          },
+          {
+            path: 'Gestion_client',
+            component: GererAgentComponent, // Correction du composant pour éviter une redondance
+          }
+        ]
+      }
+    ]
+  },
+                          //                                                                    Validateur
 {
   path:"VALIDATEUR",
   component:ValidateurComponent,
@@ -138,12 +100,12 @@ const routes: Routes = [
     },
     {
       path: 'frais', 
-        children: [
-                      {
-                        path: '', 
-                        redirectTo: 'frais-contentieux-validation', 
-                        pathMatch: 'full'
-                      },
+      children: [
+        {
+          path: '', 
+          redirectTo: 'frais-contentieux-validation', 
+          pathMatch: 'full'
+        },
                       {
                         path:'frais-contentieux-validation',
                         component: FraisContentieuxValidateurComponent
@@ -157,8 +119,8 @@ const routes: Routes = [
                         component: FraisGenerauxValidateurComponent
                       }
                     ]
-  },
-  {
+                  },
+                  {
     path: 'recouvrement', 
     children: [
       {
@@ -168,31 +130,31 @@ const routes: Routes = [
       {
         path: 'Virement-Telecompencé', 
         component: VirementTelecomponseComponent
-                      },
+      },
       {
         path: 'Affectation', 
         component: ListeOperation230Component
-        },
+      },
       {
         path: 'Arrangement', 
         component: ArrangementComponent
-        },
-        {
-          path: 'Cloture-Risque', 
-          component: ClotureRisqueComponent
-        },
-        {
-          path: 'Cloture-Dossier', 
-          component: ClotureDossierComponent
-        },
-        {
-          path: 'Ristourne-Agence',
-          component: RistourneAgenceComponent
-        }
-                      
-                    ]
-                  },
-                  {
+      },
+      {
+        path: 'Cloture-Risque', 
+        component: ClotureRisqueComponent
+      },
+      {
+        path: 'Cloture-Dossier', 
+        component: ClotureDossierComponent
+      },
+      {
+        path: 'Ristourne-Agence',
+        component: RistourneAgenceComponent
+      }
+      
+    ]
+  },
+  {
     path: 'consultation', 
     children: [
       {
@@ -212,6 +174,7 @@ const routes: Routes = [
   }
 ]
 },
+//                                                                  Gestionnaire
 {
   path:"GESTIONNAIRE",
   canActivate: [authGuard],
