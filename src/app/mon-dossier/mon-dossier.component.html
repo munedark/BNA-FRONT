@@ -1,46 +1,52 @@
 <h4 class="titre">Mon dossier</h4>
 <p class="link"><img class="img" src="../../assets/maison.png">&nbsp;&nbsp;/&nbsp;&nbsp;Consulter profile/&nbsp;&nbsp;Mon dossier</p>
+
+<div *ngIf="!clientInfo">
+  <p style="text-align: center; color: #7c6f6f; font-size: large; margin-top: 50px; ">
+    Pas d'information pour le moment
+  </p>
+</div>
+
 <div class="container" *ngIf="clientInfo">
     <h5 class="register-heading"><img src="../../assets/Mon dossier.png " style="width: 40px;float: right;"> Mon Dossier</h5>
-        <hr style="color: #17a191;">
-        <p class="title">Dossier du débiteur N: {{clientInfo.dossierDebiteur.dossierId.numCtx}}</p>
-        <div class="donnees">
-            <div class="first">
-                <ul>
-                    <li>Nom: <p class="reponse" style="text-decoration: underline;">{{clientInfo.dossierDebiteur.compteBancaire.client.nom}} {{clientInfo.dossierDebiteur.compteBancaire.client.prenom}}</p></li>
-                    <ng-container >
-                        <li>Date de Transfert: <p class="reponse">{{clientInfo.dossierDebiteur.dateTransfert}}</p></li>
-                    </ng-container>
-                </ul>
-            </div>
-    
-            <div class="second">
-                <ul>
-                    <li>Solde en instance de recouvrement:<p class="reponse">{{clientInfo.dossierDebiteur.soldeRecouvrement}} TND</p></li>
-                    <li>Etat de Dossier: <p class="reponse">{{ clientInfo.dossierDebiteur.etat_CTX ? 'ouvert' : 'fermé' }}</p></li>
-                </ul>
-            </div>
-            
+    <hr style="color: #17a191;">
+    <p class="title">Dossier du débiteur N: {{clientInfo.dossierDebiteur.dossierId.numCtx}}</p>
+    <div class="donnees">
+        <div class="first">
+            <ul>
+                <li>Nom: <p class="reponse" style="text-decoration: underline;">{{clientInfo.dossierDebiteur.compteBancaire.client.nom}} {{clientInfo.dossierDebiteur.compteBancaire.client.prenom}}</p></li>
+                <ng-container>
+                    <li>Date de Transfert: <p class="reponse">{{clientInfo.dossierDebiteur.dateTransfert}}</p></li>
+                </ng-container>
+            </ul>
         </div>
-        <div>
-            <hr style="color: #17a191;">
+
+        <div class="second">
+            <ul>
+                <li>Solde en instance de recouvrement:<p class="reponse">{{clientInfo.dossierDebiteur.soldeRecouvrement}} TND</p></li>
+                <li>Etat de Dossier: <p class="reponse">{{ clientInfo.dossierDebiteur.etat_CTX ? 'ouvert' : 'fermé' }}</p></li>
+            </ul>
+        </div>
+    </div>
+    <div>
+        <hr style="color: #17a191;">
         <p class="title">Liste des risques:<img src="../../assets/risque.png" style="width: 35px;height: auto; float: right;"></p>
         <div>
             <table class="table">
                 <thead>
                   <tr>
                     <th scope="col">ID</th>
-                    <th scope="col">produit</th>
-                    <th scope="col">montant Entrée Principale</th>
-                    <th scope="col">montant frais</th>
-                    <th scope="col">solde Principale Risque</th>
-                    <th scope="col">ir</th>
-                    <th scope="col">ic</th>
+                    <th scope="col">Produit</th>
+                    <th scope="col">Montant Entrée Principale</th>
+                    <th scope="col">Montant Frais</th>
+                    <th scope="col">Solde Principale Risque</th>
+                    <th scope="col">IR</th>
+                    <th scope="col">IC</th>
                   </tr>
                 </thead>
                 <tbody>
                   <ng-container *ngFor="let risque of clientInfo.risques">
-                    <tr >
+                    <tr>
                       <td>{{risque.id}}</td>
                       <td>{{risque.produit.libelleProduit}}</td>
                       <td>{{risque.mntEntreePrincipale}}</td>
@@ -49,12 +55,9 @@
                       <td>{{risque.ir}} TND</td>
                       <td>{{risque.ic}} TND</td>
                     </tr>
-                    
                   </ng-container>
                 </tbody>
               </table>
         </div>
-
-        </div>
     </div>
-    
+</div>
