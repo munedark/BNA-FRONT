@@ -122,4 +122,31 @@ export class SharedTableComponent {
         return '';
     }
   }
+
+  getRoleStyle(role: string): any {
+    let backgroundColor: string;
+    let fontWeight: string;
+    
+    switch (role) {
+      case 'GESTIONNAIRE':
+        backgroundColor = 'orange';
+        fontWeight = 'bold';
+        break;
+      case 'VALIDATEUR':
+        backgroundColor = '#129859'; 
+        fontWeight = 'bold';
+        break;
+      default:
+        backgroundColor = 'transparent';
+        fontWeight = 'normal';
+    }
+  
+    return {
+      'background-color': backgroundColor,
+      'color': 'white',
+      'padding': '4px 8px',
+      'border-radius': '4px',
+      'font-weight': fontWeight
+    };
+  }
 }

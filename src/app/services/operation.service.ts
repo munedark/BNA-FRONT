@@ -45,4 +45,7 @@ clotureDossier(operation:Operation){
 clotureRisque(crd:ClotureRisqueDto){
   return this.http.put<any>("http://localhost:8080/agent/operations/clotureRisque",crd);
 }
+ristourne(numCtx:number){
+  return this.http.put<any>(`http://localhost:8080/agent/dossier-debiteur/resetSolde/${numCtx}`,{})
+}
 }

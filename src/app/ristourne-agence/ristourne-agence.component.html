@@ -7,7 +7,7 @@
 </app-recherche>
 
 <app-affichage-debiteur [debiteurData]="debiteurData" *ngIf="debiteurData"></app-affichage-debiteur>
-<button class="btnRegister"  *ngIf="debiteurData && !debiteurData.etat_CTX==false" (click)="cloture()">Ristourne Agence</button>
-<ng-container *ngIf="(debiteurData?.soldeRecouvrement!=0 || !allRisquesClotures()) && clicked">
-    <p style="color: rgb(247, 72, 72); text-align: center ;">Solde recouvrement different de 0 DTN ou il y'a un risque non cloturé!</p>
+<button class="btnRegister"  *ngIf="debiteurData && !debiteurData.etat_CTX==false" (click)="ristourne()">Ristourne Agence</button>
+<ng-container *ngIf="(debiteurData?.soldeRecouvrement==0 || !allRisquesClotures()) && clicked">
+    <p style="color: rgb(247, 72, 72); text-align: center ;">Solde recouvrement est déja égale 0 DTN ou il y'a un risque non cloturé!</p>
 </ng-container>

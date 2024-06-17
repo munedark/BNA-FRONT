@@ -32,6 +32,10 @@ import { InscriptionClientComponent } from './inscription-client/inscription-cli
 import { ClientComponent } from './client/client.component';
 import { RistourneAgenceComponent } from './ristourne-agence/ristourne-agence.component';
 import { GererAgentComponent } from './gerer-agent/gerer-agent.component';
+import { GererClientComponent } from './gerer-client/gerer-client.component';
+import { MonDossierComponent } from './mon-dossier/mon-dossier.component';
+import { ContentieuxInfoComponent } from './contentieux-info/contentieux-info.component';
+import { ClientAgencesComponent } from './client-agences/client-agences.component';
 
 const routes: Routes = [
   {
@@ -54,7 +58,32 @@ const routes: Routes = [
   
   { path: '', redirectTo: '/pageAccueil', pathMatch: 'full' },
 
-  {path:"CLIENT",component:ClientComponent,canActivate: [authGuard],},
+  //                                                                    Client
+
+  {path:"CLIENT",
+    component:ClientComponent,
+    canActivate: [authGuard],
+    children:[
+      {
+        path:'',
+        redirectTo:'Mon_profile',
+        pathMatch:'full'
+      },
+      {
+        path:'Mon_profile',
+        component: MonDossierComponent
+      },
+      {
+        path:'Contentieux_Info',
+        component: ContentieuxInfoComponent
+      },
+      {
+        path:'Agence',
+        component: ClientAgencesComponent
+      }
+    ]
+
+  },
 
   //                                                                 Administrateur
 
@@ -81,7 +110,7 @@ const routes: Routes = [
           },
           {
             path: 'Gestion_client',
-            component: GererAgentComponent, // Correction du composant pour éviter une redondance
+            component: GererClientComponent,
           }
         ]
       }

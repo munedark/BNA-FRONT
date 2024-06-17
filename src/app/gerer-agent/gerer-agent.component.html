@@ -13,4 +13,7 @@
         </select>
     </div>
     <app-user-form *ngIf="Action=='ajouter'"></app-user-form>
+    <app-consulter-utilisateurs [utilisateur]="'agent'" *ngIf="Action=='consulter'"></app-consulter-utilisateurs>
+    <app-supprimer-agent *ngIf="Action=='supprimer'"></app-supprimer-agent>
+    <app-moidfier-agent *ngIf="Action=='modifier'"></app-moidfier-agent>
 </div>

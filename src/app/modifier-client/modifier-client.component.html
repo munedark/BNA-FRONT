@@ -1,0 +1,74 @@
+<div class="container">
+    <div class="search-text">
+        <p style="color: #6D7979;"><img src="../../assets/modificationUtilisateur.png" style="width: 35px;float: right;">  Modifier client :</p>
+    </div>
+    <hr style="color: green;">
+    <div>
+        <form (ngSubmit)="rechercher()" class="recherche">
+            <p class="titre">Identifiant du client:</p>
+            <div class="searchBar">
+            <input type="text" class="text" placeholder="Rechercher" name="rechercher" [(ngModel)]="identifiant" required>
+            <button type="submit" class="button">Rechercher</button>
+        </div>
+        </form>
+    </div>
+</div>
+<div *ngIf="formulaire">
+<hr style="color: #17a191 ;">
+    <form #ajout="ngForm" (ngSubmit)="modifier()">
+        <div class="form-container">
+            <div>
+                <div class="form-group">
+                    <label for="nom">Nom *</label>
+                    <input type="text" id="nom" class="form-control" placeholder="Nom" name="nom" #nom="ngModel" [(ngModel)]="client.nom" required/>
+                    <div *ngIf="nom.invalid && (nom.dirty || nom.touched)" class="text-danger">
+                        Nom est requis.
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="prenom">Prénom *</label>
+                    <input type="text" id="prenom" class="form-control" placeholder="Prénom" name="prenom" #prenom="ngModel" [(ngModel)]="client.prenom" required/>
+                    <div *ngIf="prenom.invalid && (prenom.dirty || prenom.touched)" class="text-danger">
+                        Prénom est requis.
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email *</label>
+                    <input type="email" id="email" class="form-control" placeholder="Email" name="email" #email="ngModel" [(ngModel)]="client.email" required/>
+                    <div *ngIf="email.invalid && (email.dirty || email.touched)" class="text-danger">
+                        Email est requis et doit être valide.
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="numtele">Numéro de téléphone *</label>
+                    <input type="text" id="numtele" class="form-control" placeholder="Numéro de téléphone" name="numtele" #numtele="ngModel" [(ngModel)]="client.numtele" required/>
+                    <div *ngIf="numtele.invalid && (numtele.dirty || numtele.touched)" class="text-danger">
+                        Numéro de téléphone est requis.
+                    </div>
+                </div>
+
+            </div>
+        
+            <div class="second">
+                <h5 style="color: #707C7C; margin-bottom: 20px;">Information Du Compte:</h5>
+                <div class="form-group">
+                    <label for="username">CIN *</label>
+                    <input type="text" id="username" class="form-control" placeholder="CIN" name="username" #username="ngModel" [(ngModel)]="profile.username" required/>
+                    <div *ngIf="username.invalid && (username.dirty || username.touched)" class="text-danger">
+                        Matricule est requis.
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="password">Mot de passe *</label>
+                    <input type="password" id="password" class="form-control" placeholder="Password" name="password" #password="ngModel" [(ngModel)]="profile.password" required/>
+                    <div *ngIf="password.invalid && (password.dirty || password.touched)" class="text-danger">
+                        Mot de passe est requis.
+                    </div>
+                </div>
+                
+
+            </div>
+        </div>
+        <button type="submit" class="btn btnRegister" >modifier</button>
+    </form>
+</div>

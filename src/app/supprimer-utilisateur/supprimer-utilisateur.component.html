@@ -1,1 +1,16 @@
-<p>supprimer-utilisateur works!</p>
+<div class="container">
+    <div class="search-text">
+        <p style="color: #6D7979;"><img src="../../assets/Supprimer.png" style="width: 30px;float: right;">  Supprimer client :</p>
+    </div>
+    <hr style="color: green;">
+    <div>
+        <form (ngSubmit)="supprimer()">
+            <p class="titre">Identifiant du client:</p>
+            <div class="searchBar">
+              <input type="text" class="text" placeholder="Supprimer" name="supprimer" [(ngModel)]="identifiant" required>
+              <button type="submit" class="button">Supprimer</button>
+            </div>
+          </form>
+          
+    </div>
+</div>

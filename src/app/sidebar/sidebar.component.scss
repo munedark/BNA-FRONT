@@ -155,3 +155,15 @@ button{
   background: #119c79;
   border-radius: 10px;
 }
+.sidebar-link-client {
+  padding: 0.625rem 1.625rem;
+  position: relative;
+  display: block;
+  font-size: 0.875rem;
+  border-radius: 10px;
+  font-weight: bold;
+  width: 90%;
+}  
+.sidebar-link-client:hover{
+  cursor: pointer;
+}

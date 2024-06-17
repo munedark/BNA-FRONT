@@ -14,3 +14,41 @@ img{
     width: auto;
     margin-bottom: 2px;
 }
+.selecting{
+    margin: 11px 0 40px 10px;
+}
+.labelGenerale{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: small;
+    font-weight: bold;
+    text-decoration: solid;
+    color: #06a676;
+    margin:0px 0 6px 0;
+}
+.container {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 0 0 10px 10px;
+    width: 90%;
+    border-top:2px solid #17a191 ;
+    margin-bottom: 20px ;
+}
+.register-heading {
+    color: #6C7878;
+}
+.input-with-arrow {
+    background-image: url('../../assets/down.png'); 
+    background-repeat: no-repeat;
+    background-position: right center;
+    padding-right: 30px; 
+    background-size: 15px;
+ 
+  }
+  .form-control {
+    width: calc(100% - 20px); /* Adjust the width of the inputs */
+    padding: 8px; /* Adjust the padding of the inputs */
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+  

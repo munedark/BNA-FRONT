@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { AdminServiceService } from '../services/admin-service.service'; // Update the path as per your project structure
+import Swal from 'sweetalert2';
+import { GestionServiceService } from '../services/gestion-service.service';
 
 @Component({
   selector: 'app-user-form',
@@ -17,14 +19,14 @@ export class UserFormComponent {
   profile = {
     username: '',
     password: '',
-    isEnabled: true, // Assuming this is always true for new agents
+    isEnabled: true, 
     role: {
       id: 0,
       roleName: ''
     }
   };
 
-  constructor(private adminService: AdminServiceService) {}
+  constructor(private adminService: AdminServiceService,private gestionService:GestionServiceService) {}
 
   ajouter() {
     if (this.profile.role.roleName === 'VALIDATEUR') {
@@ -37,16 +39,37 @@ export class UserFormComponent {
       agent: this.agent,
       profile: this.profile
     };
-
+    this.gestionService.verifierAgent(this.profile.username).subscribe((data)=>{
+      if(data!=undefined){
+        Swal.fire({
+          title: 'Error!',
+          text: "l'agent existe déja!",
+          icon: 'error',
+          confirmButtonText: "D'accord"
+        })
+      }
+      else{
     this.adminService.ajouterAgent(agentData).subscribe(
       (response) => {
-        console.log('Agent added successfully:', response);
-        this.resetForm();
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "Ajouté avec succès",
+          showConfirmButton: false,
+          timer: 1500
+        })
       },
       (error) => {
-        console.error('Error adding agent:', error);
-      }
-    );
+        console.error("Erreur lors de duppression de l'agent:", error);
+        Swal.fire({
+          title: 'Error!',
+          text: 'tu veux ressayer',
+          icon: 'error',
+          confirmButtonText: 'oui'
+        })
+    
+      })}
+    })
   }
 
   resetForm() {

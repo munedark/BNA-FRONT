@@ -1,6 +1,6 @@
 export interface ConsDebiteur{
     numero_dossier:number;
-    cin:number;
+    cin:string;
     nom:string;
     prenom:string;
     etat_Ctx:string;

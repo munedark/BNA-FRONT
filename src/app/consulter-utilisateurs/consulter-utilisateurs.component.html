@@ -1,0 +1,11 @@
+<app-shared-table *ngIf="utilisateur === 'client'" 
+                  [dataSource]="dataSource" 
+                  [displayedColumns]="clientColumns" 
+                  title="Liste des clients:">
+</app-shared-table>
+
+<app-shared-table *ngIf="utilisateur === 'agent'" 
+                  [dataSource]="dataSource" 
+                  [displayedColumns]="agentsColumns" 
+                  title="Liste des agents:">
+</app-shared-table>

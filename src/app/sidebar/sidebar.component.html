@@ -176,5 +176,20 @@
                 </li>
             </ul>
         </ng-container>
+
+        <ng-container *ngIf="role === 'ROLE_CLIENT'">
+            <ul class="sidebar-nav">
+                <li>
+                    <p class="sidebar-link-client" routerLink="/CLIENT/Mon_profile"> <img src="../../assets/monDossier.png" style="width: 22px;height: auto;border-radius: 2px;margin-right: 5px;">    Mon Profile</p>
+                </li>
+                <li>
+                    <p class="sidebar-link-client" routerLink="/CLIENT/Contentieux_Info"> <img src="../../assets/informations.png" style="width: 22px;height: auto;border-radius: 2px;margin-right: 5px;">    Informations</p>
+                </li>
+                <li>
+                    <p class="sidebar-link-client" routerLink="/CLIENT/Agence"> <img src="../../assets/agence.png" style="width: 22px;height: auto;border-radius: 2px;margin-right: 5px;">    List des agences</p>
+                </li>
+            </ul>
+
+            </ng-container>
     </aside>
 </div>

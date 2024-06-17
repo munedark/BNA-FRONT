@@ -1,23 +1,23 @@
 <h4 class="titre">Mon dossier</h4>
 <p class="link"><img class="img" src="../../assets/maison.png">&nbsp;&nbsp;/&nbsp;&nbsp;Consulter profile/&nbsp;&nbsp;Mon dossier</p>
-<div class="container">
+<div class="container" *ngIf="clientInfo">
     <h5 class="register-heading"><img src="../../assets/Mon dossier.png " style="width: 40px;float: right;"> Mon Dossier</h5>
         <hr style="color: #17a191;">
-        <p class="title">Dossier du débiteur N: 6025</p>
+        <p class="title">Dossier du débiteur N: {{clientInfo.dossierDebiteur.dossierId.numCtx}}</p>
         <div class="donnees">
             <div class="first">
                 <ul>
-                    <li>Nom: <p class="reponse" style="text-decoration: underline;">Hmidi Rayen</p></li>
+                    <li>Nom: <p class="reponse" style="text-decoration: underline;">{{clientInfo.dossierDebiteur.compteBancaire.client.nom}} {{clientInfo.dossierDebiteur.compteBancaire.client.prenom}}</p></li>
                     <ng-container >
-                        <li>Date de Transfert: <p class="reponse">25/03/2024</p></li>
+                        <li>Date de Transfert: <p class="reponse">{{clientInfo.dossierDebiteur.dateTransfert}}</p></li>
                     </ng-container>
                 </ul>
             </div>
     
             <div class="second">
                 <ul>
-                    <li>Solde en instance de recouvrement:<p class="reponse">500 TND</p></li>
-                    <li>Etat de Dossier: <p class="reponse">ouvert</p></li>
+                    <li>Solde en instance de recouvrement:<p class="reponse">{{clientInfo.dossierDebiteur.soldeRecouvrement}} TND</p></li>
+                    <li>Etat de Dossier: <p class="reponse">{{ clientInfo.dossierDebiteur.etat_CTX ? 'ouvert' : 'fermé' }}</p></li>
                 </ul>
             </div>
             
@@ -39,35 +39,17 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <ng-container >
+                  <ng-container *ngFor="let risque of clientInfo.risques">
                     <tr >
-                      <td>1</td>
-                      <td>1259 - Credit Directe Depenses Courante</td>
-                      <td>700 TND</td>
-                      <td>80 TND</td>
-                      <td>780 TND</td>
-                      <td>30</td>
-                      <td>20</td>
-
+                      <td>{{risque.id}}</td>
+                      <td>{{risque.produit.libelleProduit}}</td>
+                      <td>{{risque.mntEntreePrincipale}}</td>
+                      <td>{{risque.mntFrais}} TND</td>
+                      <td>{{risque.soldePrincipaleRisque}} TND</td>
+                      <td>{{risque.ir}} TND</td>
+                      <td>{{risque.ic}} TND</td>
                     </tr>
-                    <tr >
-                        <td>2</td>
-                        <td>2416 - Frais a recouvrer</td>
-                        <td>6055 TND</td>
-                        <td>55 TND</td>
-                        <td>2350 TND</td>
-                        <td>75 TND</td>
-                        <td>20 TND</td>
-                      </tr>
-                      <tr >
-                        <td>3</td>
-                        <td>1259 - Credit Directe Depenses Courante</td>
-                        <td>585 TND</td>
-                        <td>170 TND</td>
-                        <td>375 TND</td>
-                        <td>45 TND</td>
-                        <td>25 TND</td>
-                      </tr>
+                    
                   </ng-container>
                 </tbody>
               </table>

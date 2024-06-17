@@ -10,9 +10,9 @@ export class AdminServiceService {
   ajouterAgent(agentData: any) {
     return this.http.post<any>('http://localhost:8080/admin/addAgent',agentData  );
   }
-  ajouterClient(agentData: any) {
+  ajouterClient(clientData: any) {
 
-    return this.http.post<any>('http://localhost:8080/admin/addClient',agentData  );
+    return this.http.post<any>('http://localhost:8080/admin/addClient',clientData  );
   }
   showAgents() {
 

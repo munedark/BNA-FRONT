@@ -10,7 +10,7 @@ import { ConsDebiteur } from '../Models/ConsDebiteur';
   styleUrls: ['./consultation-debiteur.component.scss']
 })
 export class ConsultationDebiteurComponent implements OnInit, OnDestroy {
-  listeDebiteurs: ConsDebiteur[] = []; // Initialize the array
+  listeDebiteurs: ConsDebiteur[] = []; 
   dataSource: MatTableDataSource<ConsDebiteur> = new MatTableDataSource<ConsDebiteur>();
   displayedColumns: string[] = ['numero_dossier','nom', 'prenom','cin','solde_recouvrement','etat_Ctx','date_Transfert'];
 
@@ -26,7 +26,7 @@ export class ConsultationDebiteurComponent implements OnInit, OnDestroy {
         nom: element.compteBancaire.client.nom,
         prenom: element.compteBancaire.client.prenom,
         solde_recouvrement: element.soldeRecouvrement,
-        etat_Ctx: element.etat_CTX ? 'ouvert' : 'fermé', // Convert boolean to string
+        etat_Ctx: element.etat_CTX ? 'ouvert' : 'fermé', 
         date_Transfert: element.dateTransfert
       }));
       

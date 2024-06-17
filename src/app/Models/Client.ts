@@ -5,5 +5,5 @@ export interface Client{
     prenom:string;
     email:string;
     numtele:string;
-    cin:number;
+    cin:string;
 }

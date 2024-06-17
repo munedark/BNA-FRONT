@@ -6,5 +6,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./gerer-client.component.scss']
 })
 export class GererClientComponent {
+  Action!:String;
 
 }

@@ -1,2 +1,19 @@
 <h4 class="titre">Gérer client</h4>
-<p class="link"><img src="../../assets/maison.png">&nbsp;&nbsp;/&nbsp;&nbsp;Gérer client</p>
+<p class="link"><img src="../../assets/maison.png">&nbsp;&nbsp;/&nbsp;&nbsp;Gérer utilisateur &nbsp;&nbsp;/&nbsp;&nbsp;Gérer client</p>
+<div class="container">
+    <h4 class="register-heading"> Gérer client<img src="../../assets/gerer_client.png" style="width: 38px;margin-right: 5px;height: auto;float:right; "></h4>
+    <hr style="border-color: #17a191;">
+    <div class="selecting">
+        <label class="labelGenerale">Choisir l'action:</label>
+        <select [(ngModel)]="Action" class="form-control input-with-arrow">
+            <option value="ajouter">Ajouter client</option>
+            <option value="modifier">Modifier client</option>
+            <option value="supprimer">Supprimer client</option>
+            <option value="consulter">Consulter client</option>
+        </select>
+    </div>
+    <app-ajouter-client *ngIf="Action=='ajouter'"></app-ajouter-client>
+    <app-consulter-utilisateurs [utilisateur]="'client'" *ngIf="Action=='consulter'"></app-consulter-utilisateurs>
+    <app-supprimer-utilisateur *ngIf="Action=='supprimer'"></app-supprimer-utilisateur>
+    <app-modifier-client *ngIf="Action=='modifier'"></app-modifier-client>
+</div>

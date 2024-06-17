@@ -14,4 +14,5 @@ export class AgencesService {
   agenceById(id:number){
     return this.http.get<AgenceBank>(`http://localhost:8080/agent/agence/${id}`)
   }
+  
 }

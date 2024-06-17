@@ -9,20 +9,17 @@ export class AppNotificationButtonComponent {
   badgeCount: number = 0;
 
   constructor() {
-    // Simulate fetching the count of new operations
+    
     this.fetchNewOperationsCount();
   }
 
   fetchNewOperationsCount(): void {
-    // Simulate fetching count from the backend (replace this with actual implementation)
     setTimeout(() => {
-      // Assuming you fetched the count successfully
-      this.badgeCount = 10; // Update badge count (replace with actual count)
-    }, 2000); // Simulating a delay of 2 seconds
+      this.badgeCount = 10; 
+    }, 2000); 
   }
 
   onClick(): void {
-    // Trigger action when the button is clicked
-    // You can implement this according to your UI design
+   
   }
 }

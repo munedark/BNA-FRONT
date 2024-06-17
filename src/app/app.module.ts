@@ -91,7 +91,12 @@ import { RistourneAgenceComponent } from './ristourne-agence/ristourne-agence.co
 import { GererAgentComponent } from './gerer-agent/gerer-agent.component';
 import { GererClientComponent } from './gerer-client/gerer-client.component';
 import { SupprimerUtilisateurComponent } from './supprimer-utilisateur/supprimer-utilisateur.component';
-import { ModifierUtilisateurComponent } from './modifier-utilisateur/modifier-utilisateur.component';
+import { ConsulterUtilisateursComponent } from './consulter-utilisateurs/consulter-utilisateurs.component';
+import { AjouterClientComponent } from './ajouter-client/ajouter-client.component';
+import { MoidfierAgentComponent } from './moidfier-agent/moidfier-agent.component';
+import { ModifierClientComponent } from './modifier-client/modifier-client.component';
+import { ContentieuxInfoComponent } from './contentieux-info/contentieux-info.component';
+import { ClientAgencesComponent } from './client-agences/client-agences.component';
 
 @NgModule({
   declarations: [
@@ -168,7 +173,12 @@ import { ModifierUtilisateurComponent } from './modifier-utilisateur/modifier-ut
     GererAgentComponent,
     GererClientComponent,
     SupprimerUtilisateurComponent,
-    ModifierUtilisateurComponent,
+    ConsulterUtilisateursComponent,
+    AjouterClientComponent,
+    MoidfierAgentComponent,
+    ModifierClientComponent,
+    ContentieuxInfoComponent,
+    ClientAgencesComponent,
     
     
 
